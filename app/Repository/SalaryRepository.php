@@ -41,15 +41,15 @@ class SalaryRepository implements SalaryRepositoryInterface
      */
     public function storeSalary(Request $request, $id)
     {
-        foreach ($request->attendance as $key => $value) {
+        foreach ($request->amount as $key => $value) {
             $salary = new SalaryStudents;
             $salary->student_id = $key;
             $salary->group_id = $request->group_id;
             $salary->amount = $value;
-            $salary->salarydate = $request->salarydate;
+            $salary->salarydate = $request->salarydate.'-01';
             $salary->save();
         }
-        return redirect()->route('salary.index');
+        return redirect()->route('salary.index', ['date' => $request->salarydate]);
     }
     /**
      * Show
@@ -61,8 +61,12 @@ class SalaryRepository implements SalaryRepositoryInterface
     }
     public function showStudents($date, $teacher_id, $id)
     {
+        $date_all = explode('-', $date);
         $students = app(SalaryServiceInterface::class)->getStudent($id, $date);
-        return view('salary.show_students', compact('students', 'teacher_id', 'id', 'date'));
+        $form = DB::select('SELECT amount FROM salary_students WHERE group_id = ? and MONTH(salarydate) = ? AND YEAR(salarydate) = ? LIMIT 1', [$id, $date_all[1], $date_all[0]]);
+        $formStatus = $form ? false : true;
+        // dd($form);
+        return view('salary.show_students', compact('students', 'teacher_id', 'id', 'date', 'formStatus'));
     }
 
     /**
@@ -76,13 +80,14 @@ class SalaryRepository implements SalaryRepositoryInterface
     /**
      * Update
      */
-    public function updateSalary(Request $request)
+    public function updateSalary(Request $request, $id)
     {
-        $salary = Salary::find($id);
-        $salary->teacher_id = $request->teacher_id;
-        $salary->salary = $request->salary;
-        $salary->save();
-        return $salary;
+        foreach ($request->amount as $key => $value) {
+            $salary = SalaryStudents::where('student_id', $key)->where('salarydate', $request->salarydate.'-01')->where('group_id', $request->group_id)->first();
+            $salary->amount = $value;
+            $salary->save();
+        }
+        return redirect()->route('salary.index', ['date' => $request->salarydate]);
     }
     /**
      * Destroy

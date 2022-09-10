@@ -19,10 +19,16 @@
                         </div>
                     </div><!-- .card-title-group -->
                 </div><!-- .card-inner -->
-                <form action="{{ route('salary.update', $date, $teacher_id ,$id) }}" class="form-validate" novalidate="novalidate"
+            @if ($formStatus)
+                <form action="{{ route('salary.store', $id) }}" class="form-validate" novalidate="novalidate"
                     method="post">
                     @csrf
+            @else
+                <form action="{{ route('salary.update', $id) }}" class="form-validate" novalidate="novalidate"
+                    method="POST">
+                    @csrf
                     @method('PUT')
+            @endif
                     <div class="card-inner p-0">
                         <div class="nk-tb-list nk-tb-ulist">
                             <div class="nk-tb-item nk-tb-head">
@@ -65,7 +71,8 @@
                                     <div class="nk-tb-col tb-col-mb">
                                         <span>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control">
+                                                <input type="text" name="amount[{{ $data_student->id }}]"
+                                                    value="{{ $data_student->amount }}" class="form-control">
                                             </div>
                                         </span>
                                     </div>
@@ -76,8 +83,9 @@
                     <div class="card-inner">
                         <div class="nk-block-between-md g-3">
                             <div class="g">
-                                <input type="hidden" name="group_id" value="{{ $id}}">
-                                <input name="payments_date" type="hidden" value="{{ $date }}">
+                                <input type="hidden" name="group_id" value="{{ $id }}">
+                                <input name="salarydate" type="hidden" value="{{ $date }}">
+                                <input name="teacher_id" type="hidden" value="{{ $teacher_id }}">
                                 <div class="form-group">
                                     <a href="#" class="btn btn-secondary"
                                         onclick="event.preventDefault();this.closest('form').submit();">Save</a>
@@ -85,7 +93,7 @@
                             </div>
                         </div><!-- .nk-block-between -->
                     </div>
-                </form>
+                    {{-- </form> --}}
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->

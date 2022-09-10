@@ -135,6 +135,7 @@
                         <div class="g">
                             <input type="hidden" name="group_id" value="{{ $id }}">
                             <input name="payments_date" type="hidden" value="{{ $date }}">
+                            <input name="salarydate" type="hidden" value="{{ $students['date_salary'] }}">
                             <div class="form-group"><a href="#" class="btn btn-secondary" onclick="event.preventDefault();
                                                     this.closest('form').submit();">Save</a>
                             </div>

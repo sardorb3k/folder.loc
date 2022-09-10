@@ -45,9 +45,9 @@ class SalaryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        return $this->salary->storeSalary($request, $id);
     }
 
     /**
@@ -69,16 +69,6 @@ class SalaryController extends Controller
     {
         return $this->salary->showStudents($date, $teacher_id, $id);
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Salary  $salary
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Salary $salary)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -87,19 +77,9 @@ class SalaryController extends Controller
      * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        return $this->salary->storeSalary($request);
+        return $this->salary->updateSalary($request, $id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Salary  $salary
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Salary $salary)
-    {
-        //
-    }
 }

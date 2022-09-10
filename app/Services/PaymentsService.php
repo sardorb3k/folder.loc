@@ -47,6 +47,7 @@ class PaymentsService implements PaymentsServiceInterface
                 ->where('group_id', $id)
                 ->get();
             $status = false;
+            $date_salary = false;
         } else {
             $date_m = $date_all[1] ?? NULL;
             $date_y = $date_all[0] ?? NULL;
@@ -66,9 +67,12 @@ class PaymentsService implements PaymentsServiceInterface
                             WHERE gs.group_id=$id"
             );
             $status = true;
+            $date_salary = DB::select(
+                "SELECT payment_date FROM `payments`
+                WHERE MONTH(payment_date) = $date_m and YEAR(payment_date) = $date_y LIMIT 1"
+    );
         }
-        // dd($students);
-        return array("status" => $status, "students" => $students);
+        return array("status" => $status, "students" => $students, "date_salary" => $date_salary[0]->payment_date ?? NULL);
     }
 }
 //

@@ -18,8 +18,9 @@ interface SalaryRepositoryInterface {
     // Edit Salary
     public function editSalary($id);
     // Update Salary
-    public function updateSalary(Request $request);
+    public function updateSalary(Request $request, $id);
     // Destroy Salary
     public function destroySalary($id);
+    public function showStudents($date, $teacher_id, $id);
 }
 //

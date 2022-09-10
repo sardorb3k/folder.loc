@@ -70,11 +70,10 @@ class PaymentsRepository implements PaymentsRepositoryInterface
     }
     public function updatePayments(Request $payments, int $id): RedirectResponse
     {
-        // dd($payments->all());
         // Payment update for each student
         foreach ($payments->payments as $key => $value) {
             // payment where student_id = $key and group_id = $id
-            $payment = Payment::where('student_id', $key)->where('group_id', $id)->first();
+            $payment = Payment::where('student_id', $key)->where('group_id', $id)->where('payment_date', $payments->salarydate)->first();
             // amount
             $payment->amount = $payments['amount'] ?? null;
             $payment->payment_start = $value['start'] ?? null;

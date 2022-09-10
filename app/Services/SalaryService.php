@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Services;
+
 use App\Models\Salary;
 use App\Interfaces\SalaryServiceInterface;
 use App\Interfaces\GroupsServiceInterface;
@@ -14,10 +16,11 @@ class SalaryService implements SalaryServiceInterface
     }
     public function getAllTeachersSalary()
     {
-        
+
         return Salary::all();
     }
-    public function getGroupById($id) {
+    public function getGroupById($id)
+    {
         return DB::select("SELECT gp.id, gp.name,
         (SELECT concat(us.lastname,' ',us.firstname) AS teacher_id FROM users AS us WHERE us.id = gp.teacher_id) AS teacher_id,
         (SELECT concat(us.lastname,' ',us.firstname) AS teacher_id FROM users AS us WHERE us.id = gp.assistant_id) AS assistant_id,
@@ -27,16 +30,17 @@ class SalaryService implements SalaryServiceInterface
         WHERE
         gp.teacher_id = ? OR gp.assistant_id = ?", [$id, $id]);
     }
-    public function getStudent($id, $date) {
+    public function getStudent($id, $date)
+    {
         $date_all = explode('-', $date);
         $students = DB::select(
-            DB::raw("SELECT 
-            us.id, 
-            gp_s.id AS group_id,
+            DB::raw("SELECT
+            us.id,
+            gp_s.group_id AS group_id,
             us.lastname,
             us.firstname,
-            us.phone, 
-            us.birthday, 
+            us.phone,
+            us.birthday,
             (
            SELECT COUNT(*) AS count
            FROM attendance
@@ -44,21 +48,41 @@ class SalaryService implements SalaryServiceInterface
            att_ap,
             (
                 SELECT amount
-FROM 
+FROM
 payments
 WHERE
-student_id = us.id AND group_id = gp_s.id) AS
+student_id = us.id AND group_id = gp_s.group_id and MONTH(payment_start) = :payM AND YEAR(payment_start) = :payY ) AS
            payment,
+            (
+                SELECT amount
+FROM
+salary_students
+WHERE
+student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM AND YEAR(salarydate) = :amountY ) AS
+    amount,
+
             (
            SELECT COUNT(*) AS count
            FROM attendance
            WHERE student_id = us.id AND mark = 0 and MONTH(attendance_date) = :mon2 AND YEAR(attendance_date) = :yo2) AS att_attended
-           FROM 
+           FROM
            group_students AS gp_s
            LEFT JOIN users AS us ON us.id = gp_s.student_id
-           WHERE 
-           group_id = :id"), ['id' => $id, 'mon' => $date_all[1], 'yo' => $date_all[0], 'yo2' => $date_all[0], 'mon2' => $date_all[1]]);
-    
+           WHERE
+           group_id = :id"),
+            [
+                'id' => $id,
+                'mon' => $date_all[1],
+                'yo' => $date_all[0],
+                'yo2' => $date_all[0],
+                'mon2' => $date_all[1],
+                'payM' => $date_all[1],
+                'payY' => $date_all[0],
+                'amountY' => $date_all[0],
+                'amountM' => $date_all[1],
+                ]
+        );
+        // dd($students);
         return $students;
     }
 }
