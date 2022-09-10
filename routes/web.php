@@ -82,7 +82,7 @@ Route::group(['prefix' => 'attendance'], function () {
 });
 // Salary routes
 // Route::resource('salary', 'App\Http\Controllers\SalaryController');
-Route::group(['prefix' => 'salary'], function () {
+Route::group(['prefix' => 'salary', 'middleware' => ['auth']], function () {
     Route::get('/', 'App\Http\Controllers\SalaryController@index_red')->name('salary.index_red');
     Route::get('/{date}', 'App\Http\Controllers\SalaryController@index')->name('salary.index');
     // Teacher groups list

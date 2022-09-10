@@ -8,7 +8,7 @@ use App\Models\Salary;
 use App\Interfaces\TeachersServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\SalaryStudents;
 class SalaryRepository implements SalaryRepositoryInterface
 {
     /**
@@ -41,11 +41,15 @@ class SalaryRepository implements SalaryRepositoryInterface
      */
     public function storeSalary(Request $request, $id)
     {
-        $salary = Salary::find($id);
-        $salary->teacher_id = $request->teacher_id;
-        $salary->salary = $request->salary;
-        $salary->save();
-        return $salary;
+        foreach ($request->attendance as $key => $value) {
+            $salary = new SalaryStudents;
+            $salary->student_id = $key;
+            $salary->group_id = $request->group_id;
+            $salary->amount = $value;
+            $salary->salarydate = $request->salarydate;
+            $salary->save();
+        }
+        return redirect()->route('salary.index');
     }
     /**
      * Show
@@ -58,7 +62,7 @@ class SalaryRepository implements SalaryRepositoryInterface
     public function showStudents($date, $teacher_id, $id)
     {
         $students = app(SalaryServiceInterface::class)->getStudent($id, $date);
-        return view('salary.show_students', compact('students'));
+        return view('salary.show_students', compact('students', 'teacher_id', 'id', 'date'));
     }
 
     /**
@@ -72,7 +76,7 @@ class SalaryRepository implements SalaryRepositoryInterface
     /**
      * Update
      */
-    public function updateSalary(Request $request, $id)
+    public function updateSalary(Request $request)
     {
         $salary = Salary::find($id);
         $salary->teacher_id = $request->teacher_id;

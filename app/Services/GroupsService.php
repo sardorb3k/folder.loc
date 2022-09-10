@@ -38,7 +38,7 @@ class GroupsService implements GroupsServiceInterface
             );
             return $groups ?? [];
         } catch (\Exception $e) {
-            return false;
+            return dd($e->getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ class GroupsService implements GroupsServiceInterface
         $count_group = DB::select(
             DB::raw('SELECT count(*) AS count_group FROM `groups`')
         );
-        return $count_group[0]->count_group;
+        return $count_group[0]->count_group ?? 0;
     }
 
     /**
@@ -71,7 +71,7 @@ class GroupsService implements GroupsServiceInterface
          * Get group by id.
          */
         $group = Groups::find($id);
-        return $group;
+        return $group ?? [];
     }
 
     /**
@@ -88,7 +88,7 @@ class GroupsService implements GroupsServiceInterface
             ),
             ['id' => $id]
         );
-        return $group;
+        return $group ?? [];
     }
 
     /**
@@ -128,7 +128,7 @@ class GroupsService implements GroupsServiceInterface
             )
             ->where('group_id', $id)
             ->get();
-        return $students;
+        return $students ?? [];
     }
 
     /**
@@ -167,7 +167,7 @@ class GroupsService implements GroupsServiceInterface
                 $id .
                 ')'
         );
-        return $students;
+        return $students ?? [];
     }
 
     /**

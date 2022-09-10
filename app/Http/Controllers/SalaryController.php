@@ -87,9 +87,9 @@ class SalaryController extends Controller
      * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Salary $salary)
+    public function update(Request $request)
     {
-        //
+        return $this->salary->storeSalary($request);
     }
 
     /**

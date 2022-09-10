@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('salary_students', function (Blueprint $table) {
+        Schema::create('group_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->float('amount', 10, 2);
-            $table->unsignedBigInteger('group_id');
-            // Date of payment
-            $table->date('salarydate');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreignId('student_id');
+            $table->foreignId('group_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salary_students');
+        Schema::dropIfExists('group_items');
     }
 };

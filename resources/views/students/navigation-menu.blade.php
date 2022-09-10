@@ -7,7 +7,7 @@
         <a class="nav-link" href="{{ route('students.group', $id) }}"><em
                 class="icon ni ni-bell-fill"></em><span>Group</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ (request()->is('students/*/attendance')) ? 'active' : ' asd' }}">
         <a class="nav-link" href="{{ route('students.attendance', $id) }}"><em
                 class="icon ni ni-bell-fill"></em><span>Attendance</span></a>
     </li>

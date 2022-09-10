@@ -64,10 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                echo $exams;
-                            @endphp
-                            {{-- @foreach ($exams as $exam)
+                            @foreach ($exams as $exam)
                                 <tr class="tb-tnx-item">
                                     <td class="tb-tnx-id"><span>{{ $exam->group_id }}</span></td>
                                     <td class="tb-tnx-info">
@@ -110,7 +107,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div><!-- .card-inner -->

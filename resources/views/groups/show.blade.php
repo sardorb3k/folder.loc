@@ -38,7 +38,7 @@
                     <div class="nk-tb-list nk-tb-ulist">
                         <div class="nk-tb-item nk-tb-head">
                             <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Exam</span></div>
+                            {{-- <div class="nk-tb-col tb-col-xl"><span class="sub-text">Exam</span></div> --}}
                             <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
                             <div class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></div>
                             <div class="nk-tb-col nk-tb-col-tools text-right">
@@ -66,13 +66,13 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="nk-tb-col tb-col-xl">
+                                {{-- <div class="nk-tb-col tb-col-xl">
                                     <ul class="list-status">
                                         <li><em class="icon text-success ni ni-check-circle"></em> <span>Med</span>
                                         </li>
                                         <li><em class="icon text-info ni ni-alarm-alt"></em> <span>Final</span></li>
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <div class="nk-tb-col tb-col-xl">
                                     <span>{{ $data_student->birthday }}</span>
                                 </div>
@@ -152,6 +152,7 @@
                                             <li>
                                                 <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
                                             </li>
+                                            {{-- @dd(count($unsubscribelist)) --}}
                                         </ul>
                                     </div>
                                 </div>

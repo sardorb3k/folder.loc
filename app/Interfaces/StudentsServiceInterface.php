@@ -28,6 +28,8 @@ interface StudentsServiceInterface {
      * @return \Illuminate\Http\Response
      */
     public function getStudentById($id);
+    // Attendance
+    public function getStudentByAttendance($id);
     /**
      * Update student.
      *

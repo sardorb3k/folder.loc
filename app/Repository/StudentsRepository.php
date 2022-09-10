@@ -90,7 +90,7 @@ class StudentsRepository implements StudentsRepositoryInterface
     }
     public function attendance(int $id): View
     {
-        return view('students.attendance', ['student' => $this->studentsService->getStudentById($id)]);
+        return view('students.attendance', ['attendance' => $this->studentsService->getStudentByAttendance($id), 'id' => $id]);
     }
     public function exam(int $id): View
     {

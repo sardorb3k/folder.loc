@@ -12,14 +12,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Student;
+use App\Models\Attendance;
 
 
 class StudentsService implements StudentsServiceInterface
 {
     private $students;
-    public function __construct(Student $students)
+    public function __construct(Student $students, Attendance $attendance)
     {
         $this->students = $students;
+        $this->attendance = $attendance;
     }
     public function getAllStudents()
     {
@@ -44,6 +46,16 @@ class StudentsService implements StudentsServiceInterface
     public function getStudentById($id)
     {
         return $this->students->findOrFail($id);
+    }
+
+    public function getStudentByAttendance($id)
+    {
+        return DB::select(
+            DB::raw(
+                "SELECT att.id, att.attendance_date, gp.name FROM `attendance` as att LEFT JOIN groups as gp on att.group_id = gp.id WHERE att.student_id = :id"
+            ),
+            ['id' => $id]
+        );
     }
 
 

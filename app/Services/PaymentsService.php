@@ -54,7 +54,7 @@ class PaymentsService implements PaymentsServiceInterface
                         "SELECT us.id,us.firstname,us.lastname,us.birthday,us.phone,us.`status`,(
                             SELECT pay2.amount
                             FROM payments AS pay2
-                            WHERE pay2.student_id=4 AND pay2.group_id=1 AND MONTH (pay2.payment_start)=$date_m AND YEAR (pay2.payment_start)=$date_y) AS amount, 
+                            WHERE pay2.student_id=us.id AND pay2.group_id=$id AND MONTH (pay2.payment_start)=$date_m AND YEAR (pay2.payment_start)=$date_y) AS amount,
                             (
                             SELECT pay.payment_start
                             FROM payments AS pay

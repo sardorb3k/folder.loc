@@ -86,7 +86,7 @@ class ExamsService implements ExamsServiceInterface
                 ),
                 ['examid' => $id]
             );
-            return $exam[0];        
+            return $exam[0];
         } catch (\Exception $e) {
             return false;
         }
@@ -104,7 +104,7 @@ class ExamsService implements ExamsServiceInterface
                 ),
                 ['examid' => $id]
             );
-            return $exam_result;    
+            return $exam_result;
         } catch (\Exception $e) {
             return false;
         }

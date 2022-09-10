@@ -18,7 +18,7 @@ interface SalaryRepositoryInterface {
     // Edit Salary
     public function editSalary($id);
     // Update Salary
-    public function updateSalary(Request $request, $id);
+    public function updateSalary(Request $request);
     // Destroy Salary
     public function destroySalary($id);
 }

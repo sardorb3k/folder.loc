@@ -52,7 +52,7 @@
                                 </th>
                                 <th class="tb-tnx-amount is-alt">
                                     <span class="tb-tnx-total">Lesson time</span>
-                                    <span class="tb-tnx-status d-none d-md-inline-block">Week</span>
+                                    {{-- <span class="tb-tnx-status d-none d-md-inline-block">Week</span> --}}
                                 </th>
                                 <th class="tb-tnx-action">
                                     <span>&nbsp;</span>
@@ -85,9 +85,9 @@
                                         <div class="tb-tnx-total">
                                             <span class="badge">{{ $item->lessontime }}</span>
                                         </div>
-                                        <div class="tb-tnx-status">
+                                        {{-- <div class="tb-tnx-status">
                                             <span class="badge">{{ $item->days }}</span>
-                                        </div>
+                                        </div> --}}
                                     </td>
                                     <td class="tb-tnx-action">
                                         <div class="dropdown">
