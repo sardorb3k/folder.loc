@@ -19,13 +19,21 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('phone')->unique();
             $table->json('phone_contact')->nullable();
-            $table->enum('role', ['admin','teacher','student','superadmin'])->default('student');
-            $table->enum('status',['active','inactive'])->default('active');
-            $table->enum('gender',['male','female'])->nullable();
+            $table->enum('role', ['admin', 'teacher', 'student', 'superadmin'])->default('student');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('birthday')->nullable();
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Students 
+            $table->string('homeaddress')->nullable();
+            $table->string('reasontostudy')->nullable();
+            $table->string('interests')->nullable();
+            $table->string('hear_about_other')->nullable();
+            $table->enum('hear_about', ['friends', 'relatives', 'teacher', 'banner', 'social_media', 'flyer', 'seminar', 'other'])->default('relatives');
+            $table->json('course')->nullable();
 
             // Exam fields
             $table->string('midexam')->nullable();

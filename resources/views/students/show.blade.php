@@ -97,7 +97,7 @@
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="firstname">First name</label>
+                                            <label class="form-label" for="firstname">First name *</label>
                                             <input type="text" class="form-control form-control-lg" name="firstname"
                                                 id="firstname" value="{{ $student->firstname }}"
                                                 placeholder="Enter First name">
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="lastname">Last name</label>
+                                            <label class="form-label" for="lastname">Last name *</label>
                                             <input type="text" class="form-control form-control-lg" name="lastname"
                                                 id="lastname" value="{{ $student->lastname }}"
                                                 placeholder="Enter Last name">
@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="fv-phone">Sex / Gender</label>
+                                            <label class="form-label" for="fv-phone">Sex / Gender *</label>
                                             <div class="form-control-wrap">
                                                 <ul class="custom-control-group">
                                                     <li>
@@ -145,14 +145,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="phone-no">Phone Number</label>
+                                            <label class="form-label" for="phone-no">Phone Number *</label>
                                             <input type="tel" class="form-control form-control-lg" name="phone"
                                                 id="phone-no" value="{{ $student->phone }}" placeholder="Phone Number">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="birth-day">Date of Birth</label>
+                                            <label class="form-label" for="birth-day">Date of Birth *</label>
                                             <input type="text" class="form-control date-picker-alt" name="birthday"
                                                 value="{{ $student->birthday }}" data-date-format="yyyy-mm-dd" required>
                                         </div>
@@ -163,8 +163,7 @@
                                                 @if ($student->status == 'inactive')
                                             checked
                                             @endif id="latest-sale">
-                                            <label class="custom-control-label" for="latest-sale">He finished the
-                                                lesson</label>
+                                            <label class="custom-control-label" for="latest-sale">Status </label>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -192,7 +191,7 @@
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="password">Password</label>
+                                            <label class="form-label" for="password">Password *</label>
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
                                                     <em class="icon ni ni-lock"></em>
@@ -205,7 +204,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="password_confirmation">Confirm
-                                                Password</label>
+                                                Password *</label>
                                             <div class="form-control-wrap">
                                                 <div class="toggle-password form-icon form-icon-right">
                                                     <em class="icon ni ni-lock"></em>

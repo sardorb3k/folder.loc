@@ -100,9 +100,9 @@
                                                     data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <ul class="link-list-opt no-bdr">
-                                                        <li><a href="{{ route('students.show', $data_student->id) }}"><em
+                                                        {{-- <li><a href="{{ route('students.show', $data_student->id) }}"><em
                                                                     class="icon ni ni-focus"></em><span>View</span></a>
-                                                        </li>
+                                                        </li> --}}
                                                         <li><a
                                                                 href="{{ route('students.edit', $data_student->id) }}"><em
                                                                     class="icon ni ni-repeat"></em><span>Edit</span></a>

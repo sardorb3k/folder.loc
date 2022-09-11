@@ -23,9 +23,14 @@ class Student extends Model
         'phone',
         'birthday',
         'gender',
+        'homeaddress',
+        'reasontostudy',
+        'interests',
+        'hear_about',
+        'hear_about_other',
+        'course',
         'role',
         'status',
         'password',
     ];
-
 }

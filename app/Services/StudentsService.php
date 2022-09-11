@@ -110,17 +110,28 @@ class StudentsService implements StudentsServiceInterface
         $req = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'phone' => 'required|numeric|min:9|unique:users,phone',
+            'phone' => 'required|numeric|min:9|max:9|unique:users,phone',
             'birthday' => 'required|date',
             'gender' => 'required',
+            'homeaddress' => 'required',
+            'reasontostudy' => 'required',
+            'interests' => 'required',
+            'hear_about' => 'required',
+            'course' => 'required',
             'password' => 'required|string|min:6|confirmed',
         ]);
+        // dd($req);
         $students = $this->students->create([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'phone' => '998' . $request->phone,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
+            'homeaddress' => $request->homeaddress,
+            'reasontostudy' => $request->reasontostudy,
+            'interests' => $request->interests,
+            'hear_about' => $request->hear_about,
+            'course' => $request->course ?? [],
             'role' => 'student',
             'password' => Hash::make($request['password']),
         ]);

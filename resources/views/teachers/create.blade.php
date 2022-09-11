@@ -39,7 +39,7 @@
                                         <em class="icon ni ni-user"></em>
                                     </div>
                                     <input type="text" class="form-control" id="firstname" name="firstname"
-                                        required="" autocomplete="firstname">
+                                        required="" autocomplete="firstname" value="{{ old('firstname') }}">
                                 </div>
                             </div>
                         </div>

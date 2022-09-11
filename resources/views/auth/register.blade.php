@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label class="form-label" for="fistname">{{ __('auth.register_fistname') }}</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control form-control-lg" id="fistname" name="firstname"
+                            <input tabindex="1" type="text" class="form-control form-control-lg" id="fistname" name="firstname"
                                 value="{{ old('fistname') }}" placeholder="{{ __('auth.register_fistname_feed') }}"
                                 required>
                         </div>
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label class="form-label" for="lastname">{{ __('auth.register_lastname') }}</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control form-control-lg" id="lastname" name="lastname"
+                            <input tabindex="2" type="text" class="form-control form-control-lg" id="lastname" name="lastname"
                                 value="{{ old('lastname') }}" placeholder="{{ __('auth.register_lastname_feed') }}"
                                 required>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label class="form-label" for="phone">{{ __('auth.register_phone') }}</label>
                         <div class="form-control-wrap">
-                            <input type="phone" class="form-control form-control-lg" size="20" minlength="9" maxlength="14"
+                            <input tabindex="3" type="phone" class="form-control form-control-lg" size="20" minlength="9" maxlength="14"
                                 id="phone" name="phone" value="{{ old('phone') }}"
                                 placeholder="{{ __('auth.register_phone_feed') }}" required autocomplete="phone">
                         </div>
@@ -51,7 +51,7 @@
                                 <em class="passcode-icon icon-show icon ni ni-eye"></em>
                                 <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                             </a>
-                            <input type="password" class="form-control form-control-lg" id="password" type="password"
+                            <input tabindex="4" class="form-control form-control-lg" id="password" type="password"
                                 name="password" placeholder="{{ __('auth.register_passcode_feed') }}" required
                                 autocomplete="new-password">
                         </div>
@@ -64,16 +64,16 @@
                                 <em class="passcode-icon icon-show icon ni ni-eye"></em>
                                 <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                             </a>
-                            <input type="password" class="form-control form-control-lg" id="password_confirmation"
+                            <input tabindex="5" class="form-control form-control-lg" id="password_confirmation"
                                 type="password" name="password_confirmation"
                                 placeholder="{{ __('auth.register_confirm_feed') }}" required autocomplete="new-password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-lg btn-primary btn-block">{{ __('auth.register_submit') }}</button>
+                        <button tabindex="6" class="btn btn-lg btn-primary btn-block">{{ __('auth.register_submit') }}</button>
                     </div>
                 </form>
-                <div class="form-note-s2 text-center pt-4"> {{ __('auth.register_login_desc') }} <a
+                <div class="form-note-s2 text-center pt-4"> {{ __('auth.register_login_desc') }} <a tabindex="7"
                         href="{{ route('login') }}"><strong>{{ __('auth.register_signin') }}</strong></a>
                 </div>
                 @if ($errors->any())
