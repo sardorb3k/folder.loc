@@ -63,7 +63,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="fv-phone">+998</span>
                                         </div>
-                                        <input type="tel" class="form-control" pattern="^\d{2}-\d{3}-\d{2}-\d{2}$"
+                                        <input id="phone" type="phone" class="form-control" pattern="^\d{2}-\d{3}-\d{2}-\d{2}$"
                                             name="phone" required="" autocomplete="phone">
                                     </div>
                                 </div>
@@ -171,6 +171,10 @@
             } else {
                 input.attr("type", "password");
             }
+        });
+
+        $("#phone").inputmask({
+            "mask": "(999) 999-9999"
         });
     </script>
 @endsection

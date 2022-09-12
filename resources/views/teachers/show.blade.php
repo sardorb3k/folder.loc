@@ -161,8 +161,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="phone-no">Phone Number <span class="valid-form">*</span></label>
-                                            <input type="tel" class="form-control form-control-lg" name="phone"
-                                                id="phone-no" value="{{ $teacher->phone }}" placeholder="Phone Number">
+                                            <input type="phone" class="form-control form-control-lg" name="phone"
+                                                id="phone" value="{{ $teacher->phone }}" placeholder="Phone Number">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -174,10 +174,9 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" name="graduation" class="custom-control-input"
-                                                @if ($teacher->status == 'inactive') checked @endif id="latest-sale">
-                                            <label class="custom-control-label" for="latest-sale">He finished the
-                                                lesson</label>
+                                            <input type="checkbox" name="status" class="custom-control-input"
+                                                @if ($teacher->status == 'active') checked @endif id="latest-sale">
+                                            <label class="custom-control-label" for="latest-sale">Status</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -250,4 +249,10 @@
             </div><!-- .modal-content -->
         </div><!-- .modal-dialog -->
     </div><!-- .modal -->
+
+    <script>
+        $("#phone").inputmask({
+            "mask": "998 (99) 999-99-99"
+        });
+    </script>
 @endsection

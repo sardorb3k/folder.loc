@@ -51,8 +51,8 @@
                                     <span class="tb-tnx-total">Level</span>
                                 </th>
                                 <th class="tb-tnx-amount is-alt">
-                                    <span class="tb-tnx-total">Lesson S.T</span>
-                                    <span class="tb-tnx-status d-none d-md-inline-block">Lesson E.T</span>
+                                    <span class="tb-tnx-total">Lesson S.T - E.T</span>
+                                    <span class="tb-tnx-status d-none d-md-inline-block">Days</span>
                                 </th>
                                 <th class="tb-tnx-action">
                                     <span>&nbsp;</span>
@@ -69,12 +69,12 @@
                                     <td class="tb-tnx-info">
                                         <div class="tb-tnx-status">
                                             <span class="title">
-                                                {{ $item->teacher_id }}
+                                                {{ $item->teacher_firstname }}
                                             </span>
                                         </div>
                                         <div class="tb-tnx-status">
                                             <span class="title">
-                                                {{ $item->assistant_id }}</span>
+                                                {{ $item->assistant_firstname }}</span>
                                         </div>
                                     </td>
                                     <td class="tb-tnx-amount is-alt">
@@ -84,10 +84,11 @@
                                     <td class="tb-tnx-amount is-alt">
                                         <div class="tb-tnx-total">
                                             <span class="badge">{{ $item->lessonstarttime }}</span>
+                                            <span class="badge">{{ $item->lessonendtime }}</span>
                                         </div>
                                         <div class="tb-tnx-status">
-                                            <span class="badge">{{ $item->lessonendtime }}</span>
-                                            {{-- <span class="badge">{{ $item->days }}</span> --}}
+                                            {{-- <span class="badge">{{ $item->lessonendtime }}</span> --}}
+                                            <span class="badge">{{ $item->days }}</span>
                                         </div>
                                     </td>
                                     <td class="tb-tnx-action">

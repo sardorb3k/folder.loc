@@ -68,9 +68,14 @@ class StudentsService implements StudentsServiceInterface
         $student->update([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
-            'phone' => $request->phone,
+            'phone' => str_replace(["(", ")", "-", " "], "", $request->phone),
             'birthday' => $request->birthday,
             'gender' => $request->gender,
+            'homeaddress' => $request->homeaddress,
+            'reasontostudy' => $request->reasontostudy,
+            'interests' => $request->interests,
+            'hear_about' => $request->hear_about,
+            'course' => $request->course,
             'status' => $request->graduation == 'on' ? 'inactive' : 'active',
         ]);
     }
@@ -106,11 +111,11 @@ class StudentsService implements StudentsServiceInterface
         /**
          *  Validate request
          */
-        $request['phone'] = '998' . $request->phone;
+        $request['phone'] = '998' . str_replace(["(", ")", "-", " "], "", $request->phone);
         $req = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'phone' => 'required|numeric|unique:users,phone',
+            'phone' => 'required|unique:users,phone',
             'birthday' => 'required|date',
             'gender' => 'required',
             'homeaddress' => 'required',
@@ -140,7 +145,7 @@ class StudentsService implements StudentsServiceInterface
     {
         return DB::select(
             DB::raw(
-                "SELECT gp.id,gp.`name`,gp.lessontime,gp.days,gp.LEVEL,(
+                "SELECT gp.id,gp.`name`,gp.lessonstarttime,gp.days,gp.LEVEL,(
                     SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.teacher_id) AS teacher_fullname,(
                     SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.assistant_id) AS assistant_fullname FROM group_students AS gi LEFT JOIN groups AS gp ON gi.group_id=gp.id WHERE gi.student_id=:id"
             ),

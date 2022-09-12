@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('teacher_id');
             $table->foreignId('assistant_id')->nullable();
-            $table->string('lessontime')->nullable();
+            $table->string('lessonstarttime')->nullable();
+            $table->string('lessonendtime')->nullable();
             // Level enum value ielts level (A1, A2, B1, B2, C1, C2, D1, D2, E1, E2)
             $table->string('level')->nullable();
-            $table->enum('days',['couple','odd'])->nullable();
+            $table->enum('days', ['even', 'odd'])->nullable();
             $table->timestamps();
         });
     }

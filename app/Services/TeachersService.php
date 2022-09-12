@@ -92,7 +92,7 @@ class TeachersService implements TeachersServiceInterface
         $teacher->update([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
-            'phone' => $request->phone,
+            'phone' => str_replace(["(", ")", "-", " "], "", $request->phone),
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'role' => $request->role,
@@ -141,11 +141,11 @@ class TeachersService implements TeachersServiceInterface
         /**
          *  Validate request
          */
-        $request['phone'] = '998' . $request->phone;
+        $request['phone'] = '998' . str_replace(["(", ")", "-", " "], "", $request->phone);
         $req = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'phone' => 'required|numeric|min:9|unique:users,phone',
+            'phone' => 'required|min:9|unique:users,phone',
             'birthday' => 'required|date',
             'gender' => 'required',
             'password' => 'required|string|min:6|confirmed',

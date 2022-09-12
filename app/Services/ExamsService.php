@@ -129,13 +129,13 @@ class ExamsService implements ExamsServiceInterface
         try {
             $student = DB::select(
                 DB::raw(
-                    "SELECT er.id,ex.`level`,ex.created_at,er.mark,gp.`name`,gp.lessontime,gp.days,(
+                    "SELECT er.id,ex.`level`,ex.created_at,er.mark,gp.`name`,gp.lessonstarttime,gp.days,(
                         SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.teacher_id) AS teacher_id,(
                         SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.assistant_id) AS assistant_id FROM exam_results AS er LEFT JOIN exams AS ex ON ex.id=er.exam_id LEFT JOIN groups AS gp ON gp.id=ex.group_id WHERE er.student_id=:studentid;"
                 ),
                 ['studentid' => $id]
             );
-            return $student;
+            return $student ?? [];
         } catch (\Exception $e) {
             return false;
         }

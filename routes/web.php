@@ -61,6 +61,7 @@ Route::get('students/{id}/exam', 'App\Http\Controllers\StudentsController@exam')
 Route::get('students/{id}/group', 'App\Http\Controllers\StudentsController@group')->name('students.group');
 Route::get('students/{id}/payments', 'App\Http\Controllers\StudentsController@payments')->name('students.payments');
 Route::get('students/{id}/attendance', 'App\Http\Controllers\StudentsController@attendance')->name('students.attendance');
+
 // Payments routes
 Route::group(['prefix' => 'payments'], function () {
     Route::get('/', 'App\Http\Controllers\PaymentsController@index')->name('payments.index');

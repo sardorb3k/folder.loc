@@ -53,12 +53,12 @@
                                     <td class="tb-tnx-info">
                                         <div class="tb-tnx-status">
                                             <span class="title">
-                                                {{ $item->teacher_id }}
+                                                {{ $item->teacher_firstname }}
                                             </span>
                                         </div>
                                         <div class="tb-tnx-status">
                                             <span class="title">
-                                                {{ $item->assistant_id }}</span>
+                                                {{ $item->assistant_firstname }}</span>
                                         </div>
                                     </td>
                                     <td class="tb-tnx-amount is-alt">

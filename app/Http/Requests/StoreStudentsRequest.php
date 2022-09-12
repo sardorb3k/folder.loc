@@ -26,9 +26,14 @@ class StoreStudentsRequest extends FormRequest
         return [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'phone' => 'required|numeric|min:9|unique:users,phone',
+            'phone' => 'required|min:9|unique:users,phone',
             'birthday' => 'required|date',
             'gender' => 'required',
+            'homeaddress' => 'required',
+            'reasontostudy' => 'required',
+            'interests' => 'required',
+            'hear_about' => 'required',
+            'course' => 'required',
             'password' => 'required|string|min:6|confirmed',
         ];
     }

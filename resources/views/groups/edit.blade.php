@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-phone">Days</label>
                                 <div class="form-control-wrap">
@@ -106,15 +106,15 @@
                                         <li>
                                             <div class="custom-control custom-radio custom-control-pro no-control">
                                                 <input type="radio" class="custom-control-input" name="days"
-                                                    id="day_couple" value="couple" required=""
-                                                    @if ($group->days == 'couple') checked @endif>
-                                                <label class="custom-control-label" for="day_couple">Couple</label>
+                                                    id="day_even" value="even" required=""
+                                                    @if ($group->days == 'even') checked @endif>
+                                                <label class="custom-control-label" for="day_even">Even</label>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-level">Level</label>

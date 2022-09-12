@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-phone">Days</label>
                                 <div class="form-control-wrap">
@@ -94,21 +94,21 @@
                                         <li>
                                             <div class="custom-control custom-radio custom-control-pro no-control">
                                                 <input type="radio" class="custom-control-input" name="days"
-                                                    id="sex-male" value="odd" required="">
-                                                <label class="custom-control-label" for="sex-male">Odd</label>
+                                                    id="sex-odd" value="odd" required="">
+                                                <label class="custom-control-label" for="sex-odd">Odd</label>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="custom-control custom-radio custom-control-pro no-control">
                                                 <input type="radio" class="custom-control-input" name="days"
-                                                    id="sex-female" value="couple" required="">
-                                                <label class="custom-control-label" for="sex-female">Couple</label>
+                                                    id="sex-even" value="even" required="">
+                                                <label class="custom-control-label" for="sex-even">Even</label>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-email">Level</label>

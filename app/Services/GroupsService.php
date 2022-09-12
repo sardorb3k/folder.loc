@@ -33,7 +33,7 @@ class GroupsService implements GroupsServiceInterface
              */
             $groups = DB::select(
                 DB::raw(
-                    'SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level,ut.lastname AS teacher_id,ua.lastname AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
+                    'SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
                 )
             );
             return $groups ?? [];
@@ -77,14 +77,14 @@ class GroupsService implements GroupsServiceInterface
     /**
      * Get group by id information
      */
-    public function getGroupInfoById(int $id): Array
+    public function getGroupInfoById(int $id): array
     {
         /**
          * Get group by id information
          */
         $group = DB::select(
             DB::raw(
-                "SELECT gi.id,gi.`name`,gi.lessontime,gi.days,gi.level,concat(ut.lastname,' ',ut.firstname) AS teacher_id,concat(ua.lastname,' ',ua.firstname) AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id WHERE gi.id=:id"
+                "SELECT gi.id,gi.`name`,gi.lessonstarttime,gi.days,gi.level,concat(ut.lastname,' ',ut.firstname) AS teacher_id,concat(ua.lastname,' ',ua.firstname) AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id WHERE gi.id=:id"
             ),
             ['id' => $id]
         );
@@ -124,6 +124,7 @@ class GroupsService implements GroupsServiceInterface
                 'users.lastname',
                 'users.firstname',
                 'users.phone',
+                'users.status',
                 'users.birthday'
             )
             ->where('group_id', $id)

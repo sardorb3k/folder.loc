@@ -84,7 +84,7 @@ class StudentsController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStudentsRequest $request, $id)
+    public function update(Request $request, $id)
     {
         return $this->studentService->updateStudents($request, $id);
     }

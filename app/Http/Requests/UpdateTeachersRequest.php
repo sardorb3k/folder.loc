@@ -26,11 +26,10 @@ class UpdateTeachersRequest extends FormRequest
         return [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'gender' => 'required',
-            'phone' => 'required|numeric|min:9',
+            'phone' => 'required|unique:users,phone',
             'birthday' => 'required|date',
-            'graduation' => 'string',
-            'update_action' => 'required',
+            'gender' => 'required',
+            'password' => 'required|string|min:6|confirmed',
         ];
     }
 }

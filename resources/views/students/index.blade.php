@@ -15,8 +15,8 @@
                             class="icon ni ni-menu-alt-r"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
-                            <li><a href="{{ route('students.create') }}" class="btn btn-white btn-outline-light"><em
-                                        class="icon ni ni-download-cloud"></em><span>Export</span></a></li>
+                            {{-- <li><a href="{{ route('students.create') }}" class="btn btn-white btn-outline-light"><em
+                                        class="icon ni ni-download-cloud"></em><span>Export</span></a></li> --}}
                             <li class="nk-block-tools-opt">
                                 <div class="drodown">
                                     <a href="{{ route('students.create') }}"
@@ -88,7 +88,7 @@
                                         @if ($data_student->status == 'active')
                                             Active
                                         @else
-                                            Completed
+                                            Inactive
                                         @endif
                                     </span>
                                 </div>

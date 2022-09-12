@@ -157,10 +157,207 @@
                                                 value="{{ $student->birthday }}" data-date-format="yyyy-mm-dd" required>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="fv-homeaddress">Home
+                                                address <span class="valid-form">*</span></label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-home"></em>
+                                                </div>
+                                                <input type="text" class="form-control" id="fv-homeaddress" value="{{ $student->homeaddress }}" name="homeaddress"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="fv-why-english">Why
+                                                are you ging to learn english <span class="valid-form">*</span></label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-target"></em>
+                                                </div>
+                                                <input type="text" class="form-control" id="fv-why-english" value="{{ $student->reasontostudy }}" name="reasontostudy"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="fv-enteresteds">Interests <span
+                                                    class="valid-form">*</span></label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-tag"></em>
+                                                </div>
+                                                <input type="text" class="form-control" id="fv-interests" value="{{ $student->interests }}" name="interests"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="fv-about">Where did you hear about us
+                                                <span class="valid-form">*</span></label>
+                                            <ul class="custom-control-group" id="hear_about">
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-radio custom-control-pro">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                            value="friends"
+                                                            @if ($student->hear_about == 'friends')
+                                                            checked="checked" 
+                                                            @endif
+                                                            id="friends"><label class="custom-control-label"
+                                                            for="friends">Friends</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-radio custom-control-pro">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                            @if ($student->hear_about == 'relatives')
+                                                            checked="checked" 
+                                                            @endif
+                                                            value="relatives" id="Relatives"><label class="custom-control-label"
+                                                            for="Relatives">Relatives</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-radio custom-control-pro">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                        @if ($student->hear_about == 'teacher')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="teacher" id="teacher"><label class="custom-control-label"
+                                                            for="teacher">Teacher</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="custom-control custom-control-sm custom-radio custom-control-pro checked">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                        @if ($student->hear_about == 'banner')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="banner" id="banner"><label class="custom-control-label"
+                                                            for="banner">Banner</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-radio custom-control-pro">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                        @if ($student->hear_about == 'social_media')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="social_media" id="social_media"><label
+                                                            class="custom-control-label" for="social_media">Social media</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-radio custom-control-pro">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                        @if ($student->hear_about == 'flyer')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="flyer" id="flyer"><label class="custom-control-label"
+                                                            for="flyer">Flyer</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-radio custom-control-pro">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                        @if ($student->hear_about == 'seminar')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="seminar" id="seminar"><label class="custom-control-label"
+                                                            for="seminar">Seminar</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-radio custom-control-pro">
+                                                        <input type="radio" class="custom-control-input" name="hear_about"
+                                                        @if ($student->hear_about == 'friends')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="others-radio" id="others-radio"><label
+                                                            class="custom-control-label" for="others-radio">
+                                                            <input type="text" id="others" name="hear_about"
+                                                                class="form-control" placeholder="Others">
+            
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+            
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="fv-about">Course
+                                                <span class="valid-form">*</span></label>
+                                            <ul class="custom-control-group">
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
+                                                        <input type="checkbox" class="custom-control-input" name="course[]"
+                                                        @if ($student->course == 'englishlanguage'))
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="englishlanguage" id="englishlanguage"><label
+                                                            class="custom-control-label" for="englishlanguage">English
+                                                            Language</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
+                                                        <input type="checkbox" class="custom-control-input" name="course[]"
+                                                        @if ($student->course == 'friends')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="webdevelopment" id="webdevelopment"><label
+                                                            class="custom-control-label" for="webdevelopment">Web Development</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
+                                                        <input type="checkbox" class="custom-control-input" name="course[]"
+                                                        @if ($student->hear_about == 'friends')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="mobiledevelopment" id="mobiledevelopment"><label
+                                                            class="custom-control-label" for="mobiledevelopment">Mobile App
+                                                            Development</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="custom-control custom-control-sm custom-checkbox custom-control-pro checked">
+                                                        <input type="checkbox" class="custom-control-input" name="course[]"
+                                                        @if ($student->hear_about == 'friends')
+                                                        checked="checked" 
+                                                        @endif
+                                                            value="gamedevelopment" id="gamedevelopment"><label
+                                                            class="custom-control-label" for="gamedevelopment">Game
+                                                            Development</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
+                                                        <input type="checkbox" class="custom-control-input" name="course[]"
+                                                            @if ($student->hear_about == 'friends')
+                                                            checked="checked" 
+                                                            @endif
+                                                            value="graphicdesign" id="graphicdesign"><label
+                                                            class="custom-control-label" for="graphicdesign">Graphic Design</label>
+                                                    </div>
+                                                </li>
+                                                {{ $student->course }}
+                                            </ul>
+                                        </div>
+                                    </div>
                                     <div class="col-12">
                                         <div class="custom-control custom-switch">
                                             <input type="checkbox" name="graduation" class="custom-control-input"
-                                                @if ($student->status == 'inactive')
+                                                @if ($student->status == 'active')
                                             checked
                                             @endif id="latest-sale">
                                             <label class="custom-control-label" for="latest-sale">Status </label>
@@ -236,4 +433,11 @@
             </div><!-- .modal-content -->
         </div><!-- .modal-dialog -->
     </div><!-- .modal -->
+
+
+    <script>
+        $("#phone-no").inputmask({
+            "mask": "998 (99) 999-99-99"
+        });
+    </script>
 @endsection

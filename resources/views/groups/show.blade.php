@@ -82,7 +82,7 @@
                                         @if ($data_student->status == 'active')
                                             Active
                                         @else
-                                            Completed
+                                            Inactive
                                         @endif
                                     </span>
                                 </div>

@@ -79,7 +79,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="fv-phone">+998</span>
                                         </div>
-                                        <input type="number" class="form-control" id="phone"
+                                        <input type="phone" class="form-control" id="phone"
                                             pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone" required="">
                                     </div>
                                 </div>
