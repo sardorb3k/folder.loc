@@ -24,7 +24,7 @@ class SalaryService implements SalaryServiceInterface
         return DB::select("SELECT gp.id, gp.name,
         (SELECT concat(us.lastname,' ',us.firstname) AS teacher_id FROM users AS us WHERE us.id = gp.teacher_id) AS teacher_id,
         (SELECT concat(us.lastname,' ',us.firstname) AS teacher_id FROM users AS us WHERE us.id = gp.assistant_id) AS assistant_id,
-        gp.lessontime,gp.days,gp.level
+        gp.lessonstarttime,gp.days,gp.level
         FROM
         groups AS gp
         WHERE
