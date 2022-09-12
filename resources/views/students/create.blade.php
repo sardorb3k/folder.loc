@@ -15,6 +15,16 @@
                 {{ session('success') }} {{ session('error') }}
             </div>
         @endif
+        @if ($errors->any())
+            <div class="example-alert">
+                <div class="alert alert-danger alert-icon alert-dismissible"><em class="icon ni ni-cross-circle"></em>
+                    <strong>Message</strong>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    <button class="close" data-bs-dismiss="alert"></button></div>
+            </div>
+        @endif
     </div><!-- .nk-block-head -->
     <div class="nk-block">
         <div class="card card-bordered">
@@ -163,7 +173,7 @@
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-target"></em>
                                     </div>
-                                    <input type="text" class="form-control" id="fv-why-english" name="whyenglish"
+                                    <input type="text" class="form-control" id="fv-why-english" name="reasontostudy"
                                         required>
                                 </div>
                             </div>
@@ -241,8 +251,8 @@
                                             <input type="radio" class="custom-control-input" name="hear_about"
                                                 value="others-radio" id="others-radio"><label
                                                 class="custom-control-label" for="others-radio">
-                                                <input type="text" id="others" name="hear_about" class="form-control"
-                                                    placeholder="Others">
+                                                <input type="text" id="others" name="hear_about"
+                                                    class="form-control" placeholder="Others">
 
                                             </label>
                                         </div>
@@ -341,7 +351,8 @@
             }
             // alert($('input[name=hear_about]:checked', '#hear_about').val());
         });
-        $("#phone").inputmask({"mask": "(999) 999-9999"});
-
+        $("#phone").inputmask({
+            "mask": "(999) 999-9999"
+        });
     </script>
 @endsection

@@ -130,7 +130,7 @@ class StudentsService implements StudentsServiceInterface
             'reasontostudy' => $request->reasontostudy,
             'interests' => $request->interests,
             'hear_about' => $request->hear_about,
-            'course' => $request->course ?? [],
+            'course' => json_encode($request->course) ?? [],
             'role' => 'student',
             'password' => Hash::make($request['password']),
         ]);
