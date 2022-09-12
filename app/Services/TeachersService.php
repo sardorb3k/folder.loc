@@ -39,6 +39,16 @@ class TeachersService implements TeachersServiceInterface
     {
         return Teacher::where('role', 'teacher')->get();
     }
+
+    /**
+     * Get all assistant.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllAssistant(): Collection
+    {
+        return Teacher::where('role', 'assistant')->get();
+    }
     /**
      * Get All Teachers Paginated.
      * @param int $perPage
@@ -46,7 +56,7 @@ class TeachersService implements TeachersServiceInterface
      */
     public function getAllTeachersPaginated(int $perPage): LengthAwarePaginator
     {
-        return Teacher::where('role', 'teacher')
+        return Teacher::where('role', 'teacher')->orWhere('role', 'assistant')
             ->latest()
             ->paginate($perPage);
     }
@@ -58,7 +68,7 @@ class TeachersService implements TeachersServiceInterface
      */
     public function getCountTeachers(): int
     {
-        return Teacher::where('role', 'teacher')->count();
+        return Teacher::where('role', 'teacher')->orWhere('role', 'assistant')->count();
     }
 
     /**
@@ -85,6 +95,7 @@ class TeachersService implements TeachersServiceInterface
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
+            'role' => $request->role,
             'status' => $request->graduation == 'on' ? 'inactive' : 'active',
         ]);
         // dd($teacher);
@@ -138,6 +149,7 @@ class TeachersService implements TeachersServiceInterface
             'birthday' => 'required|date',
             'gender' => 'required',
             'password' => 'required|string|min:6|confirmed',
+            'role' => 'required',
         ]);
         $teacher = $this->teachers->create([
             'lastname' => $request->lastname,
@@ -145,7 +157,7 @@ class TeachersService implements TeachersServiceInterface
             'phone' =>  $request->phone,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
-            'role' => 'teacher',
+            'role' => $request->role,
             'password' => Hash::make($request['password']),
         ]);
         return $teacher;

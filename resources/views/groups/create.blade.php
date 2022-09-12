@@ -38,9 +38,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="lastname">Lessontime</label>
+                                <label class="form-label" for="lastname">Lesson start time</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" class="form-control time-picker" name="lessontime"
+                                    <input type="text" class="form-control time-picker" name="lessonstarttime"
+                                        placeholder="Time" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="lastname">Lesson end time</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control time-picker" name="lessonendtime"
                                         placeholder="Time" required>
                                 </div>
                             </div>
@@ -67,7 +76,7 @@
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
                                         <select class="form-control" name="assistant_id" id="default-06" required>
-                                            @foreach ($teachers as $item)
+                                            @foreach ($assistants as $item)
                                                 <option value="{{ $item->id }}">
                                                     {{ $item->lastname . ' ' . $item->firstname }}
                                                 </option>

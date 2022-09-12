@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label class="form-label" for="phone">{{ __('auth.register_phone') }}</label>
                         <div class="form-control-wrap">
-                            <input tabindex="3" type="phone" class="form-control form-control-lg" size="20" minlength="9" maxlength="14"
+                            <input tabindex="3" type="number" class="form-control form-control-lg" size="20" minlength="12" maxlength="12" 
                                 id="phone" name="phone" value="{{ old('phone') }}"
                                 placeholder="{{ __('auth.register_phone_feed') }}" required autocomplete="phone">
                         </div>

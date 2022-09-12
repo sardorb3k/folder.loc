@@ -27,7 +27,6 @@ class Student extends Model
         'reasontostudy',
         'interests',
         'hear_about',
-        'hear_about_other',
         'course',
         'role',
         'status',

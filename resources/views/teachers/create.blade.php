@@ -33,7 +33,7 @@
                     <div class="row g-gs">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="firstname">First name</label>
+                                <label class="form-label" for="firstname">First name <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-user"></em>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="lastname">Last name</label>
+                                <label class="form-label" for="lastname">Last name <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-user"></em>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-phone">Phone</label>
+                                <label class="form-label" for="fv-phone">Phone <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="form-label">Birth day</label>
+                                <label class="form-label">Birth day <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap focused">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-gift"></em>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="form-label" for="password">Password <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-lock"></em>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                <label class="form-label" for="password_confirmation">Confirm Password <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="toggle-password form-icon form-icon-right">
                                         <em class="icon ni ni-lock"></em>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-phone">Sex / Gender</label>
+                                <label class="form-label" for="fv-phone">Sex / Gender <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <ul class="custom-control-group">
                                         <li>
@@ -122,6 +122,29 @@
                                                 <input type="radio" class="custom-control-input" name="gender"
                                                     id="sex-female" value="female" required="">
                                                 <label class="custom-control-label" for="sex-female">Female</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="fv-phone">Role <span class="valid-form">*</span></label>
+                                <div class="form-control-wrap">
+                                    <ul class="custom-control-group">
+                                        <li>
+                                            <div class="custom-control custom-radio custom-control-pro no-control">
+                                                <input type="radio" class="custom-control-input" name="role"
+                                                    id="role-teacher" value="teacher" required="">
+                                                <label class="custom-control-label" for="role-teacher">Teacher</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="custom-control custom-radio custom-control-pro no-control">
+                                                <input type="radio" class="custom-control-input" name="role"
+                                                    id="role-assistant" value="assistant" required="">
+                                                <label class="custom-control-label" for="role-assistant">Assistant</label>
                                             </div>
                                         </li>
                                     </ul>

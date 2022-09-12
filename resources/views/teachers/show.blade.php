@@ -87,7 +87,7 @@
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="firstname">First name *</label>
+                                            <label class="form-label" for="firstname">First name <span class="valid-form">*</span></label>
                                             <input type="text" class="form-control form-control-lg" name="firstname"
                                                 id="firstname" value="{{ $teacher->firstname }}"
                                                 placeholder="Enter First name">
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="lastname">Last name *</label>
+                                            <label class="form-label" for="lastname">Last name <span class="valid-form">*</span></label>
                                             <input type="text" class="form-control form-control-lg" name="lastname"
                                                 id="lastname" value="{{ $teacher->lastname }}"
                                                 placeholder="Enter Last name">
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="fv-phone">Sex / Gender *</label>
+                                            <label class="form-label" for="fv-phone">Sex / Gender <span class="valid-form">*</span></label>
                                             <div class="form-control-wrap">
                                                 <ul class="custom-control-group">
                                                     <li>
@@ -133,14 +133,41 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="phone-no">Phone Number *</label>
+                                            <label class="form-label" for="fv-phone">Role <span class="valid-form">*</span></label>
+                                            <div class="form-control-wrap">
+                                                <ul class="custom-control-group">
+                                                    <li>
+                                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                                            <input type="radio" class="custom-control-input" name="role"
+                                                                id="role-teacher" value="teacher"
+                                                                @if ($teacher->role == 'teacher') checked @endif
+                                                                required="">
+                                                            <label class="custom-control-label" for="role-teacher">Teacher</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                                            <input type="radio" class="custom-control-input"
+                                                                @if ($teacher->role == 'assistant') checked @endif
+                                                                name="role"
+                                                                id="role-assistant" value="assistant" required="">
+                                                            <label class="custom-control-label" for="role-assistant">Assistant</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="phone-no">Phone Number <span class="valid-form">*</span></label>
                                             <input type="tel" class="form-control form-control-lg" name="phone"
                                                 id="phone-no" value="{{ $teacher->phone }}" placeholder="Phone Number">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="birth-day">Date of Birth *</label>
+                                            <label class="form-label" for="birth-day">Date of Birth <span class="valid-form">*</span></label>
                                             <input type="text" class="form-control date-picker-alt" name="birthday"
                                                 value="{{ $teacher->birthday }}" data-date-format="yyyy-mm-dd" required>
                                         </div>
@@ -178,7 +205,7 @@
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="password">Password *</label>
+                                            <label class="form-label" for="password">Password <span class="valid-form">*</span></label>
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
                                                     <em class="icon ni ni-lock"></em>
@@ -191,7 +218,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="password_confirmation">Confirm
-                                                Password *</label>
+                                                Password <span class="valid-form">*</span></label>
                                             <div class="form-control-wrap">
                                                 <div class="toggle-password form-icon form-icon-right">
                                                     <em class="icon ni ni-lock"></em>

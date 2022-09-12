@@ -63,7 +63,7 @@
                                     </td>
                                     <td class="tb-tnx-amount is-alt">
                                         <div class="tb-tnx-total">
-                                            <span class="badge">{{ $item->lessontime }}</span>
+                                            <span class="badge">{{ $item->lessonstarttime }}</span>
                                         </div>
                                         <div class="tb-tnx-status">
                                             <span class="badge">{{ $item->days }}</span>

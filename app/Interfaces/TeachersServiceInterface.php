@@ -8,6 +8,7 @@ use App\Models\User;
 interface TeachersServiceInterface
 {
     public function getAllTeachers();
+    public function getAllAssistant();
     public function getCountTeachers();
     public function getAllTeachersPaginated(int $perPage);
     public function getTeacherById(int $id);

@@ -121,7 +121,7 @@
 
   NioApp.PassSwitch = function () {
     NioApp.Passcode('.passcode-switch');
-  }; // Toastr Message @v1.0 
+  }; // Toastr Message @v1.0
 
 
   NioApp.Toast = function (msg, ttype, opt) {
@@ -907,9 +907,8 @@
     $("#my-profile-menu .nav-item").click(function () {
       localStorage.setItem("active_menu_item", $(this).find("a").attr('href'));
     });
-
     var item = localStorage.getItem("active_menu_item");
-    if (item != null) {
+    if (item == window.location.href) {
       $("#my-profile-menu .nav-item").removeClass('active');
       $("#my-profile-menu a[href='" + item + "']").parent('.nav-item').addClass('active current-page');
     }

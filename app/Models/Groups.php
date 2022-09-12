@@ -11,7 +11,8 @@ class Groups extends Model
 
     protected $fillable = [
         'name',
-        'lessontime',
+        'lessonstarttime',
+        'lessonendtime',
         'teacher_id',
         'assistant_id',
         'days',

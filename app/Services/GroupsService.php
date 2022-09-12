@@ -33,7 +33,7 @@ class GroupsService implements GroupsServiceInterface
              */
             $groups = DB::select(
                 DB::raw(
-                    'SELECT gi.id,gi.`name`,gi.lessontime,gi.days,gi.level,ut.lastname AS teacher_id,ua.lastname AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
+                    'SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level,ut.lastname AS teacher_id,ua.lastname AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
                 )
             );
             return $groups ?? [];
@@ -189,7 +189,8 @@ class GroupsService implements GroupsServiceInterface
     {
         $group = Groups::find($id);
         $group->name = $request->name;
-        $group->lessontime = $request->lessontime;
+        $group->lessonstarttime = $request->lessonstarttime;
+        $group->lessonendtime = $request->lessonendtime;
         $group->days = $request->days;
         $group->level = $request->level;
         $group->teacher_id = $request->teacher_id;

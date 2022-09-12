@@ -59,7 +59,8 @@ class GroupsRepository implements GroupsRepositoryInterface
     public function createGroups(): View
     {
         $teachers = $this->teachersService->getAllTeachers();
-        return view('groups.create', compact('teachers'));
+        $assistants = $this->teachersService->getAllAssistant();
+        return view('groups.create', compact('teachers','assistants'));
     }
     /**
      * EditGroups method for GroupsController class to display the form for editing a group.
@@ -68,7 +69,8 @@ class GroupsRepository implements GroupsRepositoryInterface
     {
         $group = $this->groupService->getGroupById($id);
         $teachers = $this->teachersService->getAllTeachers();
-        return view('groups.edit', compact('group', 'teachers'));
+        $assistants = $this->teachersService->getAllAssistant();
+        return view('groups.edit', compact('group', 'teachers','assistants'));
     }
     /**
      * StoreGroups method for GroupsController class to store a new group in the database.

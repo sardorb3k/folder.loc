@@ -40,20 +40,28 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="lastname">Lessontime</label>
+                                <label class="form-label" for="lastname">Lesson start time</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" class="form-control time-picker"
-                                        value="{{ $group->lessontime }}" name="lessontime" placeholder="Time"
-                                        required>
+                                    <input type="text" class="form-control time-picker" name="lessonstarttime"
+                                    value="{{ $group->lessonstarttime }}" placeholder="Time" required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-email">Teacher</label>
+                                <label class="form-label" for="lastname">Lesson end time</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control time-picker" name="lessonendtime"
+                                    value="{{ $group->lessonendtime }}" placeholder="Time" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="fv-teacher">Teacher</label>
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
-                                        <select class="form-control" name="teacher_id" id="default-06" required>
+                                        <select class="form-control" name="teacher_id" id="fv-teacher" required>
                                             @foreach ($teachers as $item)
                                                 <option value="{{ $item->id }}"
                                                     {{ $item->id == $group->teacher_id ? 'selected' : '' }}>
@@ -67,11 +75,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-email">Assestent</label>
+                                <label class="form-label" for="fv-assistants">Assestent</label>
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
-                                        <select class="form-control" name="assistant_id" id="default-06" required>
-                                            @foreach ($teachers as $item)
+                                        <select class="form-control" name="assistant_id" id="fv-assistants" required>
+                                            @foreach ($assistants as $item)
                                                 <option value="{{ $item->id }}"
                                                     {{ $item->id == $group->assistant_id ? 'selected' : '' }}>
                                                     {{ $item->lastname . ' ' . $item->firstname }}
@@ -109,15 +117,15 @@
                         </div> --}}
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-email">Level</label>
+                                <label class="form-label" for="fv-level">Level</label>
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
-                                        <select class="form-control" name="level" id="default-06" required>
-                                            <option value="beginner">Beginner</option>
-                                            <option value="elementary">Elemantary</option>
-                                            <option value="pre-intermediate">Pre-Intermediate</option>
-                                            <option value="intermediate">Intermediate</option>
-                                            <option value="upper-intermediate">Upper-Intermediate</option>
+                                        <select class="form-control" name="level" id="fv-level" required>
+                                            <option value="beginner" {{ 'beginner' == $group->level ? 'selected' : '' }}>Beginner</option>
+                                            <option value="elementary" {{ 'elementary' == $group->level ? 'selected' : '' }}>Elemantary</option>
+                                            <option value="pre-intermediate" {{ 'pre-intermediate' == $group->level ? 'selected' : '' }}>Pre-Intermediate</option>
+                                            <option value="intermediate" {{ 'intermediate' == $group->level ? 'selected' : '' }}>Intermediate</option>
+                                            <option value="upper-intermediate" {{ 'upper-intermediate' == $group->level ? 'selected' : '' }}>Upper-Intermediate</option>
                                         </select>
                                     </div>
                                 </div>
