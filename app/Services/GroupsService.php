@@ -138,13 +138,32 @@ class GroupsService implements GroupsServiceInterface
     public function groupSubscriptionStudents(Request $request): void
     {
         // dd($request->all());
-        $group_id = $request->group_id;
-        $student_id = $request->student_id;
-        $group_student = new GroupStudents();
-        $group_student->group_id = $group_id;
-        $group_student->student_id = $student_id;
-        $group_student->user_id = Auth::user()->id;
-        $group_student->save();
+        try {
+            if ($request->has('student_id')) {
+                $group_id = $request->group_id;
+                // Foreach student id
+                foreach ($request->student_id as $student_id) {
+                    // Check student id
+                    $check_student_id = GroupStudents::where(
+                        'student_id',
+                        $student_id
+                    )
+                        ->where('group_id', $group_id)
+                        ->first();
+                    if ($check_student_id) {
+                        continue;
+                    }
+                    // Create new group student
+                    $group_student = new GroupStudents();
+                    $group_student->student_id = $student_id;
+                    $group_student->group_id = $group_id;
+                    $group_student->user_id = Auth::user()->id;
+                    $group_student->save();
+                }
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     /**
@@ -152,10 +171,21 @@ class GroupsService implements GroupsServiceInterface
      */
     public function groupUnsubscriptionStudents(Request $request): void
     {
-        $group_id = $request->group_id;
-        $student_id = $request->student_id;
-        $group_student = GroupStudents::find($student_id);
-        $group_student->delete();
+        try {
+            // Validation request
+            $request->validate([
+                'group_id' => 'required',
+                'student_id' => 'required',
+            ]);
+            $group_id = $request->group_id;
+            $student_id = $request->student_id;
+            $group_student = GroupStudents::find($student_id);
+            if ($group_student) {
+                $group_student->delete();
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     /**
@@ -176,11 +206,18 @@ class GroupsService implements GroupsServiceInterface
      */
     public function deleteGroup(int $id): void
     {
-
-        // Table group_student delete group results by group id
-        $group_student = GroupStudents::where('group_id', $id)->delete();
-        // Table group delete exam by id
-        $group = Groups::where('id', $id)->delete();
+        // Validation group id
+        $group = Groups::find($id);
+        try {
+            if ($group) {
+                // Table group_student delete group results by group id
+                GroupStudents::where('group_id', $id)->delete();
+                // Table group delete exam by id
+                Groups::where('id', $id)->delete();
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     /**
@@ -188,6 +225,16 @@ class GroupsService implements GroupsServiceInterface
      */
     public function updateGroup(Request $request, int $id): void
     {
+        // Validation request
+        $request->validate([
+            'name' => 'required',
+            'lessonstarttime' => 'required',
+            'lessonendtime' => 'required',
+            'days' => 'required',
+            'level' => 'required',
+            'teacher_id' => 'required',
+            'assistant_id' => 'required',
+        ]);
         $group = Groups::find($id);
         $group->name = $request->name;
         $group->lessonstarttime = $request->lessonstarttime;

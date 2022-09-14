@@ -27,11 +27,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
+
             // Students
+            $table->string('image')->nullable();
             $table->string('homeaddress')->nullable();
             $table->string('reasontostudy')->nullable();
             $table->string('interests')->nullable();
-            $table->string('hear_about_other')->nullable();
             $table->enum('hear_about', ['friends', 'relatives', 'teacher', 'banner', 'social_media', 'flyer', 'seminar', 'other'])->default('relatives');
             $table->json('course')->nullable();
 

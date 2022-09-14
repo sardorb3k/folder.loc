@@ -61,6 +61,18 @@ class SalaryController extends Controller
         return $this->salary->showSalary($date, $id);
     }
 
+    // Store Salary List
+    public function storeSalaryList(Request $request)
+    {
+        return $this->salary->storeSalaryList($request);
+    }
+
+    // Update Salary List
+    public function updateSalaryList(Request $request, $id)
+    {
+        return $this->salary->updateSalaryList($request, $id);
+    }
+
 
     /**
      * Show group students

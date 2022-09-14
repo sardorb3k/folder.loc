@@ -112,7 +112,7 @@ class StudentsService implements StudentsServiceInterface
          *  Validate request
          */
         $request['phone'] = '998' . str_replace(["(", ")", "-", " "], "", $request->phone);
-        $req = $request->validate([
+        $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'phone' => 'required|unique:users,phone',
@@ -124,7 +124,25 @@ class StudentsService implements StudentsServiceInterface
             'hear_about' => 'required',
             'course' => 'required',
             'password' => 'required|string|min:6|confirmed',
+            'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        // File upload
+        // if($request->file('imageupload')){
+        //     $imagename = $request->file('imageupload')->getClientOriginalName();
+        //     $tempname = $request->file('imageupload')->storeAs('public/images', $imagename);
+
+        // }
+
+        // image upload to public/images folder and store image name to database students table
+        if ($request->hasFile('imageupload')) {
+            $image = $request->file('imageupload');
+            $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/students');
+            $image->move($destinationPath, $name);
+        }
+
+
         $students = $this->students->create([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
@@ -136,6 +154,7 @@ class StudentsService implements StudentsServiceInterface
             'interests' => $request->interests,
             'hear_about' => $request->hear_about,
             'course' => json_encode($request->course) ?? [],
+            'image' => $name ?? '',
             'role' => 'student',
             'password' => Hash::make($request['password']),
         ]);

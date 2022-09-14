@@ -19,17 +19,18 @@
             <div class="example-alert">
                 <div class="alert alert-danger alert-icon alert-dismissible"><em class="icon ni ni-cross-circle"></em>
                     <strong>Message</strong>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    <button class="close" data-bs-dismiss="alert"></button></div>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    <button class="close" data-bs-dismiss="alert"></button>
+                </div>
             </div>
         @endif
     </div><!-- .nk-block-head -->
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">
-                <form action="{{ route('students.store') }}" class="form-validate" method="post">
+                <form action="{{ route('students.store') }}" class="form-validate" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row g-gs">
                         <div class="col-md-6">
@@ -178,7 +179,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-enteresteds">Interests <span
                                         class="valid-form">*</span></label>
@@ -191,6 +192,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group"><label class="form-label">Image upload</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-file">
+                                        <input type="file" class="form-file-input" name="imageupload"
+                                            id="imageupload">
+                                        <label class="form-file-label" for="imageupload">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-about">Where did you hear about us
@@ -352,7 +366,7 @@
             // alert($('input[name=hear_about]:checked', '#hear_about').val());
         });
         $("#phone").inputmask({
-            "mask": "(999) 999-9999"
+            "mask": "(99) 999-9999"
         });
     </script>
 @endsection

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             // Teacher id (foreign key)
             $table->unsignedBigInteger('teacher_id');
+            // date of payment
+            $table->date('salarydate');
             // Salary float (10,2)
             $table->float('salary', 10, 2);
             // enum ('active', 'inactive') (default: 'inactive')

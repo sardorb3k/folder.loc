@@ -28,7 +28,7 @@
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">
-                <form action="{{ route('teachers.store') }}" class="form-validate" method="post">
+                <form action="{{ route('teachers.store') }}" class="form-validate" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row g-gs">
                         <div class="col-md-6">
@@ -151,6 +151,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group"><label class="form-label">Image upload</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-file">
+                                        <input type="file" class="form-file-input" name="imageupload"
+                                            id="imageupload">
+                                        <label class="form-file-label" for="imageupload">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <button type="submit" onclick="this.form.setAttribute('novalidate', 'novalidate');'"  class="btn btn-lg btn-primary">Create</button>
@@ -174,7 +185,7 @@
         });
 
         $("#phone").inputmask({
-            "mask": "(999) 999-9999"
+            "mask": "(99) 999-9999"
         });
     </script>
 @endsection

@@ -36,7 +36,8 @@
 
                     <div class="col-sm-6" style="align-self: center;">
                         <input type="hidden" name="group" value="{{ $id }}">
-                        <div class="form-group"><a href="#" class="btn btn-secondary" onclick="event.preventDefault();
+                        <div class="form-group"><a href="#" class="btn btn-secondary"
+                                onclick="event.preventDefault();
                                             this.closest('form').submit();">Search</a>
                         </div>
                     </div>
@@ -91,7 +92,10 @@
                                     </a>
                                 </div>
                                 <div class="nk-tb-col">
-                                    <div class="form-control-wrap"><input type="text" name="amount" value="{{ $data_student->amount }}" class="form-control">
+                                    <div class="form-control-wrap">
+                                        <input type="number" data-affixes-stay="true" id="amount"
+                                            name="amount[{{ $data_student->id }}]" value="{{ $data_student->amount }}"
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="nk-tb-col tb-col-xl">
@@ -105,16 +109,14 @@
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
                                                                 name="payments[{{ $data_student->id }}][start]"
                                                                 value="{{ $data_student->payment_start }}"
-                                                                id="start{{ $data_student->id }}"
-                                                                onkeydown="return false"
+                                                                id="start{{ $data_student->id }}" onkeydown="return false"
                                                                 onchange="handler('start{{ $data_student->id }}', 'end{{ $data_student->id }}');" />
                                                             <div class="input-group-addon">TO</div>
                                                             <input type="text" class="form-control date-picker"
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
                                                                 value="{{ $data_student->payment_end }}"
                                                                 name="payments[{{ $data_student->id }}][end]"
-                                                                id="end{{ $data_student->id }}"
-                                                                onkeydown="return false" />
+                                                                id="end{{ $data_student->id }}" onkeydown="return false" />
 
                                                         </div>
                                                     </div>
@@ -136,7 +138,8 @@
                             <input type="hidden" name="group_id" value="{{ $id }}">
                             <input name="payments_date" type="hidden" value="{{ $date }}">
                             <input name="salarydate" type="hidden" value="{{ $students['date_salary'] }}">
-                            <div class="form-group"><a href="#" class="btn btn-secondary" onclick="event.preventDefault();
+                            <div class="form-group"><a href="#" class="btn btn-secondary"
+                                    onclick="event.preventDefault();
                                                     this.closest('form').submit();">Save</a>
                             </div>
                         </div>
@@ -146,8 +149,13 @@
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
-
     <script>
+        console.log($('.input-daterange input'));
+        $('.input-daterange input').datepicker({
+            startDate: "09/30/2022",
+            minDate: '2017-12-12',
+
+        });
         $('#mesVigencia').datepicker({
             format: "yyyy-mm",
             startView: "months",
@@ -166,6 +174,8 @@
                 document.getElementById('form-service').submit();
             }
         });
+        // Money mask with 2 decimal places
+        $('#amount').maskMoney();
     </script>
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/> --}}
     <script>

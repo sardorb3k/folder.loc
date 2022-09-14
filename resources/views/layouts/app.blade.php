@@ -281,6 +281,7 @@
     <script src="{{ url('assets/js/libs/jqvmap.js?ver=2.9.1') }}"></script>
     <script src="{{ url('assets/js/libs/datatable-btns.js?ver=2.9.1') }}"></script>
     <script src="{{ url('assets/js/example-toastr.js?ver=2.4.0') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <!-- select region modal -->
 

@@ -87,8 +87,28 @@ class TeachersService implements TeachersServiceInterface
      */
     public function updateTeacher(Request $request, int $id): Teacher
     {
-        // dd($request->all());
+        // Validation request
+        $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'phone' => 'required',
+            'birthday' => 'required',
+            'gender' => 'required',
+            'role' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required',
+        ]);
+
         $teacher = Teacher::findOrFail($id);
+
+        // image upload to public/images folder and store image name to database students table
+        if ($request->hasFile('imageupload')) {
+            $image = $request->file('imageupload');
+            $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/students');
+            $image->move($destinationPath, $name);
+        }
+
         $teacher->update([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
@@ -96,6 +116,7 @@ class TeachersService implements TeachersServiceInterface
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'role' => $request->role,
+            'image' => $name ?? '',
             'status' => $request->graduation == 'on' ? 'inactive' : 'active',
         ]);
         // dd($teacher);
@@ -150,13 +171,24 @@ class TeachersService implements TeachersServiceInterface
             'gender' => 'required',
             'password' => 'required|string|min:6|confirmed',
             'role' => 'required',
+            'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        // image upload to public/images folder and store image name to database students table
+        if ($request->hasFile('imageupload')) {
+            $image = $request->file('imageupload');
+            $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/students');
+            $image->move($destinationPath, $name);
+        }
+
         $teacher = $this->teachers->create([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'phone' =>  $request->phone,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
+            'image' => $name ?? '',
             'role' => $request->role,
             'password' => Hash::make($request['password']),
         ]);

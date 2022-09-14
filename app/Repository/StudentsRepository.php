@@ -97,3 +97,9 @@ class StudentsRepository implements StudentsRepositoryInterface
         return view('students.exam', ['exams' => $this->examsService->getStudentById($id), 'id' => $id]);
     }
 }
+
+
+//AA 5215055
+//32301816050018
+//865504064954428
+//865504064954436

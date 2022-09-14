@@ -9,6 +9,7 @@ use App\Interfaces\TeachersServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\SalaryStudents;
+
 class SalaryRepository implements SalaryRepositoryInterface
 {
     /**
@@ -19,14 +20,17 @@ class SalaryRepository implements SalaryRepositoryInterface
         $date_all = explode('-', $date);
         $count_list = DB::select('SELECT COUNT(*) AS count FROM salary WHERE YEAR (created_at)= ? AND MONTH (created_at)=?', [$date_all[0], $date_all[1]]);
 
+        $form = DB::select('SELECT salary FROM salary WHERE MONTH(salarydate) = ? AND YEAR(salarydate) = ? LIMIT 1', [$date_all[1], $date_all[0]]);
+        $formStatus = $form ? false : true;
         if($count_list == 1){
             // Teacher list
         }else{
             // Teacher list
-            $teachers = app(TeachersServiceInterface::class)->getAllTeachers();
+            // $teachers = app(TeachersServiceInterface::class)->getAllTeachers();
+            $teachers = app(SalaryServiceInterface::class)->getTeacherList($date);
         }
         $count = 4;
-        return view('salary.index', compact('teachers', 'count', 'date'));
+        return view('salary.index', compact('teachers', 'count', 'date', 'formStatus'));
     }
     /**
      * Create
@@ -49,6 +53,26 @@ class SalaryRepository implements SalaryRepositoryInterface
             $salary->salarydate = $request->salarydate.'-01';
             $salary->save();
         }
+        return redirect()->route('salary.index', ['date' => $request->salarydate]);
+    }
+    // Update Salary List
+    public function updateSalaryList(Request $request, $id)
+    {
+        dd($request->all());
+        foreach ($request->salary as $key => $value) {
+            $salary = SalaryStudents::find($key);
+            $salary->amount = $value;
+            $salary->save();
+        }
+        return redirect()->route('salary.index', ['date' => $request->salarydate]);
+    }
+    // Salary list save
+    public function storeSalaryList(Request $request)
+    {
+        $salary = new Salary();
+        $salary->salary = $request->salary;
+        $salary->salarydate = $request->salarydate.'-01';
+        $salary->save();
         return redirect()->route('salary.index', ['date' => $request->salarydate]);
     }
     /**

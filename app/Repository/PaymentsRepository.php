@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Payment;
+
 class PaymentsRepository implements PaymentsRepositoryInterface
 {
     private $payments;
@@ -33,12 +34,14 @@ class PaymentsRepository implements PaymentsRepositoryInterface
         $groups = $this->groups->getAllGroups();
         return view('payments.index', compact('groups', 'count'));
     }
-    public function show(int $id,  Request $request):RedirectResponse{
+    public function show(int $id,  Request $request): RedirectResponse
+    {
         // dd($request->all());
         $date = $request->input('datetime') ?? date('Y-m');
         return redirect()->route('payments.show', ['id' => $id, 'date' => $date]);
     }
-    public function showPayments(int $id, $date): View{
+    public function showPayments(int $id, $date): View
+    {
         $count = $this->groups->getCountGroupStudents($id);
         $students = $this->payments->getStudents($id, $date);
         return view('payments.show', compact('students', 'count', 'date', 'id'));
@@ -52,7 +55,11 @@ class PaymentsRepository implements PaymentsRepositoryInterface
     // }
     public function storePayments(Request $request): RedirectResponse
     {
-        // dd($request->all());
+        $request->validate([
+            'amount' => 'required',
+            'group_id' => 'required',
+            'payments_date' => 'required'
+        ]);
         // Payments for each student
         foreach ($request->payments as $key => $value) {
             $payment = new Payment();
@@ -60,22 +67,26 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             $payment->payment_start = $value['start'] ?? null;
             $payment->payment_end = $value['end'] ?? null;
             // amount
-            $payment->amount = $request['amount'] ?? null;
+            $payment->amount = $request->amount[$key ?? ''] ?? null;
             $payment->group_id = $request->group_id;
-            $payment->payment_date = $request->payments_date.'-02';
+            $payment->payment_date = $request->payments_date . '-02';
             $payment->user_id = auth()->user()->id;
             $payment->save();
         }
         return redirect()->route('payments.index');
     }
-    public function updatePayments(Request $payments, int $id): RedirectResponse
+    public function updatePayments(Request $request, int $id): RedirectResponse
     {
+        // validation request
+        $request->validate([
+            'amount' => 'required',
+            'payments_date' => 'required'
+        ]);
         // Payment update for each student
-        foreach ($payments->payments as $key => $value) {
+        foreach ($request->payments as $key => $value) {
             // payment where student_id = $key and group_id = $id
-            $payment = Payment::where('student_id', $key)->where('group_id', $id)->where('payment_date', $payments->salarydate)->first();
-            // amount
-            $payment->amount = $payments['amount'] ?? null;
+            $payment = Payment::where('student_id', $key)->where('group_id', $id)->where('payment_date', $request->salarydate)->first();
+            $payment->amount = $request->amount[$key];
             $payment->payment_start = $value['start'] ?? null;
             $payment->payment_end = $value['end'] ?? null;
             $payment->save();

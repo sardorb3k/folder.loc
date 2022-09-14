@@ -127,7 +127,7 @@
                             <div class="tab-pane active" id="create">
                                 <div class="row gy-4">
                                     @csrf
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="address-county">Student list</label>
                                             <select class="form-select" id="address-county" name="student_id" required data-ui="lg">
@@ -139,6 +139,22 @@
                                                     @endif
                                                 @endforeach
                                             </select>
+                                        </div>
+                                    </div> --}}
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Student list</label>
+                                            <div class="form-control-wrap">
+                                                <select class="form-select js-select2" multiple="multiple" name="student_id[]" data-placeholder="Select Multiple options">
+                                                    @foreach ($unsubscribelist as $item)
+                                                        @if ($item->role == 'student')
+                                                            <option value="{{ $item->id }}">
+                                                                {{ $item->lastname . ' ' . $item->firstname }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">

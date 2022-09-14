@@ -30,6 +30,7 @@ class Student extends Model
         'course',
         'role',
         'status',
+        'image',
         'password',
     ];
 }

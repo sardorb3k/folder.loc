@@ -93,7 +93,7 @@
                             </div>
                         </div><!-- .nk-block-between -->
                     </div>
-                    {{-- </form> --}}
+                    </form>
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->

@@ -90,7 +90,10 @@ Route::group(['prefix' => 'salary', 'middleware' => ['auth']], function () {
     Route::get('/{date}/{id}', 'App\Http\Controllers\SalaryController@show')->name('salary.show');
     // Group students list
     Route::get('/{date}/{id}/{group_id}', 'App\Http\Controllers\SalaryController@show_students')->name('salary.show_student');
-
+    // Store salary list
+    Route::post('/list/{date}', 'App\Http\Controllers\SalaryController@storeSalaryList')->name('salary.storeSalaryList');
+    // Update salary list
+    Route::put('/list/{date}', 'App\Http\Controllers\SalaryController@updateSalaryList')->name('salary.updateSalaryList');
     // Create | Update
     Route::post('/{group_id}', 'App\Http\Controllers\SalaryController@store')->name('salary.store');
     Route::put('/{group_id}', 'App\Http\Controllers\SalaryController@update')->name('salary.update');

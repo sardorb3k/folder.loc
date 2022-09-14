@@ -85,5 +85,57 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
         // dd($students);
         return $students;
     }
+
+
+    // Teacher list for salary
+    public function getTeacherList($date)
+    {
+        $date_all = explode('-', $date);
+        $teacher = DB::select(
+            DB::raw("SELECT DISTINCT
+            usr.id,
+            usr.firstname,
+            usr.lastname,
+            (
+            SELECT
+                COUNT(grlist.id)
+            FROM
+                groups AS grlist
+            WHERE
+                grlist.teacher_id = usr.id
+        ) AS group_count,
+        (
+            SELECT
+                COUNT(gr_s.id)
+            FROM
+                group_students AS gr_s
+            INNER JOIN groups AS grs
+            ON
+                grs.id = gr_s.group_id
+            WHERE
+                grs.teacher_id = usr.id
+        ) AS students_count,
+        (
+            SELECT
+                COALESCE(SUM(sry_s.amount), 0)
+            FROM
+                salary_students AS sry_s
+            INNER JOIN groups AS grs
+            ON
+                grs.id = sry_s.group_id
+            WHERE
+                grs.teacher_id = usr.id AND YEAR(sry_s.salarydate) = :dateY AND MONTH(sry_s.salarydate) = :dateM
+        ) AS salary
+        FROM
+            `users` AS usr
+        WHERE
+            usr.role = 'teacher' OR usr.role = 'assistant'"),[
+                'dateY' => $date_all[0],
+                'dateM' => $date_all[1],
+            ]
+        );
+        return $teacher;
+    }
 }
-//
+// by id from group stundents table.
+// SELECT count(*) as count FROM `group_students` WHERE group_id = 3
