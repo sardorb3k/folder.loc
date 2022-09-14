@@ -125,13 +125,25 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
                 grs.id = sry_s.group_id
             WHERE
                 grs.teacher_id = usr.id AND YEAR(sry_s.salarydate) = :dateY AND MONTH(sry_s.salarydate) = :dateM
-        ) AS salary
+        ) AS salary,
+        (
+            SELECT
+            	sry.salary
+            FROM
+            	salary as sry
+            WHERE
+            	sry.teacher_id = usr.id
+            and YEAR(sry.salarydate) = :dateSY
+            and MONTH(sry.salarydate) = :dateSM
+            ) as salary_action
         FROM
             `users` AS usr
         WHERE
             usr.role = 'teacher' OR usr.role = 'assistant'"),[
                 'dateY' => $date_all[0],
                 'dateM' => $date_all[1],
+                'dateSY' => $date_all[0],
+                'dateSM' => $date_all[1],
             ]
         );
         return $teacher;
