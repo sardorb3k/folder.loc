@@ -28,18 +28,21 @@
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">
-                <form action="{{ route('teachers.store') }}" class="form-validate" method="post" enctype="multipart/form-data">
+                <form action="{{ route('teachers.store') }}" class="form-validate" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row g-gs">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="firstname">First name <span class="valid-form">*</span></label>
+                                <label class="form-label" for="firstname">First name <span
+                                        class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-user"></em>
                                     </div>
                                     <input type="text" class="form-control" id="firstname" name="firstname"
-                                        required="" autocomplete="firstname" value="{{ old('firstname') }}">
+                                        tabindex="1" required="" autocomplete="firstname"
+                                        value="{{ old('firstname') }}">
                                 </div>
                             </div>
                         </div>
@@ -51,7 +54,7 @@
                                         <em class="icon ni ni-user"></em>
                                     </div>
                                     <input type="text" class="form-control" id="lastname" name="lastname" required=""
-                                        autocomplete="lastname">
+                                        tabindex="2" autocomplete="lastname">
                                 </div>
                             </div>
                         </div>
@@ -63,8 +66,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="fv-phone">+998</span>
                                         </div>
-                                        <input id="phone" type="phone" class="form-control" pattern="^\d{2}-\d{3}-\d{2}-\d{2}$"
-                                            name="phone" required="" autocomplete="phone">
+                                        <input id="phone" type="phone" class="form-control" tabindex="3"
+                                            pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone" required=""
+                                            autocomplete="phone">
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +81,7 @@
                                         <em class="icon ni ni-gift"></em>
                                     </div>
                                     <input type="text" class="form-control date-picker-alt" name="birthday"
-                                        data-date-format="yyyy-mm-dd" required>
+                                        tabindex="4" data-date-format="yyyy-mm-dd" required>
                                 </div>
                             </div>
                         </div>
@@ -89,27 +93,30 @@
                                         <em class="icon ni ni-lock"></em>
                                     </div>
                                     <input type="password" class="form-control" id="password" name="password"
-                                        required="" autocomplet="password">
+                                        tabindex="5" required="" autocomplet="password">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="password_confirmation">Confirm Password <span class="valid-form">*</span></label>
+                                <label class="form-label" for="password_confirmation">Confirm Password <span
+                                        class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="toggle-password form-icon form-icon-right">
                                         <em class="icon ni ni-lock"></em>
                                     </div>
                                     <input type="password" class="form-control" id="password_confirmation"
-                                        name="password_confirmation" required="" autocomplete="new-password">
+                                        tabindex="6" name="password_confirmation" required=""
+                                        autocomplete="new-password">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-phone">Sex / Gender <span class="valid-form">*</span></label>
+                                <label class="form-label" for="fv-phone">Sex / Gender <span
+                                        class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
-                                    <ul class="custom-control-group">
+                                    <ul class="custom-control-group" tabindex="7">
                                         <li>
                                             <div class="custom-control custom-radio custom-control-pro no-control">
                                                 <input type="radio" class="custom-control-input" name="gender"
@@ -132,7 +139,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="fv-phone">Role <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
-                                    <ul class="custom-control-group">
+                                    <ul class="custom-control-group" tabindex="8">
                                         <li>
                                             <div class="custom-control custom-radio custom-control-pro no-control">
                                                 <input type="radio" class="custom-control-input" name="role"
@@ -155,8 +162,8 @@
                             <div class="form-group"><label class="form-label">Image upload</label>
                                 <div class="form-control-wrap">
                                     <div class="form-file">
-                                        <input type="file" class="form-file-input" name="imageupload"
-                                            id="imageupload">
+                                        <input type="file" class="form-file-input" name="imageupload" tabindex="9"
+                                            id="imageupload" required>
                                         <label class="form-file-label" for="imageupload">Choose file</label>
                                     </div>
                                 </div>
@@ -164,7 +171,9 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button type="submit" onclick="this.form.setAttribute('novalidate', 'novalidate');'"  class="btn btn-lg btn-primary">Create</button>
+                                <button type="submit" tabindex="10"
+                                    onclick="this.form.setAttribute('novalidate', 'novalidate');'"
+                                    class="btn btn-lg btn-primary">Create</button>
                             </div>
                         </div>
                     </div>

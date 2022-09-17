@@ -91,6 +91,64 @@ class ExamsService implements ExamsServiceInterface
             return false;
         }
     }
+
+    // Get exam results by exam id
+    public function getExamResultsById(int $id, int $student_id)
+    {
+        try {
+            $exam_results = DB::select(
+                DB::raw(
+                    "SELECT mark FROM `exam_results` WHERE exam_id = :examid and student_id = :studentid limit 1;"
+                ),
+                [
+                    'examid' => $id,
+                    'studentid' => $student_id
+                ]
+            );
+            return $exam_results[0]->mark;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    // updateExam
+    public function updateExam(Request $request, int $id, int $student_id)
+    {
+        try {
+            // Create exam results
+            // Table ExamResults create new exam results for each student key => value
+
+            $exam_result = ExamResults::where('exam_id', $id)->where('student_id', $student_id)->first();
+            if ($exam_result) {
+                $exam_result->mark = json_encode($request->mark);
+                $exam_result->save();
+            } else {
+                $exam_result = new ExamResults;
+                $exam_result->student_id = $student_id;
+                $exam_result->exam_id = $id;
+                $exam_result->mark = json_encode($request->mark);
+                $exam_result->save();
+            }
+            // return json success message
+            return response()->json(['success' => 'Exam results updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Get exam results by id
      */

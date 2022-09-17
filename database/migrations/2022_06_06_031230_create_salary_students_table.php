@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('salary_students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('teacher_id');
             $table->float('amount', 10, 2);
             $table->unsignedBigInteger('group_id');
             // Date of payment
             $table->date('salarydate');
             $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

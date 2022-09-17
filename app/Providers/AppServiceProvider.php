@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -92,8 +93,21 @@ class AppServiceProvider extends ServiceProvider
             'App\Interfaces\SalaryRepositoryInterface',
             'App\Repository\SalaryRepository'
         );
-
-
+        // Dashboard Repository
+        $this->app->bind(
+            'App\Interfaces\DashboardRepositoryInterface',
+            'App\Repository\DashboardRepository'
+        );
+        // Settings Repository
+        $this->app->bind(
+            'App\Interfaces\SettingsRepositoryInterface',
+            'App\Repository\SettingsRepository'
+        );
+        // Settings Service
+        $this->app->bind(
+            'App\Interfaces\SettingsServiceInterface',
+            'App\Services\SettingsService'
+        );
     }
 
     /**

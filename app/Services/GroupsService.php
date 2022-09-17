@@ -125,6 +125,8 @@ class GroupsService implements GroupsServiceInterface
                 'users.firstname',
                 'users.phone',
                 'users.status',
+                'users.image',
+                'users.status',
                 'users.birthday'
             )
             ->where('group_id', $id)

@@ -20,4 +20,6 @@ interface ExamsServiceInterface
     public function getExamResults(int $id);
     public function deleteExam(int $id);
     public function getStudentById(int $id);
+    public function getExamResultsById(int $id, int $student_id);
+    public function updateExam(Request $request, int $id, int $student_id);
 }

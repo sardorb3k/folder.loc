@@ -16,5 +16,3 @@
                 class="icon ni ni-bell-fill"></em><span>Exams</span></a>
     </li>
 </ul><!-- .nav-tabs -->
-
-

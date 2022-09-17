@@ -68,8 +68,8 @@ function user_os($user_agent)
                     <table class="table table-ulogs">
                         <thead class="thead-light">
                             <tr>
-                                <th class="tb-col-os"><span class="overline-title">Browser <span
-                                            class="d-sm-none">/ IP</span></span></th>
+                                <th class="tb-col-os"><span class="overline-title">Browser <span class="d-sm-none">/
+                                            IP</span></span></th>
                                 <th class="tb-col-ip"><span class="overline-title">IP</span></th>
                                 <th class="tb-col-time"><span class="overline-title">Time</span></th>
                                 <th class="tb-col-action"><span class="overline-title">&nbsp;</span></th>
@@ -78,10 +78,13 @@ function user_os($user_agent)
                         <tbody>
                             @foreach ($sessions as $item)
                                 <tr>
-                                    <td class="tb-col-os">{{ user_os($item->user_agent) }} on {{ user_braw($item->user_agent) }}</td>
+                                    <td class="tb-col-os">{{ user_os($item->user_agent) }} on
+                                        {{ user_braw($item->user_agent) }}</td>
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->ip_address }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ date("M d, Y", $item->last_activity) }} <span
-                                        class="d-none d-sm-inline-block">{{ date("g:i A", $item->last_activity) }}</span></span></td>
+                                    <td class="tb-col-time"><span
+                                            class="sub-text">{{ date('M d, Y', $item->last_activity) }} <span
+                                                class="d-none d-sm-inline-block">{{ date('g:i A', $item->last_activity) }}</span></span>
+                                    </td>
                                     <td class="tb-col-action"></td>
                                 </tr>
                             @endforeach

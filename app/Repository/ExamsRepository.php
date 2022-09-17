@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Repository;
+
 use App\Interfaces\ExamsRepositoryInterface;
 use App\Interfaces\GroupsServiceInterface;
 use App\Http\Requests\UpdateExamRequest;
@@ -38,24 +40,35 @@ class ExamsRepository implements ExamsRepositoryInterface
      */
     public function showExams(int $id): View
     {
-        return view('exams.show');
+        // Group information
+        $exam = $this->examsService->getExamById($id);
+        // Group count for select
+        $students = $this->groupService->getGroupStudents($exam->group_id);
+        $count = $this->groupService->getCountGroupStudents($exam->group_id);
+        return view('exams.show', compact('exam', 'count', 'students'));
     }
 
     /**
      * @return View
      */
-    public function createExams(Request $request): View
+    public function createExams(Request $request): RedirectResponse
     {
+        // Validation
+        $request->validate([
+            'group_id' => 'required',
+            'exam' => 'required',
+        ]);
         // Group information
         $group = $this->groupService->getGroupInfoById($request->group_id);
-        // Group count for select
-        $count = $this->groupService->getCountGroupStudents($request->group_id);
-        // Group list for select
-        $students = $this->groupService->getGroupStudents($request->group_id);
-        // dd($request->all());
-        $exam_type = $request->exam;
 
-        return view('exams.create', compact('count', 'students', 'group', 'exam_type'));
+        $exam = new Exams;
+        $exam->exam_type = $request->exam;
+        $exam->group_id = $group[0]->id;
+        $exam->level = $group[0]->level;
+        $exam->save();
+
+        // Redirect to exams edit page with exam id
+        return redirect()->route('exams.show', $exam->id);
     }
 
     /**
@@ -96,9 +109,26 @@ class ExamsRepository implements ExamsRepositoryInterface
      * @param Request $request
      * @return RedirectResponse
      */
-    public function updateExams(Request $request,int $id): RedirectResponse
+    public function updateExams(Request $request, int $id): RedirectResponse
     {
         $update = $this->examsService->updateResults($request, $id);
         return redirect()->route('exams.index');
+    }
+
+    // getExamId
+    public function getExamId(int $id, int $student_id)
+    {
+        $exam = $this->examsService->getExamResultsById($id, $student_id);
+        // JSON response
+        return response()->json(json_decode($exam));
+    }
+
+    // updateExam
+    public function updateExam(Request $request, int $id, int $student_id)
+    {
+        // dd($request->all());
+        $update = $this->examsService->updateExam($request, $id, $student_id);
+        // JSON response
+        return response()->json($update);
     }
 }

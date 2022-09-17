@@ -74,42 +74,35 @@
                             </div>
                         </div>
                         <div class="nk-tb-item">
-                            <div class="nk-tb-col"><span
-                                    class="tb-sub"><span>/subscription/index.html</span></span></div>
+                            <div class="nk-tb-col"><span class="tb-sub"><span>/subscription/index.html</span></span></div>
                             <div class="nk-tb-col text-end"><span class="tb-sub tb-amount"><span>2,094</span></span>
                             </div>
                         </div>
                         <div class="nk-tb-item">
-                            <div class="nk-tb-col"><span
-                                    class="tb-sub"><span>/general/index.html</span></span></div>
+                            <div class="nk-tb-col"><span class="tb-sub"><span>/general/index.html</span></span></div>
                             <div class="nk-tb-col text-end"><span class="tb-sub tb-amount"><span>1,634</span></span>
                             </div>
                         </div>
                         <div class="nk-tb-item">
-                            <div class="nk-tb-col"><span
-                                    class="tb-sub"><span>/crypto/index.html</span></span></div>
+                            <div class="nk-tb-col"><span class="tb-sub"><span>/crypto/index.html</span></span></div>
                             <div class="nk-tb-col text-end"><span class="tb-sub tb-amount"><span>1,497</span></span>
                             </div>
                         </div>
                         <div class="nk-tb-item">
-                            <div class="nk-tb-col"><span
-                                    class="tb-sub"><span>/invest/index.html</span></span></div>
+                            <div class="nk-tb-col"><span class="tb-sub"><span>/invest/index.html</span></span></div>
                             <div class="nk-tb-col text-end"><span class="tb-sub tb-amount"><span>1,349</span></span>
                             </div>
                         </div>
                         <div class="nk-tb-item">
-                            <div class="nk-tb-col"><span
-                                    class="tb-sub"><span>/subscription/profile.html</span></span></div>
+                            <div class="nk-tb-col"><span class="tb-sub"><span>/subscription/profile.html</span></span></div>
                             <div class="nk-tb-col text-end"><span class="tb-sub tb-amount"><span>984</span></span></div>
                         </div>
                         <div class="nk-tb-item">
-                            <div class="nk-tb-col"><span
-                                    class="tb-sub"><span>/general/index-crypto.html</span></span></div>
+                            <div class="nk-tb-col"><span class="tb-sub"><span>/general/index-crypto.html</span></span></div>
                             <div class="nk-tb-col text-end"><span class="tb-sub tb-amount"><span>879</span></span></div>
                         </div>
                         <div class="nk-tb-item">
-                            <div class="nk-tb-col"><span
-                                    class="tb-sub"><span>/apps/messages/index.html</span></span></div>
+                            <div class="nk-tb-col"><span class="tb-sub"><span>/apps/messages/index.html</span></span></div>
                             <div class="nk-tb-col text-end"><span class="tb-sub tb-amount"><span>598</span></span></div>
                         </div>
                     </div>

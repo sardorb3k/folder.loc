@@ -103,8 +103,7 @@
                                                         {{-- <li><a href="{{ route('students.show', $data_student->id) }}"><em
                                                                     class="icon ni ni-focus"></em><span>View</span></a>
                                                         </li> --}}
-                                                        <li><a
-                                                                href="{{ route('students.edit', $data_student->id) }}"><em
+                                                        <li><a href="{{ route('students.edit', $data_student->id) }}"><em
                                                                     class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                         </li>
                                                         <li class="divider"></li>
@@ -112,8 +111,10 @@
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <input type="hidden" name="id" value="{{ $data_student->id }}">
-                                                            <li><a href="#" onclick="event.preventDefault();
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $data_student->id }}">
+                                                            <li><a href="#"
+                                                                    onclick="event.preventDefault();
                                                                 this.closest('form').submit();"><em
                                                                         class="icon ni ni-na"></em><span>Delete</span></a>
                                                             </li>

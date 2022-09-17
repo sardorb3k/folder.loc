@@ -29,7 +29,7 @@ interface ExamsRepositoryInterface
     /**
      * @return View
      */
-    public function createExams(Request $request): View;
+    public function createExams(Request $request): RedirectResponse;
 
     /**
      * @param int $id
@@ -66,5 +66,9 @@ interface ExamsRepositoryInterface
      * @return RedirectResponse
      */
     // public function groupUnsubscriptionExams(Request $request): RedirectResponse;
+
+    // getExamId
+    public function getExamId(int $id, int $student_id);
+    public function updateExam(Request $request, int $id, int $student_id);
 }
 

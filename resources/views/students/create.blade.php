@@ -30,7 +30,8 @@
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">
-                <form action="{{ route('students.store') }}" class="form-validate" method="post" enctype="multipart/form-data">
+                <form action="{{ route('students.store') }}" class="form-validate" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row g-gs">
                         <div class="col-md-6">
@@ -42,7 +43,7 @@
                                         <em class="icon ni ni-user"></em>
                                     </div>
                                     <input type="text" class="form-control" id="firstname" name="firstname"
-                                        required="">
+                                        tabindex="1" value="{{ old('firstname') }}" required="">
                                 </div>
                             </div>
                         </div>
@@ -55,7 +56,7 @@
                                         <em class="icon ni ni-user"></em>
                                     </div>
                                     <input type="text" class="form-control" id="lastname" name="lastname"
-                                        required="">
+                                        value="{{ old('lastname') }}" tabindex="2" required="">
                                 </div>
                             </div>
                         </div>
@@ -80,8 +81,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="fv-phone">+998</span>
                                         </div>
-                                        <input type="phone" class="form-control" id="phone"
-                                            pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone" required="">
+                                        <input type="phone" class="form-control" id="phone" tabindex="3"
+                                            pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone" value="{{ old('phone') }}"
+                                            required="">
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +120,8 @@
                                         <em class="icon ni ni-gift"></em>
                                     </div>
                                     <input type="text" class="form-control date-picker-alt" name="birthday"
-                                        data-date-format="yyyy-mm-dd" required>
+                                        tabindex="4" value="{{ old('birthday') }}" data-date-format="yyyy-mm-dd"
+                                        required>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +136,8 @@
                                         <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                                     </a>
                                     <input type="password" name="password" class="form-control form-control-lg"
-                                        id="password" required autocomplete="current-password">
+                                        value="{{ old('password') }}" tabindex="5" id="password" required
+                                        autocomplete="current-password">
                                 </div>
                             </div>
                         </div>
@@ -148,7 +152,8 @@
                                         <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                                     </a>
                                     <input type="password" name="password_confirmation"
-                                        class="form-control form-control-lg" id="password_confirmation" required
+                                        value="{{ old('password_confirmation') }}" class="form-control form-control-lg"
+                                        id="password_confirmation" required tabindex="6"
                                         autocomplete="current-password">
                                 </div>
                             </div>
@@ -162,7 +167,7 @@
                                         <em class="icon ni ni-home"></em>
                                     </div>
                                     <input type="text" class="form-control" id="fv-homeaddress" name="homeaddress"
-                                        required>
+                                        value="{{ old('homeaddress') }}" tabindex="7" required>
                                 </div>
                             </div>
                         </div>
@@ -175,7 +180,7 @@
                                         <em class="icon ni ni-target"></em>
                                     </div>
                                     <input type="text" class="form-control" id="fv-why-english" name="reasontostudy"
-                                        required>
+                                        value="{{ old('reasontostudy') }}" tabindex="8" required>
                                 </div>
                             </div>
                         </div>
@@ -188,31 +193,31 @@
                                         <em class="icon ni ni-tag"></em>
                                     </div>
                                     <input type="text" class="form-control" id="fv-interests" name="interests"
-                                        required>
+                                        value="{{ old('interests') }}" tabindex="9" required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group"><label class="form-label">Image upload</label>
+                            <div class="form-group"><label class="form-label">Image upload <span
+                                        class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="form-file">
-                                        <input type="file" class="form-file-input" name="imageupload"
-                                            id="imageupload">
+                                        <input type="file" class="form-file-input" name="imageupload" tabindex="10"
+                                            id="imageupload" required>
                                         <label class="form-file-label" for="imageupload">Choose file</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-about">Where did you hear about us
+                                <label class="form-label" for="fv-about" tabindex="12">Where did you hear about us
                                     <span class="valid-form">*</span></label>
                                 <ul class="custom-control-group" id="hear_about">
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'friends' ? 'checked' : '' }}
                                                 value="friends" id="friends"><label class="custom-control-label"
                                                 for="friends">Friends</label>
                                         </div>
@@ -220,6 +225,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'relatives' ? 'checked' : '' }}
                                                 value="relatives" id="Relatives"><label class="custom-control-label"
                                                 for="Relatives">Relatives</label>
                                         </div>
@@ -227,6 +233,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'teacher' ? 'checked' : '' }}
                                                 value="teacher" id="teacher"><label class="custom-control-label"
                                                 for="teacher">Teacher</label>
                                         </div>
@@ -235,6 +242,7 @@
                                         <div
                                             class="custom-control custom-control-sm custom-radio custom-control-pro checked">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'banner' ? 'checked' : '' }}
                                                 value="banner" id="banner"><label class="custom-control-label"
                                                 for="banner">Banner</label>
                                         </div>
@@ -242,6 +250,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'social_media' ? 'checked' : '' }}
                                                 value="social_media" id="social_media"><label
                                                 class="custom-control-label" for="social_media">Social media</label>
                                         </div>
@@ -249,6 +258,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'flyer' ? 'checked' : '' }}
                                                 value="flyer" id="flyer"><label class="custom-control-label"
                                                 for="flyer">Flyer</label>
                                         </div>
@@ -256,6 +266,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'seminar' ? 'checked' : '' }}
                                                 value="seminar" id="seminar"><label class="custom-control-label"
                                                 for="seminar">Seminar</label>
                                         </div>
@@ -263,6 +274,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
                                             <input type="radio" class="custom-control-input" name="hear_about"
+                                                {{ old('hear_about') == 'others-radio' ? 'checked' : '' }}
                                                 value="others-radio" id="others-radio"><label
                                                 class="custom-control-label" for="others-radio">
                                                 <input type="text" id="others" name="hear_about"
@@ -274,15 +286,15 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-about">Course
+                                <label class="form-label" for="fv-about" tabindex="13">Course
                                     <span class="valid-form">*</span></label>
                                 <ul class="custom-control-group">
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
+                                                {{ old('course')['englishlanguage'] ?? 'checked' }}
                                                 value="englishlanguage" id="englishlanguage"><label
                                                 class="custom-control-label" for="englishlanguage">English
                                                 Language</label>
@@ -291,6 +303,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
+                                            {{ old('course')['webdevelopment'] ?? 'checked' }}
                                                 value="webdevelopment" id="webdevelopment"><label
                                                 class="custom-control-label" for="webdevelopment">Web Development</label>
                                         </div>
@@ -298,6 +311,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
+                                            {{ old('course')['mobiledevelopment'] ?? 'checked' }}
                                                 value="mobiledevelopment" id="mobiledevelopment"><label
                                                 class="custom-control-label" for="mobiledevelopment">Mobile App
                                                 Development</label>
@@ -307,6 +321,7 @@
                                         <div
                                             class="custom-control custom-control-sm custom-checkbox custom-control-pro checked">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
+                                            {{ old('course')['gamedevelopment'] ?? 'checked' }}
                                                 value="gamedevelopment" id="gamedevelopment"><label
                                                 class="custom-control-label" for="gamedevelopment">Game
                                                 Development</label>
@@ -315,6 +330,7 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
+                                            {{ old('course')['graphicdesign'] ?? 'checked' }}
                                                 value="graphicdesign" id="graphicdesign"><label
                                                 class="custom-control-label" for="graphicdesign">Graphic Design</label>
                                         </div>
@@ -322,13 +338,10 @@
                                 </ul>
                             </div>
                         </div>
-
-
-
                         <div class="col-md-12">
                             <div class="form-group">
                                 <button type="submit" onclick="this.form.setAttribute('novalidate', 'novalidate');'"
-                                    class="btn btn-lg btn-primary">Create</button>
+                                    class="btn btn-lg btn-primary" tabindex="14">Create</button>
                             </div>
                         </div>
                     </div>

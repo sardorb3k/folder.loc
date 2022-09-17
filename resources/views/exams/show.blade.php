@@ -1,0 +1,260 @@
+@section('title', 'Exam')
+@extends('layouts.app')
+@section('content')
+    <div class="nk-block-head">
+        <div class="nk-block-between g-3">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title" style="margin-bottom: 1rem">Exam</h3>
+            </div><!-- .nk-block-head-content -->
+        </div><!-- .nk-block-between -->
+        <div class="card nk-block">
+            <div class="card card-bordered card-stretch">
+                <div class="card-inner-group">
+                    <div class="card card-preview">
+                        <div class="card-inner">
+                            <span class="preview-title overline-title">Group information</span>
+                            <div class="nk-block-des text-soft">
+                                <p>Group name: <span class="badge badge-primary">{{ $exam->group_name }}</span></p>
+                                <p>Level: <span class="badge badge-secondary">{{ strtoupper($exam->level) }}</span>
+                                </p>
+                                <p>Exam type: <span class="badge badge-secondary">{{ strtoupper($exam->exam_type) }}</span>
+                                </p>
+                                <p>Date: <span class="badge badge-secondary">{{ date('Y-M-d -- D') }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @include('error')
+        @if ($errors->any())
+            <div class="example-alert">
+                <div class="alert alert-pro alert-danger">
+                    <div class="alert-text">
+                        <h6>Whoops! <strong>There were some problems with your input.</strong></h6>
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div><!-- .nk-block-head -->
+    <div class="card nk-block">
+        <div class="card card-bordered card-stretch">
+            <div class="card-inner-group">
+                <div class="card-inner position-relative card-tools-toggle">
+                    <h5 class="title">All Students</h5>
+                    <p>Number of students in the group: <span class="badge badge-secondary">{{ $count }}</span></p>
+                </div><!-- .card-inner -->
+                <div class="card-inner p-0">
+                    <div class="nk-tb-list nk-tb-ulist">
+                        <div class="nk-tb-item nk-tb-head">
+                            <div class="nk-tb-col"><span class="sub-text">User</span></div>
+                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
+                            <div class="nk-tb-col"><span class="sub-text">A/N</span></div>
+                        </div><!-- .nk-tb-item -->
+                        @foreach ($students as $data_student)
+                            <div class="nk-tb-item">
+                                <div class="nk-tb-col">
+                                    <a href="{{ route('students.show', $data_student->id) }}">
+                                        <div class="user-card">
+                                            <div class="user-avatar">
+                                                <img src="https://ui-avatars.com/api/?name={{ $data_student->firstname . '+' . $data_student->lastname }}&background=random"
+                                                    alt="">
+                                            </div>
+                                            <div class="user-info">
+                                                <span class="tb-lead">{{ $data_student->firstname }}
+                                                    {{ $data_student->lastname }}
+                                                </span>
+                                                <span>{{ $data_student->phone }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-tb-col tb-col-xl">
+                                    <span>{{ $data_student->birthday }}</span>
+                                </div>
+                                <div class="nk-tb-col">
+                                    <li>
+                                        <div class="drodown">
+                                            <button class="btn btn-danger" id="edit-button"
+                                                value="{{ $data_student->id }}-{{ $exam->id }}" data-toggle="modal"
+                                                data-target="#exam-anw">Ans</button>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div><!-- .nk-tb-item -->
+                        @endforeach
+                    </div><!-- .nk-tb-list -->
+                </div><!-- .card-inner -->
+            </div><!-- .card-inner-group -->
+        </div><!-- .card -->
+    </div><!-- .nk-block -->
+
+    <!-- Modal Content Code -->
+    <div class="modal fade" tabindex="-1" id="exam-anw">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <em class="icon ni ni-cross"></em>
+                </a>
+                <div class="modal-header">
+                    <h5 class="modal-title">Exam</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row gy-4" id="exam-data">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-label" for="listening">Listening</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="exam[listening]" class="form-control" id="listening">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-label" for="reading">Reading</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="exam[reading]" class="form-control" id="reading">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-label" for="writing">Writing</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="exam[writing]" class="form-control" id="writing">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-label" for="speaking">Speaking</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="exam[speaking]" class="form-control" id="speaking">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-label" for="grammar">Grammar</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="exam[grammar]" class="form-control" id="grammar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-label" for="team">Team</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="exam[team]" class="form-control" id="team">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <input type="hidden" name="student_id" id="student_id">
+                    <input type="hidden" name="exam_id" id="exam_id">
+                    <p>Exam result: <span class="badge badge-secondary" id="result">0</span></p>
+                    <span class="sub-text"><button type="button" id="exam-save"
+                            class="btn btn-primary">Submit</button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.delete').on("click", function(e) {
+            e.preventDefault();
+
+            var choice = confirm($(this).attr('data-confirm'));
+
+            if (choice) {
+                document.getElementById('form-service').submit();
+            }
+        });
+        $('body').on('click', '#edit-button', function() {
+            var link_id = $(this).val();
+            var link_id = link_id.split('-');
+            var student_id = link_id[0];
+            var exam_id = link_id[1];
+            $.ajax({
+                url: "/exams/" + exam_id + "/" + student_id + "/getExamId",
+                type: "GET",
+                success: function(data) {
+                    if (data != null) {
+                        $('#listening').val(data.listening);
+                        $('#reading').val(data.reading);
+                        $('#writing').val(data.writing);
+                        $('#speaking').val(data.speaking);
+                        $('#grammar').val(data.grammar);
+                        $('#team').val(data.team);
+                        $('#student_id').val(student_id);
+                        $('#exam_id').val(exam_id);
+                    } else {
+                        $('#listening').val('');
+                        $('#reading').val('');
+                        $('#writing').val('');
+                        $('#speaking').val('');
+                        $('#grammar').val('');
+                        $('#team').val('');
+                        $('#student_id').val(student_id);
+                        $('#exam_id').val(exam_id);
+                    }
+                    $('#result').text(resultExam());
+                }
+            });
+        });
+        $("#exam-save").click(function(e) {
+            e.preventDefault();
+            // Backend Validation
+            var listening = $('#listening').val();
+            var reading = $('#reading').val();
+            var writing = $('#writing').val();
+            var speaking = $('#speaking').val();
+            var grammar = $('#grammar').val();
+            var team = $('#team').val();
+            var student_id = $('#student_id').val();
+            var exam_id = $('#exam_id').val();
+            $.ajax({
+                url: "/exams/" + exam_id + "/" + student_id + "/getExamId",
+                type: "POST",
+                data: {
+                    mark: {
+                        listening: listening == '' ? 0 : listening,
+                        reading: reading == '' ? 0 : reading,
+                        writing: writing == '' ? 0 : writing,
+                        speaking: speaking == '' ? 0 : speaking,
+                        grammar: grammar == '' ? 0 : grammar,
+                        team: team == '' ? 0 : team,
+                    },
+                    student_id: student_id,
+                    exam_id: exam_id,
+                },
+                success: function(data) {
+                    $('#exam-anw').modal('hide');
+                    $('#result').text(0);
+                }
+            });
+        });
+        $(".col-sm-4").on("input", function() {
+            $("#result").text(resultExam());
+        });
+        $('#result').text(resultExam());
+
+        function resultExam() {
+            var sum = 0;
+            var result = 0;
+            $('.col-sm-4 input').each(function() {
+                if (this.id != 'team') {
+                    sum += Number($(this).val());
+                }
+                if (this.id == 'team') {
+                    result = sum / 5 + Number($(this).val());
+                }
+            });
+            return result;
+        }
+    </script>
+@endsection

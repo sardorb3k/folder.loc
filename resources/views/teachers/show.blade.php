@@ -50,8 +50,7 @@
                             <div class="data-col data-col-end"><span class="data-more"><em
                                         class="icon ni ni-forward-ios"></em></span></div>
                         </div><!-- data-item -->
-                        <div class="data-item" data-toggle="modal" data-target="#profile-edit"
-                            data-tab-target="#address">
+                        <div class="data-item" data-toggle="modal" data-target="#profile-edit" data-tab-target="#address">
                             <div class="data-col">
                                 <span class="data-label">Gender</span>
                                 <span class="data-value">{{ $teacher->gender == 'male' ? 'Male' : 'Female' }}</span>
@@ -87,7 +86,8 @@
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="firstname">First name <span class="valid-form">*</span></label>
+                                            <label class="form-label" for="firstname">First name <span
+                                                    class="valid-form">*</span></label>
                                             <input type="text" class="form-control form-control-lg" name="firstname"
                                                 id="firstname" value="{{ $teacher->firstname }}"
                                                 placeholder="Enter First name">
@@ -95,7 +95,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="lastname">Last name <span class="valid-form">*</span></label>
+                                            <label class="form-label" for="lastname">Last name <span
+                                                    class="valid-form">*</span></label>
                                             <input type="text" class="form-control form-control-lg" name="lastname"
                                                 id="lastname" value="{{ $teacher->lastname }}"
                                                 placeholder="Enter Last name">
@@ -103,24 +104,26 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="fv-phone">Sex / Gender <span class="valid-form">*</span></label>
+                                            <label class="form-label" for="fv-phone">Sex / Gender <span
+                                                    class="valid-form">*</span></label>
                                             <div class="form-control-wrap">
                                                 <ul class="custom-control-group">
                                                     <li>
                                                         <div
                                                             class="custom-control custom-radio custom-control-pro no-control">
-                                                            <input type="radio" class="custom-control-input" name="gender"
-                                                                id="sex-male" value="male"
+                                                            <input type="radio" class="custom-control-input"
+                                                                name="gender" id="sex-male" value="male"
                                                                 @if ($teacher->gender == 'male') checked @endif
                                                                 required="">
-                                                            <label class="custom-control-label" for="sex-male">Male</label>
+                                                            <label class="custom-control-label"
+                                                                for="sex-male">Male</label>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div
                                                             class="custom-control custom-radio custom-control-pro no-control">
-                                                            <input type="radio" class="custom-control-input" name="gender"
-                                                                id="sex-female" value="female"
+                                                            <input type="radio" class="custom-control-input"
+                                                                name="gender" id="sex-female" value="female"
                                                                 @if ($teacher->gender == 'female') checked @endif
                                                                 required="">
                                                             <label class="custom-control-label"
@@ -133,25 +136,30 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="fv-phone">Role <span class="valid-form">*</span></label>
+                                            <label class="form-label" for="fv-phone">Role <span
+                                                    class="valid-form">*</span></label>
                                             <div class="form-control-wrap">
                                                 <ul class="custom-control-group">
                                                     <li>
-                                                        <div class="custom-control custom-radio custom-control-pro no-control">
-                                                            <input type="radio" class="custom-control-input" name="role"
-                                                                id="role-teacher" value="teacher"
+                                                        <div
+                                                            class="custom-control custom-radio custom-control-pro no-control">
+                                                            <input type="radio" class="custom-control-input"
+                                                                name="role" id="role-teacher" value="teacher"
                                                                 @if ($teacher->role == 'teacher') checked @endif
                                                                 required="">
-                                                            <label class="custom-control-label" for="role-teacher">Teacher</label>
+                                                            <label class="custom-control-label"
+                                                                for="role-teacher">Teacher</label>
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                                        <div
+                                                            class="custom-control custom-radio custom-control-pro no-control">
                                                             <input type="radio" class="custom-control-input"
                                                                 @if ($teacher->role == 'assistant') checked @endif
-                                                                name="role"
-                                                                id="role-assistant" value="assistant" required="">
-                                                            <label class="custom-control-label" for="role-assistant">Assistant</label>
+                                                                name="role" id="role-assistant" value="assistant"
+                                                                required="">
+                                                            <label class="custom-control-label"
+                                                                for="role-assistant">Assistant</label>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -160,19 +168,32 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="phone-no">Phone Number <span class="valid-form">*</span></label>
+                                            <label class="form-label" for="phone-no">Phone Number <span
+                                                    class="valid-form">*</span></label>
                                             <input type="phone" class="form-control form-control-lg" name="phone"
                                                 id="phone" value="{{ $teacher->phone }}" placeholder="Phone Number">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="birth-day">Date of Birth <span class="valid-form">*</span></label>
+                                            <label class="form-label" for="birth-day">Date of Birth <span
+                                                    class="valid-form">*</span></label>
                                             <input type="text" class="form-control date-picker-alt" name="birthday"
                                                 value="{{ $teacher->birthday }}" data-date-format="yyyy-mm-dd" required>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group"><label class="form-label">Image upload</label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" name="imageupload" tabindex="9"
+                                                        id="imageupload">
+                                                    <label class="form-file-label" for="imageupload">Choose file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="custom-control custom-switch">
                                             <input type="checkbox" name="status" class="custom-control-input"
                                                 @if ($teacher->status == 'active') checked @endif id="latest-sale">
@@ -184,8 +205,10 @@
                                             <li>
                                                 <input type="hidden" name="update_action" value="personal">
                                                 <input type="hidden" name="id" value="{{ $teacher->id }}">
-                                                <a href="#" onclick="event.preventDefault();
-                                                    this.closest('form').submit();" class="btn btn-lg btn-primary">Update
+                                                <a href="#"
+                                                    onclick="event.preventDefault();
+                                                    this.closest('form').submit();"
+                                                    class="btn btn-lg btn-primary">Update
                                                     Profile</a>
                                             </li>
                                             <li>
@@ -204,13 +227,14 @@
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="password">Password <span class="valid-form">*</span></label>
+                                            <label class="form-label" for="password">Password <span
+                                                    class="valid-form">*</span></label>
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
                                                     <em class="icon ni ni-lock"></em>
                                                 </div>
-                                                <input type="password" class="form-control" id="password" name="password"
-                                                    required="">
+                                                <input type="password" class="form-control" id="password"
+                                                    name="password" required="">
                                             </div>
                                         </div>
                                     </div>
@@ -232,8 +256,10 @@
                                             <li>
                                                 <input type="hidden" name="update_action" value="password">
                                                 <input type="hidden" name="id" value="{{ $teacher->id }}">
-                                                <a href="#" onclick="event.preventDefault();
-                                                    this.closest('form').submit();" class="btn btn-lg btn-primary">Update
+                                                <a href="#"
+                                                    onclick="event.preventDefault();
+                                                    this.closest('form').submit();"
+                                                    class="btn btn-lg btn-primary">Update
                                                     Address</a>
                                             </li>
                                             <li>
@@ -249,7 +275,6 @@
             </div><!-- .modal-content -->
         </div><!-- .modal-dialog -->
     </div><!-- .modal -->
-
     <script>
         $("#phone").inputmask({
             "mask": "998 (99) 999-99-99"

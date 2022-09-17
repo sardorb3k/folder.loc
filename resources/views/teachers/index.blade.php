@@ -93,14 +93,14 @@
                                                                     class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                         </li>
                                                         <li class="divider"></li>
-                                                        <form
-                                                            action="{{ route('teachers.destroy', $data_student->id) }}"
+                                                        <form action="{{ route('teachers.destroy', $data_student->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="id"
                                                                 value="{{ $data_student->id }}">
-                                                            <li><a href="#" onclick="event.preventDefault();
+                                                            <li><a href="#"
+                                                                    onclick="event.preventDefault();
                                                                 this.closest('form').submit();"><em
                                                                         class="icon ni ni-na"></em><span>Delete</span></a>
                                                             </li>

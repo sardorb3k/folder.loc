@@ -95,7 +95,7 @@ class TeachersService implements TeachersServiceInterface
             'birthday' => 'required',
             'gender' => 'required',
             'role' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
         ]);
 
@@ -116,7 +116,7 @@ class TeachersService implements TeachersServiceInterface
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'role' => $request->role,
-            'image' => $name ?? '',
+            'image' => $name ?? $teacher->image,
             'status' => $request->graduation == 'on' ? 'inactive' : 'active',
         ]);
         // dd($teacher);

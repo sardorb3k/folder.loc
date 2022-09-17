@@ -1,17 +1,15 @@
 <?php
 namespace App\Interfaces;
 /**
- * Salary Service Interface
+ * Settings Service Interface
  */
-interface SalaryServiceInterface {
+use Illuminate\Http\Request;
+interface SettingsServiceInterface {
     /**
-     * Get salary
+     * Get Settings
      * @param  int $id
      * @return array
      */
-    // public function getSalary($id);
-    public function getGroupById($id);
-    public function getStudent($id, $date);
-    public function getTeacherList($date);
+    public function storeSettings(Request $request);
 }
 //

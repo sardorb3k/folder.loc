@@ -30,7 +30,7 @@ class SalaryService implements SalaryServiceInterface
         WHERE
         gp.teacher_id = ? OR gp.assistant_id = ?", [$id, $id]);
     }
-    public function getStudent($id, $date)
+    public function getStudent($id, $date, $teacher_id)
     {
         $date_all = explode('-', $date);
         $students = DB::select(
@@ -58,7 +58,7 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(payment_start) = :payM
 FROM
 salary_students
 WHERE
-student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM AND YEAR(salarydate) = :amountY ) AS
+student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM AND YEAR(salarydate) = :amountY and teacher_id = :teacher_id ) AS
     amount,
 
             (
@@ -80,6 +80,7 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
                 'payY' => $date_all[0],
                 'amountY' => $date_all[0],
                 'amountM' => $date_all[1],
+                'teacher_id' => $teacher_id
                 ]
         );
         // dd($students);
@@ -124,7 +125,7 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
             ON
                 grs.id = sry_s.group_id
             WHERE
-                grs.teacher_id = usr.id AND YEAR(sry_s.salarydate) = :dateY AND MONTH(sry_s.salarydate) = :dateM
+                grs.teacher_id = usr.id AND YEAR(sry_s.salarydate) = :dateY AND MONTH(sry_s.salarydate) = :dateM and sry_s.teacher_id = usr.id
         ) AS salary,
         (
             SELECT

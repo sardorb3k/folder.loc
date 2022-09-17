@@ -11,7 +11,7 @@ interface SalaryServiceInterface {
      */
     // public function getSalary($id);
     public function getGroupById($id);
-    public function getStudent($id, $date);
+    public function getStudent($id, $date, $teacher_id);
     public function getTeacherList($date);
 }
 //

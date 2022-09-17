@@ -58,7 +58,7 @@
                                     <div class="nk-tb-col tb-col-xl">
                                         <span>
                                             <span class="badge badge-outline-primary">{{ $data_student->att_ap }}</span> /
-                                            <span class="badge badge-outline-primary">20</span></span>
+                                            <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span></span>
                                     </div>
                                     <div class="nk-tb-col tb-col-xl">
                                         <span>

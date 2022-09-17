@@ -18,7 +18,7 @@
                         <div class="nk-block-head-content">
                             <h4 class="nk-block-title">Group list</h4>
                             <div class="nk-block-des">
-                                <p>The student is currently a member of  groups.<span class="text-soft"><em
+                                <p>The student is currently a member of groups.<span class="text-soft"><em
                                             class="icon ni ni-info"></em></span></p>
                             </div>
                         </div>
@@ -45,7 +45,8 @@
                                 <tr>
                                     <td class="tb-col-os">{{ $item->name }}</td>
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->teacher_fullname }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_fullname }}</span></td>
+                                    <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_fullname }}</span>
+                                    </td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->LEVEL }}</span></td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->days }}</span></td>
                                     <td class="tb-col-action"></td>

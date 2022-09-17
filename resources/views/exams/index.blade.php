@@ -92,7 +92,7 @@
                                                 data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                                 <ul class="link-list-plain">
-                                                    <li><a href="{{ route('exams.edit', $exam->id) }}">Edit</a></li>
+                                                    <li><a href="{{ route('exams.show', $exam->id) }}">Edit</a></li>
                                                     <form action="{{ route('exams.destroy', $exam->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')

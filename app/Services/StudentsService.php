@@ -64,7 +64,32 @@ class StudentsService implements StudentsServiceInterface
      */
     public function updateStudent(Request $request, $id)
     {
+        dd($request->all());
+        // Validate request
+        $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'phone' => 'required',
+            'birthday' => 'required',
+            'gender' => 'required',
+            'homeaddress' => 'required',
+            'reasontostudy' => 'required',
+            'interests' => 'required',
+            'hear_about' => 'required',
+            'course' => 'required',
+            'status' => 'required',
+            'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        // Get student by id
         $student = $this->students->findOrFail($id);
+        // Update student information
+        if ($request->hasFile('imageupload')) {
+            $image = $request->file('imageupload');
+            $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/teachers');
+            $image->move($destinationPath, $name);
+        }
+        // Update student information
         $student->update([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
@@ -76,6 +101,7 @@ class StudentsService implements StudentsServiceInterface
             'interests' => $request->interests,
             'hear_about' => $request->hear_about,
             'course' => $request->course,
+            'image' => $name ?? $student->image,
             'status' => $request->graduation == 'on' ? 'inactive' : 'active',
         ]);
     }
@@ -126,14 +152,6 @@ class StudentsService implements StudentsServiceInterface
             'password' => 'required|string|min:6|confirmed',
             'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        // File upload
-        // if($request->file('imageupload')){
-        //     $imagename = $request->file('imageupload')->getClientOriginalName();
-        //     $tempname = $request->file('imageupload')->storeAs('public/images', $imagename);
-
-        // }
-
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
             $image = $request->file('imageupload');
@@ -141,12 +159,10 @@ class StudentsService implements StudentsServiceInterface
             $destinationPath = public_path('/uploads/students');
             $image->move($destinationPath, $name);
         }
-
-
         $students = $this->students->create([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
-            'phone' => '998' . $request->phone,
+            'phone' => $request->phone,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'homeaddress' => $request->homeaddress,

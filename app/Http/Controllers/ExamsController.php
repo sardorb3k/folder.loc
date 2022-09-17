@@ -105,6 +105,22 @@ class ExamsController extends Controller
         return $this->examRepository->updateExams($request, $id);
     }
 
+    // Get the exam id
+    public function getExamId($id, $exam_id)
+    {
+        /**
+         * Exam Repository getExamIdRepository
+         */
+        return $this->examRepository->getExamId($id, $exam_id);
+    }
+    // updateExam
+    public function updateExam(Request $request, $id, $exam_id)
+    {
+        /**
+         * Exam Repository updateExamRepository
+         */
+        return $this->examRepository->updateExam($request, $id, $exam_id);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -117,5 +133,14 @@ class ExamsController extends Controller
          * Exam Repository destroyRepository
          */
         return $this->examRepository->destroyExams($id);
+    }
+
+    // Exam save
+    public function examSave(Request $request)
+    {
+        /**
+         * Exam Repository examSaveRepository
+         */
+        return $this->examRepository->examSave($request);
     }
 }

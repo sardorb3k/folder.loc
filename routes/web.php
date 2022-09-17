@@ -108,6 +108,9 @@ Route::group(['prefix' => 'exams'], function () {
     Route::get('/', ['as' => 'exams.index', 'uses' => 'App\Http\Controllers\ExamsController@index']);
     // -- Exam Get show
     Route::get('/{id}', ['as' => 'exams.show', 'uses' => 'App\Http\Controllers\ExamsController@show']);
+    // -- Exam by id
+    Route::get('/{id}/{examid}/getExamId', ['as' => 'exams.getByID', 'uses' => 'App\Http\Controllers\ExamsController@getExamId']);
+    Route::post('/{id}/{examid}/getExamId', ['as' => 'exams.updateExam', 'uses' => 'App\Http\Controllers\ExamsController@updateExam']);
     // -- Exam Get create | i update -> POST
     Route::post('/create', ['as' => 'exams.create', 'uses' => 'App\Http\Controllers\ExamsController@create']);
     // -- Exam Post store
@@ -118,6 +121,12 @@ Route::group(['prefix' => 'exams'], function () {
     Route::put('/{id}', ['as' => 'exams.update', 'uses' => 'App\Http\Controllers\ExamsController@update']);
     // -- Exam Delete destroy
     Route::delete('/{id}', ['as' => 'exams.destroy', 'uses' => 'App\Http\Controllers\ExamsController@destroy']);
+});
+
+// Settings
+Route::group(['prefix' => 'settings'], function () {
+    Route::get('/', 'App\Http\Controllers\SettingsController@index')->name('settings.index');
+    Route::post('/', 'App\Http\Controllers\SettingsController@store')->name('settings.store');
 });
 
 
