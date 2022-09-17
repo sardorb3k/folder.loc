@@ -114,7 +114,6 @@
                                     <td class="tb-tnx-amount is-alt">
                                         <div class="tb-tnx-total">
                                             <input type="number" pattern="/^-?\d+\.?\d*$/" value="{{ $item->salary_action }}"
-                                                onKeyPress="if(parseInt(this.value)=={{ strlen((string) $item->salary) }}) return false;"
                                                 class="form-control" name="salary[{{ $item->id }}]">
                                         </div>
                                     </td>

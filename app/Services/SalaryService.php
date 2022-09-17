@@ -40,6 +40,7 @@ class SalaryService implements SalaryServiceInterface
             us.lastname,
             us.firstname,
             us.phone,
+            us.image,
             us.birthday,
             (
            SELECT COUNT(*) AS count

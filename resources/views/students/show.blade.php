@@ -90,7 +90,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="personal">
                             <form action="{{ route('students.update', $student->id) }}" class="form-validate"
-                                novalidate="novalidate" method="post">
+                                novalidate="novalidate" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row gy-4">
@@ -353,9 +353,25 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group"><label class="form-label">Image upload</label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" name="imageupload"
+                                                        id="imageupload">
+                                                    <label class="form-file-label" for="imageupload">Choose file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" name="graduation" class="custom-control-input"
+                                            <img src="{{ asset('uploads/students/'.$student->image) }}" height="100" width="100" >
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="status" class="custom-control-input"
                                                 @if ($student->status == 'active') checked @endif id="latest-sale">
                                             <label class="custom-control-label" for="latest-sale">Status </label>
                                         </div>

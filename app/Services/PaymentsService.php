@@ -42,6 +42,7 @@ class PaymentsService implements PaymentsServiceInterface
                     'users.lastname',
                     'users.firstname',
                     'users.phone',
+                    'users.image',
                     'users.birthday'
                 )
                 ->where('group_id', $id)
@@ -52,7 +53,7 @@ class PaymentsService implements PaymentsServiceInterface
             $date_m = $date_all[1] ?? NULL;
             $date_y = $date_all[0] ?? NULL;
             $students = DB::select(
-                        "SELECT us.id,us.firstname,us.lastname,us.birthday,us.phone,us.`status`,(
+                        "SELECT us.id,us.firstname,us.lastname,us.birthday,us.image,us.phone,us.`status`,(
                             SELECT pay2.amount
                             FROM payments AS pay2
                             WHERE pay2.student_id=us.id AND pay2.group_id=$id AND MONTH (pay2.payment_start)=$date_m AND YEAR (pay2.payment_start)=$date_y) AS amount,

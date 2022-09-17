@@ -53,7 +53,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
     //     $students = $this->groups->getGroupStudents($id);
     //     return view('payments.show', compact('students', 'count', 'id'));
     // }
-    public function storePayments(Request $request): RedirectResponse
+    public function storePayments(Request $request)
     {
         $request->validate([
             'amount' => 'required',

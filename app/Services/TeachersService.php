@@ -98,17 +98,17 @@ class TeachersService implements TeachersServiceInterface
             'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
         ]);
-
+        // dd($request->all());
         $teacher = Teacher::findOrFail($id);
 
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/students');
+            $destinationPath = public_path('/uploads/teachers');
             $image->move($destinationPath, $name);
         }
-
+        // dd($request->all());
         $teacher->update([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
@@ -171,14 +171,14 @@ class TeachersService implements TeachersServiceInterface
             'gender' => 'required',
             'password' => 'required|string|min:6|confirmed',
             'role' => 'required',
-            'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imageupload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/students');
+            $destinationPath = public_path('/uploads/teachers');
             $image->move($destinationPath, $name);
         }
 

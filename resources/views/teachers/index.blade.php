@@ -55,8 +55,8 @@
                                 <div class="nk-tb-col">
                                     <a href="{{ route('teachers.show', $data_student->id) }}">
                                         <div class="user-card">
-                                            <div class="user-avatar">
-                                                <img src="https://ui-avatars.com/api/?name={{ $data_student->lastname . '+' . $data_student->firstname }}&background=random"
+                                            <div class="user-avatar" style="{{ $data_student->image ? '' : 'background: #798bff;'}}">
+                                                <img src="{{ $data_student->image ? asset('uploads/teachers/'.$data_student->image) : 'https://ui-avatars.com/api/?name='. $data_student->lastname . '+' . $data_student->firstname .'&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">

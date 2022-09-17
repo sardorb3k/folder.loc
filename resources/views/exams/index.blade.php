@@ -55,7 +55,7 @@
                                     </span>
                                 </th>
                                 <th class="tb-tnx-amount is-alt">
-                                    <span class="tb-tnx-total">A/N</span>
+                                    <span class="tb-tnx-total"><em class="icon ni ni-check"></em> / -</span>
                                     <span class="tb-tnx-status d-none d-md-inline-block">Date</span>
                                 </th>
                                 <th class="tb-tnx-action">

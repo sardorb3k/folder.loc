@@ -80,7 +80,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="personal">
                             <form action="{{ route('teachers.update', $teacher->id) }}" class="form-validate"
-                                novalidate="novalidate" method="post">
+                                novalidate="novalidate" method="post"  enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row gy-4">
@@ -191,6 +191,11 @@
                                                     <label class="form-file-label" for="imageupload">Choose file</label>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="custom-control custom-switch">
+                                            <img src="{{ asset('uploads/teachers/'.$teacher->image) }}" height="100" width="100" >
                                         </div>
                                     </div>
                                     <div class="col-6">

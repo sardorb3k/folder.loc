@@ -294,7 +294,6 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
-                                                {{ old('course')['englishlanguage'] ?? 'checked' }}
                                                 value="englishlanguage" id="englishlanguage"><label
                                                 class="custom-control-label" for="englishlanguage">English
                                                 Language</label>
@@ -303,7 +302,6 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
-                                            {{ old('course')['webdevelopment'] ?? 'checked' }}
                                                 value="webdevelopment" id="webdevelopment"><label
                                                 class="custom-control-label" for="webdevelopment">Web Development</label>
                                         </div>
@@ -311,7 +309,6 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
-                                            {{ old('course')['mobiledevelopment'] ?? 'checked' }}
                                                 value="mobiledevelopment" id="mobiledevelopment"><label
                                                 class="custom-control-label" for="mobiledevelopment">Mobile App
                                                 Development</label>
@@ -321,7 +318,6 @@
                                         <div
                                             class="custom-control custom-control-sm custom-checkbox custom-control-pro checked">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
-                                            {{ old('course')['gamedevelopment'] ?? 'checked' }}
                                                 value="gamedevelopment" id="gamedevelopment"><label
                                                 class="custom-control-label" for="gamedevelopment">Game
                                                 Development</label>
@@ -330,7 +326,6 @@
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                             <input type="checkbox" class="custom-control-input" name="course[]"
-                                            {{ old('course')['graphicdesign'] ?? 'checked' }}
                                                 value="graphicdesign" id="graphicdesign"><label
                                                 class="custom-control-label" for="graphicdesign">Graphic Design</label>
                                         </div>

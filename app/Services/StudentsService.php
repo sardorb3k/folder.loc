@@ -64,11 +64,11 @@ class StudentsService implements StudentsServiceInterface
      */
     public function updateStudent(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         // Validate request
         $request->validate([
-            'lastname' => 'required',
             'firstname' => 'required',
+            'lastname' => 'required',
             'phone' => 'required',
             'birthday' => 'required',
             'gender' => 'required',
@@ -78,21 +78,22 @@ class StudentsService implements StudentsServiceInterface
             'hear_about' => 'required',
             'course' => 'required',
             'status' => 'required',
-            'imageupload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imageupload' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         // Get student by id
         $student = $this->students->findOrFail($id);
-        // Update student information
+
+        // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/teachers');
+            $destinationPath = public_path('/uploads/students');
             $image->move($destinationPath, $name);
         }
         // Update student information
         $student->update([
-            'lastname' => $request->lastname,
             'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
             'phone' => str_replace(["(", ")", "-", " "], "", $request->phone),
             'birthday' => $request->birthday,
             'gender' => $request->gender,

@@ -43,6 +43,7 @@ class AttendanceService implements AttendanceServiceInterface
                     'users.lastname',
                     'users.firstname',
                     'users.phone',
+                    'users.image',
                     'users.birthday'
                 )
                 ->where('group_id', $id)
@@ -51,7 +52,7 @@ class AttendanceService implements AttendanceServiceInterface
         } else {
             $students = DB::select(
                 DB::raw(
-                    "SELECT us.id,us.firstname,us.lastname,us.birthday,us.phone,us.`status`,(
+                    "SELECT us.id,us.firstname,us.lastname,us.image,us.birthday,us.phone,us.`status`,(
                         SELECT mark FROM attendance AS ad WHERE ad.student_id=us.id AND ad.attendance_date=:attendade_date AND ad.group_id = gs.group_id) AS mark FROM group_students AS gs LEFT JOIN users AS us ON us.id=gs.student_id WHERE gs.group_id=:group_id"
                 ),
                 [

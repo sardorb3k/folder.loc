@@ -26,6 +26,7 @@ class Teacher extends Model
         'gender',
         'role',
         'status',
+        'image',
         'password',
     ];
 

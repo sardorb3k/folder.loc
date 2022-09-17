@@ -13,6 +13,16 @@
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
         @include('error')
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
     </div><!-- .nk-block-head -->
     <div class="card card-preview">
         <div class="card-inner">
@@ -78,8 +88,8 @@
                                 <div class="nk-tb-col">
                                     <a href="{{ route('students.show', $data_student->id) }}">
                                         <div class="user-card">
-                                            <div class="user-avatar">
-                                                <img src="https://ui-avatars.com/api/?name={{ $data_student->lastname . '+' . $data_student->firstname }}&background=random"
+                                            <div class="user-avatar" style="{{ $data_student->image ? '' : 'background: #798bff;'}}">
+                                                <img src="{{ $data_student->image ? asset('uploads/students/'.$data_student->image) : 'https://ui-avatars.com/api/?name='. $data_student->lastname . '+' . $data_student->firstname .'&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
