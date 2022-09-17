@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('attendance_date');
+            $table->string('attendance_day');
             $table->timestamps();
         });
     }
@@ -30,4 +30,3 @@ return new class extends Migration
         Schema::dropIfExists('settings');
     }
 };
-  
