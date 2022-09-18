@@ -17,7 +17,7 @@
                     <div class="nk-block-head-content">
                         <h4 class="nk-block-title">Personal Information</h4>
                         <div class="nk-block-des">
-                            <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+                            <p>Basic info, like your name and address, that you use on CRM Platform.</p>
                         </div>
                     </div>
                 </div><!-- .nk-block-head -->

@@ -80,7 +80,7 @@
                                         <div class="drodown">
                                             <button class="btn btn-danger" id="edit-button"
                                                 value="{{ $data_student->id }}-{{ $exam->id }}" data-toggle="modal"
-                                                data-target="#exam-anw">Ans</button>
+                                                data-target="#exam-anw">{{ $data_student->result ? $data_student->result : '0' }}</button>
                                         </div>
                                     </li>
                                 </div>
@@ -217,6 +217,7 @@
             var team = $('#team').val();
             var student_id = $('#student_id').val();
             var exam_id = $('#exam_id').val();
+            var result = $('#result').text();
             $.ajax({
                 url: "/exams/" + exam_id + "/" + student_id + "/getExamId",
                 type: "POST",
@@ -229,12 +230,15 @@
                         grammar: grammar == '' ? 0 : grammar,
                         team: team == '' ? 0 : team,
                     },
+                    result: result,
                     student_id: student_id,
                     exam_id: exam_id,
                 },
                 success: function(data) {
                     $('#exam-anw').modal('hide');
                     $('#result').text(0);
+                    // reset form
+                    window.location.reload();
                 }
             });
         });

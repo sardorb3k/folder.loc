@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('exam_id');
             $table->json('mark');
+            $table->string('result');
             $table->timestamps();
         });
     }

@@ -17,7 +17,8 @@ use Illuminate\Http\Request;
 class AttendanceService implements AttendanceServiceInterface
 {
     private $attendance;
-    public function __construct(Attendance $attendance) {
+    public function __construct(Attendance $attendance)
+    {
         $this->attendance = $attendance;
     }
     /**
@@ -29,37 +30,99 @@ class AttendanceService implements AttendanceServiceInterface
             DB::raw("SELECT COUNT(*) as count FROM attendance WHERE group_id=:id AND attendance_date=:attendance_date"),
             ['attendance_date' => $date, 'id' => $id]
         );
+        $date_all = explode('-', $date);
 
         if ($count[0]->count == 0) {
-            $students = GroupStudents::join(
-                'users',
-                'group_students.student_id',
-                '=',
-                'users.id'
-            )
-                ->select(
-                    'users.id',
-                    'group_students.id as group_id',
-                    'users.lastname',
-                    'users.firstname',
-                    'users.phone',
-                    'users.image',
-                    'users.birthday'
-                )
-                ->where('group_id', $id)
-                ->get();
+            // $students = GroupStudents::join(
+            //     'users',
+            //     'group_students.student_id',
+            //     '=',
+            //     'users.id'
+            // )
+            //     ->select(
+            //         'users.id',
+            //         'group_students.id as group_id',
+            //         'users.lastname',
+            //         'users.firstname',
+            //         'users.phone',
+            //         'users.image',
+            //         'users.birthday'
+            //     )
+            //     ->where('group_id', $id)
+            //     ->get();
+            $students = DB::select("SELECT
+                        us.id,
+                        us.firstname,
+                        us.lastname,
+                        us.image,
+                        us.birthday,
+                        us.phone,
+                        us.`status`,
+                        (
+                        SELECT
+                            COUNT(*)
+                        FROM
+                            attendance
+                        WHERE
+                            student_id = us.id AND group_id = $id AND mark = 1 AND YEAR(attendance_date) = '$date_all[0]' AND MONTH(attendance_date) = '$date_all[1]'
+                    ) AS attendance_a,
+                    (
+                        SELECT
+                            COUNT(*)
+                        FROM
+                            attendance
+                        WHERE
+                            student_id = us.id AND group_id = $id AND mark = 0 AND YEAR(attendance_date) = '$date_all[0]' AND MONTH(attendance_date) = '$date_all[1]'
+                    ) AS attendance_n,
+                    'as' AS mark
+                    FROM
+                        group_students AS gs
+                    LEFT JOIN users AS us
+                    ON
+                        us.id = gs.student_id
+                    WHERE
+                        gs.group_id = $id");
             $status = false;
         } else {
-            $students = DB::select(
-                DB::raw(
-                    "SELECT us.id,us.firstname,us.lastname,us.image,us.birthday,us.phone,us.`status`,(
-                        SELECT mark FROM attendance AS ad WHERE ad.student_id=us.id AND ad.attendance_date=:attendade_date AND ad.group_id = gs.group_id) AS mark FROM group_students AS gs LEFT JOIN users AS us ON us.id=gs.student_id WHERE gs.group_id=:group_id"
-                ),
-                [
-                    'group_id' => $id,
-                    'attendade_date' => $date
-                ]
-            );
+            $students = DB::select("SELECT
+                    us.id,
+                    us.firstname,
+                    us.lastname,
+                    us.image,
+                    us.birthday,
+                    us.phone,
+                    us.`status`,
+                    (
+                    SELECT
+                        COUNT(*)
+                    FROM
+                        attendance
+                    WHERE
+                        student_id = us.id AND group_id = $id AND mark = 1 AND YEAR(attendance_date) = '$date_all[0]' AND MONTH(attendance_date) = '$date_all[1]'
+                ) AS attendance_a,
+                (
+                    SELECT
+                        COUNT(*)
+                    FROM
+                        attendance
+                    WHERE
+                        student_id = us.id AND group_id = $id AND mark = 0 AND YEAR(attendance_date) = '$date_all[0]' AND MONTH(attendance_date) = '$date_all[1]'
+                ) AS attendance_n,
+                (
+                    SELECT
+                        mark
+                    FROM
+                        attendance
+                    WHERE
+                        student_id = us.id AND attendance_date = '$date' AND group_id = $id
+                ) AS mark
+                FROM
+                    group_students AS gs
+                LEFT JOIN users AS us
+                ON
+                    us.id = gs.student_id
+                WHERE
+                    gs.group_id = $id");
             $status = true;
         }
         return array("status" => $status, "students" => $students);
@@ -109,6 +172,5 @@ class AttendanceService implements AttendanceServiceInterface
             );
         }
     }
-
 }
 //

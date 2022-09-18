@@ -228,7 +228,7 @@
   }
 
   ;
-  NioApp.coms.docReady.push(jqvmap_init); // Charts 
+  NioApp.coms.docReady.push(jqvmap_init); // Charts
 
   var deviceStatusData = {
     labels: ["Desktop", "Mobile", "Tablet"],
@@ -240,16 +240,16 @@
       data: [84.5, 14.2, 1.3]
     }]
   };
-  var TrafficChannelDoughnutData = {
-    labels: ["Organic Search", "Social Media", "Referrals", "Others"],
-    dataUnit: 'People',
-    legend: false,
-    datasets: [{
-      borderColor: "#fff",
-      background: ["#798bff", "#b8acff", "#ffa9ce", "#f9db7b"],
-      data: [4305, 859, 482, 138]
-    }]
-  };
+//   var TrafficChannelDoughnutData = {
+//     labels: ["Organic Search", "Social Media", "Referrals", "Others"],
+//     dataUnit: 'People',
+//     legend: false,
+//     datasets: [{
+//       borderColor: "#fff",
+//       background: ["#798bff", "#b8acff", "#ffa9ce", "#f9db7b"],
+//       data: [4305, 859, 482, 138]
+//     }]
+//   };
 
   function analyticsDoughnut(selector, set_data) {
     var $selector = selector ? $(selector) : $('.analytics-doughnut');

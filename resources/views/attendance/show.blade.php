@@ -23,14 +23,15 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
-                                <input type="text" class="form-control date-picker" name="date" value="{{ $date }}"
-                                    data-date-format="yyyy-mm-dd">
+                                <input type="text" class="form-control date-picker" name="date"
+                                    value="{{ $date }}" data-date-format="yyyy-mm-dd">
                             </div>
                             <div class="form-note">Date format <code>mm/dd/yyyy</code></div>
                         </div>
                     </div>
                     <div class="col-sm-6" style="align-self: center;">
-                        <div class="form-group"><a href="#" class="btn btn-secondary" onclick="event.preventDefault();
+                        <div class="form-group"><a href="#" class="btn btn-secondary"
+                                onclick="event.preventDefault();
                                     this.closest('form').submit();">Search</a>
                         </div>
                     </div>
@@ -46,10 +47,10 @@
                     <h5 class="title">All Students</h5>
                 </div><!-- .card-inner -->
                 @if ($students['status'] == true)
-                        <form action="{{ route('attendance.update', $id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <input name="attendance_date" type="hidden" value="{{ $date }}">
+                    <form action="{{ route('attendance.update', $id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input name="attendance_date" type="hidden" value="{{ $date }}">
                     @else
                         <form action="{{ route('attendance.store') }}" method="POST">
                             @csrf
@@ -58,6 +59,7 @@
                     <div class="nk-tb-list nk-tb-ulist">
                         <div class="nk-tb-item nk-tb-head">
                             <div class="nk-tb-col"><span class="sub-text">User</span></div>
+                            <div class="nk-tb-col"><span class="sub-text">A/N</span></div>
                             <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
                             <div class="nk-tb-col nk-tb-col-tools text-right">
                                 <span class="sub-text">Present</span>
@@ -68,8 +70,9 @@
                                 <div class="nk-tb-col">
                                     <a href="{{ route('students.show', $data_student->id) }}">
                                         <div class="user-card">
-                                            <div class="user-avatar" style="{{ $data_student->image ? '' : 'background: #798bff;'}}">
-                                                <img src="{{ $data_student->image ? asset('uploads/students/'.$data_student->image) : 'https://ui-avatars.com/api/?name='. $data_student->lastname . '+' . $data_student->firstname .'&background=random' }}"
+                                            <div class="user-avatar"
+                                                style="{{ $data_student->image ? '' : 'background: #798bff;' }}">
+                                                <img src="{{ $data_student->image ? asset('uploads/students/' . $data_student->image) : 'https://ui-avatars.com/api/?name=' . $data_student->lastname . '+' . $data_student->firstname . '&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
@@ -82,17 +85,22 @@
                                     </a>
                                 </div>
                                 <div class="nk-tb-col tb-col-xl">
+                                    <span>
+                                        <span class="badge badge-outline-primary">{{ $data_student->attendance_a }}</span>
+                                        /
+                                        <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span></span>
+                                </div>
+                                <div class="nk-tb-col tb-col-xl">
                                     <span>{{ $data_student->birthday }}</span>
                                 </div>
                                 <div class="nk-tb-col nk-tb-col-tools">
                                     <ul class="nk-tb-actions gx-1">
                                         <li>
                                             <div class="drodown">
-                                                <input name="attendance[{{ $data_student->id }}]" type="hidden" value="0">
-                                                <input name="attendance[{{ $data_student->id }}]" type="checkbox" value="1"
-                                                @if ($data_student->mark == 1)
-                                                    checked
-                                                @endif>
+                                                <input name="attendance[{{ $data_student->id }}]" type="hidden"
+                                                    value="0">
+                                                <input name="attendance[{{ $data_student->id }}]" type="checkbox"
+                                                    value="1" @if ($data_student->mark == 1) checked @endif>
                                             </div>
                                         </li>
                                     </ul>
@@ -107,9 +115,10 @@
                 <div class="card-inner">
                     <div class="nk-block-between-md g-3">
                         <div class="g">
-                            <input type="hidden" name="group_id" value="{{ $id}}">
+                            <input type="hidden" name="group_id" value="{{ $id }}">
                             <input type="hidden" name="attendance_date" value="{{ $date }}">
-                            <div class="form-group"><a href="#" class="btn btn-secondary" onclick="event.preventDefault();
+                            <div class="form-group"><a href="#" class="btn btn-secondary"
+                                    onclick="event.preventDefault();
                                                         this.closest('form').submit();">Save</a>
                             </div>
                         </div>

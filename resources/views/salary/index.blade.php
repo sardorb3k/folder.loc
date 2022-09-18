@@ -24,9 +24,9 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
-                                <input type="text" id="mesVigencia" class="form-control" name="datetime"
+                                <input type="text" id="mesVigencia" class="form-control date-picker" name="datetime"
                                     value="{{ $date ?? date('Y-m') }}" data-date-format="yyyy-mm" autocomplete="off"
-                                    required readonly>
+                                    required >
                             </div>
                             <div class="form-note">Date format <code>mm/yyyy</code></div>
                         </div>

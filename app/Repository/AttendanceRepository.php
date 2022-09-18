@@ -6,13 +6,14 @@ namespace App\Repository;
 
 use App\Interfaces\AttendanceRepositoryInterface;
 use App\Interfaces\AttendanceServiceInterface;
+use App\Interfaces\GroupsServiceInterface;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Models\Attendance;
+use Illuminate\View\View;
 use App\Models\Student;
 use App\Models\Exams;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Interfaces\GroupsServiceInterface;
 class AttendanceRepository implements AttendanceRepositoryInterface{
     private $attendance;
     private $attendanceService;
@@ -35,7 +36,9 @@ class AttendanceRepository implements AttendanceRepositoryInterface{
     public function showAttendance(int $id, $date): View{
         $count = $this->groupService->getCountGroupStudents($id);
         $students = $this->attendanceService->getStudents($id, $date);
-        return view('attendance.show', compact('students', 'count', 'date', 'id'));
+        $crm_attendance_day = DB::select('SELECT attendance_day FROM settings WHERE id = 1')[0]->attendance_day;
+
+        return view('attendance.show', compact('students', 'count', 'date', 'id', 'crm_attendance_day'));
     }
     public function storeAttendance(Request $request): RedirectResponse{
         /**

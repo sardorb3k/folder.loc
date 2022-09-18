@@ -8,8 +8,8 @@
     };
     function jqvmap_init () {
         var elm = '.vector-map';
-        
-        if($(elm).exists() && typeof($.fn.vectorMap) === 'function') {   
+
+        if($(elm).exists() && typeof($.fn.vectorMap) === 'function') {
             $(elm).each(function(){
                 var $self = $(this), _self_id = $self.attr('id'), map_data = eval(_self_id);
                 $self.vectorMap({
@@ -39,7 +39,7 @@
 
     NioApp.coms.docReady.push(jqvmap_init);
 
-    // Charts 
+    // Charts
     var deviceStatusData = {
         labels : ["Desktop", "Mobile", "Tablet"],
         dataUnit : 'People',
@@ -51,16 +51,16 @@
         }]
     };
 
-    var TrafficChannelDoughnutData = {
-        labels : ["Organic Search", "Social Media", "Referrals", "Others"],
-        dataUnit : 'People',
-        legend: false,
-        datasets : [{
-            borderColor : "#fff",
-            background : ["#798bff","#b8acff","#ffa9ce","#f9db7b"],
-            data: [4305, 859, 482, 138]
-        }]
-    };
+    // var TrafficChannelDoughnutData = {
+    //     labels : ["Organic Search", "Social Media", "Referrals", "Others"],
+    //     dataUnit : 'People',
+    //     legend: false,
+    //     datasets : [{
+    //         borderColor : "#fff",
+    //         background : ["#798bff","#b8acff","#ffa9ce","#f9db7b"],
+    //         data: [4305, 859, 482, 138]
+    //     }]
+    // };
 
     function analyticsDoughnut(selector, set_data){
         var $selector = (selector) ? $(selector) : $('.analytics-doughnut');
@@ -77,7 +77,7 @@
                     hoverBorderColor: _get_data.datasets[i].borderColor,
                     data: _get_data.datasets[i].data,
                 });
-            } 
+            }
             var chart = new Chart(selectCanvas, {
                 type: 'doughnut',
                 data: {
@@ -127,7 +127,7 @@
         })
     }
     // init chart
-    NioApp.coms.docReady.push(function(){ analyticsDoughnut(); });  
+    NioApp.coms.docReady.push(function(){ analyticsDoughnut(); });
 
     var OrganicSearchData = {
         labels : ["01 Jan", "02 Jan", "03 Jan", "04 Jan", "05 Jan", "06 Jan", "07 Jan", "08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan"],
@@ -250,7 +250,7 @@
                     pointHitRadius: 4,
                     data: _get_data.datasets[i].data,
                 });
-            } 
+            }
             var chart = new Chart(selectCanvas, {
                 type: 'line',
                 data: {
@@ -300,7 +300,7 @@
                                 fontColor:'#9eaecf',
                                 padding: 0
                             },
-                            gridLines: { 
+                            gridLines: {
                                 color: NioApp.hexRGB("#526484",.2),
                                 tickMarkLength:0,
                                 zeroLineColor: NioApp.hexRGB("#526484",.2)
@@ -328,7 +328,7 @@
         })
     }
     // init chart
-    NioApp.coms.docReady.push(function(){ analyticsLineSmall(); });    
+    NioApp.coms.docReady.push(function(){ analyticsLineSmall(); });
 
 
 
@@ -362,7 +362,7 @@
                     barPercentage : .7,
                     categoryPercentage : .7
                 });
-            } 
+            }
             var chart = new Chart(selectCanvas, {
                 type: 'bar',
                 data: {
@@ -415,7 +415,7 @@
                                 display: false,
                                 stepSize:300
                             },
-                            gridLines: { 
+                            gridLines: {
                                 color: NioApp.hexRGB("#526484",.2),
                                 tickMarkLength:0,
                                 zeroLineColor: NioApp.hexRGB("#526484",.2),
@@ -443,7 +443,7 @@
         })
     }
     // init chart
-    NioApp.coms.docReady.push(function(){ analyticsAu(); });  
+    NioApp.coms.docReady.push(function(){ analyticsAu(); });
 
 
     var analyticOvData = {
@@ -491,7 +491,7 @@
                     pointHitRadius: 4,
                     data: _get_data.datasets[i].data,
                 });
-            } 
+            }
             var chart = new Chart(selectCanvas, {
                 type: 'line',
                 data: {
@@ -545,7 +545,7 @@
                                 padding: 8,
                                 stepSize:2400
                             },
-                            gridLines: { 
+                            gridLines: {
                                 color: NioApp.hexRGB("#526484",.2),
                                 tickMarkLength:0,
                                 zeroLineColor: NioApp.hexRGB("#526484",.2),

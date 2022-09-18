@@ -121,11 +121,13 @@ class ExamsService implements ExamsServiceInterface
             $exam_result = ExamResults::where('exam_id', $id)->where('student_id', $student_id)->first();
             if ($exam_result) {
                 $exam_result->mark = json_encode($request->mark);
+                $exam_result->result = $request->result;
                 $exam_result->save();
             } else {
                 $exam_result = new ExamResults;
                 $exam_result->student_id = $student_id;
                 $exam_result->exam_id = $id;
+                $exam_result->result = $request->result;
                 $exam_result->mark = json_encode($request->mark);
                 $exam_result->save();
             }

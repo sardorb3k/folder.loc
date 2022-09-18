@@ -34,6 +34,23 @@ class DashboardRepository implements DashboardRepositoryInterface
     {
         $user_id = Auth::user();
         // return $user_id."Salom";
+        $date_y = date('Y');
+        $date_m = date('m');
+        $attendance_n = DB::select("SELECT
+        CONCAT(firstname, ' ', lastname) AS fullname,
+        (
+        SELECT
+            COUNT(*)
+        FROM
+            attendance
+        WHERE
+            attendance.mark = 0 AND attendance.student_id = users.id AND YEAR(attendance.attendance_date) = $date_y AND MONTH(attendance.attendance_date) = $date_m
+    ) AS day
+    FROM
+        users
+    WHERE
+        users.role = 'student'
+    ORDER BY day  DESC");
 
 
         // $students = GroupItems::join('users', 'group_items.student_id', '=', 'users.id')->select("users.id", "group_items.id as group_id", "users.lastname", "users.firstname", "users.phone")->where('group_id', $group->id)->get();
@@ -51,7 +68,7 @@ class DashboardRepository implements DashboardRepositoryInterface
             ]
         );
 
-        return view('dashboard.admin');
+        return view('dashboard.admin', compact('attendance_n', 'groups'));
     }
 
     // studentDashboard

@@ -20,6 +20,7 @@
                             <div class="nk-block-des">
                                 <p>You can count the days you are not in school<span class="text-soft"><em
                                             class="icon ni ni-info"></em></span></p>
+                                <p style="border-left: 5px solid antiquewhite;">No days</p>
                             </div>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
@@ -38,7 +39,7 @@
                         </thead>
                         <tbody>
                             @foreach ($attendance as $item)
-                                <tr>
+                                <tr style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
                                     <td class="tb-col-os">{{ $item->name }}</td>
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->attendance_date }}</span></td>
                                 </tr>

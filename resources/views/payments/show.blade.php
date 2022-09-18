@@ -14,15 +14,15 @@
         </div><!-- .nk-block-between -->
         @include('error')
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div><!-- .nk-block-head -->
     <div class="card card-preview">
         <div class="card-inner">
@@ -88,8 +88,9 @@
                                 <div class="nk-tb-col">
                                     <a href="{{ route('students.show', $data_student->id) }}">
                                         <div class="user-card">
-                                            <div class="user-avatar" style="{{ $data_student->image ? '' : 'background: #798bff;'}}">
-                                                <img src="{{ $data_student->image ? asset('uploads/students/'.$data_student->image) : 'https://ui-avatars.com/api/?name='. $data_student->lastname . '+' . $data_student->firstname .'&background=random' }}"
+                                            <div class="user-avatar"
+                                                style="{{ $data_student->image ? '' : 'background: #798bff;' }}">
+                                                <img src="{{ $data_student->image ? asset('uploads/students/' . $data_student->image) : 'https://ui-avatars.com/api/?name=' . $data_student->lastname . '+' . $data_student->firstname . '&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
@@ -114,9 +115,10 @@
                                             <div class="drodown">
                                                 <div class="form-group">
                                                     <div class="form-control-wrap">
-                                                        <div class="input-daterange date-picker-range input-group">
+                                                        <div class="input-daterange input-group" id="dateonemot">
                                                             <input type="text" class="form-control date-picker"
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
+                                                                start-date="{{ $date }}"
                                                                 name="payments[{{ $data_student->id }}][start]"
                                                                 value="{{ $data_student->payment_start }}"
                                                                 id="start{{ $data_student->id }}" onkeydown="return false"
@@ -126,7 +128,8 @@
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
                                                                 value="{{ $data_student->payment_end }}"
                                                                 name="payments[{{ $data_student->id }}][end]"
-                                                                id="end{{ $data_student->id }}" onkeydown="return false" />
+                                                                id="end{{ $data_student->id }}"
+                                                                onkeydown="return false" />
 
                                                         </div>
                                                     </div>
@@ -160,11 +163,10 @@
         </div><!-- .card -->
     </div><!-- .nk-block -->
     <script>
-        console.log($('.input-daterange input'));
-        $('.input-daterange input').datepicker({
-            startDate: "09/30/2022",
-            minDate: '2017-12-12',
-
+        $('#dateonemot input').datepicker({
+            format: "yyyy-mm-dd",
+            startDate: new Date('{{ $date }}-01'),
+            // endDate: new Date('2022-10-30')
         });
         $('#mesVigencia').datepicker({
             format: "yyyy-mm",

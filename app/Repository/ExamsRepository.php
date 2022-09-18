@@ -7,6 +7,7 @@ use App\Interfaces\GroupsServiceInterface;
 use App\Http\Requests\UpdateExamRequest;
 use App\Http\Requests\StoreExamRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use App\Services\ExamsService;
 use Illuminate\Http\Request;
 use App\Models\ExamResults;
@@ -43,7 +44,24 @@ class ExamsRepository implements ExamsRepositoryInterface
         // Group information
         $exam = $this->examsService->getExamById($id);
         // Group count for select
-        $students = $this->groupService->getGroupStudents($exam->group_id);
+        // $students = $this->groupService->getGroupStudents($exam->group_id);
+        $students = DB::select("SELECT
+        group_students.student_id AS id,
+        users.lastname,
+        users.firstname,
+        users.phone,
+        users.image,
+        users.birthday,
+        group_students.group_id,
+        (
+            SELECT result FROM exam_results WHERE student_id = users.id and exam_id = $id
+            ) as result
+    FROM
+        users
+    LEFT JOIN group_students ON users.id = group_students.student_id
+    WHERE
+        group_students.group_id =$exam->group_id");
+        // dd($students);
         $count = $this->groupService->getCountGroupStudents($exam->group_id);
         return view('exams.show', compact('exam', 'count', 'students'));
     }
