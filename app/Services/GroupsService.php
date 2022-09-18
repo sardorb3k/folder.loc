@@ -215,7 +215,7 @@ class GroupsService implements GroupsServiceInterface
                 // Table group_student delete group results by group id
                 GroupStudents::where('group_id', $id)->delete();
                 // Table group delete exam by id
-                Groups::where('id', $id)->delete();
+                $group->delete();
             }
         } catch (\Exception $e) {
             dd($e->getMessage());

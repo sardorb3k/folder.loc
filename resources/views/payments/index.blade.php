@@ -28,6 +28,9 @@
                             <tr class="tb-tnx-head">
                                 <th class="tb-tnx-id"><span class="">Name</span></th>
                                 <th class="tb-tnx-info">
+                                    <span class="tb-tnx-total">Level</span>
+                                </th>
+                                <th class="tb-tnx-info">
                                     <span class="tb-tnx-status d-none d-sm-inline-block">
                                         <span>Teacher</span>
                                     </span>
@@ -50,6 +53,7 @@
                                         <a
                                             href="{{ route('payments.show_red', $item->id) }}"><span>{{ $item->name }}</span></a>
                                     </td>
+                                    <td class="tb-tnx-info"><span style="text-transform: uppercase;">{{ $item->level }}</span></td>
                                     <td class="tb-tnx-info">
                                         <div class="tb-tnx-status">
                                             <span class="title">

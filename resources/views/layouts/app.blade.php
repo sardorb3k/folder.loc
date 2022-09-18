@@ -37,7 +37,7 @@
                                 <ul class="nk-quick-nav">
                                     <li class="dropdown language-dropdown d-none d-sm-block mr-n1">
                                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
-                                            <div class="quick-icon border border-light">
+                                            <div class="quick-icon border border-light" style="background: #000">
                                                 <img class="icon"
                                                     src="./images/flags/{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}.png"
                                                     alt="{{ Config::get('languages')[App::getLocale()]['display'] }}">
@@ -153,7 +153,7 @@
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle mr-lg-n1" data-toggle="dropdown">
                                             <div class="user-toggle">
-                                                <div class="user-avatar sm">
+                                                <div class="user-avatar sm" style="background: #798bff;">
                                                     <em class="icon ni ni-user-alt"></em>
                                                 </div>
                                             </div>
@@ -162,7 +162,7 @@
                                             class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
                                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                                 <div class="user-card">
-                                                    <div class="user-avatar">
+                                                    <div class="user-avatar" style="background: #798bff;">
                                                         <span>{{ substr(Auth::user()->lastname, 0, 1) . substr(Auth::user()->firstname, 0, 1) }}</span>
                                                     </div>
                                                     <div class="user-info">
@@ -171,7 +171,7 @@
                                                         <span class="sub-text">{{ Auth::user()->phone }}</span>
                                                     </div>
                                                     <div class="user-action">
-                                                        <a class="btn btn-icon mr-n2" href="/pr"><em
+                                                        <a class="btn btn-icon mr-n2" href="/"><em
                                                                 class="icon ni ni-setting"></em></a>
                                                     </div>
                                                 </div>

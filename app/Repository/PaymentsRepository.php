@@ -67,7 +67,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             $payment->payment_start = $value['start'] ?? null;
             $payment->payment_end = $value['end'] ?? null;
             // amount
-            $payment->amount = $request->amount[$key ?? ''] ?? null;
+            $payment->amount = $request->amount[$key ?? ''] ?? '0';
             $payment->group_id = $request->group_id;
             $payment->payment_date = $request->payments_date . '-02';
             $payment->user_id = auth()->user()->id;
@@ -86,7 +86,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
         foreach ($request->payments as $key => $value) {
             // payment where student_id = $key and group_id = $id
             $payment = Payment::where('student_id', $key)->where('group_id', $id)->where('payment_date', $request->salarydate)->first();
-            $payment->amount = $request->amount[$key];
+            $payment->amount = $request->amount[$key] ?? '0';
             $payment->payment_start = $value['start'] ?? null;
             $payment->payment_end = $value['end'] ?? null;
             $payment->save();

@@ -109,9 +109,7 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <li><a href="#" onclick="event.preventDefault();
-                                                                        this.closest('form').submit();"
-                                                                data-confirm="Are you sure to delete this item?">Remove</a>
+                                                        <li><a href="#" data-confirm="Are you sure to delete this item?" onclick="return confirm('Are you sure you want to delete this item?');">Remove</a>
                                                         </li>
                                                     </form>
                                                 </ul>

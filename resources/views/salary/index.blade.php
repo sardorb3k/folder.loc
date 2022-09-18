@@ -24,9 +24,12 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
-                                <input type="text" id="mesVigencia" class="form-control date-picker" name="datetime"
+                                <input type="text" id="mesVigencia" class="form-control" name="datetime"
+                                    value="{{ $date ?? date('Y-m') }}" data-date-format="yyyy-mm" autocomplete="off" required
+                                    readonly>
+                                {{-- <input type="text" id="mesVigencia" class="form-control date-picker" name="datetime"
                                     value="{{ $date ?? date('Y-m') }}" data-date-format="yyyy-mm" autocomplete="off"
-                                    required >
+                                    required > --}}
                             </div>
                             <div class="form-note">Date format <code>mm/yyyy</code></div>
                         </div>
@@ -108,7 +111,7 @@
                                             </span>
                                         </div>
                                         <div class="tb-tnx-status">
-                                            <span class="title">{{ $item->salary }}</span>
+                                            <span class="title">{{ $item->role == 'teacher' ? $item->salary : $item->salary_assistent  }}</span>
                                         </div>
                                     </td>
                                     <td class="tb-tnx-amount is-alt">

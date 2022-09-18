@@ -116,7 +116,7 @@
                                                 <div class="form-group">
                                                     <div class="form-control-wrap">
                                                         <div class="input-daterange input-group" id="dateonemot">
-                                                            <input type="text" class="form-control date-picker"
+                                                            <input type="text" class="form-control"
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
                                                                 start-date="{{ $date }}"
                                                                 name="payments[{{ $data_student->id }}][start]"
@@ -124,11 +124,12 @@
                                                                 id="start{{ $data_student->id }}" onkeydown="return false"
                                                                 onchange="handler('start{{ $data_student->id }}', 'end{{ $data_student->id }}');" />
                                                             <div class="input-group-addon">TO</div>
-                                                            <input type="text" class="form-control date-picker"
+                                                            <input type="text" class="form-control"
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
                                                                 value="{{ $data_student->payment_end }}"
                                                                 name="payments[{{ $data_student->id }}][end]"
                                                                 id="end{{ $data_student->id }}"
+                                                                disabled
                                                                 onkeydown="return false" />
 
                                                         </div>
@@ -163,12 +164,17 @@
         </div><!-- .card -->
     </div><!-- .nk-block -->
     <script>
-        $('#dateonemot input').datepicker({
+        const now = new Date();
+
+        const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+console.log(lastDay);
+        $('#start2').datepicker({
             format: "yyyy-mm-dd",
             startDate: new Date('{{ $date }}-01'),
-            // endDate: new Date('2022-10-30')
+            endDate: new Date('{{ $date }}-30')
+            // endDate: new Date('{{ explode('-', $date)[0] }}-{{ explode('-', $date)[1]+1 }}-30')
         });
-        $('#mesVigencia').datepicker({
+        $('#start2').datepicker({
             format: "yyyy-mm",
             startView: "months",
             minViewMode: "months",

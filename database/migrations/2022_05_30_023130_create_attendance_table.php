@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('attendance_date');
             $table->date('updated_at');
             // Foreign keys
-            $table->foreign('group_id')->references('id')->on('groups');
-            $table->foreign('student_id')->references('id')->on('users');
+            // $table->foreign('group_id')->references('id')->on('groups');
+            // $table->foreign('student_id')->references('id')->on('users');
         });
     }
 

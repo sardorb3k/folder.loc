@@ -37,6 +37,9 @@
                                         </span>
                                     </span>
                                 </th>
+                                <th class="tb-tnx-info">
+                                    <span class="tb-tnx-total">Level</span>
+                                </th>
                                 <th class="tb-tnx-amount is-alt">
                                     <span class="tb-tnx-total">Lesson time</span>
                                     <span class="tb-tnx-status d-none d-md-inline-block">Week</span>
@@ -60,6 +63,9 @@
                                             <span class="title">
                                                 {{ $item->assistant_firstname }}</span>
                                         </div>
+                                    </td>
+                                    <td class="tb-tnx-info">
+                                        <span class="tb-tnx-total">{{ $item->level }}</span>
                                     </td>
                                     <td class="tb-tnx-amount is-alt">
                                         <div class="tb-tnx-total">

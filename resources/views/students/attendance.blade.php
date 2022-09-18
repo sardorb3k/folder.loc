@@ -20,7 +20,7 @@
                             <div class="nk-block-des">
                                 <p>You can count the days you are not in school<span class="text-soft"><em
                                             class="icon ni ni-info"></em></span></p>
-                                <p style="border-left: 5px solid antiquewhite;">No days</p>
+                                <p style="border-left: 10px solid antiquewhite;"> &nbsp; Absent</p>
                             </div>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">

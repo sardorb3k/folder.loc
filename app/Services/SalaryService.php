@@ -93,11 +93,13 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
     public function getTeacherList($date)
     {
         $date_all = explode('-', $date);
-        $teacher = DB::select(
-            DB::raw("SELECT DISTINCT
+        $year = $date_all['0'];
+        $month = $date_all['1'];
+        $teacher = DB::select("SELECT DISTINCT
             usr.id,
             usr.firstname,
             usr.lastname,
+            usr.role,
             (
             SELECT
                 COUNT(grlist.id)
@@ -116,6 +118,7 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
                 grs.id = gr_s.group_id
             WHERE
                 grs.teacher_id = usr.id
+                or grs.assistant_id = usr.id
         ) AS students_count,
         (
             SELECT
@@ -126,8 +129,19 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
             ON
                 grs.id = sry_s.group_id
             WHERE
-                grs.teacher_id = usr.id AND YEAR(sry_s.salarydate) = :dateY AND MONTH(sry_s.salarydate) = :dateM and sry_s.teacher_id = usr.id
+                grs.teacher_id = usr.id AND YEAR(sry_s.salarydate) = $year AND MONTH(sry_s.salarydate) = $month and sry_s.teacher_id = usr.id
         ) AS salary,
+        (
+            SELECT
+                COALESCE(SUM(sry_s.amount), 0)
+            FROM
+                salary_students AS sry_s
+            INNER JOIN groups AS grs
+            ON
+                grs.id = sry_s.group_id
+            WHERE
+                grs.assistant_id = usr.id AND YEAR(sry_s.salarydate) = $year AND MONTH(sry_s.salarydate) = $month and sry_s.teacher_id = usr.id
+        ) AS salary_assistent,
         (
             SELECT
             	sry.salary
@@ -135,19 +149,14 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
             	salary as sry
             WHERE
             	sry.teacher_id = usr.id
-            and YEAR(sry.salarydate) = :dateSY
-            and MONTH(sry.salarydate) = :dateSM
+            and YEAR(sry.salarydate) = $year
+            and MONTH(sry.salarydate) = $month
             ) as salary_action
         FROM
             `users` AS usr
         WHERE
-            usr.role = 'teacher' OR usr.role = 'assistant'"),[
-                'dateY' => $date_all[0],
-                'dateM' => $date_all[1],
-                'dateSY' => $date_all[0],
-                'dateSM' => $date_all[1],
-            ]
-        );
+            usr.role = 'teacher' OR usr.role = 'assistant'");
+            // dd($teacher);
         return $teacher;
     }
 }

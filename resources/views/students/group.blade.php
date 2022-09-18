@@ -43,7 +43,7 @@
                         <tbody>
                             @foreach ($groups as $item)
                                 <tr>
-                                    <td class="tb-col-os">{{ $item->name }}</td>
+                                    <td class="tb-col-os"><a href="{{ route('groups.show', $item->id) }}">{{ $item->name }}</a></td>
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->teacher_fullname }}</span></td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_fullname }}</span>
                                     </td>
