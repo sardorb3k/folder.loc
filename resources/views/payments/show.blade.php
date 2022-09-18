@@ -38,7 +38,7 @@
                                 </div>
                                 <input type="text" id="mesVigencia" class="form-control" name="datetime"
                                     value="{{ $date }}" data-date-format="yyyy-mm" autocomplete="off" required
-                                    readonly>
+                                    >
                             </div>
                             <div class="form-note">Date format <code>mm/yyyy</code></div>
                         </div>
@@ -164,10 +164,6 @@
         </div><!-- .card -->
     </div><!-- .nk-block -->
     <script>
-        const now = new Date();
-
-        const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-console.log(lastDay);
         $('#start2').datepicker({
             format: "yyyy-mm-dd",
             startDate: new Date('{{ $date }}-01'),
