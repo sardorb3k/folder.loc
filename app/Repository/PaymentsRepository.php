@@ -60,6 +60,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             'group_id' => 'required',
             'payments_date' => 'required'
         ]);
+        $day = date('d');
         // Payments for each student
         foreach ($request->payments as $key => $value) {
             $payment = new Payment();
@@ -69,7 +70,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             // amount
             $payment->amount = $request->amount[$key ?? ''] ?? '0';
             $payment->group_id = $request->group_id;
-            $payment->payment_date = $request->payments_date . '-02';
+            $payment->payment_date = $request->payments_date . '-'.$day;
             $payment->user_id = auth()->user()->id;
             $payment->save();
         }

@@ -117,6 +117,7 @@
                                                         <div class="input-daterange input-group" id="dateonemot">
                                                             <input type="text" class="form-control payment_date"
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
+                                                                onkeydown="return false"
                                                                 name="payments[{{ $data_student->id }}][start]"
                                                                 value="{{ $data_student->payment_start }}"
                                                                 id="start{{ $data_student->id }}"
@@ -124,6 +125,7 @@
                                                             <div class="input-group-addon">TO</div>
                                                             <input type="text" class="form-control"
                                                                 data-date-format="yyyy-mm-dd"
+                                                                onkeydown="return false"
                                                                 value="{{ $data_student->payment_end }}"
                                                                 name="payments[{{ $data_student->id }}][end]"
                                                                 id="end{{ $data_student->id }}" readonly />

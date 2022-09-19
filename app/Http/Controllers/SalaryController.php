@@ -23,9 +23,9 @@ class SalaryController extends Controller
         return $this->salary->indexSalary($date);
     }
 
-    public function index_red()
+    public function index_red(Request $date)
     {
-        $date = date('Y-m');
+        $date = $date->datetime ?? date('Y-m');
         return redirect()->route('salary.index', ['date' => $date]);
     }
 

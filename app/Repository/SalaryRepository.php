@@ -13,7 +13,7 @@ use App\Models\SalaryStudents;
 class SalaryRepository implements SalaryRepositoryInterface
 {
     /**
-     * Inxdex
+     * Inxdexx
      */
     public function indexSalary($date)
     {

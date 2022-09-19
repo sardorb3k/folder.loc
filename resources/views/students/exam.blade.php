@@ -43,7 +43,7 @@
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->teacher_id }}</span></td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_id }}</span></td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->level }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ $item->result }}</span></td>
+                                    <td class="tb-col-time"><span class="sub-text"><a href="{{ route('exams.show', $item->group_id) }}">{{ $item->result }}</a></span></td>
                                     <td class="tb-col-action"></td>
                                 </tr>
                             @endforeach

@@ -151,7 +151,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="birth-day">Date of Birth *</label>
-                                            <input type="text" class="form-control date-picker-alt" name="birthday"
+                                            <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false" 
                                                 value="{{ $student->birthday }}" data-date-format="yyyy-mm-dd" required>
                                         </div>
                                     </div>

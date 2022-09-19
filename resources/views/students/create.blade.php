@@ -119,7 +119,7 @@
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-gift"></em>
                                     </div>
-                                    <input type="text" class="form-control date-picker-alt" name="birthday"
+                                    <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false" 
                                         tabindex="4" value="{{ old('birthday') }}" data-date-format="yyyy-mm-dd"
                                         required>
                                 </div>

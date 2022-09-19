@@ -72,7 +72,7 @@
                                 <div class="nk-tb-col tb-col-mb">
                                     <span>
                                         <div class="form-control-wrap">
-                                            <input type="text" name="amount[{{ $data_student->id }}]" id="amount"
+                                            <input type="text" name="amount[{{ $data_student->id }}]" id="amount" 
                                                 value="{{ $data_student->amount }}" class="form-control">
                                         </div>
                                     </span>

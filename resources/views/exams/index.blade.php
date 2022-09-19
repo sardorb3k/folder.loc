@@ -66,7 +66,13 @@
                         <tbody>
                             @foreach ($exams as $exam)
                                 <tr class="tb-tnx-item">
-                                    <td class="tb-tnx-id"><span>{{ $exam->group_id }}</span></td>
+                                    <td class="tb-tnx-id">
+                                        <a href="{{ route('exams.show', $exam->id) }}">
+                                            <span>
+                                                {{ $exam->group_id }}
+                                            </span>
+                                        </a>
+                                    </td>
                                     <td class="tb-tnx-info">
                                         <div class="tb-tnx-status">
                                             <span class="title">
