@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('group_id');
             // Date of payment
             $table->date('salarydate');
-            $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('teacher_id')->references('id')->on('users');
+            // $table->foreign('student_id')->references('id')->on('users');
+            // $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

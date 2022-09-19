@@ -12,6 +12,8 @@ namespace App\Services;
 use App\Http\Requests\UpdateTeachersRequest;
 use App\Http\Requests\StoreTeachersRequest;
 use App\Interfaces\TeachersServiceInterface;
+use App\Models\Salary;
+use App\Models\SalaryStudents;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
@@ -153,6 +155,12 @@ class TeachersService implements TeachersServiceInterface
     public function deleteTeacher(int $id): bool
     {
         $teacher = Teacher::findOrFail($id);
+        $file_path = 'uploads/teachers/'.$teacher->image;
+        unlink($file_path);
+        // Salary delete
+        Salary::where('teacher_id', $id)->delete();
+        // Salary student delete
+        SalaryStudents::where('teacher_id', $id)->delete();
         return $teacher->delete();
     }
 

@@ -32,7 +32,7 @@
                                 <th class="tb-col-ip"><span class="overline-title">Teacher</span></th>
                                 <th class="tb-col-time"><span class="overline-title">Assistant</span></th>
                                 <th class="tb-col-time"><span class="overline-title">Level</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Mark</span></th>
+                                <th class="tb-col-time"><span class="overline-title">Result</span></th>
                                 <th class="tb-col-action"><span class="overline-title">&nbsp;</span></th>
                             </tr>
                         </thead>
@@ -43,13 +43,7 @@
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->teacher_id }}</span></td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_id }}</span></td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->level }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">
-                                        @if ($item->mark == 0)
-                                            Accepted
-                                        @else
-                                            Not Accepted
-                                        @endif
-                                    </span></td>
+                                    <td class="tb-col-time"><span class="sub-text">{{ $item->result }}</span></td>
                                     <td class="tb-col-action"></td>
                                 </tr>
                             @endforeach

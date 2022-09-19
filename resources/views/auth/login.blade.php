@@ -3,7 +3,7 @@
 @section('content')
     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
         <div class="brand-logo pb-4 text-center">
-            <a href="html/index.html" class="logo-link">
+            <a href="/" class="logo-link">
                 <h1 style="font-size: 40px;">Luna unversity</h1>
                 <!--img class="logo-light logo-img logo-img-lg" src="./images/logo.png" srcset="./images/logo2x.png 2x"
                             alt="logo">
@@ -25,11 +25,11 @@
                     @csrf
                     <div class="form-group">
                         <div class="form-label-group">
-                            <label class="form-label" for="phone">{{ __('auth.phone') }}</label>
+                            <label class="form-label" for="phone-no">{{ __('auth.phone') }}</label>
                         </div>
                         <div class="form-control-wrap">
-                            <input type="number" name="phone" value="{{ old('phone') }}" maxlength="13"
-                                class="form-control form-control-lg" id="phone"
+                            <input type="tel" name="phone" value="{{ old('phone') }}"
+                                class="form-control form-control-lg" id="phone-no"
                                 placeholder="{{ __('auth.phone_feed') }}" required autofocus>
                         </div>
                     </div>
@@ -119,4 +119,7 @@
             </div>
         </div>
     </div>
+    <script>
+        $("#phone-no").inputmask("999 (99) 999-99-99");
+    </script>
 @endsection

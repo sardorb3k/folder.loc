@@ -25,13 +25,10 @@ class ExamsService implements ExamsServiceInterface
     public function getAllExams()
     {
         try {
-            $exams = DB::select(
-                DB::raw(
-                    'SELECT ex.id,gp.`name` AS group_id,ex.exam_type,ex.created_at,ex.`level`,(
-                        SELECT COUNT(*) FROM exam_results WHERE exam_results.exam_id=ex.id AND exam_results.mark=1) AS accepted,(
-                        SELECT COUNT(*) FROM exam_results WHERE exam_results.exam_id=ex.id AND exam_results.mark=0) AS notaccepted FROM exams AS ex LEFT JOIN groups AS gp ON gp.id=ex.group_id'
-                )
-            );
+            $crm_exam_pass = DB::select('SELECT exam_pass FROM settings WHERE id = 1')[0]->exam_pass;
+            $exams = DB::select("SELECT ex.id,gp.`name` AS group_id,ex.exam_type,ex.created_at,ex.`level`,(
+                        SELECT COUNT(*) FROM `exam_results` WHERE result >= $crm_exam_pass AND exam_id = ex.id) AS accepted,(
+                            SELECT COUNT(*) FROM `exam_results` WHERE result < $crm_exam_pass AND exam_id = ex.id) AS notaccepted FROM exams AS ex LEFT JOIN groups AS gp ON gp.id=ex.group_id");
             return $exams;
         } catch (\Exception $e) {
             return dd($e->getMessage());
@@ -189,7 +186,7 @@ class ExamsService implements ExamsServiceInterface
         try {
             $student = DB::select(
                 DB::raw(
-                    "SELECT er.id,ex.`level`,ex.created_at,er.mark,gp.`name`,gp.lessonstarttime,gp.days,(
+                    "SELECT er.id,ex.`level`,ex.created_at,er.result,gp.`name`,gp.lessonstarttime,gp.days,(
                         SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.teacher_id) AS teacher_id,(
                         SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.assistant_id) AS assistant_id FROM exam_results AS er LEFT JOIN exams AS ex ON ex.id=er.exam_id LEFT JOIN groups AS gp ON gp.id=ex.group_id WHERE er.student_id=:studentid;"
                 ),

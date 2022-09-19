@@ -36,9 +36,8 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
-                                <input type="text" id="mesVigencia" class="form-control" name="datetime"
-                                    value="{{ $date }}" data-date-format="yyyy-mm" autocomplete="off" required
-                                    >
+                                <input type="text" id="mesVigencia" class="form-control" name="datetime" onkeydown="return false"
+                                    value="{{ $date }}" data-date-format="yyyy-mm" autocomplete="off" required>
                             </div>
                             <div class="form-note">Date format <code>mm/yyyy</code></div>
                         </div>
@@ -116,22 +115,18 @@
                                                 <div class="form-group">
                                                     <div class="form-control-wrap">
                                                         <div class="input-daterange input-group" id="dateonemot">
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control payment_date"
                                                                 data-date-format="yyyy-mm-dd" autocomplete="off"
-                                                                start-date="{{ $date }}"
                                                                 name="payments[{{ $data_student->id }}][start]"
                                                                 value="{{ $data_student->payment_start }}"
-                                                                id="start{{ $data_student->id }}" onkeydown="return false"
+                                                                id="start{{ $data_student->id }}"
                                                                 onchange="handler('start{{ $data_student->id }}', 'end{{ $data_student->id }}');" />
                                                             <div class="input-group-addon">TO</div>
                                                             <input type="text" class="form-control"
-                                                                data-date-format="yyyy-mm-dd" autocomplete="off"
+                                                                data-date-format="yyyy-mm-dd"
                                                                 value="{{ $data_student->payment_end }}"
                                                                 name="payments[{{ $data_student->id }}][end]"
-                                                                id="end{{ $data_student->id }}"
-                                                                disabled
-                                                                onkeydown="return false" />
-
+                                                                id="end{{ $data_student->id }}" readonly />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,18 +159,16 @@
         </div><!-- .card -->
     </div><!-- .nk-block -->
     <script>
-        $('#start2').datepicker({
+        $('.payment_date').datepicker({
             format: "yyyy-mm-dd",
             startDate: new Date('{{ $date }}-01'),
             endDate: new Date('{{ $date }}-30')
-            // endDate: new Date('{{ explode('-', $date)[0] }}-{{ explode('-', $date)[1]+1 }}-30')
         });
-        $('#start2').datepicker({
+        // The select date
+        $('#mesVigencia').datepicker({
             format: "yyyy-mm",
-            startView: "months",
-            minViewMode: "months",
-            language: 'pt-BR',
-            maxDate: new Date("2017-11-00")
+            viewMode: "months",
+            minViewMode: "months"
         });
     </script>
     <script>

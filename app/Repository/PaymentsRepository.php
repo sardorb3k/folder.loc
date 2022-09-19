@@ -80,8 +80,12 @@ class PaymentsRepository implements PaymentsRepositoryInterface
         // validation request
         $request->validate([
             'amount' => 'required',
+            'group_id' => 'required',
+            'payments' => 'required',
+            'salarydate' => 'required',
             'payments_date' => 'required'
         ]);
+        // dd($request->all());
         // Payment update for each student
         foreach ($request->payments as $key => $value) {
             // payment where student_id = $key and group_id = $id

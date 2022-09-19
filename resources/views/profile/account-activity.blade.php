@@ -54,7 +54,7 @@ function user_os($user_agent)
                         <div class="nk-block-head-content">
                             <h4 class="nk-block-title">Login Activity</h4>
                             <div class="nk-block-des">
-                                <p>Here is your last {{ $data_sessions }} login activities log. <span class="text-soft"><em
+                                <p>Here is your last login activities log. <span class="text-soft"><em
                                             class="icon ni ni-info"></em></span></p>
                             </div>
                         </div>
@@ -76,15 +76,6 @@ function user_os($user_agent)
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($sessions as $item)
-                                <tr>
-                                    <td class="tb-col-os">{{ user_os($item->user_agent) }} on {{ user_braw($item->user_agent) }}</td>
-                                    <td class="tb-col-ip"><span class="sub-text">{{ $item->ip_address }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ date("M d, Y", $item->last_activity) }} <span
-                                        class="d-none d-sm-inline-block">{{ date("g:i A", $item->last_activity) }}</span></span></td>
-                                    <td class="tb-col-action"></td>
-                                </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div><!-- .nk-block-head -->

@@ -17,7 +17,7 @@
                     <div class="nk-block-head-content">
                         <h4 class="nk-block-title">Personal Information</h4>
                         <div class="nk-block-des">
-                            <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+                            <p>Basic info, like your name and address, that you use on CRM Platform.</p>
                         </div>
                     </div>
                 </div><!-- .nk-block-head -->
@@ -42,7 +42,7 @@
                                 @endif
                             </div>
                         </div><!-- data-item -->
-                        <div class="data-item"
+                        {{-- <div class="data-item"
                             {{ Auth::user()->role != 'student' ? 'data-toggle=modal data-target=#profile-edit' : '' }}>
                             <div class="data-col">
                                 <span class="data-label">Email</span>
@@ -57,7 +57,7 @@
                                     <span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span>
                                 @endif
                             </div>
-                        </div><!-- data-item -->
+                        </div><!-- data-item --> --}}
                         <div class="data-item">
                             <div class="data-col">
                                 <span class="data-label">Phone Number</span>
@@ -122,7 +122,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="personal">
                                 <form action="{{ route('profile.information') }}" class="form-validate"
-                                    novalidate="novalidate" method="post">
+                                    novalidate="novalidate" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row gy-4">
                                         <div class="col-md-6">
@@ -187,6 +187,18 @@
                                                 <input type="text" class="form-control date-picker-alt" name="birthday"
                                                     value="{{ $user->birthday }}" data-date-format="yyyy-mm-dd"
                                                     required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group"><label class="form-label">Image upload <span
+                                                        class="valid-form">*</span></label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input" name="imageupload" tabindex="10"
+                                                            id="imageupload" required>
+                                                        <label class="form-file-label" for="imageupload">Choose file</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-12">

@@ -55,8 +55,9 @@
                                 <div class="nk-tb-col">
                                     <a href="{{ route('teachers.show', $data_student->id) }}">
                                         <div class="user-card">
-                                            <div class="user-avatar" style="{{ $data_student->image ? '' : 'background: #798bff;'}}">
-                                                <img src="{{ $data_student->image ? asset('uploads/teachers/'.$data_student->image) : 'https://ui-avatars.com/api/?name='. $data_student->lastname . '+' . $data_student->firstname .'&background=random' }}"
+                                            <div class="user-avatar"
+                                                style="{{ $data_student->image ? '' : 'background: #798bff;' }}">
+                                                <img src="{{ $data_student->image ? asset('uploads/teachers/' . $data_student->image) : 'https://ui-avatars.com/api/?name=' . $data_student->lastname . '+' . $data_student->firstname . '&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
@@ -99,11 +100,14 @@
                                                             @method('DELETE')
                                                             <input type="hidden" name="id"
                                                                 value="{{ $data_student->id }}">
-                                                            <li><a href="#"
+                                                            {{-- <li><a href="#"
                                                                     onclick="event.preventDefault();
                                                                 this.closest('form').submit();"><em
                                                                         class="icon ni ni-na"></em><span>Delete</span></a>
-                                                            </li>
+                                                            </li> --}}
+                                                            <li><a onclick="deleteTeacher();"><em
+                                                                    class="icon ni ni-na"></em><span>Delete</span></a>
+                                                        </li>
                                                         </form>
                                                     </ul>
                                                 </div>
@@ -125,4 +129,25 @@
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
+    <script>
+        function deleteTeacher() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        }
+    </script>
 @endsection

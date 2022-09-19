@@ -49,11 +49,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // Phone
+        $data['phone'] = str_replace(["(", ")", "-", " ", "_"], "", $data['phone']);
         return Validator::make($data, [
             'lastname' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             // Phone regex: /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/ (with space)
-            'phone' => ['required', 'numeric', 'unique:users'],
+            'phone' => ['required', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -66,11 +68,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
         return User::create([
             'lastname' => $data['lastname'],
             'firstname' => $data['firstname'],
-            'phone' => $data['phone'],
+            'phone' => str_replace(["(", ")", "-", " ", "_"], "", $data['phone']),
             'password' => Hash::make($data['password']),
         ]);
     }

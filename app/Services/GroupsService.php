@@ -12,10 +12,15 @@ namespace App\Services;
 use App\Http\Requests\UpdateGroupsRequest;
 use App\Interfaces\GroupsServiceInterface;
 use App\Http\Requests\StoreGroupsRequest;
+use App\Models\Attendance;
+use App\Models\ExamResults;
+use App\Models\Exams;
 use Illuminate\Support\Facades\DB;
 use App\Models\GroupStudents;
 use Illuminate\Http\Request;
 use App\Models\Groups;
+use App\Models\Payment;
+use App\Models\SalaryStudents;
 use Auth;
 
 class GroupsService implements GroupsServiceInterface
@@ -210,16 +215,25 @@ class GroupsService implements GroupsServiceInterface
     {
         // Validation group id
         $group = Groups::find($id);
-        try {
+        // try {
             if ($group) {
                 // Table group_student delete group results by group id
                 GroupStudents::where('group_id', $id)->delete();
+                Attendance::where('group_id', $id)->delete();
+                $exam = Exams::where('group_id', $id)->first();
+                if ($exam) {
+                    ExamResults::where('exam_id', $exam->id)->delete();
+                    $exam->delete();
+                }
+                // Payment delete group results by group id
+                Payment::where('group_id', $id)->delete();
+                SalaryStudents::where('group_id', $id)->delete();
                 // Table group delete exam by id
                 $group->delete();
             }
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-        }
+        // } catch (\Exception $e) {
+        //     dd($e->getMessage());
+        // }
     }
 
     /**

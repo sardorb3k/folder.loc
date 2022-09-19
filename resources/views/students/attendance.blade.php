@@ -34,6 +34,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th class="tb-col-os"><span class="overline-title">Group Name</span></th>
+                                <th class="tb-col-os"><span class="overline-title">Level</span></th>
                                 <th class="tb-col-ip"><span class="overline-title">Date</span></th>
                             </tr>
                         </thead>
@@ -41,6 +42,7 @@
                             @foreach ($attendance as $item)
                                 <tr style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
                                     <td class="tb-col-os">{{ $item->name }}</td>
+                                    <td class="tb-col-os">{{ $item->level }}</td>
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->attendance_date }}</span></td>
                                 </tr>
                             @endforeach

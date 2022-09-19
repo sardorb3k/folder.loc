@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('salary', 10, 2);
             // enum ('active', 'inactive') (default: 'inactive')
             $table->enum('status', ['active', 'inactive'])->default('inactive');
-            $table->foreign('teacher_id')->references('id')->on('users');
+            // $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

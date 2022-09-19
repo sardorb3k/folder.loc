@@ -141,7 +141,7 @@
                                             </select>
                                         </div>
                                     </div> --}}
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Student list</label>
                                             <div class="form-control-wrap">

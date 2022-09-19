@@ -17,6 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <link id="skin-default" rel="stylesheet" href="{{ url('/assets/css/theme.css?ver=2.9.1') }}">
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 
 <body class="nk-body bg-white npc-default has-aside ">
@@ -36,8 +38,9 @@
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">
                                     <li class="dropdown language-dropdown d-none d-sm-block mr-n1">
-                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
-                                            <div class="quick-icon border border-light" style="background: #000">
+                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon"
+                                            data-toggle="dropdown">
+                                            <div class="quick-icon border border-light">
                                                 <img class="icon"
                                                     src="./images/flags/{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}.png"
                                                     alt="{{ Config::get('languages')[App::getLocale()]['display'] }}">
@@ -153,8 +156,14 @@
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle mr-lg-n1" data-toggle="dropdown">
                                             <div class="user-toggle">
-                                                <div class="user-avatar sm" style="background: #798bff;">
-                                                    <em class="icon ni ni-user-alt"></em>
+                                                <div class="user-avatar sm"
+                                                    style="{{ Auth::user()->image ?? 'background: #798bff;' }}">
+                                                    @if (Auth::user()->image)
+                                                        <img src="{{ asset('uploads/' . Auth::user()->role . '/' . Auth::user()->image) }}"
+                                                            alt="{{ Auth::user()->firstname }}">
+                                                    @else
+                                                        <em class='icon ni ni-user-alt'></em>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </a>
@@ -162,25 +171,30 @@
                                             class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
                                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                                 <div class="user-card">
-                                                    <div class="user-avatar" style="background: #798bff;">
-                                                        <span>{{ substr(Auth::user()->lastname, 0, 1) . substr(Auth::user()->firstname, 0, 1) }}</span>
+                                                    <div class="user-avatar"
+                                                        style="{{ Auth::user()->image ?? 'background: #798bff;' }}">
+                                                        @if (Auth::user()->image)
+                                                            <img src="{{ asset('uploads/' . Auth::user()->role . '/' . Auth::user()->image) }}"
+                                                                alt="{{ Auth::user()->firstname }}">
+                                                        @else
+                                                            <em class='icon ni ni-user-alt'></em>
+                                                        @endif
                                                     </div>
                                                     <div class="user-info">
                                                         <span
                                                             class="lead-text">{{ Auth::user()->lastname . ' ' . Auth::user()->firstname }}</span>
                                                         <span class="sub-text">{{ Auth::user()->phone }}</span>
                                                     </div>
-                                                    <div class="user-action">
+                                                    {{-- <div class="user-action">
                                                         <a class="btn btn-icon mr-n2" href="/"><em
                                                                 class="icon ni ni-setting"></em></a>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                    <li><a href=""><em class="icon ni ni-user-alt"></em><span>View
-                                                                Profile</span></a></li>
-                                                    <li><a href=""><em class="icon ni ni-setting-alt"></em><span>Account
+                                                    <li><a href="{{ route('profile.show') }}"><em
+                                                                class="icon ni ni-setting-alt"></em><span>Account
                                                                 Setting</span></a></li>
                                                 </ul>
                                             </div>
@@ -188,7 +202,8 @@
                                                 <ul class="link-list">
                                                     <form method="POST" action="{{ route('logout') }}">
                                                         @csrf
-                                                        <li><a onclick="event.preventDefault();
+                                                        <li><a
+                                                                onclick="event.preventDefault();
                                                             this.closest('form').submit();"><em
                                                                     class="icon ni ni-signout"></em><span>Sign
                                                                     out</span></a></li>
@@ -198,8 +213,8 @@
                                         </div>
                                     </li><!-- .dropdown -->
                                     <li class="d-lg-none">
-                                        <a href="#" class="toggle nk-quick-nav-icon mr-n1" data-target="sideNav"><em
-                                                class="icon ni ni-menu"></em></a>
+                                        <a href="#" class="toggle nk-quick-nav-icon mr-n1"
+                                            data-target="sideNav"><em class="icon ni ni-menu"></em></a>
                                     </li>
                                 </ul><!-- .nk-quick-nav -->
                             </div><!-- .nk-header-tools -->
@@ -246,7 +261,8 @@
                                                                             <a href="{{ route('lang.switch', $lang) }}"
                                                                                 class="language-item">
                                                                                 <img src="{{ url('/images/flags/' . $language['flag-icon'] . '.png') }}"
-                                                                                    alt="" class="language-flag">
+                                                                                    alt=""
+                                                                                    class="language-flag">
                                                                                 <span
                                                                                     class="language-name">{{ $language['display'] }}</span>
                                                                             </a>
@@ -281,7 +297,9 @@
     <script src="{{ url('assets/js/libs/jqvmap.js?ver=2.9.1') }}"></script>
     <script src="{{ url('assets/js/libs/datatable-btns.js?ver=2.9.1') }}"></script>
     <script src="{{ url('assets/js/example-toastr.js?ver=2.4.0') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
+        integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <!-- select region modal -->
 

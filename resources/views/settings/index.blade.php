@@ -45,6 +45,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="exam_pass">Exam pass
+                                    <span class="valid-form">*</span></label>
+                                <div class="form-control-wrap">
+                                    <input type="number" class="form-control" id="exam_pass" name="exam_pass"
+                                        tabindex="2" value="{{ $info->exam_pass }}" required="">
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <button type="submit" onclick="this.form.setAttribute('novalidate', 'novalidate');'"

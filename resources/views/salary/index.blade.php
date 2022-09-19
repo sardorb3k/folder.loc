@@ -1,6 +1,8 @@
 @section('title', 'Salary')
 @extends('layouts.app')
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
@@ -25,13 +27,10 @@
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
                                 <input type="text" id="mesVigencia" class="form-control" name="datetime"
-                                    value="{{ $date ?? date('Y-m') }}" data-date-format="yyyy-mm" autocomplete="off" required
-                                    readonly>
-                                {{-- <input type="text" id="mesVigencia" class="form-control date-picker" name="datetime"
-                                    value="{{ $date ?? date('Y-m') }}" data-date-format="yyyy-mm" autocomplete="off"
-                                    required > --}}
+                                    value="{{ $date ?? date('Y-m') }}" data-date-format="yyyy-mm" onkeydown="return false"
+                                    required>
                             </div>
-                            <div class="form-note">Date format <code>mm/yyyy</code></div>
+                            <div class="form-note">Date format <code>yyyy/mm</code></div>
                         </div>
                     </div>
 
@@ -45,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="nk-block">
+    <div class="card nk-block">
         <div class="card card-bordered card-stretch">
             <div class="card-inner-group">
                 <div class="card-inner">
@@ -111,13 +110,15 @@
                                             </span>
                                         </div>
                                         <div class="tb-tnx-status">
-                                            <span class="title">{{ $item->role == 'teacher' ? $item->salary : $item->salary_assistent  }}</span>
+                                            <span
+                                                class="title">{{ $item->role == 'teacher' ? $item->salary : $item->salary_assistent }}</span>
                                         </div>
                                     </td>
                                     <td class="tb-tnx-amount is-alt">
                                         <div class="tb-tnx-total">
-                                            <input type="number" pattern="/^-?\d+\.?\d*$/" value="{{ $item->salary_action }}"
-                                                class="form-control" name="salary[{{ $item->id }}]">
+                                            <input type="number" pattern="/^-?\d+\.?\d*$/"
+                                                value="{{ $item->salary_action }}" class="form-control"
+                                                name="salary[{{ $item->id }}]">
                                         </div>
                                     </td>
                                 </tr>
@@ -141,6 +142,12 @@
         </div><!-- .card -->
     </div><!-- .nk-block -->
     <script>
+        // The select date
+        $('#mesVigencia').datepicker({
+            format: "yyyy-mm",
+            viewMode: "months",
+            minViewMode: "months"
+        });
         $('.delete').on("click", function(e) {
             e.preventDefault();
 

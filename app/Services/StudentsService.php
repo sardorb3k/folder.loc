@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Student;
 use App\Models\Attendance;
-
+use App\Models\ExamResults;
+use App\Models\GroupStudents;
+use App\Models\SalaryStudents;
 
 class StudentsService implements StudentsServiceInterface
 {
@@ -52,7 +54,7 @@ class StudentsService implements StudentsServiceInterface
     {
         return DB::select(
             DB::raw(
-                "SELECT att.id, att.attendance_date, att.mark, gp.name FROM `attendance` as att LEFT JOIN groups as gp on att.group_id = gp.id WHERE att.student_id = :id ORDER BY att.attendance_date DESC"
+                "SELECT att.id, att.attendance_date, att.mark, gp.name, gp.level FROM `attendance` as att LEFT JOIN groups as gp on att.group_id = gp.id WHERE att.student_id = :id ORDER BY att.attendance_date DESC"
             ),
             ['id' => $id]
         );
@@ -85,7 +87,7 @@ class StudentsService implements StudentsServiceInterface
 
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
-            $file_path = 'uploads/students/'.$student->image;
+            $file_path = 'uploads/students/' . $student->image;
             unlink($file_path);
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
@@ -132,8 +134,12 @@ class StudentsService implements StudentsServiceInterface
     public function deleteStudent($id): void
     {
         // delete student by id
-
         $this->students->destroy($id);
+        // Group delete
+        GroupStudents::where('student_id', $id)->delete();
+        // Salary delete
+        SalaryStudents::where('student_id', $id)->delete();
+        ExamResults::where('student_id', $id)->delete();
     }
     public function storeStudent(Request $request): void
     {

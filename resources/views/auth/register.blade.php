@@ -4,7 +4,7 @@
 
     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
         <div class="brand-logo pb-4 text-center">
-            <a href="html/index.html" class="logo-link">
+            <a href="/" class="logo-link">
                 <h1 style="font-size: 40px;">Luna unversity</h1>
             </a>
         </div>
@@ -37,10 +37,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="phone">{{ __('auth.register_phone') }}</label>
+                        <label class="form-label" for="phone-no">{{ __('auth.register_phone') }}</label>
                         <div class="form-control-wrap">
-                            <input tabindex="3" type="number" class="form-control form-control-lg" size="20" minlength="12" maxlength="12" 
-                                id="phone" name="phone" value="{{ old('phone') }}"
+                            <input tabindex="3" type="tel" class="form-control form-control-lg"
+                                id="phone-no" name="phone" value="{{ old('phone') }}"
                                 placeholder="{{ __('auth.register_phone_feed') }}" required autocomplete="phone">
                         </div>
                     </div>
@@ -137,4 +137,7 @@
             </div>
         </div>
     </div>
+    <script>
+        $("#phone-no").inputmask("999 (99) 999-99-99");
+    </script>
 @endsection

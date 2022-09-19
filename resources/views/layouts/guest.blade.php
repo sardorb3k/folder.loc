@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Sardor Sattorov">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description"
-        content="Luna Unversity. SRM panel">
+    <meta name="description" content="Luna Unversity. SRM panel">
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ url('/images/favicon.png') }}">
     <!-- Page Title  -->
@@ -15,6 +14,8 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ url('/assets/css/dashlite.css?ver=2.9.1') }}">
     <link id="skin-default" rel="stylesheet" href="{{ url('/assets/css/theme.css?ver=2.9.1') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 </head>
 
 <body class="nk-body bg-white npc-default pg-auth">
@@ -160,5 +161,10 @@
             </div><!-- .modal-content -->
         </div><!-- .modla-dialog -->
     </div><!-- .modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
+        integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+</body>
 
 </html>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\GroupsController;
+use App\Http\Controllers\AuthProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,11 @@ Route::group(['prefix' => 'salary', 'middleware' => ['auth']], function () {
     Route::put('/{group_id}', 'App\Http\Controllers\SalaryController@update')->name('salary.update');
 });
 
+// Auth Profile update
+Route::post('/user/profile/information', [AuthProfileController::class, 'information'])->name('profile.information')->middleware(['auth']);
+
+Route::get('/user/account', [AuthProfileController::class, 'account_activity'])
+    ->name('profile.show');
 
 // Exams routes
 // Route::resource('exams', 'App\Http\Controllers\ExamsController');

@@ -17,6 +17,7 @@ class SettingsSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'attendance_day' => 12,
+            'exam_pass' => 80,
         ]);
     }
 }
