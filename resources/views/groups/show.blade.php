@@ -8,23 +8,25 @@
                     <p>You have total {{ $count }} students.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
-            <div class="nk-block-head-content">
-                <div class="toggle-wrap nk-block-tools-toggle">
-                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
-                            class="icon ni ni-menu-alt-r"></em></a>
-                    <div class="toggle-expand-content" data-content="pageMenu">
-                        <ul class="nk-block-tools g-3">
-                            <li class="nk-block-tools-opt">
-                                <div class="drodown">
-                                    <a href="#" data-toggle="modal" data-target="#group-create"
-                                        class="dropdown-toggle btn btn-icon btn-primary">
-                                        <em class="icon ni ni-plus"></em></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div><!-- .toggle-wrap -->
-            </div><!-- .nk-block-head-content -->
+            @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                <div class="nk-block-head-content">
+                    <div class="toggle-wrap nk-block-tools-toggle">
+                        <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
+                                class="icon ni ni-menu-alt-r"></em></a>
+                        <div class="toggle-expand-content" data-content="pageMenu">
+                            <ul class="nk-block-tools g-3">
+                                <li class="nk-block-tools-opt">
+                                    <div class="drodown">
+                                        <a href="#" data-toggle="modal" data-target="#group-create"
+                                            class="dropdown-toggle btn btn-icon btn-primary">
+                                            <em class="icon ni ni-plus"></em></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- .toggle-wrap -->
+                </div><!-- .nk-block-head-content -->
+            @endif
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
     @include('error')
@@ -41,12 +43,14 @@
                             {{-- <div class="nk-tb-col tb-col-xl"><span class="sub-text">Exam</span></div> --}}
                             <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
                             <div class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></div>
-                            <div class="nk-tb-col nk-tb-col-tools text-right">
-                                <div class="dropdown">
-                                    <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
-                                        data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-plus"></em></a>
+                            @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                                <div class="nk-tb-col nk-tb-col-tools text-right">
+                                    <div class="dropdown">
+                                        <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
+                                            data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-plus"></em></a>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div><!-- .nk-tb-item -->
                         @foreach ($students as $data_student)
                             <div class="nk-tb-item">
@@ -86,6 +90,7 @@
                                         @endif
                                     </span>
                                 </div>
+                                @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                                 <div class="nk-tb-col nk-tb-col-tools">
                                     <ul class="nk-tb-actions gx-1">
                                         <li>
@@ -103,6 +108,7 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @endif
                             </div><!-- .nk-tb-item -->
                         @endforeach
                     </div><!-- .nk-tb-list -->

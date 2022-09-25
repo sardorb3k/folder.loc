@@ -36,11 +36,20 @@ class GroupsService implements GroupsServiceInterface
             /**
              * Get all groups.
              */
+            if (Auth::user()->getRole() != 'teacher' || Auth::user()->getRole() != 'assistant'){
             $groups = DB::select(
                 DB::raw(
                     'SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
                 )
             );
+        }else {
+            $userid == Auth::user()->id;
+            if(Auth::user()->getRole() != 'teacher'){
+            $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ut.id = $userid");
+            }else{
+                $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ua.id = $userid");
+            }
+        }
             return $groups ?? [];
         } catch (\Exception $e) {
             return dd($e->getMessage());

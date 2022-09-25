@@ -108,7 +108,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="listening">Listening</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[listening]" class="form-control" id="listening">
+                                    <input type="number" name="exam[listening]" class="form-control" id="listening" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="reading">Reading</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[reading]" class="form-control" id="reading">
+                                    <input type="number" name="exam[reading]" class="form-control" id="reading" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="writing">Writing</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[writing]" class="form-control" id="writing">
+                                    <input type="number" name="exam[writing]" class="form-control" id="writing" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="speaking">Speaking</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[speaking]" class="form-control" id="speaking">
+                                    <input type="number" name="exam[speaking]" class="form-control" id="speaking" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="grammar">Grammar</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[grammar]" class="form-control" id="grammar">
+                                    <input type="number" name="exam[grammar]" class="form-control" id="grammar" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="team">Team</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[team]" class="form-control" id="team">
+                                    <input type="number" name="exam[team]" class="form-control" id="team" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -158,12 +158,15 @@
                     <input type="hidden" name="student_id" id="student_id">
                     <input type="hidden" name="exam_id" id="exam_id">
                     <p>Exam result: <span class="badge badge-secondary" id="result">0</span></p>
+                    @if (Auth::user()->role == 'superadmin')
                     <span class="sub-text"><button type="button" id="exam-save"
                             class="btn btn-primary">Submit</button></span>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+    
     <script>
         $('.delete').on("click", function(e) {
             e.preventDefault();
@@ -206,6 +209,8 @@
                 }
             });
         });
+
+        @if (Auth::user()->role == 'superadmin')
         $("#exam-save").click(function(e) {
             e.preventDefault();
             // Backend Validation
@@ -242,6 +247,7 @@
                 }
             });
         });
+        @endif
         $(".col-sm-4").on("input", function() {
             $("#result").text(resultExam());
         });

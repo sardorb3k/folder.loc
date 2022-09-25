@@ -91,6 +91,7 @@
                         </thead>
                         <tbody>
                             @foreach ($teachers as $item)
+                                @if (Auth::user()->getRole() == 'superadmin')
                                 <tr class="tb-tnx-item">
                                     <td class="tb-tnx-id">
                                         <a href="{{ route('salary.show', ['date' => $date, 'id' => $item->id]) }}"><span>{{ $item->firstname }}
@@ -122,10 +123,50 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @else
+                                @if (Auth::user()->id == $item->id)
+                                <tr class="tb-tnx-item">
+                                    <td class="tb-tnx-id">
+                                        <a href="{{ route('salary.show', ['date' => $date, 'id' => $item->id]) }}"><span>{{ $item->firstname }}
+                                                {{ $item->lastname }}</span></a>
+                                    </td>
+                                    {{-- <td class="tb-tnx-info">
+                                        <div class="tb-tnx-status">
+                                            <span class="title">
+                                                {{ $item->group_count }}
+                                            </span>
+                                        </div>
+                                    </td> --}}
+                                    <td class="tb-tnx-info">
+                                        <div class="tb-tnx-status">
+                                            <span class="title">
+                                                {{ $item->students_count }}
+                                            </span>
+                                        </div>
+                                        <div class="tb-tnx-status">
+                                            <span
+                                                class="title">{{ $item->role == 'teacher' ? $item->salary : $item->salary_assistent }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="tb-tnx-amount is-alt">
+                                        <div class="tb-tnx-total">
+                                            <input type="number" pattern="/^-?\d+\.?\d*$/"
+                                                value="{{ $item->salary_action }}" class="form-control"
+                                                @disabled(Auth::user()->getRole() != 'superadmin')
+                                                name="salary[{{ $item->id }}]">
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                                @endif
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
                 </div><!-- .card-inner -->
+                @if (Auth::user()->getRole() == 'superadmin')
                 <div class="card-inner">
                     <div class="nk-block-between-md g-3">
                         <div class="g">
@@ -137,6 +178,7 @@
                         </div>
                     </div><!-- .nk-block-between -->
                 </div>
+                @endif
                 </form>
             </div><!-- .card-inner-group -->
         </div><!-- .card -->

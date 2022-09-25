@@ -9,7 +9,7 @@
                 <span class="nk-menu-text">Dashboard</span>
             </a>
         </li><!-- .nk-menu-item -->
-        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+        @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
                 <h6 class="overline-title text-primary-alt">Assessment</h6>
             </li><!-- .nk-menu-heading -->
@@ -20,7 +20,7 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
-        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+        @if (Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
                 <h6 class="overline-title text-primary-alt">Accounting</h6>
             </li><!-- .nk-menu-heading -->
@@ -31,7 +31,7 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
-        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+        @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
                 <h6 class="overline-title text-primary-alt">Academy</h6>
             </li><!-- .nk-menu-heading -->
@@ -42,7 +42,7 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
-        @if (Auth::user()->role == 'admin')
+        @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-item">
                 <a href="{{ route('teachers.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-card-view"></em></span>
@@ -50,7 +50,7 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
-        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+        @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-item">
                 <a href="{{ route('groups.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-layers"></em></span>
@@ -58,7 +58,7 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
-        @if (Auth::user()->role == 'admin')
+        @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-item">
                 <a href="{{ route('payments.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-view-col"></em></span>
@@ -66,7 +66,7 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
-        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+        @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-item">
                 <a href="{{ route('attendance.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-calendar-booking"></em></span>
@@ -74,7 +74,7 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
-        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'superadmin')
+        @if (Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
                 <h6 class="overline-title text-primary-alt">Settings</h6>
             </li><!-- .nk-menu-heading -->

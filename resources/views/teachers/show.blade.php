@@ -63,6 +63,8 @@
             </div><!-- .card-inner -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
+
+    @if (Auth::user()->getRole() == 'superadmin')
     <div class="modal fade" role="dialog" id="profile-edit">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -280,6 +282,7 @@
             </div><!-- .modal-content -->
         </div><!-- .modal-dialog -->
     </div><!-- .modal -->
+    @endif
     <script>
         $("#phone").inputmask({
             "mask": "998 (99) 999-99-99"

@@ -73,6 +73,7 @@
             </div><!-- .card-inner -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
+    @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
     <div class="modal fade" role="dialog" id="profile-edit">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -450,6 +451,7 @@
             </div><!-- .modal-content -->
         </div><!-- .modal-dialog -->
     </div><!-- .modal -->
+    @endif
 
 
     <script>

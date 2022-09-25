@@ -30,6 +30,11 @@ class DashboardRepository implements DashboardRepositoryInterface
         $this->groupService = $groupService;
         $this->studentService = $studentService;
     }
+    // Teacher Dashboard 
+    public function teacherDashboard(): View
+    {
+        return view('dashboard.teacher');
+    }
     /**
      * Attendance Repository indexRepository
      */
@@ -164,12 +169,6 @@ class DashboardRepository implements DashboardRepositoryInterface
             'user_id' => $user_id
         ]);
         return view('dashboard.student', compact('groups', 'exams', 'attendance', 'payments'));
-    }
-
-    // teacherDashboard
-    public function teacherDashboard(): View
-    {
-        return view('dashboard.teacher');
     }
 }
 

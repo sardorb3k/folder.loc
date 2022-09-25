@@ -9,6 +9,7 @@
                     <p>You have a total of  groups.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
+            @if (Auth::user()->role == 'superadmin')
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle">
                     <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
@@ -26,6 +27,7 @@
                     </div>
                 </div><!-- .toggle-wrap -->
             </div><!-- .nk-block-head-content -->
+            @endif
         </div><!-- .nk-block-between -->
         @include('error')
     </div><!-- .nk-block-head -->
@@ -92,6 +94,7 @@
                                             <span class="badge badge-outline-primary">{{ date("d-M-Y", strtotime($exam->created_at)) }}</span>
                                         </div>
                                     </td>
+                                    @if (Auth::user()->role == 'superadmin')
                                     <td class="tb-tnx-action">
                                         <div class="dropdown">
                                             <a class="text-soft dropdown-toggle btn btn-icon btn-trigger"
@@ -112,6 +115,7 @@
                                             </div>
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -120,6 +124,7 @@
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
+    @if (Auth::user()->role == 'superadmin')
     <div class="modal fade" role="dialog" id="group-create">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -173,6 +178,7 @@
             </div><!-- .modal-content -->
         </div><!-- .modal-dialog -->
     </div><!-- .modal -->
+    @endif
     <script>
         $('.delete').on("click", function(e) {
             e.preventDefault();

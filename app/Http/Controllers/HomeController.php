@@ -34,6 +34,8 @@ class HomeController extends Controller
             return $this->dashboard->adminDashboard();
         }elseif (Auth::user()->getRole() == 'student'){
             return $this->dashboard->studentDashboard();
+        }elseif (Auth::user()->getRole() == 'teacher' || Auth::user()->getRole() == 'assistant'){
+            return $this->dashboard->teacherDashboard();
         }
     }
 }

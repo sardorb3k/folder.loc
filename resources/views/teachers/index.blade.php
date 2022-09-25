@@ -9,6 +9,8 @@
                     <p>You have total {{ $count }} teachers.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
+
+        @if (Auth::user()->getRole() == 'superadmin')
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle">
                     <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
@@ -28,6 +30,7 @@
                     </div>
                 </div><!-- .toggle-wrap -->
             </div><!-- .nk-block-head-content -->
+            @endif
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
 
@@ -43,12 +46,14 @@
                             <div class="nk-tb-col"><span class="sub-text">User</span></div>
                             <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
                             <div class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></div>
+                            @if (Auth::user()->getRole() == 'superadmin')
                             <div class="nk-tb-col nk-tb-col-tools text-right">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
                                         data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-plus"></em></a>
                                 </div>
                             </div>
+                            @endif
                         </div><!-- .nk-tb-item -->
                         @foreach ($teachers as $data_student)
                             <div class="nk-tb-item">
@@ -82,6 +87,7 @@
                                         @endif
                                     </span>
                                 </div>
+                                @if (Auth::user()->getRole() == 'superadmin')
                                 <div class="nk-tb-col nk-tb-col-tools">
                                     <ul class="nk-tb-actions gx-1">
                                         <li>
@@ -115,6 +121,7 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @endif
                             </div><!-- .nk-tb-item -->
                         @endforeach
                     </div><!-- .nk-tb-list -->

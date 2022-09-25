@@ -9,6 +9,7 @@
                     <p>You have a total of {{ $count }} groups.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
+            @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
             <div class="nk-block-head-content">
                 <ul class="nk-block-tools g-3">
                     <li>
@@ -19,6 +20,7 @@
                     </li>
                 </ul>
             </div><!-- .nk-block-head-content -->
+            @endif
         </div><!-- .nk-block-between -->
         @include('error')
     </div><!-- .nk-block-head -->
@@ -56,9 +58,11 @@
                                 <th class="tb-tnx-amount is-alt">
                                     <span class="tb-tnx-total">Lesson S.T - E.T</span>
                                 </th>
+                                @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                                 <th class="tb-tnx-action">
                                     <span>&nbsp;</span>
                                 </th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -98,6 +102,7 @@
                                             <span class="badge">{{ $item->lessonendtime }}</span>
                                         </div> --}}
                                     </td>
+                                    @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                                     <td class="tb-tnx-action">
                                         <div class="dropdown">
                                             <a class="text-soft dropdown-toggle btn btn-icon btn-trigger"
@@ -116,6 +121,7 @@
                                             </div>
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
