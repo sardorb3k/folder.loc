@@ -157,7 +157,7 @@
                                         <a href="#" class="dropdown-toggle mr-lg-n1" data-toggle="dropdown">
                                             <div class="user-toggle">
                                                 <div class="user-avatar sm"
-                                                    style="{{ Auth::user()->image ?? 'background: #798bff;' }}">
+                                                    style="{{ Auth::user()->image == null ? '' : 'background: #798bff;' }}">
                                                     @if (Auth::user()->image)
                                                         <img src="{{ asset('uploads/' . Auth::user()->role . 's/' . Auth::user()->image) }}"
                                                             alt="{{ Auth::user()->firstname }}">
