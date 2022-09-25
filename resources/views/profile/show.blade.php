@@ -221,9 +221,8 @@
                             </div><!-- .tab-pane -->
                             <div class="tab-pane" id="password">
                                 <form action="{{ route('profile.information') }}" class="form-validate"
-                                    novalidate="novalidate" method="post">
+                                    novalidate="novalidate" method="POST">
                                     @csrf
-                                    @method('PUT')
                                     <div class="row gy-4">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -259,7 +258,7 @@
                                                     <a href="#" onclick="event.preventDefault();
                                                     this.closest('form').submit();"
                                                         class="btn btn-lg btn-primary">Update
-                                                        Address</a>
+                                                        Password</a>
                                                 </li>
                                                 <li>
                                                     <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
