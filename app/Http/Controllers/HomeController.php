@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         // Auth role
         // dd(Auth::user()->getRole());
-        if (Auth::user()->getRole() == 'admin'){
+        if (Auth::user()->getRole() == 'admin' || Auth::user()->getRole() == 'superadmin'){
             return $this->dashboard->adminDashboard();
         }elseif (Auth::user()->getRole() == 'student'){
             return $this->dashboard->studentDashboard();
