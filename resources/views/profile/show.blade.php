@@ -228,9 +228,11 @@
                                             <div class="form-group">
                                                 <label class="form-label" for="password">Password</label>
                                                 <div class="form-control-wrap">
-                                                    <div class="form-icon form-icon-right">
-                                                        <em class="icon ni ni-lock"></em>
-                                                    </div>
+                                                    <a href="#" class="form-icon form-icon-right passcode-switch toggle-password"
+                                                        data-target="password">
+                                                        <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                        <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                                    </a>
                                                     <input type="password" class="form-control" id="password"
                                                         name="password" required="">
                                                 </div>
@@ -241,9 +243,11 @@
                                                 <label class="form-label" for="password_confirmation">Confirm
                                                     Password</label>
                                                 <div class="form-control-wrap">
-                                                    <div class="toggle-password form-icon form-icon-right">
-                                                        <em class="icon ni ni-lock"></em>
-                                                    </div>
+                                                    <a href="#" class="form-icon form-icon-right passcode-switch toggle-password"
+                                                        data-target="password">
+                                                        <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                        <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                                    </a>
                                                     <input type="password" class="form-control"
                                                         id="password_confirmation" name="password_confirmation"
                                                         required="">
@@ -274,4 +278,15 @@
             </div><!-- .modal-dialog -->
         </div><!-- .modal -->
     @endif
+
+    <script>
+        $(".toggle-password").click(function() {
+            input = $(this).parent().find("input");
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
 @endsection
