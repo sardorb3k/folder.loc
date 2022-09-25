@@ -105,11 +105,11 @@ class TeachersService implements TeachersServiceInterface
 
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
-            $file_path = 'uploads/teachers/'.$teacher->image;
+            $file_path = 'uploads/teacher/' . $teacher->image;
             unlink($file_path);
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/teachers');
+            $destinationPath = public_path('/uploads/teacher');
             $image->move($destinationPath, $name);
         }
         // dd($request->all());
@@ -155,7 +155,7 @@ class TeachersService implements TeachersServiceInterface
     public function deleteTeacher(int $id): bool
     {
         $teacher = Teacher::findOrFail($id);
-        $file_path = 'uploads/teachers/'.$teacher->image;
+        $file_path = 'uploads/teacher/' . $teacher->image;
         unlink($file_path);
         // Salary delete
         Salary::where('teacher_id', $id)->delete();
@@ -188,7 +188,7 @@ class TeachersService implements TeachersServiceInterface
         if ($request->hasFile('imageupload')) {
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/teachers');
+            $destinationPath = public_path('/uploads/teacher');
             $image->move($destinationPath, $name);
         }
 

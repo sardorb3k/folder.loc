@@ -87,11 +87,11 @@ class StudentsService implements StudentsServiceInterface
 
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
-            $file_path = 'uploads/students/' . $student->image;
+            $file_path = 'uploads/student/' . $student->image;
             unlink($file_path);
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/students');
+            $destinationPath = public_path('/uploads/student');
             $image->move($destinationPath, $name);
         }
         // Update student information
@@ -165,7 +165,7 @@ class StudentsService implements StudentsServiceInterface
         if ($request->hasFile('imageupload')) {
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/students');
+            $destinationPath = public_path('/uploads/student');
             $image->move($destinationPath, $name);
         }
         $students = $this->students->create([

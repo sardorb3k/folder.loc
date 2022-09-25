@@ -30,8 +30,8 @@ class AuthProfileController extends Controller
             $user->birthday = $request->birthday;
             // image upload to public/images folder and store image name to database users table
             if ($request->hasFile('imageupload')) {
-                if ($user->imageupload != null) {
-                    $image_path = 'uploads/' . $user->role . $user->imageupload;
+                if ($user->image != null) {
+                    $image_path = 'uploads/' . $user->role . '/' . $user->image;
                     unlink($image_path);
                 }
                 $image = $request->file('imageupload');
@@ -39,7 +39,7 @@ class AuthProfileController extends Controller
                 $destinationPath = public_path('/uploads/' . $user->role);
                 $image->move($destinationPath, $name);
             }
-            $user->image = $name ?? $user->imageupload;
+            $user->image = $name ?? $user->image;
             $user->save();
             return redirect()->route('profile.show')
                 ->with('success', 'user updated successfully');
