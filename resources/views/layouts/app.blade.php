@@ -295,7 +295,6 @@
     <script src="{{ asset('assets/js/libs/jqvmap.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/libs/datatable-btns.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/example-toastr.js?ver=2.4.0') }}"></script>
-    <script src="{{ asset('assets/js/jquery.maskMoney.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.inputmask.min.js') }}"></script>
     <!-- select region modal -->
 
