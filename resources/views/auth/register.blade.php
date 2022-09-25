@@ -5,7 +5,7 @@
     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
         <div class="brand-logo pb-4 text-center">
             <a href="/" class="logo-link">
-                <h1 style="font-size: 40px;">Luna unversity</h1>
+                <h1 style="font-size: 40px;">Rexar Academy</h1>
             </a>
         </div>
         <div class="card card-bordered">
@@ -14,7 +14,7 @@
                     <div class="nk-block-head-content">
                         <h4 class="nk-block-title">{{ __('auth.register') }}</h4>
                         <div class="nk-block-des">
-                            <p>Create New Luna Account</p>
+                            <p>Create New Rexar Student Account</p>
                         </div>
                     </div>
                 </div>

@@ -7,18 +7,17 @@
     <meta name="author" content="Sardor Sattorov">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Luna Unversity. SRM panel">
+    <meta name="description" content="Rexar Academy. LMS panel">
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ url('/images/favicon.png') }}">
     <!-- Page Title  -->
-    <title>@yield('title') - {{ config('app.name', 'Luna Unversity') }}</title>
+    <title>@yield('title') - {{ config('app.name', 'Rexar Academy') }}</title>
     <!-- StyleSheets  -->
-    <link rel="stylesheet" href="{{ url('/assets/css/dashlite.css?ver=2.9.1') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
-    <link id="skin-default" rel="stylesheet" href="{{ url('/assets/css/theme.css?ver=2.9.1') }}">
-    <script src="sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=2.9.1') }}">
+    <script src="{{ asset('assets/js/autonumeric.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.inputmask.min.js') }}"></script>
+    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=2.9.1') }}">
 </head>
 
 <body class="nk-body bg-white npc-default has-aside ">
@@ -32,7 +31,7 @@
                         <div class="nk-header-wrap">
                             <div class="nk-header-brand">
                                 <a href="{{ url('/dashboard') }}" class="logo-link">
-                                    <h4 style="font-family: 'Nioicon';">Luna unversity</h4>
+                                    <h4 style="font-family: 'Nioicon';">Rexar Academy</h4>
                                 </a>
                             </div><!-- .nk-header-brand -->
                             <div class="nk-header-tools">
@@ -242,8 +241,7 @@
                                 <div class="nk-footer">
                                     <div class="container wide-xl">
                                         <div class="nk-footer-wrap g-2">
-                                            <div class="nk-footer-copyright"> &copy; 2022 Luna Unversity. <a
-                                                    href="https://satif.uz">SATIF</a>
+                                            <div class="nk-footer-copyright"> &copy; 2022 Rexar Academy
                                             </div>
                                             <div class="nk-footer-links">
                                                 <ul class="nav nav-sm">
@@ -291,16 +289,14 @@
     </div>
     <!-- app-root @e -->
     <!-- JavaScript -->
-    <script src="{{ url('assets/js/bundle.js?ver=2.9.1') }}"></script>
-    <script src="{{ url('assets/js/scripts.js?ver=2.9.1') }}"></script>
-    <script src="{{ url('assets/js/charts/gd-analytics.js?ver=2.9.1') }}"></script>
-    <script src="{{ url('assets/js/libs/jqvmap.js?ver=2.9.1') }}"></script>
-    <script src="{{ url('assets/js/libs/datatable-btns.js?ver=2.9.1') }}"></script>
-    <script src="{{ url('assets/js/example-toastr.js?ver=2.4.0') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
-        integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+    <script src="{{ asset('assets/js/bundle.js?ver=2.9.1') }}"></script>
+    <script src="{{ asset('assets/js/scripts.js?ver=2.9.1') }}"></script>
+    <script src="{{ asset('assets/js/charts/gd-analytics.js?ver=2.9.1') }}"></script>
+    <script src="{{ asset('assets/js/libs/jqvmap.js?ver=2.9.1') }}"></script>
+    <script src="{{ asset('assets/js/libs/datatable-btns.js?ver=2.9.1') }}"></script>
+    <script src="{{ asset('assets/js/example-toastr.js?ver=2.4.0') }}"></script>
+    <script src="{{ asset('assets/js/jquery.maskMoney.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.inputmask.min.js') }}"></script>
     <!-- select region modal -->
 
 </html>

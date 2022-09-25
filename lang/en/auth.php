@@ -19,7 +19,7 @@ return [
 
     // Login
     'sign_in' => 'Sign-In',
-    'sign_in_decs' => 'Access the Luna panel using your phone and passcode.',
+    'sign_in_decs' => 'Access the Rexar panel using your phone and passcode.',
     'phone' => 'Phone number',
     'phone_feed' => 'Enter your phone number',
     'passcode' => 'Passcode',

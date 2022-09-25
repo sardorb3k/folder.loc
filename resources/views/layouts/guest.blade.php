@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta name="author" content="Sardor Sattorov">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Luna Unversity. SRM panel">
+    <meta name="description" content="Rexar Academy Unversity. LMS panel">
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ url('/images/favicon.png') }}">
     <!-- Page Title  -->
-    <title>@yield('title') - {{ config('app.name', 'Luna Unversity') }}</title>
+    <title>@yield('title') - {{ config('app.name', 'Rexar Academy') }}</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ url('/assets/css/dashlite.css?ver=2.9.1') }}">
     <link id="skin-default" rel="stylesheet" href="{{ url('/assets/css/theme.css?ver=2.9.1') }}">

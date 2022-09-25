@@ -3,6 +3,6 @@
 return [
 
     // Login
-    'footer' => 'Luna Unversity. All Rights Reserved.',
+    'footer' => 'Rexar Academy. All Rights Reserved.',
 
 ];

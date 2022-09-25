@@ -12,6 +12,7 @@
                 </div>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
+        <p></p>
         @include('error')
 
         @if ($errors->any())
@@ -23,6 +24,12 @@
                 </ul>
             </div>
         @endif
+
+        <div id="paymentError" style="display: none" class="alert alert-danger">
+            <ul>
+                <li></li>
+            </ul>
+        </div>
     </div><!-- .nk-block-head -->
     <div class="card card-preview">
         <div class="card-inner">
@@ -62,105 +69,108 @@
                     <h5 class="title">All Students</h5>
                 </div><!-- .card-inner -->
 
-                @if ($students['status'] == true)
-                    <form action="{{ route('payments.update', $id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                    @else
-                        <form action="{{ route('payments.store') }}" method="POST">
-                            @csrf
-                @endif
-                <div class="card-inner p-0">
-                    <div class="nk-tb-list nk-tb-ulist">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            <div class="nk-tb-col"><span class="sub-text">Amuont</span></div>
-                            <div class="nk-tb-col nk-tb-col-tools text-right">
-                                <div class="dropdown">
-                                    <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
-                                        data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-plus"></em></a>
-                                </div>
-                            </div>
-                        </div><!-- .nk-tb-item -->
-                        @foreach ($students['students'] as $data_student)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col">
-                                    <a href="{{ route('students.show', $data_student->id) }}">
-                                        <div class="user-card">
-                                            <div class="user-avatar"
-                                                style="{{ $data_student->image ? '' : 'background: #798bff;' }}">
-                                                <img src="{{ $data_student->image ? asset('uploads/students/' . $data_student->image) : 'https://ui-avatars.com/api/?name=' . $data_student->lastname . '+' . $data_student->firstname . '&background=random' }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="user-info">
-                                                <span
-                                                    class="tb-lead">{{ $data_student->lastname . ' ' . $data_student->firstname }}
-                                                </span>
-                                                <span>{{ $data_student->phone }}</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="nk-tb-col">
-                                    <div class="form-control-wrap">
-                                        <input type="number" data-affixes-stay="true" id="amount"
-                                            name="amount[{{ $data_student->id }}]" value="{{ $data_student->amount }}"
-                                            class="form-control">
+                {{-- @if ($students['status'] == true) --}}
+                <form id="paymentForm" action="{{ route('payments.update', $id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                {{-- @else
+                    <form id="paymentForm" action="{{ route('payments.store') }}" method="POST">
+                        @csrf --}}
+                {{-- @endif --}}
+                    <div class="card-inner p-0">
+                        <div class="nk-tb-list nk-tb-ulist">
+                            <div class="nk-tb-item nk-tb-head">
+                                <div class="nk-tb-col"><span class="sub-text">User</span></div>
+                                <div class="nk-tb-col"><span class="sub-text">Amuont</span></div>
+                                <div class="nk-tb-col nk-tb-col-tools text-right">
+                                    <div class="dropdown">
+                                        <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
+                                            data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-plus"></em></a>
                                     </div>
                                 </div>
-                                <div class="nk-tb-col tb-col-xl">
-                                    <ul class="nk-tb-actions gx-1">
-                                        <li>
-                                            <div class="drodown">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <div class="input-daterange input-group" id="dateonemot">
-                                                            <input type="text" class="form-control payment_date"
-                                                                data-date-format="yyyy-mm-dd" autocomplete="off"
-                                                                onkeydown="return false"
-                                                                name="payments[{{ $data_student->id }}][start]"
-                                                                value="{{ $data_student->payment_start }}"
-                                                                id="start{{ $data_student->id }}"
-                                                                onchange="handler('start{{ $data_student->id }}', 'end{{ $data_student->id }}');" />
-                                                            <div class="input-group-addon">TO</div>
-                                                            <input type="text" class="form-control"
-                                                                data-date-format="yyyy-mm-dd"
-                                                                onkeydown="return false"
-                                                                value="{{ $data_student->payment_end }}"
-                                                                name="payments[{{ $data_student->id }}][end]"
-                                                                id="end{{ $data_student->id }}" readonly />
+                            </div><!-- .nk-tb-item -->
+                            @foreach ($students['students'] as $student_data)
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col">
+                                        {{-- {{ route('students.show', $student_data->id) }} --}}
+                                        <a href="">
+                                            <div class="user-card">
+                                                <div class="user-avatar"
+                                                    style="{{ $student_data->image ? '' : 'background: #798bff;' }}">
+                                                    <img src="{{ $student_data->image ? asset('uploads/students/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
+                                                        alt="">
+                                                </div>
+                                                <div class="user-info">
+                                                    <span
+                                                        class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
+                                                    </span>
+                                                    <span>{{ $student_data->phone }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                        <div class="form-control-wrap">
+                                            <input data-affixes-stay="true" id="amount{{ $student_data->id }}"
+                                                name="amount[{{ $student_data->id }}]" value="{{ $student_data->amount }}"
+                                                class="form-control payment-amount" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-xl">
+                                        <ul class="nk-tb-actions gx-1">
+                                            <li>
+                                                <div class="drodown">
+                                                    <div class="form-group">
+                                                        <div class="form-control-wrap">
+                                                            <div class="input-daterange input-group" id="dateonemot">
+                                                                <input type="text" class="form-control payment_date"
+                                                                    data-date-format="yyyy-mm-dd" autocomplete="off"
+                                                                    onkeydown="return false"
+                                                                    name="payments[{{ $student_data->id }}][start]"
+                                                                    value="{{ $student_data->payment_start }}"
+                                                                    id="start{{ $student_data->id }}"
+                                                                    onchange="handler('start{{ $student_data->id }}', 'end{{ $student_data->id }}');" />
+                                                                <div class="input-group-addon">TO</div>
+                                                                <input type="text" class="form-control"
+                                                                    data-date-format="yyyy-mm-dd"
+                                                                    onkeydown="return false"
+                                                                    value="{{ $student_data->payment_end }}"
+                                                                    name="payments[{{ $student_data->id }}][end]"
+                                                                    id="end{{ $student_data->id }}" readonly />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div><!-- .nk-tb-item -->
+                            @endforeach
+                        </div><!-- .nk-tb-list -->
+                    </div><!-- .card-inner -->
+
+
+
+                    <div class="card-inner">
+                        <div class="nk-block-between-md g-3">
+                            <div class="g">
+                                <input type="hidden" name="group_id" value="{{ $id }}">
+                                <input name="payments_date" type="hidden" value="{{ $date }}">
+                                <input name="salarydate" type="hidden" value="{{ $students['date_salary'] }}">
+                                <div class="form-group">
+                                    <button onclick="submitPaymentForm()" type="button" class="btn btn-secondary">Save</button>
                                 </div>
-                            </div><!-- .nk-tb-item -->
-                        @endforeach
-                    </div><!-- .nk-tb-list -->
-                </div><!-- .card-inner -->
-
-
-
-                <div class="card-inner">
-                    <div class="nk-block-between-md g-3">
-                        <div class="g">
-                            <input type="hidden" name="group_id" value="{{ $id }}">
-                            <input name="payments_date" type="hidden" value="{{ $date }}">
-                            <input name="salarydate" type="hidden" value="{{ $students['date_salary'] }}">
-                            <div class="form-group"><a href="#" class="btn btn-secondary"
-                                    onclick="event.preventDefault();
-                                                    this.closest('form').submit();">Save</a>
                             </div>
-                        </div>
-                    </div><!-- .nk-block-between -->
-                </div><!-- .card-inner -->
+                        </div><!-- .nk-block-between -->
+                    </div><!-- .card-inner -->
                 </form>
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
     <script>
+        // format amount input
+        new AutoNumeric.multiple('.payment-amount', {decimalPlaces: 0, minimumValue: 0});
+
         $('.payment_date').datepicker({
             format: "yyyy-mm-dd",
             startDate: new Date('{{ $date }}-01'),
@@ -172,8 +182,7 @@
             viewMode: "months",
             minViewMode: "months"
         });
-    </script>
-    <script>
+
         $('.delete').on("click", function(e) {
             e.preventDefault();
 
@@ -183,11 +192,29 @@
                 document.getElementById('form-service').submit();
             }
         });
-        // Money mask with 2 decimal places
-        $('#amount').maskMoney();
-    </script>
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/> --}}
-    <script>
+
+        const submitPaymentForm = () => {  
+            $('#paymentError').hide();
+            var readyToSubmit = true;
+            $('.payment-amount').each(function() {
+                const amount = this.value;
+                const id =  $(this).attr('id').split('amount')[1];
+                const startDate = $('#start' + id).val();
+                $('#start'+id).css({'borderColor': '#dbdfea'});
+                if(amount && !startDate) {
+                    $('#paymentError ul li').text('Iltimos to\'lov sanasini kiriting.');
+                    $('#paymentError').show();
+                    $('#start'+id).css({'borderColor': 'red'});
+                    readyToSubmit = false;
+                } 
+            });
+
+            if(readyToSubmit) {
+                $('#paymentForm').submit();
+            }
+          
+        }
+
         function addnull(y, m, d) {
             var d0 = '',
                 m0 = '';

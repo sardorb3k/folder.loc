@@ -132,14 +132,16 @@ class AttendanceService implements AttendanceServiceInterface
      */
     public function storeAttendance(Request $request)
     {
-        foreach ($request->attendance as $key => $value) {
-            $attendance = new Attendance;
-            $attendance->student_id = $key;
-            $attendance->group_id = $request->group_id;
-            $attendance->mark = $value;
-            $attendance->attendance_date = $request->attendance_date;
-            $attendance->updated_at = date("Y-m-d H:i:s");
-            $attendance->save();
+        if (isset($request->attendance)) {
+            foreach ($request->attendance as $key => $value) {
+                $attendance = new Attendance;
+                $attendance->student_id = $key;
+                $attendance->group_id = $request->group_id;
+                $attendance->mark = $value;
+                $attendance->attendance_date = $request->attendance_date;
+                $attendance->updated_at = date("Y-m-d H:i:s");
+                $attendance->save();
+            }
         }
     }
     /**
@@ -148,28 +150,27 @@ class AttendanceService implements AttendanceServiceInterface
     public function updateAttendance(Request $request, int $id)
     {
         // dd($request->all());
-        foreach ($request->attendance as $key => $value) {
-            // Attendance update
-            // $attendance = Attendance::where('student_id', $key)
-            //     ->where('group_id', $id)
-            //     ->where('attendance_date', $request->attendance_date)
-            //     ->first();
-            // $attendance->mark = $value;
-            // $attendance->updated_at = date("Y-m-d H:i:s");
-            // $attendance->save();
-            // DB update
-            $attendance = DB::update(
-                DB::raw(
-                    "UPDATE attendance SET mark=:mark,updated_at=:updated_at WHERE student_id=:student_id AND group_id=:group_id AND attendance_date=:attendance_date"
-                ),
-                [
-                    'mark' => $value,
-                    'updated_at' => date("Y-m-d H:i:s"),
-                    'student_id' => $key,
-                    'group_id' => $id,
-                    'attendance_date' => $request->attendance_date
-                ]
-            );
+        if (isset($request->attendance)) {
+            foreach ($request->attendance as $key => $value) {
+                // Attendance update
+                $attendance = Attendance::where('student_id', $key)
+                    ->where('group_id', $id)
+                    ->where('attendance_date', $request->attendance_date)
+                    ->first();
+                if (isset($attendance)) {
+                    $attendance->mark = $value;
+                    $attendance->updated_at = date("Y-m-d H:i:s");
+                    $attendance->save();
+                } else {
+                    $attendance = new Attendance;
+                    $attendance->student_id = $key;
+                    $attendance->group_id = $request->group_id;
+                    $attendance->mark = $value;
+                    $attendance->attendance_date = $request->attendance_date;
+                    $attendance->updated_at = date("Y-m-d H:i:s");
+                    $attendance->save();
+                }
+            }
         }
     }
 }

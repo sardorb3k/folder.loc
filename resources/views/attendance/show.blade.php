@@ -10,6 +10,7 @@
                 </div>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
+        <p></p>
         @include('error')
     </div><!-- .nk-block-head -->
     <div class="card card-preview">
@@ -58,49 +59,47 @@
                 <div class="card-inner p-0">
                     <div class="nk-tb-list nk-tb-ulist">
                         <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            <div class="nk-tb-col"><span class="sub-text">A/N</span></div>
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
+                            <div class="nk-tb-col"><span class="sub-text">Student</span></div>
+                            <div class="nk-tb-col"><span class="sub-text">Present / Total</span></div>
                             <div class="nk-tb-col nk-tb-col-tools text-right">
-                                <span class="sub-text">Present</span>
+                                <span class="sub-text">Mark</span>
                             </div>
                         </div><!-- .nk-tb-item -->
-                        @foreach ($students['students'] as $data_student)
+                        @foreach ($students['students'] as $student_data)
                             <div class="nk-tb-item">
                                 <div class="nk-tb-col">
-                                    <a href="{{ route('students.show', $data_student->id) }}">
+                                    <a href="{{ route('students.show', $student_data->id) }}">
                                         <div class="user-card">
                                             <div class="user-avatar"
-                                                style="{{ $data_student->image ? '' : 'background: #798bff;' }}">
-                                                <img src="{{ $data_student->image ? asset('uploads/students/' . $data_student->image) : 'https://ui-avatars.com/api/?name=' . $data_student->lastname . '+' . $data_student->firstname . '&background=random' }}"
+                                                style="{{ $student_data->image ? '' : 'background: #798bff;' }}">
+                                                <img src="{{ $student_data->image ? asset('uploads/students/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
                                                 <span
-                                                    class="tb-lead">{{ $data_student->lastname . ' ' . $data_student->firstname }}
+                                                    class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
                                                 </span>
-                                                <span>{{ $data_student->phone }}</span>
+                                                <span>{{ $student_data->phone }}</span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="nk-tb-col tb-col-xl">
                                     <span>
-                                        <span class="badge badge-outline-primary">{{ $data_student->attendance_a }}</span>
+                                        <span class="badge badge-outline-primary">{{ $student_data->attendance_a }}</span>
                                         /
                                         <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span></span>
-                                </div>
-                                <div class="nk-tb-col tb-col-xl">
-                                    <span>{{ $data_student->birthday }}</span>
                                 </div>
                                 <div class="nk-tb-col nk-tb-col-tools">
                                     <ul class="nk-tb-actions gx-1">
                                         <li>
                                             <div class="drodown">
-                                                <input name="attendance[{{ $data_student->id }}]" type="hidden"
+                                                <input name="attendance[{{ $student_data->id }}]" type="hidden"
                                                     value="0">
-                                                <input name="attendance[{{ $data_student->id }}]" type="checkbox"
-                                                    value="1" @if ($data_student->mark == 1) checked @endif>
+                                                <div class="custom-control custom-switch">    
+                                                    <input name="attendance[{{ $student_data->id }}]" value="1" type="checkbox" @if ($student_data->mark == 1) checked @endif class="custom-control-input" id="attendanceSwitch{{$student_data->id}}">    
+                                                    <label class="custom-control-label" for="attendanceSwitch{{$student_data->id}}"></label>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>
@@ -131,11 +130,6 @@
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
-    <script>
-        $("#datepicker").datepicker().datepicker("2022-03-09", new Date());
-
-        // $("#datepicker").datepicker().datepicker("03-2022", new Date());
-    </script>
     <script>
         $('.delete').on("click", function(e) {
             e.preventDefault();

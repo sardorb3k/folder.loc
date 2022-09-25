@@ -42,7 +42,7 @@
                                 </th>
                                 <th class="tb-tnx-amount is-alt">
                                     <span class="tb-tnx-total">Lesson time</span>
-                                    <span class="tb-tnx-status d-none d-md-inline-block">Week</span>
+                                    <span class="tb-tnx-status d-none d-md-inline-block">Days</span>
                                 </th>
                             </tr>
                         </thead>
@@ -65,14 +65,14 @@
                                         </div>
                                     </td>
                                     <td class="tb-tnx-info">
-                                        <span class="tb-tnx-total">{{ $item->level }}</span>
+                                        <span class="tb-tnx-total"  style="text-transform: capitalize;">{{ $item->level }}</span>
                                     </td>
                                     <td class="tb-tnx-amount is-alt">
                                         <div class="tb-tnx-total">
                                             <span class="badge">{{ $item->lessonstarttime }}</span>
                                         </div>
                                         <div class="tb-tnx-status">
-                                            <span class="badge">{{ $item->days }}</span>
+                                            <span class="badge"  style="text-transform: capitalize;">{{ $item->days }}</span>
                                         </div>
                                     </td>
                                 </tr>

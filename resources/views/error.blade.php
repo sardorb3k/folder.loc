@@ -3,8 +3,8 @@
         <div
             class="alert alert-pro @if (session('error')) alert-danger @endif @if (session('success')) alert-primary @endif">
             <div class="alert-text">
-                <h6>Message</h6>
-                <p>{{ session('success') }} {{ session('error') }}</p>
+                {{-- <h6>Message</h6> --}}
+                <h6>{{ session('success') }} {{ session('error') }}</h6>
             </div>
         </div>
     </div>

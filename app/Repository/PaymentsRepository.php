@@ -63,19 +63,22 @@ class PaymentsRepository implements PaymentsRepositoryInterface
         $day = date('d');
         // Payments for each student
         foreach ($request->payments as $key => $value) {
-            $payment = new Payment();
-            $payment->student_id = $key;
-            $payment->payment_start = $value['start'] ?? null;
-            $payment->payment_end = $value['end'] ?? null;
-            // amount
-            $payment->amount = $request->amount[$key ?? ''] ?? '0';
-            $payment->group_id = $request->group_id;
-            $payment->payment_date = $request->payments_date . '-'.$day;
-            $payment->user_id = auth()->user()->id;
-            $payment->save();
+            if ($request->amount[$key]) {
+                $payment = new Payment();
+                $payment->student_id = $key;
+                $payment->payment_start = $value['start'];
+                $payment->payment_end = $value['end'];
+                // amount
+                $payment->amount =  (int) str_replace(',', '', $request->amount[$key]);
+                $payment->group_id = $request->group_id;
+                $payment->payment_date = $request->payments_date . '-' . $day;
+                $payment->user_id = auth()->user()->id;
+                $payment->save();
+            }
         }
         return redirect()->route('payments.index');
     }
+
     public function updatePayments(Request $request, int $id): RedirectResponse
     {
         // validation request
@@ -83,20 +86,35 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             'amount' => 'required',
             'group_id' => 'required',
             'payments' => 'required',
-            'salarydate' => 'required',
             'payments_date' => 'required'
         ]);
-        // dd($request->all());
         // Payment update for each student
         foreach ($request->payments as $key => $value) {
             // payment where student_id = $key and group_id = $id
-            $payment = Payment::where('student_id', $key)->where('group_id', $id)->where('payment_date', $request->salarydate)->first();
-            $payment->amount = $request->amount[$key] ?? '0';
-            $payment->payment_start = $value['start'] ?? null;
-            $payment->payment_end = $value['end'] ?? null;
-            $payment->save();
+            if ($request->amount[$key]) {
+                $payment = Payment::where('student_id', $key)->where('group_id', $id)->where('payment_date', $request->salarydate)->first();
+                if (isset($payment)) {
+                    $payment->amount = (int) str_replace(',', '', $request->amount[$key]);
+                    $payment->payment_start = $value['start'];
+                    $payment->payment_end = $value['end'];
+                    $payment->save();
+                } else {
+                    $payment = new Payment();
+                    $payment->student_id = $key;
+                    $payment->payment_start = $value['start'];
+                    $payment->payment_end = $value['end'];
+                    $day = date('d');
+                    // amount
+                    $payment->amount =  (int) str_replace(',', '', $request->amount[$key]);
+                    $payment->group_id = $request->group_id;
+                    $payment->payment_date = $request->payments_date . '-' . $day;
+                    $payment->user_id = auth()->user()->id;
+                    $payment->save();
+                }
+            }
         }
-        return redirect()->route('payments.index');
+
+        return redirect()->back()->with('success', 'To\'lov saqlandi.');
     }
 }
 //
