@@ -92,12 +92,11 @@
                             @foreach ($students['students'] as $student_data)
                                 <div class="nk-tb-item">
                                     <div class="nk-tb-col">
-                                        {{-- {{ route('students.show', $student_data->id) }} --}}
-                                        <a href="">
+                                        <a href="{{ route('students.show', $student_data->id) }}">
                                             <div class="user-card">
                                                 <div class="user-avatar"
                                                     style="{{ $student_data->image ? '' : 'background: #798bff;' }}">
-                                                    <img src="{{ $student_data->image ? asset('uploads/students/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
+                                                    <img src="{{ $student_data->image ? asset('uploads/student/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
                                                         alt="">
                                                 </div>
                                                 <div class="user-info">
