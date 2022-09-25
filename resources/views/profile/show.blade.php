@@ -61,7 +61,7 @@
                         <div class="data-item">
                             <div class="data-col">
                                 <span class="data-label">Phone Number</span>
-                                <span class="data-value text-soft">{{ Auth::user()->phone }}</span>
+                                <span class="data-value text-soft">+{{ Auth::user()->phone }}</span>
                             </div>
                             <div class="data-col data-col-end">
                                 <span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span>
