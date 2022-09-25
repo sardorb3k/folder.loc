@@ -51,20 +51,20 @@
                                 </div>
                             </div>
                         </div><!-- .nk-tb-item -->
-                        @foreach ($students as $data_student)
+                        @foreach ($students as $student_data)
                             <div class="nk-tb-item">
                                 <div class="nk-tb-col">
-                                    <a href="{{ route('students.show', $data_student->id) }}">
+                                    <a href="{{ route('students.show', $student_data->id) }}">
                                         <div class="user-card">
-                                            <div class="user-avatar" style="{{ $data_student->image ? '' : 'background: #798bff;'}}">
-                                                <img src="{{ $data_student->image ? asset('uploads/students/'.$data_student->image) : 'https://ui-avatars.com/api/?name='. $data_student->lastname . '+' . $data_student->firstname .'&background=random' }}"
+                                            <div class="user-avatar" style="{{ $student_data->image ? '' : 'background: #798bff;'}}">
+                                                <img src="{{ $student_data->image ? asset('uploads/student/'.$student_data->image) : 'https://ui-avatars.com/api/?name='. $student_data->lastname . '+' . $student_data->firstname .'&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
                                                 <span
-                                                    class="tb-lead">{{ $data_student->lastname . ' ' . $data_student->firstname }}
+                                                    class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
                                                 </span>
-                                                <span>{{ $data_student->phone }}</span>
+                                                <span>{{ $student_data->phone }}</span>
                                             </div>
                                         </div>
                                     </a>
@@ -80,12 +80,12 @@
                                     </ul>
                                 </div> --}}
                                 <div class="nk-tb-col tb-col-xl">
-                                    <span>{{ $data_student->birthday }}</span>
+                                    <span>{{ $student_data->birthday }}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
                                     <span
-                                        class="tb-status text-{{ $data_student->status == 'active' ? 'success' : 'info' }}">
-                                        @if ($data_student->status == 'active')
+                                        class="tb-status text-{{ $student_data->status == 'active' ? 'success' : 'info' }}">
+                                        @if ($student_data->status == 'active')
                                             Active
                                         @else
                                             Inactive
@@ -100,19 +100,19 @@
                                                     data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <ul class="link-list-opt no-bdr">
-                                                        {{-- <li><a href="{{ route('students.show', $data_student->id) }}"><em
+                                                        {{-- <li><a href="{{ route('students.show', $student_data->id) }}"><em
                                                                     class="icon ni ni-focus"></em><span>View</span></a>
                                                         </li> --}}
-                                                        <li><a href="{{ route('students.edit', $data_student->id) }}"><em
+                                                        <li><a href="{{ route('students.edit', $student_data->id) }}"><em
                                                                     class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                         </li>
                                                         <li class="divider"></li>
-                                                        <form action="{{ route('students.destroy', $data_student->id) }}"
+                                                        <form action="{{ route('students.destroy', $student_data->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="id"
-                                                                value="{{ $data_student->id }}">
+                                                                value="{{ $student_data->id }}">
                                                             <li><a href="#"
                                                                     onclick="event.preventDefault();
                                                                 this.closest('form').submit();"><em

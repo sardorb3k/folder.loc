@@ -367,7 +367,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="custom-control custom-switch">
-                                            <img src="{{ asset('uploads/students/'.$student->image) }}" height="100" width="100" >
+                                            <img src="{{ asset('uploads/student/'.$student->image) }}" height="100" width="100" >
                                         </div>
                                     </div>
                                     <div class="col-6">
