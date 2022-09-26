@@ -30,7 +30,7 @@
                     <div class="row g-gs">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="firstname">Name</label>
+                                <label class="form-label" for="firstname">Title</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="firstname" name="name" required="">
                                 </div>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="lastname">Lesson start time</label>
+                                <label class="form-label" for="lastname">Start time</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control time-picker" name="lessonstarttime"
                                         placeholder="Time" required>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="lastname">Lesson end time</label>
+                                <label class="form-label" for="lastname">End time</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control time-picker" name="lessonendtime"
                                         placeholder="Time" required>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-email">Assestent</label>
+                                <label class="form-label" for="fv-email">Assistant</label>
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
                                         <select class="form-control" name="assistant_id" id="default-06" required>
@@ -115,11 +115,12 @@
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
                                         <select class="form-control" name="level" id="default-06" required>
-                                            <option value="beginner">Beginner</option>
-                                            <option value="elementary">Elemantary</option>
-                                            <option value="pre-intermediate">Pre-Intermediate</option>
-                                            <option value="intermediate">Intermediate</option>
-                                            <option value="upper-intermediate">Upper-Intermediate</option>
+                                            <option value="freshman">Freshman</option>
+                                            <option value="sophomore">Sophomore</option>
+                                            <option value="junior">Junior</option>
+                                            <option value="senior">Senior</option>
+                                            <option value="ielts-junior">IELTS Junior</option>
+                                            <option value="ielts-senior">IELTS Senior</option>
                                         </select>
                                     </div>
                                 </div>
