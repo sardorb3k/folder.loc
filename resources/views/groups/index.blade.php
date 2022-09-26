@@ -53,7 +53,7 @@
                                     <span class="tb-tnx-total">Level</span>
                                 </th>
                                 <th class="tb-tnx-info is-alt">
-                                    <span class="tb-tnx-status d-none d-md-inline-block">Days</span>
+                                    <span class="tb-tnx-total d-none d-md-inline-block">Days</span>
                                 </th>
                                 <th class="tb-tnx-amount is-alt">
                                     <span class="tb-tnx-total">Lesson Time</span>

@@ -335,7 +335,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button type="submit" onclick="this.form.setAttribute('novalidate', 'novalidate');'"
+                                <button type="submit" onclick="this.form.setAttribute('novalidate', 'novalidate');"
                                     class="btn btn-lg btn-primary" tabindex="14">Create</button>
                             </div>
                         </div>
