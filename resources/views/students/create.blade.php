@@ -174,7 +174,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-why-english">Why
-                                    are you ging to learn english <span class="valid-form">*</span></label>
+                                    are you going to learn English <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-target"></em>

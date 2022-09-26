@@ -41,7 +41,7 @@
                                 <label class="form-label" for="lastname">Start time</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control time-picker" name="lessonstarttime"
-                                        placeholder="Time" required>
+                                        placeholder="Time" required autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                 <label class="form-label" for="lastname">End time</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control time-picker" name="lessonendtime"
-                                        placeholder="Time" required>
+                                        placeholder="Time" required autocomplete="off"> 
                                 </div>
                             </div>
                         </div>

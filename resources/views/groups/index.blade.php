@@ -38,7 +38,7 @@
                     <table class="table table-tranx">
                         <thead>
                             <tr class="tb-tnx-head">
-                                <th class="tb-tnx-id"><span class="">Title</span></th>
+                                <th class="tb-tnx-id"><span class="">Group</span></th>
                                 <th class="tb-tnx-info">
                                     <span class="tb-tnx-status d-none d-sm-inline-block">
                                         <span>Teacher</span>
@@ -50,9 +50,12 @@
                                     </span>
                                 </th>
                                 <th class="tb-tnx-info is-alt">
+                                    <span class="tb-tnx-total">Students #</span>
+                                </th>
+                                <th class="tb-tnx-info is-alt">
                                     <span class="tb-tnx-total d-none d-md-inline-block">Days</span>
                                 </th>
-                                <th class="tb-tnx-amount is-alt">
+                                <th class="tb-tnx-info is-alt">
                                     <span class="tb-tnx-total">Lesson Time</span>
                                 </th>
                                 @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
@@ -80,6 +83,11 @@
                                         <div class="tb-tnx-status">
                                             <span class="title">
                                                 {{ $item->assistant_firstname }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="tb-tnx-info is-alt">
+                                        <div class="tb-tnx-status">
+                                            11
                                         </div>
                                     </td>
                                     <td class="tb-tnx-info is-alt">

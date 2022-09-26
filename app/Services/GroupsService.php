@@ -36,20 +36,20 @@ class GroupsService implements GroupsServiceInterface
             /**
              * Get all groups.
              */
-            if (Auth::user()->getRole() != 'teacher' || Auth::user()->getRole() != 'assistant'){
-            $groups = DB::select(
-                DB::raw(
-                    'SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
-                )
-            );
-        }else {
-            $userid == Auth::user()->id;
-            if(Auth::user()->getRole() != 'teacher'){
-            $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ut.id = $userid");
-            }else{
-                $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ua.id = $userid");
+            if (Auth::user()->getRole() != 'teacher' || Auth::user()->getRole() != 'assistant') {
+                $groups = DB::select(
+                    DB::raw(
+                        'SELECT gi.id, gi.`name`,gi.lessonstarttime,lessonendtime, gi.days, gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
+                    )
+                );
+            } else {
+                $userid == Auth::user()->id;
+                if (Auth::user()->getRole() != 'teacher') {
+                    $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ut.id = $userid");
+                } else {
+                    $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ua.id = $userid");
+                }
             }
-        }
             return $groups ?? [];
         } catch (\Exception $e) {
             return dd($e->getMessage());
@@ -225,21 +225,21 @@ class GroupsService implements GroupsServiceInterface
         // Validation group id
         $group = Groups::find($id);
         // try {
-            if ($group) {
-                // Table group_student delete group results by group id
-                GroupStudents::where('group_id', $id)->delete();
-                Attendance::where('group_id', $id)->delete();
-                $exam = Exams::where('group_id', $id)->first();
-                if ($exam) {
-                    ExamResults::where('exam_id', $exam->id)->delete();
-                    $exam->delete();
-                }
-                // Payment delete group results by group id
-                Payment::where('group_id', $id)->delete();
-                SalaryStudents::where('group_id', $id)->delete();
-                // Table group delete exam by id
-                $group->delete();
+        if ($group) {
+            // Table group_student delete group results by group id
+            GroupStudents::where('group_id', $id)->delete();
+            Attendance::where('group_id', $id)->delete();
+            $exam = Exams::where('group_id', $id)->first();
+            if ($exam) {
+                ExamResults::where('exam_id', $exam->id)->delete();
+                $exam->delete();
             }
+            // Payment delete group results by group id
+            Payment::where('group_id', $id)->delete();
+            SalaryStudents::where('group_id', $id)->delete();
+            // Table group delete exam by id
+            $group->delete();
+        }
         // } catch (\Exception $e) {
         //     dd($e->getMessage());
         // }

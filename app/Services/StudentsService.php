@@ -39,9 +39,13 @@ class StudentsService implements StudentsServiceInterface
     public function getAllStudentsPaginated(int $perPage): LengthAwarePaginator
     {
 
-        $students = DB::select("SELECT groups.level group_level, groups.name as group_name, users.* FROM users LEFT JOIN group_students ON group_students.student_id = users.id LEFT JOIN groups ON group_students.group_id = groups.id WHERE role = 'student'");
-
-        return new LengthAwarePaginator($students, count($students), $perPage);
+        return $this->students
+            ->leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
+            ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')
+            ->where('users.role', 'student')
+            ->select('groups.level as group_level', 'groups.name as group_name', 'users.*')
+            ->latest('users.created_at')
+            ->paginate($perPage);
     }
 
     public function getCountStudents(): int
