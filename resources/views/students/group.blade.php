@@ -32,10 +32,10 @@
                     <table class="table table-ulogs">
                         <thead class="thead-light">
                             <tr>
-                                <th class="tb-col-os"><span class="overline-title">Name</span></th>
+                                <th class="tb-col-os"><span class="overline-title">Group</span></th>
                                 <th class="tb-col-ip"><span class="overline-title">Teacher</span></th>
                                 <th class="tb-col-time"><span class="overline-title">Assistant</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Level</span></th>
+                                <th class="tb-col-time"><span class="overline-title">Days</span></th>
                                 <th class="tb-col-time"><span class="overline-title">Time</span></th>
                                 <th class="tb-col-action"><span class="overline-title">&nbsp;</span></th>
                             </tr>
@@ -43,12 +43,22 @@
                         <tbody>
                             @foreach ($groups as $item)
                                 <tr>
-                                    <td class="tb-col-os"><a href="{{ route('groups.show', $item->id ?? '0') }}">{{ $item->name }}</a></td>
+                                    <td class="tb-col-os">
+                                        <a href="{{ route('groups.show', $item->id ?? '0') }}" style="text-transform: capitalize;">
+                                            {{ $item->LEVEL }} {{ $item->name }}
+                                        </a>
+                                    </td>
                                     <td class="tb-col-ip"><span class="sub-text">{{ $item->teacher_fullname }}</span></td>
                                     <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_fullname }}</span>
                                     </td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ $item->LEVEL }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ $item->days }}</span></td>
+                                    <td class="tb-col-time"><span class="sub-text"style="text-transform: capitalize;">{{ $item->days }}</span></td>
+                                    <td class="tb-col-time">
+                                        <span class="sub-text">
+                                            <div class="tb-tnx-status">
+                                                <span class="badge"  style="text-transform: capitalize;">{{ $item->lessonstarttime }}</span>
+                                            </div>
+                                        </span>
+                                    </td>
                                     <td class="tb-col-action"></td>
                                 </tr>
                             @endforeach

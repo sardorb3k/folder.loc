@@ -49,9 +49,6 @@
                                         </span>
                                     </span>
                                 </th>
-                                <th class="tb-tnx-info">
-                                    <span class="tb-tnx-total">Level</span>
-                                </th>
                                 <th class="tb-tnx-info is-alt">
                                     <span class="tb-tnx-total d-none d-md-inline-block">Days</span>
                                 </th>
@@ -70,7 +67,9 @@
                                 <tr class="tb-tnx-item">
                                     <td class="tb-tnx-id">
                                         <a
-                                            href="{{ route('groups.show', $item->id) }}"><span>{{ $item->name }}</span></a>
+                                            href="{{ route('groups.show', $item->id) }}">
+                                            <span style="text-transform: capitalize;">{{ $item->level }} {{ $item->name }}</span>
+                                        </a>
                                     </td>
                                     <td class="tb-tnx-info">
                                         <div class="tb-tnx-status">
@@ -84,12 +83,8 @@
                                         </div>
                                     </td>
                                     <td class="tb-tnx-info is-alt">
-                                        <span class="tb-tnx-total"
-                                            style="text-transform: capitalize;">{{ $item->level }}</span>
-                                    </td>
-                                    <td class="tb-tnx-info is-alt">
                                         <div class="tb-tnx-status">
-                                            <span class="badge">
+                                            <span class="badge" style="text-transform: capitalize;">
                                                 {{ $item->days }}</span>
                                         </div>
                                     </td>
@@ -98,9 +93,6 @@
                                             <span class="badge">{{ $item->lessonstarttime }}</span>
                                             <span class="badge">{{ $item->lessonendtime }}</span>
                                         </div>
-                                        {{-- <div class="tb-tnx-status">
-                                            <span class="badge">{{ $item->lessonendtime }}</span>
-                                        </div> --}}
                                     </td>
                                     @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                                     <td class="tb-tnx-action">
