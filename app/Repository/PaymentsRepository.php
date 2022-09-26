@@ -89,6 +89,9 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             'payments_date' => 'required'
         ]);
         // Payment update for each student
+        if (count(array_filter($request->amount, 'is_null')) == count($request->amount)) {
+            return redirect()->back()->with('success', 'O\'zgarish yo\'q.');
+        }
         foreach ($request->payments as $key => $value) {
             // payment where student_id = $key and group_id = $id
             if ($request->amount[$key]) {
@@ -117,4 +120,3 @@ class PaymentsRepository implements PaymentsRepositoryInterface
         return redirect()->back()->with('success', 'To\'lov saqlandi.');
     }
 }
-//

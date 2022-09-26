@@ -38,7 +38,7 @@
                     <table class="table table-tranx">
                         <thead>
                             <tr class="tb-tnx-head">
-                                <th class="tb-tnx-id"><span class="">Name</span></th>
+                                <th class="tb-tnx-id"><span class="">Title</span></th>
                                 <th class="tb-tnx-info">
                                     <span class="tb-tnx-status d-none d-sm-inline-block">
                                         <span>Teacher</span>
@@ -56,7 +56,7 @@
                                     <span class="tb-tnx-status d-none d-md-inline-block">Days</span>
                                 </th>
                                 <th class="tb-tnx-amount is-alt">
-                                    <span class="tb-tnx-total">Lesson S.T - E.T</span>
+                                    <span class="tb-tnx-total">Lesson Time</span>
                                 </th>
                                 @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                                 <th class="tb-tnx-action">
