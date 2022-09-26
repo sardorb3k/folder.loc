@@ -31,9 +31,13 @@ class StudentsRepository implements StudentsRepositoryInterface
      */
     public function indexStudents(): View
     {
+
+        $students = $this->studentsService->getAllStudentsPaginated(10);
+        $count = $this->studentsService->getCountStudents();
+
         return view('students.index', [
-            'students' => $this->studentsService->getAllStudentsPaginated(10),
-            'count' => $this->studentsService->getCountStudents()
+            'students' => $students,
+            'count' => $count
         ]);
     }
     public function showStudents(int $id): View

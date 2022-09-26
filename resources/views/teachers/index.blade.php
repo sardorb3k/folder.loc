@@ -44,7 +44,8 @@
                     <div class="nk-tb-list nk-tb-ulist">
                         <div class="nk-tb-item nk-tb-head">
                             <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
+                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Role</span></div>
+                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Birthday</span></div>
                             <div class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></div>
                             @if (Auth::user()->getRole() == 'superadmin')
                             <div class="nk-tb-col nk-tb-col-tools text-right">
@@ -55,32 +56,35 @@
                             </div>
                             @endif
                         </div><!-- .nk-tb-item -->
-                        @foreach ($teachers as $data_student)
+                        @foreach ($teachers as $student_data)
                             <div class="nk-tb-item">
                                 <div class="nk-tb-col">
-                                    <a href="{{ route('teachers.show', $data_student->id) }}">
+                                    <a href="{{ route('teachers.show', $student_data->id) }}">
                                         <div class="user-card">
                                             <div class="user-avatar"
-                                                style="{{ $data_student->image ? '' : 'background: #798bff;' }}">
-                                                <img src="{{ $data_student->image ? asset('uploads/teacher/' . $data_student->image) : 'https://ui-avatars.com/api/?name=' . $data_student->lastname . '+' . $data_student->firstname . '&background=random' }}"
+                                                style="{{ $student_data->image ? '' : 'background: #798bff;' }}">
+                                                <img src="{{ $student_data->image ? asset('uploads/teacher/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
                                                 <span
-                                                    class="tb-lead">{{ $data_student->lastname . ' ' . $data_student->firstname }}
+                                                    class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
                                                 </span>
-                                                <span>{{ $data_student->phone }}</span>
+                                                <span>+{{ $student_data->phone }}</span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="nk-tb-col tb-col-xl">
-                                    <span>{{ $data_student->birthday }}</span>
+                                    <span style="text-transform: capitalize">{{ $student_data->role }}</span>
+                                </div>
+                                <div class="nk-tb-col tb-col-md">
+                                    <span>{{ $student_data->birthday }}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
                                     <span
-                                        class="tb-status text-{{ $data_student->status == 'active' ? 'success' : 'info' }}">
-                                        @if ($data_student->status == 'active')
+                                        class="tb-status text-{{ $student_data->status == 'active' ? 'success' : 'info' }}">
+                                        @if ($student_data->status == 'active')
                                             Active
                                         @else
                                             Inactive
@@ -96,16 +100,16 @@
                                                     data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <ul class="link-list-opt no-bdr">
-                                                        <li><a href="{{ route('teachers.show', $data_student->id) }}"><em
+                                                        <li><a href="{{ route('teachers.show', $student_data->id) }}"><em
                                                                     class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                         </li>
                                                         <li class="divider"></li>
-                                                        <form action="{{ route('teachers.destroy', $data_student->id) }}"
+                                                        <form action="{{ route('teachers.destroy', $student_data->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="id"
-                                                                value="{{ $data_student->id }}">
+                                                                value="{{ $student_data->id }}">
                                                             {{-- <li><a href="#"
                                                                     onclick="event.preventDefault();
                                                                 this.closest('form').submit();"><em

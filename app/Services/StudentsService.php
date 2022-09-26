@@ -16,6 +16,7 @@ use App\Models\Attendance;
 use App\Models\ExamResults;
 use App\Models\GroupStudents;
 use App\Models\SalaryStudents;
+use App\Models\User;
 
 class StudentsService implements StudentsServiceInterface
 {
@@ -37,10 +38,12 @@ class StudentsService implements StudentsServiceInterface
      */
     public function getAllStudentsPaginated(int $perPage): LengthAwarePaginator
     {
-        return $this->students->where('role', 'student')
-            ->latest()
-            ->paginate($perPage);
+
+        $students = DB::select("SELECT groups.level group_level, groups.name as group_name, users.* FROM users LEFT JOIN group_students ON group_students.student_id = users.id LEFT JOIN groups ON group_students.group_id = groups.id WHERE role = 'student'");
+
+        return new LengthAwarePaginator($students, count($students), $perPage);
     }
+
     public function getCountStudents(): int
     {
         return $this->students->where('role', 'student')->count();

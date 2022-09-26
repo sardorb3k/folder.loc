@@ -40,9 +40,8 @@
                     <div class="nk-tb-list nk-tb-ulist">
                         <div class="nk-tb-item nk-tb-head">
                             <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            {{-- <div class="nk-tb-col tb-col-mb"><span class="sub-text">Group</span></div> --}}
-                            {{-- <div class="nk-tb-col tb-col-xl"><span class="sub-text">Exam</span></div> --}}
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
+                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Group</span></div>
+                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Birthday</span></div>
                             <div class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></div>
                             <div class="nk-tb-col nk-tb-col-tools text-right">
                                 <div class="dropdown">
@@ -64,22 +63,15 @@
                                                 <span
                                                     class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
                                                 </span>
-                                                <span>{{ $student_data->phone }}</span>
+                                                <span>+{{ $student_data->phone }}</span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                                {{-- <div class="nk-tb-col tb-col-mb">
-                                    <span class="tb-amount">580.00 <span class="currency">USD</span></span>
-                                </div> --}}
-                                {{-- <div class="nk-tb-col tb-col-xl">
-                                    <ul class="list-status">
-                                        <li><em class="icon text-success ni ni-check-circle"></em> <span>Med</span>
-                                        </li>
-                                        <li><em class="icon text-info ni ni-alarm-alt"></em> <span>Final</span></li>
-                                    </ul>
-                                </div> --}}
-                                <div class="nk-tb-col tb-col-xl">
+                                <div class="nk-tb-col tb-col-md">
+                                    <span style="text-transform: capitalize;  @if(!$student_data->group_level) color: red; @endif">{{ $student_data->group_level ? $student_data->group_level . ' ' . $student_data->group_name : 'No Group'}}</span>
+                                </div>
+                                <div class="nk-tb-col tb-col-md">
                                     <span>{{ $student_data->birthday }}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
