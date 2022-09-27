@@ -152,7 +152,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="birth-day">Date of Birth *</label>
-                                            <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false" 
+                                            <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false"
                                                 value="{{ $student->birthday }}" data-date-format="yyyy-mm-dd" required>
                                         </div>
                                     </div>
@@ -300,7 +300,7 @@
                                                         class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                                         <input type="checkbox" class="custom-control-input"
                                                             name="course[]"
-                                                            {{ in_array('englishlanguage', json_decode($student->course)) ? 'checked' : '' }}
+                                                            {{ !empty(in_array('englishlanguage', json_decode($student->course) ?? [])) ? 'checked' : '' }}
                                                             value="englishlanguage" id="englishlanguage"><label
                                                             class="custom-control-label" for="englishlanguage">English
                                                             Language</label>
@@ -311,7 +311,7 @@
                                                         class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                                         <input type="checkbox" class="custom-control-input"
                                                             name="course[]"
-                                                            {{ in_array('webdevelopment', json_decode($student->course)) ? 'checked' : '' }}
+                                                            {{ in_array('webdevelopment', json_decode($student->course) ?? []) ? 'checked' : '' }}
                                                             value="webdevelopment" id="webdevelopment"><label
                                                             class="custom-control-label" for="webdevelopment">Web
                                                             Development</label>
@@ -322,7 +322,7 @@
                                                         class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                                         <input type="checkbox" class="custom-control-input"
                                                             name="course[]"
-                                                            {{ in_array('mobiledevelopment', json_decode($student->course)) ? 'checked' : '' }}
+                                                            {{ in_array('mobiledevelopment', json_decode($student->course) ?? []) ? 'checked' : '' }}
                                                             value="mobiledevelopment" id="mobiledevelopment"><label
                                                             class="custom-control-label" for="mobiledevelopment">Mobile
                                                             App
@@ -334,7 +334,7 @@
                                                         class="custom-control custom-control-sm custom-checkbox custom-control-pro checked">
                                                         <input type="checkbox" class="custom-control-input"
                                                             name="course[]"
-                                                            {{ in_array('gamedevelopment', json_decode($student->course)) ? 'checked' : '' }}
+                                                            {{ in_array('gamedevelopment', json_decode($student->course) ?? []) ? 'checked' : '' }}
                                                             value="gamedevelopment" id="gamedevelopment"><label
                                                             class="custom-control-label" for="gamedevelopment">Game
                                                             Development</label>
@@ -345,7 +345,7 @@
                                                         class="custom-control custom-control-sm custom-checkbox custom-control-pro">
                                                         <input type="checkbox" class="custom-control-input"
                                                             name="course[]"
-                                                            {{ in_array('graphicdesign', json_decode($student->course)) ? 'checked' : '' }}
+                                                            {{ in_array('graphicdesign', json_decode($student->course) ?? []) ? 'checked' : '' }}
                                                             value="graphicdesign" id="graphicdesign"><label
                                                             class="custom-control-label" for="graphicdesign">Graphic
                                                             Design</label>

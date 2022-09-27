@@ -12,6 +12,8 @@ class SalaryController extends Controller
     public function __construct(SalaryRepositoryInterface $salary)
     {
         $this->salary = $salary;
+        // Middleware for authentication.
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
