@@ -75,6 +75,15 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @if ($groups->hasPages())
+                        <div class="card-inner">
+                            <div class="nk-block-between-md g-3">
+                                <div class="g">
+                                    {{ $groups->links() }}
+                                </div>
+                            </div><!-- .nk-block-between -->
+                        </div><!-- .card-inner -->
+                    @endif
                 </div><!-- .card-inner -->
             </div><!-- .card-inner-group -->
         </div><!-- .card -->

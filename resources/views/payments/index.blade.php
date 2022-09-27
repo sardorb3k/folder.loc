@@ -55,7 +55,7 @@
                                     <td class="tb-tnx-info">
                                         <div class="tb-tnx-status">
                                             <span class="title">
-                                        {{ $item->teacher_firstname }} 
+                                        {{ $item->teacher_firstname }}
                                             </span>
                                         </div>
                                         <div class="tb-tnx-status">
@@ -75,6 +75,15 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @if ($groups->hasPages())
+                        <div class="card-inner">
+                            <div class="nk-block-between-md g-3">
+                                <div class="g">
+                                    {{ $groups->links() }}
+                                </div>
+                            </div><!-- .nk-block-between -->
+                        </div><!-- .card-inner -->
+                    @endif
                 </div><!-- .card-inner -->
             </div><!-- .card-inner-group -->
         </div><!-- .card -->

@@ -32,7 +32,7 @@ class GroupsRepository implements GroupsRepositoryInterface
      */
     public function indexGroups(): View
     {
-        $groups = $this->groupService->getAllGroups();
+        $groups = $this->groupService->getAllGroupsPagination(10);
         $count = $this->groupService->getCountGroups();
 
         return view('groups.index', compact('groups', 'count'))

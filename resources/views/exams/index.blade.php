@@ -119,6 +119,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        @if ($exams->hasPages())
+                            <div class="card-inner">
+                                <div class="nk-block-between-md g-3">
+                                    <div class="g">
+                                        {{ $exams->links() }}
+                                    </div>
+                                </div><!-- .nk-block-between -->
+                            </div><!-- .card-inner -->
+                        @endif
                     </table>
                 </div><!-- .card-inner -->
             </div><!-- .card-inner-group -->

@@ -5,14 +5,17 @@ namespace App\Services;
 use App\Models\Salary;
 use App\Interfaces\SalaryServiceInterface;
 use App\Interfaces\GroupsServiceInterface;
+use App\Models\Groups;
 use Illuminate\Support\Facades\DB;
 
 class SalaryService implements SalaryServiceInterface
 {
     private $group;
-    public function __construct(GroupsServiceInterface $group)
+    private $groups;
+    public function __construct(GroupsServiceInterface $group, Groups $groups)
     {
         $this->group = $group;
+        $this->groups = $groups;
     }
     public function getAllTeachersSalary()
     {
@@ -21,14 +24,14 @@ class SalaryService implements SalaryServiceInterface
     }
     public function getGroupById($id)
     {
-        return DB::select("SELECT gp.id, gp.name,
-        (SELECT concat(us.lastname,' ',us.firstname) AS teacher_id FROM users AS us WHERE us.id = gp.teacher_id) AS teacher_id,
-        (SELECT concat(us.lastname,' ',us.firstname) AS teacher_id FROM users AS us WHERE us.id = gp.assistant_id) AS assistant_id,
-        gp.lessonstarttime,gp.days,gp.level
-        FROM
-        groups AS gp
-        WHERE
-        gp.teacher_id = ? OR gp.assistant_id = ?", [$id, $id]);
+        return $this->groups
+            ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+            ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+            ->select(DB::raw('CONCAT(ut.lastname," ", ut.firstname) AS teacher_id'), DB::raw('CONCAT(ua.lastname," ", ua.firstname) AS assistant_id'), 'groups.*')
+            ->where('groups.teacher_id', $id)
+            ->orWhere('groups.assistant_id', $id)
+            ->latest('groups.created_at')
+            ->paginate(10);
     }
     public function getStudent($id, $date, $teacher_id)
     {
@@ -82,7 +85,7 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
                 'amountY' => $date_all[0],
                 'amountM' => $date_all[1],
                 'teacher_id' => $teacher_id
-                ]
+            ]
         );
         // dd($students);
         return $students;
@@ -156,7 +159,7 @@ student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM
             `users` AS usr
         WHERE
             usr.role = 'teacher' OR usr.role = 'assistant'");
-            // dd($teacher);
+        // dd($teacher);
         return $teacher;
     }
 }

@@ -19,6 +19,7 @@ interface GroupsServiceInterface
     public function getUnsubscribeList(int $id): array;
     public function deleteGroup(int $id): void;
     public function updateGroup(Request $request, int $id): void;
+    public function getAllGroupsPagination(int $prePage);
 
 
 }
