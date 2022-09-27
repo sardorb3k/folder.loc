@@ -35144,7 +35144,7 @@ h6 .badge {
 .tb-col-xxl,
 .tb-col-xs,
 .tb-col-mb {
-  display: none !important;
+  /* display: none !important; */
 }
 
 @media (min-width: 576px) {
