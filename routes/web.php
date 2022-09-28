@@ -19,9 +19,9 @@ use App\Http\Controllers\AuthProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 // Authentication routes
@@ -43,21 +43,21 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 // Home page route for logged in users only (middleware auth)
-Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'App\Http\Controllers\HomeController@index']);
+Route::get('/', ['as' => 'dashboard', 'uses' => 'App\Http\Controllers\HomeController@index'])->middleware(['auth']);
 
 // Group routes
-Route::resource('groups', GroupsController::class);
+Route::resource('groups', GroupsController::class)->middleware(['auth']);
 // Student routes
-Route::resource('students', GroupsController::class);
+Route::resource('students', GroupsController::class)->middleware(['auth']);
 // Group subscription student routes
 Route::post('groups/subscription', [GroupsController::class, 'subscription'])->name('groups.subscription')->middleware(['auth']);
 Route::post('groups/unsubscribe', [GroupsController::class, 'unsubscribe'])->name('groups.unsubscribe')->middleware(['auth']);
 
 // Teacher routes
-Route::resource('teachers', 'App\Http\Controllers\TeachersController');
+Route::resource('teachers', 'App\Http\Controllers\TeachersController')->middleware(['auth']);
 
 // Student routes
-Route::resource('students', 'App\Http\Controllers\StudentsController');
+Route::resource('students', 'App\Http\Controllers\StudentsController')->middleware(['auth']);
 Route::get('students/{id}/exam', 'App\Http\Controllers\StudentsController@exam')->name('students.exam');
 Route::get('students/{id}/group', 'App\Http\Controllers\StudentsController@group')->name('students.group');
 Route::get('students/{id}/payments', 'App\Http\Controllers\StudentsController@payments')->name('students.payments');

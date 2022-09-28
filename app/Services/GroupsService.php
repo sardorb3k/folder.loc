@@ -22,9 +22,15 @@ use App\Models\Groups;
 use App\Models\Payment;
 use App\Models\SalaryStudents;
 use Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class GroupsService implements GroupsServiceInterface
 {
+    private $groups;
+    public function __construct(Groups $groups)
+    {
+        $this->groups = $groups;
+    }
     /**
      * Get all groups.
      *
@@ -58,6 +64,39 @@ class GroupsService implements GroupsServiceInterface
         } catch (\Exception $e) {
             return dd($e->getMessage());
         }
+    }
+    // get All Groups pagination
+    public function getAllGroupsPagination($perPage = 10)
+    {
+        // User role if teacher or assistant
+        if (Auth::user()->getRole() != 'teacher' || Auth::user()->getRole() != 'assistant') {
+            $groups = $this->groups
+                ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                ->latest('groups.created_at')
+                ->paginate($perPage);
+        } else {
+            $userid = Auth::user()->id;
+            if (Auth::user()->getRole() != 'teacher') {
+                $groups = $this->groups
+                    ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                    ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                    ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->where('ut.id', $userid)
+                    ->latest('groups.created_at')
+                    ->paginate($perPage);
+            } else {
+                $groups = $this->groups
+                    ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                    ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                    ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->where('ua.id', $userid)
+                    ->latest('groups.created_at')
+                    ->paginate($perPage);
+            }
+        }
+        return $groups ?? [];
     }
 
     /**

@@ -31,7 +31,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
      */
     public function indexAttendance(): View
     {
-        $groups = $this->groupService->getAllGroups();
+        $groups = $this->groupService->getAllGroupsPagination(10);
         $count = $this->groupService->getCountGroups();
         return view('attendance.index', compact('groups', 'count'));
     }

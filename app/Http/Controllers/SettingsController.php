@@ -12,6 +12,8 @@ class SettingsController extends Controller
     public function __construct(SettingsRepositoryInterface $settings)
     {
         $this->settings = $settings;
+        // Middleware for authentication.
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

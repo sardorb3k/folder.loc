@@ -29,7 +29,7 @@ class ExamsRepository implements ExamsRepositoryInterface
     public function indexExams(): View
     {
         $exams = $this->examsService->getAllExams() ?? [];
-        $groups = $this->groupService->getAllGroups() ?? [];
+        $groups = $this->groupService->getAllGroupsPagination(10) ?? [];
         // $exams = [];
         // $groups = [];
         return view('exams.index', compact('exams', 'groups'));

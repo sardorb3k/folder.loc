@@ -31,7 +31,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
     public function indexPayments(): View
     {
         $count = $this->groups->getCountGroups();
-        $groups = $this->groups->getAllGroups();
+        $groups = $this->groups->getAllGroupsPagination(10);
         return view('payments.index', compact('groups', 'count'));
     }
     public function show(int $id,  Request $request): RedirectResponse

@@ -30,7 +30,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         $this->groupService = $groupService;
         $this->studentService = $studentService;
     }
-    // Teacher Dashboard 
+    // Teacher Dashboard
     public function teacherDashboard(): View
     {
         return view('dashboard.teacher');
@@ -52,13 +52,13 @@ class DashboardRepository implements DashboardRepositoryInterface
         FROM
             attendance
         WHERE
-            attendance.mark = 0 AND attendance.student_id = users.id AND YEAR(attendance.attendance_date) = $date_y AND MONTH(attendance.attendance_date) = $date_m
+            attendance.mark > 0 AND attendance.student_id = users.id AND YEAR(attendance.attendance_date) = $date_y AND MONTH(attendance.attendance_date) = $date_m
     ) AS day
     FROM
         users
     WHERE
         users.role = 'student'
-    ORDER BY day  DESC");
+    ORDER BY day  DESC LIMIT 8");
 
 
         // $students = GroupItems::join('users', 'group_items.student_id', '=', 'users.id')->select("users.id", "group_items.id as group_id", "users.lastname", "users.firstname", "users.phone")->where('group_id', $group->id)->get();

@@ -9,17 +9,17 @@
                     <p>You have a total of {{ $count }} groups.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
-            @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
-            <div class="nk-block-head-content">
-                <ul class="nk-block-tools g-3">
-                    <li>
-                        <div class="drodown">
-                            <a href="{{ route('groups.create') }}" class="dropdown-toggle btn btn-icon btn-primary"><em
-                                    class="icon ni ni-plus"></em></a>
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- .nk-block-head-content -->
+            @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                <div class="nk-block-head-content">
+                    <ul class="nk-block-tools g-3">
+                        <li>
+                            <div class="drodown">
+                                <a href="{{ route('groups.create') }}" class="dropdown-toggle btn btn-icon btn-primary"><em
+                                        class="icon ni ni-plus"></em></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- .nk-block-head-content -->
             @endif
         </div><!-- .nk-block-between -->
         @include('error')
@@ -58,10 +58,10 @@
                                 <th class="tb-tnx-info is-alt">
                                     <span class="tb-tnx-total">Lesson Time</span>
                                 </th>
-                                @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
-                                <th class="tb-tnx-action">
-                                    <span>&nbsp;</span>
-                                </th>
+                                @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                                    <th class="tb-tnx-action">
+                                        <span>&nbsp;</span>
+                                    </th>
                                 @endif
                             </tr>
                         </thead>
@@ -69,9 +69,9 @@
                             @foreach ($groups as $item)
                                 <tr class="tb-tnx-item">
                                     <td class="tb-tnx-id">
-                                        <a
-                                            href="{{ route('groups.show', $item->id) }}">
-                                            <span style="text-transform: capitalize;">{{ $item->level }} {{ $item->name }}</span>
+                                        <a href="{{ route('groups.show', $item->id) }}">
+                                            <span style="text-transform: capitalize;">{{ $item->level }}
+                                                {{ $item->name }}</span>
                                         </a>
                                     </td>
                                     <td class="tb-tnx-info">
@@ -102,30 +102,41 @@
                                             <span class="badge">{{ $item->lessonendtime }}</span>
                                         </div>
                                     </td>
-                                    @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
-                                    <td class="tb-tnx-action">
-                                        <div class="dropdown">
-                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger"
-                                                data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
-                                                <ul class="link-list-plain">
-                                                    <li><a href="{{ route('groups.edit', $item->id) }}">Edit</a></li>
-                                                    <form action="{{ route('groups.destroy', $item->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <li><a href="#"  data-confirm="Are you sure to delete this item?" onclick="event.preventDefault();this.closest('form').submit();">Remove</a>
-                                                        </li>
-                                                    </form>
-                                                </ul>
+                                    @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                                        <td class="tb-tnx-action">
+                                            <div class="dropdown">
+                                                <a class="text-soft dropdown-toggle btn btn-icon btn-trigger"
+                                                    data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
+                                                    <ul class="link-list-plain">
+                                                        <li><a href="{{ route('groups.edit', $item->id) }}">Edit</a></li>
+                                                        <form action="{{ route('groups.destroy', $item->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <li><a href="#"
+                                                                    data-confirm="Are you sure to delete this item?"
+                                                                    onclick="event.preventDefault();this.closest('form').submit();">Remove</a>
+                                                            </li>
+                                                        </form>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
                                     @endif
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    @if ($groups->hasPages())
+                        <div class="card-inner">
+                            <div class="nk-block-between-md g-3">
+                                <div class="g">
+                                    {{ $groups->links() }}
+                                </div>
+                            </div><!-- .nk-block-between -->
+                        </div><!-- .card-inner -->
+                    @endif
                 </div><!-- .card-inner -->
             </div><!-- .card-inner-group -->
         </div><!-- .card -->

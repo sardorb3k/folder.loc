@@ -26,9 +26,11 @@ class ExamsService implements ExamsServiceInterface
     {
         try {
             $crm_exam_pass = DB::select('SELECT exam_pass FROM settings WHERE id = 1')[0]->exam_pass;
-            $exams = DB::select("SELECT ex.id,gp.`name` AS group_id,ex.exam_type,ex.created_at,ex.`level`,(
-                        SELECT COUNT(*) FROM `exam_results` WHERE result >= $crm_exam_pass AND exam_id = ex.id) AS accepted,(
-                            SELECT COUNT(*) FROM `exam_results` WHERE result < $crm_exam_pass AND exam_id = ex.id) AS notaccepted FROM exams AS ex LEFT JOIN groups AS gp ON gp.id=ex.group_id");
+            $exams = $this->exams
+                ->leftJoin('groups', 'groups.id', '=', 'exams.group_id')
+                ->select(DB::raw('(SELECT COUNT(*) FROM exam_results WHERE result >= ' . $crm_exam_pass . ' AND exam_id = exams.id) AS accepted'), DB::raw('(SELECT COUNT(*) FROM exam_results WHERE result < ' . $crm_exam_pass . ' AND exam_id = exams.id) AS notaccepted'), 'exams.*')
+                ->latest('exams.created_at')
+                ->paginate(10);
             return $exams;
         } catch (\Exception $e) {
             return dd($e->getMessage());
