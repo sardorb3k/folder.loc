@@ -38,7 +38,6 @@ class StudentsService implements StudentsServiceInterface
      */
     public function getAllStudentsPaginated(int $perPage): LengthAwarePaginator
     {
-
         return $this->students
             ->leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
             ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')

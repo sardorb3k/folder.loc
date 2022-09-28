@@ -42,6 +42,10 @@ class GroupsService implements GroupsServiceInterface
                         'SELECT gi.id, gi.`name`,gi.lessonstarttime,lessonendtime, gi.days, gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
                     )
                 );
+                // $groups = Groups::leftJoin('users as teachers', 'teachers.id', '=', 'groups.teacher_id')
+                //     ->leftJoin('users as assistants', 'assistants.id', '=', 'groups.assistant_id')
+                //     ->select('groups.*', 'teachers.firstname as teacher_firstname', 'teachers.lastname as teacher_lastname', 'assistants.firstname as assistant_firstname', 'assistants.lastname as assistant_lastname')
+                //     ->latest('groups.created_at');
             } else {
                 $userid == Auth::user()->id;
                 if (Auth::user()->getRole() != 'teacher') {
