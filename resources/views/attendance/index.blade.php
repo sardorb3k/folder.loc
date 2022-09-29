@@ -12,91 +12,74 @@
         </div><!-- .nk-block-between -->
         @include('error')
     </div><!-- .nk-block-head -->
-    <div class="nk-block">
-        <div class="card card-bordered card-stretch">
-            <div class="card-inner-group">
-                <div class="card-inner">
-                    <div class="card-title-group">
-                        <div class="card-title">
-                            <h5 class="title">All Group</h5>
-                        </div>
-                    </div><!-- .card-title-group -->
-                </div><!-- .card-inner -->
-                <div class="card-inner p-0">
-                    <table class="table table-tranx">
-                        <thead>
-                            <tr class="tb-tnx-head">
-                                <th class="tb-tnx-id"><span class="">Name</span></th>
-                                <th class="tb-tnx-info">
-                                    <span class="tb-tnx-status d-none d-sm-inline-block">
-                                        <span>Teacher</span>
+    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+        <thead>
+            <tr class="nk-tb-item nk-tb-head">
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">#</span>
+                </th>
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Group</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Teacher</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Assistant</span>
+                </th>
+                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Days</span>
+                </th>
+                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Time</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($groups as $group)
+                <tr class="nk-tb-item odd">
+                    <td class="nk-tb-col nk-tb-col-check sorting_1">
+                        <span>{{ $loop->iteration }}</span>
+                    </td>
+                    <td class="nk-tb-col">
+                        <a href="{{ route('attendance.show_red', $group->id) }}">
+                            <span style="text-transform: capitalize;">{{ $group->level }}
+                                {{ $group->name }}</span>
+                        </a>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <div class="user-card">
+                            <div class="user-card">
+                                <div class="user-info">
+                                    <span class="tb-lead">{{ $group->teacher_firstname }}
                                     </span>
-                                    <span class="tb-tnx-status d-md-inline-block d-none">
-                                        <span class="d-none d-md-block">
-                                            <span>Assistant</span>
-                                        </span>
-                                    </span>
-                                </th>
-                                <th class="tb-tnx-amount is-alt">
-                                    <span class="tb-tnx-status d-none d-md-inline-block">Days</span>
-                                    <span class="tb-tnx-total">Lesson time</span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($groups as $item)
-                                <tr class="tb-tnx-item">
-                                    <td class="tb-tnx-id">
-                                        <a
-                                            href="{{ route('attendance.show_red', $item->id) }}">
-                                            <span style="text-transform: capitalize;">{{ $item->level }} {{ $item->name }}</span>
-                                        </a>
-                                    </td>
-                                    <td class="tb-tnx-info">
-                                        <div class="tb-tnx-status">
-                                            <span class="title">
-                                                {{ $item->teacher_firstname }}
-                                            </span>
-                                        </div>
-                                        <div class="tb-tnx-status">
-                                            <span class="title">
-                                                {{ $item->assistant_firstname }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="tb-tnx-amount is-alt">
-                                        <div class="tb-tnx-status">
-                                            <span class="badge"  style="text-transform: capitalize;">{{ $item->days }}</span>
-                                        </div>
-                                        <div class="tb-tnx-total">
-                                            <span class="badge">{{ $item->lessonstarttime }}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @if ($groups->hasPages())
-                        <div class="card-inner">
-                            <div class="nk-block-between-md g-3">
-                                <div class="g">
-                                    {{ $groups->links() }}
+                                    <span>{{ $group->teacher_lastname }}</span>
                                 </div>
-                            </div><!-- .nk-block-between -->
-                        </div><!-- .card-inner -->
-                    @endif
-                </div><!-- .card-inner -->
-            </div><!-- .card-inner-group -->
-        </div><!-- .card -->
-    </div><!-- .nk-block -->
-    <script>
-        $('.delete').on("click", function(e) {
-            e.preventDefault();
-
-            var choice = confirm($(this).attr('data-confirm'));
-
-            if (choice) {
-                document.getElementById('form-service').submit();
-            }
-        });
-    </script>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <div class="user-card">
+                            <div class="user-card">
+                                <div class="user-info">
+                                    <span class="tb-lead">{{ $group->assistant_firstname }}
+                                    </span>
+                                    <span>{{ $group->assistant_lastname }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span class="badge" style="text-transform: capitalize;">
+                            {{ $group->days }}
+                        </span>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span class="badge">{{ $group->lessonstarttime }}</span>
+                        <span class="badge">{{ $group->lessonendtime }}</span>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection

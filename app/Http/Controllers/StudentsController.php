@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateStudentsRequest;
 use App\Http\Requests\StoreStudentsRequest;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use DataTables;
 
 class StudentsController extends Controller
 {
@@ -26,7 +27,7 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         /**
          * Index Students method. Get all students.

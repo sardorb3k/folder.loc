@@ -1,4 +1,12 @@
-
 /* Form input validation */
-.valid-form { color: #f44336 !important; }
+.valid-form {
+    color: #f44336 !important;
+}
 
+.no-focus-outline {
+    outline: 0;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

@@ -35,114 +35,118 @@
     </div><!-- .nk-block-head -->
 
     @include('error')
-    <div class="nk-block">
-        <div class="card card-bordered card-stretch">
-            <div class="card-inner-group">
-                <div class="card-inner position-relative card-tools-toggle">
-                </div><!-- .card-inner -->
-                <div class="card-inner p-0">
-                    <div class="nk-tb-list nk-tb-ulist">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Role</span></div>
-                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Birthday</span></div>
-                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></div>
-                            @if (Auth::user()->getRole() == 'superadmin')
-                            <div class="nk-tb-col nk-tb-col-tools text-right">
-                                <div class="dropdown">
-                                    <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
-                                        data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-plus"></em></a>
+    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+        <thead>
+            <tr class="nk-tb-item nk-tb-head">
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">#</span>
+                </th>
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Teacher</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Role</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Phone</span>
+                </th>
+                <th class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Birthday</span>
+                </th>
+                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Status</span>
+                </th>
+                @if (Auth::user()->getRole() == 'superadmin')
+                    <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"></th>
+                @endif
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($teachers as $teacher)
+                <tr class="nk-tb-item odd">
+                    <td class="nk-tb-col nk-tb-col-check sorting_1">
+                        <span>{{ $loop->iteration }}</span>
+                    </td>
+                    <td class="nk-tb-col">
+                        <div class="user-card">
+                            <a href="{{ route('students.show', $teacher->id) }}">
+                                <div class="user-card">
+                                    <div class="user-avatar" style="{{ $teacher->image ? '' : 'background: #798bff;'}}">
+                                        <img src="{{ $teacher->image ? asset('uploads/teacher/'.$teacher->image) : 'https://ui-avatars.com/api/?name='. $teacher->lastname . '+' . $teacher->firstname .'&background=random' }}"
+                                            alt="">
+                                    </div>
+                                    <div class="user-info">
+                                        <span class="tb-lead">{{ $teacher->firstname }}
+                                        </span>
+                                        <span>{{ $teacher->lastname }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            @endif
-                        </div><!-- .nk-tb-item -->
-                        @foreach ($teachers as $student_data)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col">
-                                    <a href="{{ route('teachers.show', $student_data->id) }}">
-                                        <div class="user-card">
-                                            <div class="user-avatar"
-                                                style="{{ $student_data->image ? '' : 'background: #798bff;' }}">
-                                                <img src="{{ $student_data->image ? asset('uploads/teacher/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="user-info">
-                                                <span
-                                                    class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
-                                                </span>
-                                                <span>+{{ $student_data->phone }}</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="nk-tb-col tb-col-xl">
-                                    <span style="text-transform: capitalize">{{ $student_data->role }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>{{ $student_data->birthday }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span
-                                        class="tb-status text-{{ $student_data->status == 'active' ? 'success' : 'info' }}">
-                                        @if ($student_data->status == 'active')
-                                            Active
-                                        @else
-                                            Inactive
-                                        @endif
-                                    </span>
-                                </div>
-                                @if (Auth::user()->getRole() == 'superadmin')
-                                <div class="nk-tb-col nk-tb-col-tools">
-                                    <ul class="nk-tb-actions gx-1">
-                                        <li>
-                                            <div class="drodown">
-                                                <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                    data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <ul class="link-list-opt no-bdr">
-                                                        <li><a href="{{ route('teachers.show', $student_data->id) }}"><em
-                                                                    class="icon ni ni-repeat"></em><span>Edit</span></a>
-                                                        </li>
-                                                        <li class="divider"></li>
-                                                        <form action="{{ route('teachers.destroy', $student_data->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="hidden" name="id"
-                                                                value="{{ $student_data->id }}">
-                                                            {{-- <li><a href="#"
-                                                                    onclick="event.preventDefault();
-                                                                this.closest('form').submit();"><em
-                                                                        class="icon ni ni-na"></em><span>Delete</span></a>
-                                                            </li> --}}
-                                                            <li><a onclick="deleteTeacher();"><em
-                                                                    class="icon ni ni-na"></em><span>Delete</span></a>
-                                                        </li>
-                                                        </form>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                @endif
-                            </div><!-- .nk-tb-item -->
-                        @endforeach
-                    </div><!-- .nk-tb-list -->
-                </div><!-- .card-inner -->
-                <div class="card-inner">
-                    <div class="nk-block-between-md g-3">
-                        <div class="g">
-                            {{ $teachers->links() }}
+                            </a>
                         </div>
-                    </div><!-- .nk-block-between -->
-                </div><!-- .card-inner -->
-            </div><!-- .card-inner-group -->
-        </div><!-- .card -->
-    </div><!-- .nk-block -->
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span style="text-transform: capitalize">{{ $teacher->role }}</span>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <input type="text" class="phone border-0 bg-transparent text-soft no-focus-outline cursor-pointer"  value="{{ $teacher->phone }}" onclick="window.location = 'tel:+{{ $teacher->phone }}'" readonly>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span>{{ $teacher->birthday }}</span>
+                    </td>
+                    <td class="nk-tb-col tb-col-md">
+                        <span
+                            class="tb-status text-{{ $teacher->status == 'active' ? 'success' : 'info' }}">
+                            @if ($teacher->status == 'active')
+                                Active
+                            @else
+                                Inactive
+                            @endif
+                        </span>
+                    </td>
+                    @if (Auth::user()->getRole() == 'superadmin')
+                        <td class="nk-tb-col nk-tb-col-tools">
+                            <ul class="nk-tb-actions gx-1">
+                                <li>
+                                    <div class="drodown">
+                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown" aria-expanded="true">
+                                            <em class="icon ni ni-more-h"></em>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end" style="">
+                                            <ul class="link-list-opt no-bdr">
+                                                <li><a href="{{ route('teachers.show', $teacher->id) }}"><em
+                                                    class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <form action="{{ route('teachers.destroy', $teacher->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="id"
+                                                        value="{{ $teacher->id }}">
+                                                    <li>
+                                                        <a onclick="deleteTeacher(this)">
+                                                            <em class="icon ni ni-na"></em><span>Delete</span>
+                                                        </a>
+                                                    </li>
+                                                </form>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </td>
+                    @endif
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
     <script>
-        function deleteTeacher() {
-            Swal.fire({
+        $(".phone").inputmask({
+            "mask": "+999 (99) 999-99-99"
+        });
+
+        async function deleteTeacher (element) {
+            const result = await Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
@@ -150,15 +154,10 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                }
-            })
+            });
+            if (result.isConfirmed) {
+                await element.closest('form').submit();
+            }
         }
     </script>
 @endsection

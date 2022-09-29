@@ -75,7 +75,7 @@ class GroupsService implements GroupsServiceInterface
                 ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                 ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
                 ->latest('groups.created_at')
-                ->paginate($perPage);
+                ->paginate();
         } else {
             $userid = Auth::user()->id;
             if (Auth::user()->getRole() != 'teacher') {
@@ -85,7 +85,7 @@ class GroupsService implements GroupsServiceInterface
                     ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
                     ->where('ut.id', $userid)
                     ->latest('groups.created_at')
-                    ->paginate($perPage);
+                    ->paginate();
             } else {
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
@@ -93,7 +93,7 @@ class GroupsService implements GroupsServiceInterface
                     ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
                     ->where('ua.id', $userid)
                     ->latest('groups.created_at')
-                    ->paginate($perPage);
+                    ->paginate();
             }
         }
         return $groups ?? [];

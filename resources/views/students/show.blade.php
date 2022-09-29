@@ -35,19 +35,12 @@
                             <div class="data-col data-col-end"><span class="data-more"><em
                                         class="icon ni ni-forward-ios"></em></span></div>
                         </div><!-- data-item -->
-                        {{-- <div class="data-item">
-                            <div class="data-col">
-                                <span class="data-label">Email</span>
-                                <span
-                                    class="data-value">{{ $student->email == null ? 'Not add yet' : $student->email }}</span>
-                            </div>
-                            <div class="data-col data-col-end"><span class="data-more"><em
-                                        class="icon ni ni-forward-ios"></em></span></div>
-                        </div><!-- data-item --> --}}
                         <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Phone Number</span>
-                                <span class="data-value text-soft">{{ $student->phone }}</span>
+                                <span class="data-value text-soft">
+                                    <input type="text" class="phone border-0 bg-transparent text-soft no-focus-outline cursor-pointer"  value="{{ $student->phone }}" readonly>
+                                </span>
                             </div>
                             <div class="data-col data-col-end"><span class="data-more disable"><em
                                         class="icon ni ni-lock-alt"></em></span></div>
@@ -145,7 +138,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="phone-no">Phone Number *</label>
-                                            <input type="tel" class="form-control form-control-lg" name="phone"
+                                            <input type="tel" class="phone form-control form-control-lg" name="phone"
                                                 id="phone-no" value="{{ $student->phone }}" placeholder="Phone Number">
                                         </div>
                                     </div>
@@ -455,8 +448,8 @@
 
 
     <script>
-        $("#phone-no").inputmask({
-            "mask": "998 (99) 999-99-99"
+        $(".phone").inputmask({
+            "mask": "+999 (99) 999 99 99"
         });
     </script>
 @endsection

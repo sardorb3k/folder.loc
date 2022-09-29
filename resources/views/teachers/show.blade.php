@@ -37,7 +37,9 @@
                         <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Phone Number</span>
-                                <span class="data-value text-soft">{{ $teacher->phone }}</span>
+                                <span class="data-value text-soft">
+                                    <input type="text" class="phone border-0 bg-transparent text-soft no-focus-outline cursor-pointer"  value="{{ $teacher->phone }}" readonly>
+                                </span>
                             </div>
                             <div class="data-col data-col-end"><span class="data-more disable"><em
                                         class="icon ni ni-lock-alt"></em></span></div>
@@ -172,7 +174,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="phone-no">Phone Number <span
                                                     class="valid-form">*</span></label>
-                                            <input type="phone" class="form-control form-control-lg" name="phone"
+                                            <input type="phone" class="phone form-control form-control-lg" name="phone"
                                                 id="phone" value="{{ $teacher->phone }}" placeholder="Phone Number">
                                         </div>
                                     </div>
@@ -284,8 +286,8 @@
     </div><!-- .modal -->
     @endif
     <script>
-        $("#phone").inputmask({
-            "mask": "998 (99) 999-99-99"
+        $(".phone").inputmask({
+            "mask": "+999 (99) 999-99-99"
         });
     </script>
 @endsection

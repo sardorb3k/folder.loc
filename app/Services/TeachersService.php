@@ -60,7 +60,7 @@ class TeachersService implements TeachersServiceInterface
     {
         return Teacher::where('role', 'teacher')->orWhere('role', 'assistant')
             ->latest()
-            ->paginate($perPage);
+            ->paginate();
     }
 
     /**

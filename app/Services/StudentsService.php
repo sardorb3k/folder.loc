@@ -38,13 +38,14 @@ class StudentsService implements StudentsServiceInterface
      */
     public function getAllStudentsPaginated(int $perPage): LengthAwarePaginator
     {
+
         return $this->students
             ->leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
             ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')
             ->where('users.role', 'student')
             ->select('groups.level as group_level', 'groups.name as group_name', 'users.*')
             ->latest('users.created_at')
-            ->paginate($perPage);
+            ->paginate();
     }
 
     public function getCountStudents(): int
@@ -104,7 +105,7 @@ class StudentsService implements StudentsServiceInterface
         $student->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'phone' => str_replace(["(", ")", "-", " "], "", $request->phone),
+            'phone' => str_replace(["(", ")", "-", " ", "+"], "", $request->phone),
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'homeaddress' => $request->homeaddress,
@@ -152,7 +153,7 @@ class StudentsService implements StudentsServiceInterface
         /**
          *  Validate request
          */
-        $request['phone'] = '998' . str_replace(["(", ")", "-", " "], "", $request->phone);
+        $request['phone'] = '998' . str_replace(["(", ")", "-", " ", "+"], "", $request->phone);
         $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',

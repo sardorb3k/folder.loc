@@ -68,7 +68,7 @@
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-mail"></em>
                                     </div>
-                                    <input type="text" class="form-control" id="fv-email" name="email">
+                                    <input type="email" class="form-control" id="fv-email" name="email" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                                     </div>
                                     <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false" 
                                         tabindex="4" value="{{ old('birthday') }}" data-date-format="yyyy-mm-dd"
-                                        required>
+                                        required  autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                                     </a>
                                     <input type="password" name="password" class="form-control form-control-lg"
                                         value="{{ old('password') }}" tabindex="5" id="password" required
-                                        autocomplete="current-password">
+                                        autocomplete="current-password"  autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                                     <input type="password" name="password_confirmation"
                                         value="{{ old('password_confirmation') }}" class="form-control form-control-lg"
                                         id="password_confirmation" required tabindex="6"
-                                        autocomplete="current-password">
+                                        autocomplete="current-password"  autocomplete="off">
                                 </div>
                             </div>
                         </div>
