@@ -31,7 +31,7 @@ class SalaryService implements SalaryServiceInterface
             ->where('groups.teacher_id', $id)
             ->orWhere('groups.assistant_id', $id)
             ->latest('groups.created_at')
-            ->paginate(10);
+            ->get();
     }
     public function getStudent($id, $date, $teacher_id)
     {

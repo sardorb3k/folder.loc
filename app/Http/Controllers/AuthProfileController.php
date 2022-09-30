@@ -68,8 +68,6 @@ class AuthProfileController extends Controller
     {
         $user_id = Auth::user()->id;
         $user = User::where('id', $user_id)->first();
-        // $data_sessions = count(Sessions::where('user_id', $user_id)->get());
-        // $sessions = Sessions::where('user_id', $user_id)->orderBy('last_activity')->paginate(15);
         return view('profile.show', compact('user'));
     }
 }

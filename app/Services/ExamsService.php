@@ -30,7 +30,7 @@ class ExamsService implements ExamsServiceInterface
                 ->leftJoin('groups', 'groups.id', '=', 'exams.group_id')
                 ->select(DB::raw('(SELECT COUNT(*) FROM exam_results WHERE result >= ' . $crm_exam_pass . ' AND exam_id = exams.id) AS accepted'), DB::raw('(SELECT COUNT(*) FROM exam_results WHERE result < ' . $crm_exam_pass . ' AND exam_id = exams.id) AS notaccepted'), 'exams.*')
                 ->latest('exams.created_at')
-                ->paginate(10);
+                ->get();
             return $exams;
         } catch (\Exception $e) {
             return dd($e->getMessage());

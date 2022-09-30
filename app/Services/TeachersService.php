@@ -56,11 +56,11 @@ class TeachersService implements TeachersServiceInterface
      * @param int $perPage
      * @return \Illuminate\Http\Response
      */
-    public function getAllTeachersPaginated(int $perPage): LengthAwarePaginator
+    public function getAllTeachersPaginated(int $perPage)
     {
         return Teacher::where('role', 'teacher')->orWhere('role', 'assistant')
             ->latest()
-            ->paginate();
+            ->get();
     }
 
     /**

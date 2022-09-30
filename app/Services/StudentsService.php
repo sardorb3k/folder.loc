@@ -36,7 +36,7 @@ class StudentsService implements StudentsServiceInterface
      * @param int $perPage
      * @return \Illuminate\Http\Response
      */
-    public function getAllStudentsPaginated(int $perPage): LengthAwarePaginator
+    public function getAllStudentsPaginated(int $perPage)
     {
 
         return $this->students
@@ -45,7 +45,7 @@ class StudentsService implements StudentsServiceInterface
             ->where('users.role', 'student')
             ->select('groups.level as group_level', 'groups.name as group_name', 'users.*')
             ->latest('users.created_at')
-            ->paginate();
+            ->get();
     }
 
     public function getCountStudents(): int

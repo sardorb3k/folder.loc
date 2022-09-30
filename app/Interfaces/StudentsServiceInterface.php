@@ -1,14 +1,19 @@
 <?php
+
 namespace App\Interfaces;
+
 /**
  * Students Service Interface
  */
+
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Student;
-interface StudentsServiceInterface {
+
+interface StudentsServiceInterface
+{
     /**
      * Get all students.
      *
@@ -21,7 +26,7 @@ interface StudentsServiceInterface {
      * @return \Illuminate\Http\Response
      */
     public function getCountStudents(): int;
-    public function getAllStudentsPaginated(int $perPage): LengthAwarePaginator;
+    public function getAllStudentsPaginated(int $perPage);
     /**
      * Get student by id.
      *
