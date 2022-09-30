@@ -28,43 +28,56 @@
                         </div>
                     </div>
                 </div><!-- .nk-block-head -->
-                <div class="nk-block card card-bordered">
-                    <table class="table table-ulogs">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="tb-col-os"><span class="overline-title">Group</span></th>
-                                <th class="tb-col-ip"><span class="overline-title">Teacher</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Assistant</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Days</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Time</span></th>
-                                <th class="tb-col-action"><span class="overline-title">&nbsp;</span></th>
+                <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr class="nk-tb-item nk-tb-head">
+                            <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">#</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Group</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Teacher</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Assistant</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Days</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Time</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($groups as $group)
+                            <tr class="nk-tb-item odd">
+                                <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                    <span>{{ $loop->iteration }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-mb">
+                                    <a href="{{ route('groups.show', $group->id ?? '0') }}" class="text-capitalize">
+                                        {{ $group->LEVEL }} {{ $group->name }}
+                                    </a>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span>{{ $group->teacher_fullname }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span>{{ $group->assistant_fullname }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span class="badge text-capitalize">{{ $group->days }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span class="badge text-capitalize">{{ $group->lessonstarttime }}</span>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($groups as $item)
-                                <tr>
-                                    <td class="tb-col-os">
-                                        <a href="{{ route('groups.show', $item->id ?? '0') }}" style="text-transform: capitalize;">
-                                            {{ $item->LEVEL }} {{ $item->name }}
-                                        </a>
-                                    </td>
-                                    <td class="tb-col-ip"><span class="sub-text">{{ $item->teacher_fullname }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_fullname }}</span>
-                                    </td>
-                                    <td class="tb-col-time"><span class="sub-text"style="text-transform: capitalize;">{{ $item->days }}</span></td>
-                                    <td class="tb-col-time">
-                                        <span class="sub-text">
-                                            <div class="tb-tnx-status">
-                                                <span class="badge"  style="text-transform: capitalize;">{{ $item->lessonstarttime }}</span>
-                                            </div>
-                                        </span>
-                                    </td>
-                                    <td class="tb-col-action"></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div><!-- .nk-block-head -->
+                        @endforeach
+                    </tbody>
+                </table>
             </div><!-- .card-inner -->
         </div><!-- .card -->
     </div><!-- .nk-block -->

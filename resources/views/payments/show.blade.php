@@ -182,16 +182,6 @@
             minViewMode: "months"
         });
 
-        $('.delete').on("click", function(e) {
-            e.preventDefault();
-
-            var choice = confirm($(this).attr('data-confirm'));
-
-            if (choice) {
-                document.getElementById('form-service').submit();
-            }
-        });
-
         const submitPaymentForm = () => {  
             $('#paymentError').hide();
             var readyToSubmit = true;
@@ -211,7 +201,6 @@
             if(readyToSubmit) {
                 $('#paymentForm').submit();
             }
-          
         }
 
         function addnull(y, m, d) {

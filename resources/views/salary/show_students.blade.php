@@ -37,43 +37,43 @@
                             <div class="nk-tb-col tb-col-xl"><span class="sub-text">Payment</span></div>
                             <div class="nk-tb-col tb-col-mb"><span class="sub-text">Amount</span></div>
                         </div><!-- .nk-tb-item -->
-                        @foreach ($students as $data_student)
+                        @foreach ($students as $student_data)
                             <div class="nk-tb-item">
                                 <div class="nk-tb-col">
-                                    <a href="{{ route('students.show', $data_student->id) }}">
+                                    <a href="{{ route('students.show', $student_data->id) }}">
                                         <div class="user-card">
                                             <div class="user-avatar"
-                                                style="{{ $data_student->image ? '' : 'background: #798bff;' }}">
-                                                <img src="{{ $data_student->image ? asset('uploads/student/' . $data_student->image) : 'https://ui-avatars.com/api/?name=' . $data_student->lastname . '+' . $data_student->firstname . '&background=random' }}"
+                                                style="{{ $student_data->image ? '' : 'background: #798bff;' }}">
+                                                <img src="{{ $student_data->image ? asset('uploads/student/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
                                                     alt="">
                                             </div>
                                             <div class="user-info">
                                                 <span
-                                                    class="tb-lead">{{ $data_student->lastname . ' ' . $data_student->firstname }}
+                                                    class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
                                                 </span>
-                                                <span>{{ $data_student->phone }}</span>
+                                                <span>{{ $student_data->phone }}</span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="nk-tb-col tb-col-xl">
                                     <span>
-                                        <span class="badge badge-outline-primary">{{ $data_student->att_ap }}</span> /
+                                        <span class="badge badge-outline-primary">{{ $student_data->att_ap }}</span> /
                                         <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span></span>
                                 </div>
                                 <div class="nk-tb-col tb-col-xl">
                                     <span>
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="payment"
-                                                value="{{ number_format($data_student->payment) }}" disabled>
+                                                value="{{ number_format($student_data->payment) }}" disabled>
                                         </div>
                                     </span>
                                 </div>
                                 <div class="nk-tb-col tb-col-mb">
                                     <span>
                                         <div class="form-control-wrap">
-                                            <input type="text" name="amount[{{ $data_student->id }}]" id="amount" 
-                                                value="{{ $data_student->amount }}" class="form-control">
+                                            <input type="text" name="amount[{{ $student_data->id }}]" id="amount" 
+                                                value="{{ $student_data->amount }}" class="form-control payment-amount" autocomplete="off">
                                         </div>
                                     </span>
                                 </div>
@@ -99,20 +99,7 @@
         </div><!-- .card -->
     </div><!-- .nk-block -->
     <script>
-        $('.delete').on("click", function(e) {
-            e.preventDefault();
-
-            var choice = confirm($(this).attr('data-confirm'));
-
-            if (choice) {
-                document.getElementById('form-service').submit();
-            }
-        });
-        // $('#payment').on('change', function() {
-        //     var payment = $(this).val();
-        //     var usFormat = payment.toLocaleString('en-US');
-        //     $('#total').val(usFormat);
-        // });
+         new AutoNumeric.multiple('.payment-amount', {decimalPlaces: 0, minimumValue: 0});
         // Payment Format Number
         $('#payment').on('keyup', function() {
             var payment = $(this).val();

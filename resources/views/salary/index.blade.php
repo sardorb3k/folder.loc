@@ -58,126 +58,72 @@
                     <form action="{{ route('salary.storeSalaryList', $date) }}" class="form-validate"
                         novalidate="novalidate" method="post">
                         @csrf
-                    @else
-                        <form action="{{ route('salary.updateSalaryList', $date) }}" class="form-validate"
-                            novalidate="novalidate" method="POST">
-                            @csrf
-                            @method('PUT')
+                @else
+                    <form action="{{ route('salary.updateSalaryList', $date) }}" class="form-validate"
+                        novalidate="novalidate" method="POST">
+                        @csrf
+                        @method('PUT')
                 @endif
-                <div class="card-inner p-0">
-                    <table class="table table-tranx">
+                <div class="card-inner p-10">
+                    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                         <thead>
-                            <tr class="tb-tnx-head">
-                                <th class="tb-tnx-id"><span class="">Teacher Name</span></th>
-                                {{-- <th class="tb-tnx-info">
-                                    <span class="tb-tnx-status d-none d-sm-inline-block">
-                                        <span>Groups count</span>
-                                    </span>
-                                </th> --}}
-                                <th class="tb-tnx-info">
-                                    <span class="tb-tnx-status d-none d-sm-inline-block">
-                                        <span>Students count</span>
-                                    </span>
-                                    <span class="tb-tnx-status d-md-inline-block d-none">
-                                        <span class="d-none d-md-block">
-                                            <span>Salary</span>
-                                        </span>
-                                    </span>
+                            <tr class="nk-tb-item nk-tb-head">
+                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">#</span>
                                 </th>
-                                <th class="tb-tnx-amount is-alt">
-                                    <span class="tb-tnx-total">Action</span>
+                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Teacher</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Students #</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Total Salary</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb text-end sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Total Paid</span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($teachers as $item)
-                                @if (Auth::user()->getRole() == 'superadmin')
-                                <tr class="tb-tnx-item">
-                                    <td class="tb-tnx-id">
-                                        <a href="{{ route('salary.show', ['date' => $date, 'id' => $item->id]) }}"><span>{{ $item->firstname }}
-                                                {{ $item->lastname }}</span></a>
+                            @foreach ($teachers as $teacher)
+                                <tr class="nk-tb-item odd">
+                                    <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                        <span>{{ $loop->iteration }}</span>
                                     </td>
-                                    {{-- <td class="tb-tnx-info">
-                                        <div class="tb-tnx-status">
-                                            <span class="title">
-                                                {{ $item->group_count }}
-                                            </span>
-                                        </div>
-                                    </td> --}}
-                                    <td class="tb-tnx-info">
-                                        <div class="tb-tnx-status">
-                                            <span class="title">
-                                                {{ $item->students_count }}
-                                            </span>
-                                        </div>
-                                        <div class="tb-tnx-status">
-                                            <span
-                                                class="title">{{ $item->role == 'teacher' ? $item->salary : $item->salary_assistent }}</span>
-                                        </div>
+                                    <td class="nk-tb-col tb-col-lg">
+                                        <a href="{{ route('salary.show', ['date' => $date, 'id' => $teacher->id]) }}">
+                                            <span>{{ $teacher->firstname }}  {{ $teacher->lastname }}</span>
+                                        </a>
                                     </td>
-                                    <td class="tb-tnx-amount is-alt">
-                                        <div class="tb-tnx-total">
-                                            <input type="number" pattern="/^-?\d+\.?\d*$/"
-                                                value="{{ $item->salary_action }}" class="form-control"
-                                                name="salary[{{ $item->id }}]">
-                                        </div>
+                                    <td class="nk-tb-col tb-col-mb">
+                                        <span>  {{ $teacher->students_count }} </span>
+                                    </td>
+                                    <td class="nk-tb-col tb-col-mb">
+                                        <input type="text" class="payment-amount border-0 bg-transparent text-soft no-focus-outline"  value="{{ $teacher->role == 'teacher' ? $teacher->salary : $teacher->salary_assistent }}" readonly>
+                                    </td>
+                                    <td class="nk-tb-col tb-col-lg nk-tb-col-tools">
+                                        <input value="{{ $teacher->salary_action }}" class="form-control payment-amount"
+                                            @disabled(Auth::user()->getRole() != 'superadmin')
+                                            name="salary[{{ $teacher->id }}]" autocomplete="off">
                                     </td>
                                 </tr>
-                                @else
-                                @if (Auth::user()->id == $item->id)
-                                <tr class="tb-tnx-item">
-                                    <td class="tb-tnx-id">
-                                        <a href="{{ route('salary.show', ['date' => $date, 'id' => $item->id]) }}"><span>{{ $item->firstname }}
-                                                {{ $item->lastname }}</span></a>
-                                    </td>
-                                    {{-- <td class="tb-tnx-info">
-                                        <div class="tb-tnx-status">
-                                            <span class="title">
-                                                {{ $item->group_count }}
-                                            </span>
-                                        </div>
-                                    </td> --}}
-                                    <td class="tb-tnx-info">
-                                        <div class="tb-tnx-status">
-                                            <span class="title">
-                                                {{ $item->students_count }}
-                                            </span>
-                                        </div>
-                                        <div class="tb-tnx-status">
-                                            <span
-                                                class="title">{{ $item->role == 'teacher' ? $item->salary : $item->salary_assistent }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="tb-tnx-amount is-alt">
-                                        <div class="tb-tnx-total">
-                                            <input type="number" pattern="/^-?\d+\.?\d*$/"
-                                                value="{{ $item->salary_action }}" class="form-control"
-                                                @disabled(Auth::user()->getRole() != 'superadmin')
-                                                name="salary[{{ $item->id }}]">
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-
-                                @endif
-                                @endif
                             @endforeach
                         </tbody>
                     </table>
                 </div><!-- .card-inner -->
                 @if (Auth::user()->getRole() == 'superadmin')
-                <div class="card-inner">
-                    <div class="nk-block-between-md g-3">
-                        <div class="g">
-                            <input name="salarydate" type="hidden" value="{{ $date }}">
-                            <div class="form-group">
-                                <a href="#" class="btn btn-secondary"
-                                    onclick="event.preventDefault();this.closest('form').submit();">Save</a>
+                    <div class="card-inner">
+                        <div class="nk-block-between-md g-3">
+                            <div class="g">
+                                <input name="salarydate" type="hidden" value="{{ $date }}">
+                                <div class="form-group">
+                                    <a href="#" class="btn btn-secondary"
+                                        onclick="event.preventDefault();this.closest('form').submit();">Save</a>
+                                </div>
                             </div>
-                        </div>
-                    </div><!-- .nk-block-between -->
-                </div>
+                        </div><!-- .nk-block-between -->
+                    </div>
                 @endif
                 </form>
             </div><!-- .card-inner-group -->
@@ -190,14 +136,7 @@
             viewMode: "months",
             minViewMode: "months"
         });
-        $('.delete').on("click", function(e) {
-            e.preventDefault();
 
-            var choice = confirm($(this).attr('data-confirm'));
-
-            if (choice) {
-                document.getElementById('form-service').submit();
-            }
-        });
+        new AutoNumeric.multiple('.payment-amount', {decimalPlaces: 0, minimumValue: 0});
     </script>
 @endsection

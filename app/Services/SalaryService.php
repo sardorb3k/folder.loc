@@ -52,28 +52,28 @@ class SalaryService implements SalaryServiceInterface
            att_ap,
             (
                 SELECT amount
-FROM
-payments
-WHERE
-student_id = us.id AND group_id = gp_s.group_id and MONTH(payment_start) = :payM AND YEAR(payment_start) = :payY ) AS
-           payment,
-            (
-                SELECT amount
-FROM
-salary_students
-WHERE
-student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM AND YEAR(salarydate) = :amountY and teacher_id = :teacher_id ) AS
-    amount,
+                FROM
+                payments
+                WHERE
+                student_id = us.id AND group_id = gp_s.group_id and MONTH(payment_start) = :payM AND YEAR(payment_start) = :payY ) AS
+                        payment,
+                            (
+                                SELECT amount
+                FROM
+                salary_students
+                WHERE
+                student_id = us.id AND group_id = gp_s.group_id and MONTH(salarydate) = :amountM AND YEAR(salarydate) = :amountY and teacher_id = :teacher_id ) AS
+                    amount,
 
             (
-           SELECT COUNT(*) AS count
-           FROM attendance
-           WHERE student_id = us.id AND mark = 0 and MONTH(attendance_date) = :mon2 AND YEAR(attendance_date) = :yo2) AS att_attended
-           FROM
-           group_students AS gp_s
-           LEFT JOIN users AS us ON us.id = gp_s.student_id
-           WHERE
-           group_id = :id"),
+            SELECT COUNT(*) AS count
+            FROM attendance
+            WHERE student_id = us.id AND mark = 0 and MONTH(attendance_date) = :mon2 AND YEAR(attendance_date) = :yo2) AS att_attended
+            FROM
+            group_students AS gp_s
+            LEFT JOIN users AS us ON us.id = gp_s.student_id
+            WHERE
+            group_id = :id"),
             [
                 'id' => $id,
                 'mon' => $date_all[1],

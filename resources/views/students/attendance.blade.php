@@ -29,26 +29,38 @@
                         </div>
                     </div>
                 </div><!-- .nk-block-head -->
-                <div class="nk-block card card-bordered">
-                    <table class="table table-ulogs">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="tb-col-os"><span class="overline-title">Group Name</span></th>
-                                <th class="tb-col-os"><span class="overline-title">Level</span></th>
-                                <th class="tb-col-ip"><span class="overline-title">Date</span></th>
+                <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr class="nk-tb-item nk-tb-head">
+                            <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">#</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Group</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Date</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($attendance as $atten)
+                            <tr class="nk-tb-item odd" style="{{ $atten->mark == 0 ? 'background:antiquewhite' : '' }}">
+                                <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                    <span>{{ $loop->iteration }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-mb">
+                                    <span class="text-capitalize">
+                                        {{  $atten->level . ' ' . $atten->name }} 
+                                    </span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span>{{ $atten->attendance_date }}</span>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($attendance as $item)
-                                <tr style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
-                                    <td class="tb-col-os">{{ $item->name }}</td>
-                                    <td class="tb-col-os">{{ $item->level }}</td>
-                                    <td class="tb-col-ip"><span class="sub-text">{{ $item->attendance_date }}</span></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div><!-- .nk-block-head -->
+                        @endforeach
+                    </tbody>
+                </table>
             </div><!-- .card-inner -->
         </div><!-- .card -->
     </div><!-- .nk-block -->

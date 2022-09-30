@@ -61,7 +61,7 @@
                     </td>
                     <td class="nk-tb-col">
                         <a href="{{ route('groups.show', $group->id) }}">
-                            <span style="text-transform: capitalize;">{{ $group->level }}
+                            <span class="text-capitalize">{{ $group->level }}
                                 {{ $group->name }}</span>
                         </a>
                     </td>
@@ -88,12 +88,10 @@
                         </div>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span style="text-transform: capitalize;">
-                           11
-                        </span>
+                        <span> 11 </span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span class="badge" style="text-transform: capitalize;">
+                        <span class="badge text-capitalize">
                             {{ $group->days }}
                         </span>
                     </td>

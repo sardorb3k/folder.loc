@@ -24,32 +24,69 @@
                         </div>
                     </div>
                 </div><!-- .nk-block-head -->
-                <div class="nk-block card card-bordered">
-                    <table class="table table-ulogs">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="tb-col-os"><span class="overline-title">Group Name</span></th>
-                                <th class="tb-col-ip"><span class="overline-title">Teacher</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Assistant</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Level</span></th>
-                                <th class="tb-col-time"><span class="overline-title">Result</span></th>
-                                <th class="tb-col-action"><span class="overline-title">&nbsp;</span></th>
+                <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr class="nk-tb-item nk-tb-head">
+                            <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">#</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Group</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Teacher</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Assistant</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Result</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Date</span>
+                            </th>
+                            <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <span class="sub-text">Action</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($exams as $exam)
+                            <tr class="nk-tb-item odd">
+                                <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                    <span>{{ $loop->iteration }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-mb">
+                                    <span class="text-capitalize">
+                                        {{  $exam->level . ' ' . $exam->name }} 
+                                    </span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span>{{ $exam->teacher_id }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span>{{ $exam->assistant_id }}</span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span class="badge">
+                                        {{ $exam->result }}
+                                    </span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span>
+                                        {{date('d-m-Y', strtotime($exam->created_at));}}
+                                    </span>
+                                </td>
+                                <td class="nk-tb-col tb-col-lg">
+                                    <span>
+                                        <a href="{{ route('exams.show', $exam->group_id) }}"><em
+                                            class="icon ni ni-info-i"></em><span>Check</span></a>
+                                    </span>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($exams as $item)
-                                <tr>
-                                    <td class="tb-col-os">{{ $item->name }}</td>
-                                    <td class="tb-col-ip"><span class="sub-text">{{ $item->teacher_id }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ $item->assistant_id }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{ $item->level }}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text"><a href="{{ route('exams.show', $item->group_id) }}">{{ $item->result }}</a></span></td>
-                                    <td class="tb-col-action"></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div><!-- .nk-block-head -->
+                        @endforeach
+                    </tbody>
+                </table>
             </div><!-- .card-inner -->
         </div><!-- .card -->
     </div><!-- .nk-block -->

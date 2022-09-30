@@ -50,7 +50,7 @@ class SalaryRepository implements SalaryRepositoryInterface
             $salary->student_id = $key;
             $salary->group_id = $request->group_id;
             $salary->teacher_id = $request->teacher_id;
-            $salary->amount = $value;
+            $salary->amount = (int) str_replace(',', '', $value);
             $salary->salarydate = $request->salarydate . '-01';
             $salary->save();
         }
@@ -59,12 +59,25 @@ class SalaryRepository implements SalaryRepositoryInterface
     // Update Salary List
     public function updateSalaryList(Request $request, $date)
     {
-        foreach ($request->salary as $key => $value) {
-            $salary = Salary::where('teacher_id', $key)->where('salarydate', $date . '-01')->first();
-            $salary->salary = $value ?? 0;
-            $salary->save();
+        if (count(array_filter($request->salary, 'is_null')) == count($request->salary)) {
+            return redirect()->route('salary.index', ['date' => $request->salarydate])->with('success', 'O\'zgarish yo\'q.');
         }
-        return redirect()->route('salary.index', ['date' => $request->salarydate]);
+        foreach ($request->salary as $key => $value) {
+            if ($value != null) {
+                $salary = Salary::where('teacher_id', $key)->where('salarydate', $date . '-01')->first();
+                if ($salary) {
+                    $salary->salary = (int) str_replace(',', '', $value);
+                    $salary->save();
+                } else {
+                    $salary = new Salary();
+                    $salary->salary = (int) str_replace(',', '', $value);
+                    $salary->teacher_id = $key;
+                    $salary->salarydate = $request->salarydate . '-01';
+                    $salary->save();
+                }
+            }
+        }
+        return redirect()->route('salary.index', ['date' => $request->salarydate])->with('success', 'Oyliklar saqlandi.');
     }
     // Salary list save
     public function storeSalaryList(Request $request)
@@ -77,7 +90,7 @@ class SalaryRepository implements SalaryRepositoryInterface
         ]);
         foreach ($request->salary as $key => $value) {
             $salary = new Salary();
-            $salary->salary = $value ?? 0;
+            $salary->salary = (int) str_replace(',', '', $value) ?? 0;
             $salary->teacher_id = $key;
             $salary->salarydate = $request->salarydate . '-01';
             $salary->save();
@@ -118,7 +131,7 @@ class SalaryRepository implements SalaryRepositoryInterface
     {
         foreach ($request->amount as $key => $value) {
             $salary = SalaryStudents::where('student_id', $key)->where('salarydate', $request->salarydate . '-01')->where('group_id', $request->group_id)->where('teacher_id', $request->teacher_id)->first();
-            $salary->amount = $value;
+            $salary->amount = (int) str_replace(',', '', $value);
             $salary->save();
         }
         return redirect()->route('salary.index', ['date' => $request->salarydate]);

@@ -91,7 +91,6 @@
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
-
     <!-- Modal Content Code -->
     <div class="modal fade" tabindex="-1" id="exam-anw">
         <div class="modal-dialog" role="document">
@@ -108,7 +107,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="listening">Listening</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[listening]" class="form-control" id="listening" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[listening]" class="form-control exam-result-input" id="listening" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +115,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="reading">Reading</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[reading]" class="form-control" id="reading" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[reading]" class="form-control exam-result-input" id="reading" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +123,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="writing">Writing</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[writing]" class="form-control" id="writing" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[writing]" class="form-control exam-result-input" id="writing" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +131,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="speaking">Speaking</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[speaking]" class="form-control" id="speaking" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[speaking]" class="form-control exam-result-input" id="speaking" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +139,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="grammar">Grammar</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[grammar]" class="form-control" id="grammar" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input" id="grammar" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +147,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="team">Team</label>
                                 <div class="form-control-wrap">
-                                    <input type="number" name="exam[team]" class="form-control" id="team" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[team]" class="form-control exam-result-input" id="team" @disabled(Auth::user()->getRole() != 'superadmin')>
                                 </div>
                             </div>
                         </div>
@@ -168,15 +167,8 @@
     </div>
     
     <script>
-        $('.delete').on("click", function(e) {
-            e.preventDefault();
+        new AutoNumeric.multiple('.exam-result-input', {decimalPlaces: 0, minimumValue: 0, maximumValue: 100});
 
-            var choice = confirm($(this).attr('data-confirm'));
-
-            if (choice) {
-                document.getElementById('form-service').submit();
-            }
-        });
         $('body').on('click', '#edit-button', function() {
             var link_id = $(this).val();
             var link_id = link_id.split('-');
@@ -211,42 +203,42 @@
         });
 
         @if (Auth::user()->role == 'superadmin')
-        $("#exam-save").click(function(e) {
-            e.preventDefault();
-            // Backend Validation
-            var listening = $('#listening').val();
-            var reading = $('#reading').val();
-            var writing = $('#writing').val();
-            var speaking = $('#speaking').val();
-            var grammar = $('#grammar').val();
-            var team = $('#team').val();
-            var student_id = $('#student_id').val();
-            var exam_id = $('#exam_id').val();
-            var result = $('#result').text();
-            $.ajax({
-                url: "/exams/" + exam_id + "/" + student_id + "/getExamId",
-                type: "POST",
-                data: {
-                    mark: {
-                        listening: listening == '' ? 0 : listening,
-                        reading: reading == '' ? 0 : reading,
-                        writing: writing == '' ? 0 : writing,
-                        speaking: speaking == '' ? 0 : speaking,
-                        grammar: grammar == '' ? 0 : grammar,
-                        team: team == '' ? 0 : team,
+            $("#exam-save").click(function(e) {
+                e.preventDefault();
+                // Backend Validation
+                var listening = $('#listening').val();
+                var reading = $('#reading').val();
+                var writing = $('#writing').val();
+                var speaking = $('#speaking').val();
+                var grammar = $('#grammar').val();
+                var team = $('#team').val();
+                var student_id = $('#student_id').val();
+                var exam_id = $('#exam_id').val();
+                var result = $('#result').text();
+                $.ajax({
+                    url: "/exams/" + exam_id + "/" + student_id + "/getExamId",
+                    type: "POST",
+                    data: {
+                        mark: {
+                            listening: listening == '' ? 0 : listening,
+                            reading: reading == '' ? 0 : reading,
+                            writing: writing == '' ? 0 : writing,
+                            speaking: speaking == '' ? 0 : speaking,
+                            grammar: grammar == '' ? 0 : grammar,
+                            team: team == '' ? 0 : team,
+                        },
+                        result: result,
+                        student_id: student_id,
+                        exam_id: exam_id,
                     },
-                    result: result,
-                    student_id: student_id,
-                    exam_id: exam_id,
-                },
-                success: function(data) {
-                    $('#exam-anw').modal('hide');
-                    $('#result').text(0);
-                    // reset form
-                    window.location.reload();
-                }
+                    success: function(data) {
+                        $('#exam-anw').modal('hide');
+                        $('#result').text(0);
+                        // reset form
+                        window.location.reload();
+                    }
+                });
             });
-        });
         @endif
         $(".col-sm-4").on("input", function() {
             $("#result").text(resultExam());

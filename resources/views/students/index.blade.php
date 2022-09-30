@@ -79,7 +79,7 @@
                         </div>
                     </td>
                     <td class="nk-tb-col tb-col-mb">
-                        <span style="text-transform: capitalize;  @if(!$student_data->group_level) color: red; @endif">
+                        <span class="text-capitalize" style="@if(!$student_data->group_level) color: red; @endif">
                             {{ $student_data->group_level ? $student_data->group_level . ' ' . $student_data->group_name : 'No Group'}} 
                         </span>
                     </td>
@@ -108,7 +108,8 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" style="">
                                         <ul class="link-list-opt no-bdr">
-                                            <li><a href="{{ route('students.edit', $student_data->id) }}"><em
+                                            <li>
+                                                <a href="{{ route('students.edit', $student_data->id) }}"><em
                                                 class="icon ni ni-repeat"></em><span>Edit</span></a>
                                             </li>
                                             <li class="divider"></li>
