@@ -48,6 +48,9 @@
                 <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Time</span>
                 </th>
+                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Created Date</span>
+                </th>
                 @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                     <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"></th>
                 @endif
@@ -98,6 +101,9 @@
                     <td class="nk-tb-col tb-col-lg">
                         <span class="badge">{{ $group->lessonstarttime }}</span>
                         <span class="badge">{{ $group->lessonendtime }}</span>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span>{{ date_format($group->created_at, 'd-m-Y') }}</span>
                     </td>
                     @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                         <td class="nk-tb-col nk-tb-col-tools">

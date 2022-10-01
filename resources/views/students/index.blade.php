@@ -52,6 +52,9 @@
                 <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Status</span>
                 </th>
+                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Created Date</span>
+                </th>
                 <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"></th>
             </tr>
         </thead>
@@ -98,6 +101,9 @@
                                 Inactive
                             @endif
                         </span>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span>{{ date_format($student_data->created_at, 'd-m-Y') }}</span>
                     </td>
                     <td class="nk-tb-col nk-tb-col-tools">
                         <ul class="nk-tb-actions gx-1">
