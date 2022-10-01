@@ -121,11 +121,12 @@
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
                                         <select class="form-control" name="level" id="fv-level" required>
-                                            <option value="beginner" {{ 'beginner' == $group->level ? 'selected' : '' }}>Beginner</option>
-                                            <option value="elementary" {{ 'elementary' == $group->level ? 'selected' : '' }}>Elemantary</option>
-                                            <option value="pre-intermediate" {{ 'pre-intermediate' == $group->level ? 'selected' : '' }}>Pre-Intermediate</option>
-                                            <option value="intermediate" {{ 'intermediate' == $group->level ? 'selected' : '' }}>Intermediate</option>
-                                            <option value="upper-intermediate" {{ 'upper-intermediate' == $group->level ? 'selected' : '' }}>Upper-Intermediate</option>
+                                            <option value="freshman" {{ 'freshman' == $group->level ? 'selected' : '' }}>Freshman</option>
+                                            <option value="sophomore" {{ 'sophomore' == $group->level ? 'selected' : '' }}>Sophomore</option>
+                                            <option value="junior" {{ 'junior' == $group->level ? 'selected' : '' }}>Junior</option>
+                                            <option value="senior" {{ 'senior' == $group->level ? 'selected' : '' }}>Senior</option>
+                                            <option value="ielts-junior" {{ 'ielts-junior' == $group->level ? 'selected' : '' }}>IELTS Junior</option>
+                                            <option value="ielts-senior" {{ 'ielts-senior' == $group->level ? 'selected' : '' }}>IELTS Senior</option>
                                         </select>
                                     </div>
                                 </div>
