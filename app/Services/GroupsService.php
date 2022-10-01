@@ -73,7 +73,7 @@ class GroupsService implements GroupsServiceInterface
             $groups = $this->groups
                 ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                 ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
                 ->latest('groups.created_at')
                 ->get();
         } else {
@@ -82,7 +82,7 @@ class GroupsService implements GroupsServiceInterface
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                    ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
                     ->where('ut.id', $userid)
                     ->latest('groups.created_at')
                     ->get();
@@ -90,7 +90,7 @@ class GroupsService implements GroupsServiceInterface
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                    ->select('ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
                     ->where('ua.id', $userid)
                     ->latest('groups.created_at')
                     ->get();

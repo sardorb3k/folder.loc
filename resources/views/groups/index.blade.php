@@ -88,7 +88,7 @@
                         </div>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span> 11 </span>
+                        <span> {{$group->students_count}} </span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
                         <span class="badge text-capitalize">
