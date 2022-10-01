@@ -54,7 +54,7 @@ class SalaryRepository implements SalaryRepositoryInterface
             $salary->salarydate = $request->salarydate . '-01';
             $salary->save();
         }
-        return redirect()->route('salary.index', ['date' => $request->salarydate]);
+        return redirect()->back()->with('success', 'Oyliklar saqlandi.');
     }
     // Update Salary List
     public function updateSalaryList(Request $request, $date)
@@ -95,7 +95,7 @@ class SalaryRepository implements SalaryRepositoryInterface
             $salary->salarydate = $request->salarydate . '-01';
             $salary->save();
         }
-        return redirect()->route('salary.index', ['date' => $request->salarydate]);
+        return redirect()->route('salary.index', ['date' => $request->salarydate])->with('success', 'Oyliklar saqlandi.');
     }
     /**
      * Show
@@ -134,7 +134,7 @@ class SalaryRepository implements SalaryRepositoryInterface
             $salary->amount = (int) str_replace(',', '', $value);
             $salary->save();
         }
-        return redirect()->route('salary.index', ['date' => $request->salarydate]);
+        return redirect()->back()->with('success', 'Oyliklar saqlandi.');
     }
     /**
      * Destroy

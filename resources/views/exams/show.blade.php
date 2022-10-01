@@ -47,46 +47,59 @@
                     <h5 class="title">All Students</h5>
                     <p>Number of students in the group: <span class="badge badge-secondary">{{ $count }}</span></p>
                 </div><!-- .card-inner -->
-                <div class="card-inner p-0">
-                    <div class="nk-tb-list nk-tb-ulist">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
-                            <div class="nk-tb-col"><span class="sub-text">A/N</span></div>
-                        </div><!-- .nk-tb-item -->
-                        @foreach ($students as $data_student)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col">
-                                    <a href="{{ route('students.show', $data_student->id) }}">
+                <div class="card-inner p-10">
+                    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                        <thead>
+                            <tr class="nk-tb-item nk-tb-head">
+                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">#</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Student</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Birthday</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Result</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($students as $student)
+                                <tr class="nk-tb-item odd">
+                                    <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                        <span>{{ $loop->iteration }}</span>
+                                    </td>
+                                    <td class="nk-tb-col tb-col-mb">
                                         <div class="user-card">
-                                            <div class="user-avatar">
-                                                <img src="https://ui-avatars.com/api/?name={{ $data_student->firstname . '+' . $data_student->lastname }}&background=random"
-                                                    alt="">
-                                            </div>
-                                            <div class="user-info">
-                                                <span class="tb-lead">{{ $data_student->firstname }}
-                                                    {{ $data_student->lastname }}
-                                                </span>
-                                                <span>{{ $data_student->phone }}</span>
-                                            </div>
+                                            <a href="{{ route('students.show', $student->id) }}">
+                                                <div class="user-card">
+                                                    <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;'}}">
+                                                        <img src="{{ $student->image ? asset('uploads/student/'.$student->image) : 'https://ui-avatars.com/api/?name='. $student->lastname . '+' . $student->firstname .'&background=random' }}"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="user-info">
+                                                        <span class="tb-lead">{{ $student->firstname }}
+                                                        </span>
+                                                        <span>{{ $student->lastname }}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="nk-tb-col tb-col-xl">
-                                    <span>{{ $data_student->birthday }}</span>
-                                </div>
-                                <div class="nk-tb-col">
-                                    <li>
-                                        <div class="drodown">
-                                            <button class="btn btn-danger" id="edit-button"
-                                                value="{{ $data_student->id }}-{{ $exam->id }}" data-toggle="modal"
-                                                data-target="#exam-anw">{{ $data_student->result ? $data_student->result : '0' }}</button>
-                                        </div>
-                                    </li>
-                                </div>
-                            </div><!-- .nk-tb-item -->
-                        @endforeach
-                    </div><!-- .nk-tb-list -->
+                                    </td>
+                                    <td class="nk-tb-col tb-col-lg">
+                                        <span>{{ $student->birthday }}</span>
+                                    </td>
+                                    <td class="nk-tb-col tb-col-lg">
+                                        <button class="btn btn-danger" id="edit-button"
+                                        value="{{ $student->id }}-{{ $exam->id }}" data-toggle="modal"
+                                        data-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div><!-- .card-inner -->
             </div><!-- .card-inner-group -->
         </div><!-- .card -->

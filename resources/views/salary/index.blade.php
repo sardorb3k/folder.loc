@@ -7,9 +7,7 @@
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">Salary</h3>
-                <div class="nk-block-des text-soft">
-                    <p>You have a total of {{ $count }} teachers.</p>
-                </div>
+                <p></p>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
         @include('error')

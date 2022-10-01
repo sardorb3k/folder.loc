@@ -54,7 +54,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
          * Attendance Repository storeRepository
          */
         $this->attendanceService->storeAttendance($request);
-        return redirect()->route('attendance.index');
+        return redirect()->back()->with('success', 'Davomat saqlandi.');
     }
     public function updateAttendance(Request $attendance, int $id): RedirectResponse
     {
@@ -62,7 +62,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
          * Attendance Repository updateRepository
          */
         $this->attendanceService->updateAttendance($attendance, $id);
-        return redirect()->route('attendance.index');
+        return redirect()->back()->with('success', 'Davomat saqlandi.');
     }
 }
 

@@ -30,98 +30,85 @@
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
     @include('error')
-    <div class="nk-block">
-        <div class="card card-bordered card-stretch">
-            <div class="card-inner-group">
-                <div class="card-inner position-relative card-tools-toggle">
-                    <h5 class="title">All Student</h5>
-                </div><!-- .card-inner -->
-                <div class="card-inner p-0">
-                    <div class="nk-tb-list nk-tb-ulist">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span class="sub-text">User</span></div>
-                            {{-- <div class="nk-tb-col tb-col-xl"><span class="sub-text">Exam</span></div> --}}
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">Birthday</span></div>
-                            <div class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></div>
-                            @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
-                                <div class="nk-tb-col nk-tb-col-tools text-right">
-                                    <div class="dropdown">
-                                        <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
-                                            data-toggle="dropdown" data-offset="0,5"><em class="icon ni ni-plus"></em></a>
+    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+        <thead>
+            <tr class="nk-tb-item nk-tb-head">
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">#</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Student</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Birthday</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Status</span>
+                </th>
+                @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Action</span>
+                </th>
+                @endif
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($students as $student)
+                <tr class="nk-tb-item odd">
+                    <td class="nk-tb-col nk-tb-col-check sorting_1">
+                        <span>{{ $loop->iteration }}</span>
+                    </td>
+                    <td class="nk-tb-col tb-col-mb">
+                        <div class="user-card">
+                            <a href="{{ route('students.show', $student->id) }}">
+                                <div class="user-card">
+                                    <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;'}}">
+                                        <img src="{{ $student->image ? asset('uploads/student/'.$student->image) : 'https://ui-avatars.com/api/?name='. $student->lastname . '+' . $student->firstname .'&background=random' }}"
+                                            alt="">
+                                    </div>
+                                    <div class="user-info">
+                                        <span class="tb-lead">{{ $student->firstname }}
+                                        </span>
+                                        <span>{{ $student->lastname }}</span>
                                     </div>
                                 </div>
-                            @endif
-                        </div><!-- .nk-tb-item -->
-                        @foreach ($students as $data_student)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col">
-                                    <a href="{{ route('students.show', $data_student->id) }}">
-                                        <div class="user-card">
-                                            <div class="user-avatar" style="{{ $data_student->image ? '' : 'background: #798bff;'}}">
-                                                <img src="{{ $data_student->image ? asset('uploads/student/'.$data_student->image) : 'https://ui-avatars.com/api/?name='. $data_student->lastname . '+' . $data_student->firstname .'&background=random' }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="user-info">
-                                                <span
-                                                    class="tb-lead">{{ $data_student->lastname . ' ' . $data_student->firstname }}
-                                                </span>
-                                                <span>{{ $data_student->phone }}</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                {{-- <div class="nk-tb-col tb-col-xl">
-                                    <ul class="list-status">
-                                        <li><em class="icon text-success ni ni-check-circle"></em> <span>Med</span>
-                                        </li>
-                                        <li><em class="icon text-info ni ni-alarm-alt"></em> <span>Final</span></li>
-                                    </ul>
-                                </div> --}}
-                                <div class="nk-tb-col tb-col-xl">
-                                    <span>{{ $data_student->birthday }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-mb">
-                                    <span
-                                        class="tb-status text-{{ $data_student->status == 'active' ? 'success' : 'info' }}">
-                                        @if ($data_student->status == 'active')
-                                            Active
-                                        @else
-                                            Inactive
-                                        @endif
-                                    </span>
-                                </div>
-                                @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
-                                <div class="nk-tb-col nk-tb-col-tools">
-                                    <ul class="nk-tb-actions gx-1">
-                                        <li>
-                                            <div class="drodown">
-                                                <form action="{{ route('groups.unsubscribe') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="student_id" value="{{ $data_student->group_id }}">
-                                                    <input type="hidden" name="group_id" value="{{ $group->id }}">
-                                                    <a href="#" onclick="event.preventDefault();
-                                                        this.closest('form').submit();"
-                                                        class="dropdown-toggle btn btn-icon btn-trigger"
-                                                        data-toggle="dropdown"><em class="icon ni ni-trash"></em></a>
-                                                </form>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                @endif
-                            </div><!-- .nk-tb-item -->
-                        @endforeach
-                    </div><!-- .nk-tb-list -->
-                </div><!-- .card-inner -->
-                <div class="card-inner">
-                    <div class="nk-block-between-md g-3">
-                        <div class="g">
+                            </a>
                         </div>
-                    </div><!-- .nk-block-between -->
-                </div><!-- .card-inner -->
-            </div><!-- .card-inner-group -->
-        </div><!-- .card -->
-    </div><!-- .nk-block -->
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span>{{ $student->birthday }}</span>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span class="tb-status text-{{ $student->status == 'active' ? 'success' : 'info' }}">
+                            @if ($student->status == 'active')
+                                Active
+                            @else
+                                Inactive
+                            @endif
+                        </span>
+                    </td>
+                    @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                        <td class="nk-tb-col tb-col-lg">
+                            <ul class="nk-tb-actions gx-1">
+                                <li>
+                                    <div class="drodown">
+                                        <form action="{{ route('groups.unsubscribe') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="student_id" value="{{ $student->group_id }}">
+                                            <input type="hidden" name="group_id" value="{{ $group->id }}">
+                                            <a href="#" onclick="unsubscribeStudent(this)"
+                                                class="dropdown-toggle btn btn-icon btn-trigger"
+                                                data-toggle="dropdown"><em class="icon ni ni-trash"></em></a>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </td>
+                    @endif
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
     <div class="modal fade" role="dialog" id="group-create">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -133,20 +120,6 @@
                             <div class="tab-pane active" id="create">
                                 <div class="row gy-4">
                                     @csrf
-                                    {{-- <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-county">Student list</label>
-                                            <select class="form-select" id="address-county" name="student_id" required data-ui="lg">
-                                                @foreach ($unsubscribelist as $item)
-                                                    @if ($item->role == 'student')
-                                                        <option value="{{ $item->id }}">
-                                                            {{ $item->lastname . ' ' . $item->firstname }}
-                                                        </option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div> --}}
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Student list</label>
@@ -186,4 +159,22 @@
             </div><!-- .modal-content -->
         </div><!-- .modal-dialog -->
     </div><!-- .modal -->
+
+    <script>
+
+       async function unsubscribeStudent (element) {
+           const result = await Swal.fire({
+               title: 'Are you sure?',
+               text: "You won't be able to revert this!",
+               icon: 'warning',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               confirmButtonText: 'Yes, delete it!'
+           });
+           if (result.isConfirmed) {
+               await element.closest('form').submit();
+           }
+       }
+   </script>
 @endsection

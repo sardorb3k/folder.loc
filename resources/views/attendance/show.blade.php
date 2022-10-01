@@ -56,60 +56,71 @@
                         <form action="{{ route('attendance.store') }}" method="POST">
                             @csrf
                 @endif
-                <div class="card-inner p-0">
-                    <div class="nk-tb-list nk-tb-ulist">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span class="sub-text">Student</span></div>
-                            <div class="nk-tb-col"><span class="sub-text">Present / Total</span></div>
-                            <div class="nk-tb-col nk-tb-col-tools text-right">
-                                <span class="sub-text">Mark</span>
-                            </div>
-                        </div><!-- .nk-tb-item -->
-                        @foreach ($students['students'] as $student_data)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col">
-                                    <a href="{{ route('students.show', $student_data->id) }}">
+                <div class="card-inner p-10">
+                    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                        <thead>
+                            <tr class="nk-tb-item nk-tb-head">
+                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">#</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Student</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Present / Total</span>
+                                </th>
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Mark</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($students['students'] as $student)
+                                <tr class="nk-tb-item odd">
+                                    <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                        <span>{{ $loop->iteration }}</span>
+                                    </td>
+                                    <td class="nk-tb-col tb-col-mb">
                                         <div class="user-card">
-                                            <div class="user-avatar"
-                                                style="{{ $student_data->image ? '' : 'background: #798bff;' }}">
-                                                <img src="{{ $student_data->image ? asset('uploads/student/' . $student_data->image) : 'https://ui-avatars.com/api/?name=' . $student_data->lastname . '+' . $student_data->firstname . '&background=random' }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="user-info">
-                                                <span
-                                                    class="tb-lead">{{ $student_data->lastname . ' ' . $student_data->firstname }}
-                                                </span>
-                                                <span>{{ $student_data->phone }}</span>
-                                            </div>
+                                            <a href="{{ route('students.show', $student->id) }}">
+                                                <div class="user-card">
+                                                    <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;'}}">
+                                                        <img src="{{ $student->image ? asset('uploads/student/'.$student->image) : 'https://ui-avatars.com/api/?name='. $student->lastname . '+' . $student->firstname .'&background=random' }}"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="user-info">
+                                                        <span class="tb-lead">{{ $student->firstname }}
+                                                        </span>
+                                                        <span>{{ $student->lastname }}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="nk-tb-col tb-col-xl">
-                                    <span>
-                                        <span class="badge badge-outline-primary">{{ $student_data->attendance_a }}</span>
-                                        /
-                                        <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span></span>
-                                </div>
-                                <div class="nk-tb-col nk-tb-col-tools">
-                                    <ul class="nk-tb-actions gx-1">
-                                        <li>
-                                            <div class="drodown">
-                                                <input name="attendance[{{ $student_data->id }}]" type="hidden"
+                                    </td>
+                                    <td class="nk-tb-col tb-col-lg">
+                                        <span>
+                                            <span class="badge badge-outline-primary">{{ $student->attendance_a }}</span>
+                                            /
+                                            <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span>
+                                        </span>
+                                    </td>
+                                    <td class="nk-tb-col tb-col-lg">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input name="attendance[{{ $student->id }}]" type="hidden"
                                                     value="0">
                                                 <div class="custom-control custom-switch">    
-                                                    <input name="attendance[{{ $student_data->id }}]" value="1" type="checkbox" @if ($student_data->mark == 1) checked @endif class="custom-control-input" id="attendanceSwitch{{$student_data->id}}">    
-                                                    <label class="custom-control-label" for="attendanceSwitch{{$student_data->id}}"></label>
+                                                    <input name="attendance[{{ $student->id }}]" value="1" type="checkbox" @if ($student->mark == 1) checked @endif class="custom-control-input" id="attendanceSwitch{{$student->id}}">    
+                                                    <label class="custom-control-label" for="attendanceSwitch{{$student->id}}"></label>
                                                 </div>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- .nk-tb-item -->
-                        @endforeach
-                    </div><!-- .nk-tb-list -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div><!-- .card-inner -->
-
-
 
                 <div class="card-inner">
                     <div class="nk-block-between-md g-3">
