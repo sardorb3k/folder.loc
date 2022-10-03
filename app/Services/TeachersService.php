@@ -106,7 +106,9 @@ class TeachersService implements TeachersServiceInterface
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
             $file_path = 'uploads/teacher/' . $teacher->image;
-            unlink($file_path);
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
             $image = $request->file('imageupload');
             $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/uploads/teacher');

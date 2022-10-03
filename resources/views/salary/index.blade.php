@@ -72,6 +72,9 @@
                                 <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Teacher</span>
                                 </th>
+                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <span class="sub-text">Role</span>
+                                </th>
                                 <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Students #</span>
                                 </th>
@@ -93,6 +96,9 @@
                                         <a href="{{ route('salary.show', ['date' => $date, 'id' => $teacher->id]) }}">
                                             <span>{{ $teacher->firstname }}  {{ $teacher->lastname }}</span>
                                         </a>
+                                    </td>
+                                    <td class="nk-tb-col tb-col-mb">
+                                        <span class="text-capitalize">  {{ $teacher->role }} </span>
                                     </td>
                                     <td class="nk-tb-col tb-col-mb">
                                         <span>  {{ $teacher->students_count }} </span>

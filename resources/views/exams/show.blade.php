@@ -92,7 +92,7 @@
                                         <span>{{ $student->birthday }}</span>
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
-                                        <button class="btn btn-danger" id="edit-button"
+                                        <button class="btn btn-{{ $student->result && $student->result >= 80 ? 'success' : 'danger' }}" id="edit-button"
                                         value="{{ $student->id }}-{{ $exam->id }}" data-toggle="modal"
                                         data-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
                                     </td>
@@ -120,7 +120,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="listening">Listening</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[listening]" class="form-control exam-result-input" id="listening" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[listening]" class="form-control exam-result-input" id="listening" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="reading">Reading</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[reading]" class="form-control exam-result-input" id="reading" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[reading]" class="form-control exam-result-input" id="reading" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[reading]') }}">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="writing">Writing</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[writing]" class="form-control exam-result-input" id="writing" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[writing]" class="form-control exam-result-input" id="writing" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[writing]') }}">
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="speaking">Speaking</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[speaking]" class="form-control exam-result-input" id="speaking" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[speaking]" class="form-control exam-result-input" id="speaking" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="grammar">Grammar</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input" id="grammar" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input" id="grammar" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[grammar]') }}">
                                 </div>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="team">Team</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[team]" class="form-control exam-result-input" id="team" @disabled(Auth::user()->getRole() != 'superadmin')>
+                                    <input type="text" name="exam[team]" class="form-control exam-result-input" id="team" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[team]') }}">
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
     </div>
     
     <script>
-        new AutoNumeric.multiple('.exam-result-input', {decimalPlaces: 0, minimumValue: 0, maximumValue: 100});
+        new AutoNumeric.multiple('.exam-result-input', {decimalPlaces: 0, minimumValue: 0, maximumValue: 100,  watchExternalChanges: true});
 
         $('body').on('click', '#edit-button', function() {
             var link_id = $(this).val();
@@ -201,12 +201,12 @@
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
                     } else {
-                        $('#listening').val('');
-                        $('#reading').val('');
-                        $('#writing').val('');
-                        $('#speaking').val('');
-                        $('#grammar').val('');
-                        $('#team').val('');
+                        $('#listening').val(0);
+                        $('#reading').val(0);
+                        $('#writing').val(0);
+                        $('#speaking').val(0);
+                        $('#grammar').val(0);
+                        $('#team').val(0);
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
                     }
