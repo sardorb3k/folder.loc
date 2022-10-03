@@ -99,7 +99,7 @@ class StudentsService implements StudentsServiceInterface
                 unlink($file_path);
             }
             $image = $request->file('imageupload');
-            $name = time() . '-' . $request['phone'] . '.' . $image->getClientOriginalExtension();
+            $name = $request->firstname . ' ' . $request->lastname . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/uploads/student');
             $image->move($destinationPath, $name);
         }
