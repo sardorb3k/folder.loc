@@ -32,7 +32,9 @@ class AuthProfileController extends Controller
             if ($request->hasFile('imageupload')) {
                 if ($user->image != null) {
                     $image_path = 'uploads/' . $user->role . '/' . $user->image;
-                    unlink($image_path);
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
                 }
                 $image = $request->file('imageupload');
                 $name = time() . '.' . $image->getClientOriginalExtension();
