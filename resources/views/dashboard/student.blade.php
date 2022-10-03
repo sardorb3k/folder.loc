@@ -6,7 +6,7 @@
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">Dashboard</h3>
                 <div class="nk-block-des text-soft">
-                    <p>Welcome to {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}.</p>
+                    <p>Welcome, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}!</p>
                 </div>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
@@ -25,20 +25,19 @@
                     <div class="nk-tb-list is-compact">
                         <div class="nk-tb-item nk-tb-head">
                             <div class="nk-tb-col"><span>Group</span></div>
-                            <div class="nk-tb-col"><span>Level</span></div>
                             <div class="nk-tb-col"><span>Day</span></div>
-                            <div class="nk-tb-col"><span>Lesson Start time</span></div>
-                            <div class="nk-tb-col"><span>Lesson End Time</span></div>
+                            <div class="nk-tb-col"><span>Lesson Time</span></div>
                             <div class="nk-tb-col"><span>Teacher</span></div>
                             <div class="nk-tb-col"><span>Assistant</span></div>
                         </div>
                         @foreach ($groups as $group)
                             <div class="nk-tb-item">
-                                <div class="nk-tb-col"><span>{{ $group->name }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $group->level }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $group->days }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $group->lessonstarttime }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $group->lessonendtime }}</span></div>
+                                <div class="nk-tb-col"><span class="text-capitalize">{{ $group->level }} {{ $group->name }}</span></div>
+                                <div class="nk-tb-col"><span class="text-capitalize badge">{{ $group->days }}</span></div>
+                                <div class="nk-tb-col">
+                                    <span class="badge">{{ $group->lessonstarttime }}</span>
+                                    <span class="badge">{{ $group->lessonendtime }}</span>
+                                </div>
                                 <div class="nk-tb-col"><span>{{ $group->teacher_fullname }}</span></div>
                                 <div class="nk-tb-col"><span>{{ $group->assistant_fullname }}</span></div>
                             </div>
@@ -58,14 +57,12 @@
                     </div>
                     <div class="nk-tb-list is-compact">
                         <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>Group name</span></div>
-                            <div class="nk-tb-col"><span>Level</span></div>
+                            <div class="nk-tb-col"><span>Group</span></div>
                             <div class="nk-tb-col"><span>Date</span></div>
                         </div>
                         @foreach ($attendance as $item)
                             <div class="nk-tb-item" style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
-                                <div class="nk-tb-col"><span>{{ $item->name }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $item->level }}</span></div>
+                                <div class="nk-tb-col"><span class="text-capitalize">{{ $item->level }} {{ $item->name }}</span></div>
                                 <div class="nk-tb-col"><span>{{ $item->attendance_date }}</span></div>
                             </div>
                         @endforeach
@@ -111,15 +108,13 @@
                     </div>
                     <div class="nk-tb-list is-compact">
                         <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>Group name</span></div>
-                            <div class="nk-tb-col"><span>level</span></div>
+                            <div class="nk-tb-col"><span>Group</span></div>
                             <div class="nk-tb-col"><span>Date</span></div>
-                            <div class="nk-tb-col tb-col-sm text-end"><span>amount</span></div>
+                            <div class="nk-tb-col tb-col-sm text-end"><span>Amount</span></div>
                         </div>
                         @foreach ($payments as $payment)
                             <div class="nk-tb-item">
-                                <div class="nk-tb-col"><span>{{ $payment->name }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $payment->level }}</span></div>
+                                <div class="nk-tb-col"><span class="text-capitalize">{{ $item->level }} {{ $item->name }}</span></div>
                                 <div class="nk-tb-col"><span>{{ $payment->payment_date }}</span></div>
                                 <div class="nk-tb-col"><span>{{ $payment->amount }}</span></div>
                             </div>
