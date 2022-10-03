@@ -93,7 +93,7 @@
                                         <span>{{ $loop->iteration }}</span>
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
-                                        <a href="{{ route('salary.show', ['date' => $date, 'id' => $teacher->id]) }}">
+                                        <a @if(Auth::user()->getRole() == 'superadmin') href="{{  route('salary.show', ['date' => $date, 'id' => $teacher->id]) }}" @endif>
                                             <span>{{ $teacher->firstname }}  {{ $teacher->lastname }}</span>
                                         </a>
                                     </td>

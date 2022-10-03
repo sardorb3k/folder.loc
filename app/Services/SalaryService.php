@@ -6,6 +6,7 @@ use App\Models\Salary;
 use App\Interfaces\SalaryServiceInterface;
 use App\Interfaces\GroupsServiceInterface;
 use App\Models\Groups;
+use Auth;
 use Illuminate\Support\Facades\DB;
 
 class SalaryService implements SalaryServiceInterface
@@ -19,7 +20,6 @@ class SalaryService implements SalaryServiceInterface
     }
     public function getAllTeachersSalary()
     {
-
         return Salary::all();
     }
     public function getGroupById($id)
@@ -98,6 +98,7 @@ class SalaryService implements SalaryServiceInterface
         $date_all = explode('-', $date);
         $year = $date_all['0'];
         $month = $date_all['1'];
+        $byTeacherQuery = Auth::user()->getRole() == 'teacher' || Auth::user()->getRole() == 'assistant' ? "AND usr.id = " . Auth::user()->id : "";
         $teacher = DB::select("SELECT DISTINCT
             usr.id,
             usr.firstname,
@@ -158,7 +159,7 @@ class SalaryService implements SalaryServiceInterface
         FROM
             `users` AS usr
         WHERE
-            usr.role = 'teacher' OR usr.role = 'assistant'");
+            (usr.role = 'teacher' OR usr.role = 'assistant')" . $byTeacherQuery);
         // dd($teacher);
         return $teacher;
     }
