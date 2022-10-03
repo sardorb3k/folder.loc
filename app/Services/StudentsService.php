@@ -95,7 +95,7 @@ class StudentsService implements StudentsServiceInterface
         // image upload to public/images folder and store image name to database students table
         if ($request->hasFile('imageupload')) {
             $file_path = 'uploads/student/' . $student->image;
-            if (file_exists($file_path)) {
+            if ($student->image != null) {
                 unlink($file_path);
             }
             $image = $request->file('imageupload');

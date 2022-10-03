@@ -62,7 +62,8 @@
                                                 @endforeach
                                             </ul>
                                         </div>
-                                    </li><!-- .dropdown -->
+                                    </li>
+                                    <!-- .dropdown -->
                                     {{-- <li class="dropdown notification-dropdown">
                                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
                                             <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em>
@@ -156,12 +157,12 @@
                                         <a href="#" class="dropdown-toggle mr-lg-n1" data-toggle="dropdown">
                                             <div class="user-toggle">
                                                 <div class="user-avatar sm"
-                                                    style="{{ Auth::user()->image == null ? '' : 'background: #798bff;' }}">
-                                                    @if (Auth::user()->image)
+                                                    style="{{ Auth::user()->image == null ? 'background: #798bff;' : '' }}">
+                                                    @if (Auth::user()->image != null)
                                                         <img src="{{ asset('uploads/' . Auth::user()->role. '/' . Auth::user()->image) }}"
                                                             alt="{{ Auth::user()->firstname }}">
                                                     @else
-                                                        <em class='icon ni ni-user-alt'></em>
+                                                        <em class='icon ni ni-user'></em>
                                                     @endif
                                                 </div>
                                             </div>

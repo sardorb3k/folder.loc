@@ -359,9 +359,11 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="custom-control custom-switch">
-                                            <img src="{{ asset('uploads/student/'.$student->image) }}" height="100" width="100" >
-                                        </div>
+                                        @if($student->image != null)
+                                            <div class="custom-control custom-switch">
+                                                <img src="{{ asset('uploads/student/'.$student->image) }}" height="100" width="100" >
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="col-6">
                                         <div class="custom-control custom-switch">
