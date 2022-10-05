@@ -10,6 +10,8 @@ return [
     'day' => 'Day',
     'days' => 'Days',
     'time' => 'Time',
+    'student' => 'Student',
+    'students' => 'Students',
     'teacher' => 'Teacher',
     'teachers' => 'Teachers',
     'assistant' => 'Assistant',
@@ -27,5 +29,10 @@ return [
     'attendance' => 'Attendance',
     'absent' => 'Absent',
     'result' => 'Result',
-    'timetable' => 'Timetable'
+    'timetable' => 'Timetable',
+    'assessment' => 'Assessment',
+    'accounting' => 'Accounting',
+    'salary' => 'Salary',
+    'academy' => 'Academy',
+    'settings' => 'Settings',
 ];

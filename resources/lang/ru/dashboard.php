@@ -10,6 +10,8 @@ return [
     'day' => 'День',
     'days' => 'Дни',
     'time' => 'Время',
+    'student' => 'Студент',
+    'students' => 'Студенты',
     'teacher' => 'Учитель',
     'teachers' => 'Учителя',
     'assistant' => 'Помощник учителя',
@@ -28,4 +30,9 @@ return [
     'absent' => 'Oтсутствовал(a)',
     'result' => 'Результат',
     'timetable' => 'Расписание',
+    'assessment' => 'Оценка',
+    'accounting' => 'Отчеты',
+    'salary' => 'Зарплата',
+    'academy' => 'Академия',
+    'settings' => 'Настройки',
 ];

@@ -10,6 +10,8 @@ return [
     'day' => 'Kun',
     'days' => 'Kunlar',
     'time' => 'Vaqt',
+    'student' => 'O\'quvchi',
+    'students' => 'O\'quvchilar',
     'teacher' => 'O\'qituvchi',
     'teachers' => 'O\'qituvchilar',
     'assistant' => 'Yordamchi O\'qituvchi',
@@ -28,4 +30,9 @@ return [
     'absent' => 'Kelmagan',
     'result' => 'Natija',
     'timetable' => 'Dars jadvali',
+    'assessment' => 'Baholash',
+    'accounting' => 'Hisobotlar',
+    'salary' => 'Maosh',
+    'academy' => 'Akademiya',
+    'settings' => 'Sozlamalar',
 ];

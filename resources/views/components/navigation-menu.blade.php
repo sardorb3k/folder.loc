@@ -11,34 +11,34 @@
         </li><!-- .nk-menu-item -->
         @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
-                <h6 class="overline-title text-primary-alt">Assessment</h6>
+                <h6 class="overline-title text-primary-alt">{{__('dashboard.assessment')}}</h6>
             </li><!-- .nk-menu-heading -->
             <li class="nk-menu-item">
                 <a href="{{ route('exams.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-view-col"></em></span>
-                    <span class="nk-menu-text">Exam</span>
+                    <span class="nk-menu-text">{{__('dashboard.exam')}}</span>
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
         @if (Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
-                <h6 class="overline-title text-primary-alt">Accounting</h6>
+                <h6 class="overline-title text-primary-alt">{{__('dashboard.accounting')}}</h6>
             </li><!-- .nk-menu-heading -->
             <li class="nk-menu-item">
                 <a href="{{ route('salary.index_red') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-bar-chart-fill"></em></span>
-                    <span class="nk-menu-text">Salary</span>
+                    <span class="nk-menu-text">{{__('dashboard.salary')}}</span>
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
         @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
-                <h6 class="overline-title text-primary-alt">Academy</h6>
+                <h6 class="overline-title text-primary-alt">{{__('dashboard.academy')}}</h6>
             </li><!-- .nk-menu-heading -->
             <li class="nk-menu-item">
                 <a href="{{ route('students.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                    <span class="nk-menu-text">Students</span>
+                    <span class="nk-menu-text">{{__('dashboard.students')}}</span>
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
@@ -46,7 +46,7 @@
             <li class="nk-menu-item">
                 <a href="{{ route('teachers.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-card-view"></em></span>
-                    <span class="nk-menu-text">Teachers</span>
+                    <span class="nk-menu-text">{{__('dashboard.teachers')}}</span>
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
@@ -54,7 +54,7 @@
             <li class="nk-menu-item">
                 <a href="{{ route('groups.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-layers"></em></span>
-                    <span class="nk-menu-text">Groups</span>
+                    <span class="nk-menu-text">{{__('dashboard.groups')}}</span>
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
@@ -62,7 +62,7 @@
             <li class="nk-menu-item">
                 <a href="{{ route('payments.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-view-col"></em></span>
-                    <span class="nk-menu-text">Payments</span>
+                    <span class="nk-menu-text">{{__('dashboard.payments')}}</span>
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
@@ -70,13 +70,13 @@
             <li class="nk-menu-item">
                 <a href="{{ route('attendance.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-calendar-booking"></em></span>
-                    <span class="nk-menu-text">Attendance</span>
+                    <span class="nk-menu-text">{{__('dashboard.attendance')}}</span>
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
         @if (Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
-                <h6 class="overline-title text-primary-alt">Settings</h6>
+                <h6 class="overline-title text-primary-alt">{{__('dashboard.settings')}}</h6>
             </li><!-- .nk-menu-heading -->
             <li class="nk-menu-item">
                 <a href="{{ route('settings.index') }}" class="nk-menu-link">
