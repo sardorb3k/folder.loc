@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'welcome' => 'Xush kelibsiz',
+    'account_settings' => 'Profil sozlamalari',
+    'sign_out' => 'Chiqish',
+    'footer' => 'Rexar Academy. All Rights Reserved.',
+    'groups' => 'Guruhlar',
+    'group' => 'Guruh',
+    'day' => 'Kun',
+    'days' => 'Kunlar',
+    'time' => 'Vaqt',
+    'teacher' => 'O\'qituvchi',
+    'teachers' => 'O\'qituvchilar',
+    'assistant' => 'Yordamchi O\'qituvchi',
+    'assistants' => 'Yordamchi O\'qituvchilar',
+    'even' => 'Sesh/Pay/Shan',
+    'odd' => 'Dush/Chor/Juma',
+    'date' => 'Sana',
+    'exam' => 'Imtihon',
+    'exams' => 'Imtihonlar',
+    'level' => 'Daraja',
+    'action' => 'Boshqaruv',
+    'payment' => 'To\'lov',
+    'payments' => 'To\'lovlar',
+    'amount' => 'Miqdor',
+    'attendance' => 'Davomat',
+    'absent' => 'Kelmagan',
+    'result' => 'Natija'
+];

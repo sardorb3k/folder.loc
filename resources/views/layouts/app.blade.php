@@ -193,20 +193,24 @@
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                    <li><a href="{{ route('profile.show') }}"><em
-                                                                class="icon ni ni-setting-alt"></em><span>Account
-                                                                Setting</span></a></li>
+                                                    <li>
+                                                        <a href="{{ route('profile.show') }}">
+                                                            <em class="icon ni ni-setting-alt"></em>
+                                                            <span class="text-capitalize">{{ __('dashboard.account_settings')}}</span>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
                                                     <form method="POST" action="{{ route('logout') }}">
                                                         @csrf
-                                                        <li><a
-                                                                onclick="event.preventDefault();
-                                                            this.closest('form').submit();"><em
-                                                                    class="icon ni ni-signout"></em><span>Sign
-                                                                    out</span></a></li>
+                                                        <li><a onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                                            <em class="icon ni ni-signout"></em>
+                                                                    <span>{{ __('dashboard.sign_out')}}</span>
+                                                                </a>
+                                                            </li>
                                                     </form>
                                                 </ul>
                                             </div>

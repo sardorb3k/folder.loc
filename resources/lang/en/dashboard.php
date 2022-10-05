@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'welcome' => 'Welcome',
+    'account_settings' => 'Account Settings',
+    'sign_out' => 'Sign out',
+    'footer' => 'Rexar Academy. All Rights Reserved.',
+    'groups' => 'Groups',
+    'group' => 'Group',
+    'day' => 'Day',
+    'days' => 'Days',
+    'time' => 'Time',
+    'teacher' => 'Teacher',
+    'teachers' => 'Teachers',
+    'assistant' => 'Assistant',
+    'assistants' => 'Assistants',
+    'even' => 'Tue/Thu/Sat',
+    'odd' => 'Mon/Wed/Fri',
+    'date' => 'Date',
+    'exam' => 'Exam',
+    'exams' => 'Exams',
+    'level' => 'Level',
+    'action' => 'Action',
+    'payment' => 'Payment',
+    'payments' => 'Payments',
+    'amount' => 'Amount',
+    'attendance' => 'Attendance',
+    'absent' => 'Absent',
+    'result' => 'Result'
+];
