@@ -26,5 +26,6 @@ return [
     'amount' => 'Amount',
     'attendance' => 'Attendance',
     'absent' => 'Absent',
-    'result' => 'Result'
+    'result' => 'Result',
+    'timetable' => 'Timetable'
 ];

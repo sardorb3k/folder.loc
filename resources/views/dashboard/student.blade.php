@@ -1,6 +1,7 @@
 @section('title', 'Dashboard')
 @extends('layouts.app')
 @section('content')
+
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
@@ -18,34 +19,56 @@
                     <div class="card-inner mb-n2">
                         <div class="card-title-group">
                             <div class="card-title card-title-sm">
-                                <h6 class="title">{{ __('dashboard.groups')}}</h6>
+                                <h6 class="title">{{ __('dashboard.timetable')}}</h6>
                             </div>
                         </div>
                     </div>
-                    <div class="nk-tb-list is-compact">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>{{ __('dashboard.group')}}</span></div>
-                            <div class="nk-tb-col"><span>{{ __('dashboard.day')}}</span></div>
-                            <div class="nk-tb-col"><span>{{ __('dashboard.time')}}</span></div>
-                            <div class="nk-tb-col"><span>{{ __('dashboard.teacher')}}</span></div>
-                            <div class="nk-tb-col"><span>{{ __('dashboard.assistant')}}</span></div>
-                        </div>
-                        @foreach ($groups as $group)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col"><span class="text-capitalize">{{ $group->level }} {{ $group->name }}</span></div>
-                                <div class="nk-tb-col">
-                                    <span class="text-capitalize badge">
-                                        {{ __('dashboard.'. $group->days)}}
-                                    </span>
-                                </div>
-                                <div class="nk-tb-col">
-                                    <span class="badge">{{ $group->lessonstarttime }}</span>
-                                    <span class="badge">{{ $group->lessonendtime }}</span>
-                                </div>
-                                <div class="nk-tb-col"><span>{{ $group->teacher_fullname }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $group->assistant_fullname }}</span></div>
-                            </div>
-                        @endforeach
+                    <div class="card-inner p-10">
+                        <table class="datatable-init-nohelpers nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.group')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.day')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.time')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.teacher')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.assistant')}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($groups as $group)
+                                    <tr class="nk-tb-item odd">
+                                        <td class="nk-tb-col">
+                                            <span class="text-capitalize">{{ $group->level }} {{ $group->name }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span class="text-capitalize badge">
+                                                {{ __('dashboard.'. $group->days)}}
+                                            </span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span class="badge">{{ $group->lessonstarttime }}</span>
+                                            <span class="badge">{{ $group->lessonendtime }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span>{{ $group->teacher_fullname }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span>{{ $group->assistant_fullname }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -59,17 +82,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="nk-tb-list is-compact">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>{{ __('dashboard.group')}}</span></div>
-                            <div class="nk-tb-col"><span>{{ __('dashboard.date')}}</span></div>
-                        </div>
-                        @foreach ($attendance as $item)
-                            <div class="nk-tb-item" style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
-                                <div class="nk-tb-col"><span class="text-capitalize">{{ $item->level }} {{ $item->name }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $item->attendance_date }}</span></div>
-                            </div>
-                        @endforeach
+                    <div class="card-inner p-10">
+                        <table class="datatable-init-nohelpers nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.group')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.date')}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($attendance as $item)
+                                    <tr class="nk-tb-item odd" style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
+                                        <td class="nk-tb-col">
+                                            <span class="text-capitalize">{{ $group->level }} {{ $group->name }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span>{{ $item->attendance_date }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -82,21 +119,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="nk-tb-list is-compact">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>{{ __('dashboard.exam')}}</span></div>
-                            <div class="nk-tb-col"><span>{{ __('dashboard.group')}}</span></div>
-                            <div class="nk-tb-col tb-col-sm text-end"><span>{{ __('dashboard.result')}}</span></div>
-                        </div>
-                        @foreach ($exams as $exam)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col"><span>{{ $exam->exam_type }}</span></div>
-                                <div class="nk-tb-col"><span class="text-capitalize">{{ $exam->group_level }} {{ $exam->group_name }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $exam->result }}</span></div>
-                            </div>
-                        @endforeach
-                    </div>
-
+                    <div class="card-inner">
+                        <table class="datatable-init-nohelpers nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.exam')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.group')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.result')}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($exams as $exam)
+                                    <tr class="nk-tb-item odd">
+                                        <td class="nk-tb-col">
+                                            <span class="text-capitalize">{{ $exam->exam_type }}</span>
+                                        </td>
+                                        <td class="nk-tb-col">
+                                            <span class="text-capitalize">{{ $exam->level }} {{ $exam->name }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span>{{ $exam->result }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>  
                 </div>
             </div>
             <div class="col-lg-6">
@@ -108,24 +162,44 @@
                             </div>
                         </div>
                     </div>
-                    <div class="nk-tb-list is-compact">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>{{ __('dashboard.group')}}</span></div>
-                            <div class="nk-tb-col"><span>{{ __('dashboard.date')}}</span></div>
-                            <div class="nk-tb-col tb-col-sm text-end"><span>{{ __('dashboard.amount')}}</span></div>
-                        </div>
-                        @foreach ($payments as $payment)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col"><span class="text-capitalize">{{ $item->level }} {{ $item->name }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $payment->payment_date }}</span></div>
-                                <div class="nk-tb-col"><span>{{ $payment->amount }}</span></div>
-                            </div>
-                        @endforeach
-                    </div>
-
+                    <div class="card-inner">
+                        <table class="datatable-init-nohelpers nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.group')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.date')}}</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">{{ __('dashboard.amount')}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($payments as $payment)
+                                    <tr class="nk-tb-item odd">
+                                        <td class="nk-tb-col">
+                                            <span class="text-capitalize">{{ $payment->level }} {{ $payment->name }}</span>
+                                        </td>
+                                        <td class="nk-tb-col">
+                                            <span class="text-capitalize">{{ $payment->payment_date }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span class="payment-amount">{{ $payment->amount }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>  
                 </div>
             </div>
         </div>
-    </div><!-- .row -->
     </div><!-- .nk-block -->
+
+    <script>
+        new AutoNumeric('.payment-amount', {decimalPlaces: 0, minimumValue: 0});
+    </script>
 @endsection

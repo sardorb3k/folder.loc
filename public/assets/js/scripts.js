@@ -527,6 +527,14 @@
       scrollX: true,
       buttons: ['copy', 'excel', 'csv', 'pdf']
     });
+    NioApp.DataTable('.datatable-init-nohelpers', {
+      responsive: {
+        details: true
+      },
+      bPaginate: false,
+      bFilter: false,
+      bInfo: false
+    });
     $.fn.DataTable.ext.pager.numbers_length = 7;
   }; // BootStrap Extended
 

@@ -142,7 +142,7 @@
         </tbody>
     </table>
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             $('.phone').inputmask('+999 (99) 999 99 99');
         });
 

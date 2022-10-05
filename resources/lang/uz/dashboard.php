@@ -26,5 +26,6 @@ return [
     'amount' => 'Miqdor',
     'attendance' => 'Davomat',
     'absent' => 'Kelmagan',
-    'result' => 'Natija'
+    'result' => 'Natija',
+    'timetable' => 'Dars jadvali',
 ];
