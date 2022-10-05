@@ -518,7 +518,8 @@
     NioApp.DataTable('.datatable-init', {
       responsive: {
         details: true
-      }
+      },
+      scrollX: true,
     });
     NioApp.DataTable('.datatable-init-export', {
       responsive: {
@@ -531,6 +532,7 @@
       responsive: {
         details: true
       },
+      scrollX: true,
       bPaginate: false,
       bFilter: false,
       bInfo: false
