@@ -26,17 +26,14 @@
                         <div class="data-head">
                             <h6 class="overline-title">Basics</h6>
                         </div>
-                        <div class="data-item"
-                            {{ Auth::user()->role != 'student' ? 'data-toggle=modal data-target=#profile-edit' : '' }}>
+                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Full Name</span>
-                                <span
-                                    class="data-value">{{ Auth::user()->lastname . ' ' . Auth::user()->firstname }}</span>
+                                <span class="data-value">{{ Auth::user()->lastname . ' ' . Auth::user()->firstname }}</span>
                             </div>
                             <div class="data-col data-col-end">
                                 @if (Auth::user()->role != 'student')
                                     <span class="data-more"><em class="icon ni ni-forward-ios"></em></span>
-
                                 @else
                                     <span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span>
                                 @endif
@@ -68,8 +65,7 @@
 
                             </div>
                         </div><!-- data-item -->
-                        <div class="data-item"
-                            {{ Auth::user()->role != 'student' ? 'data-toggle=modal data-target=#profile-edit' : '' }}>
+                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Date of Birth</span>
                                 <span class="data-value">{{ Auth::user()->birthday }}</span>
@@ -77,23 +73,19 @@
                             <div class="data-col data-col-end">
                                 @if (Auth::user()->role != 'student')
                                     <span class="data-more"><em class="icon ni ni-forward-ios"></em></span>
-
                                 @else
                                     <span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span>
                                 @endif
                             </div>
                         </div><!-- data-item -->
-                        <div class="data-item"
-                            {{ Auth::user()->role != 'student' ? 'data-toggle=modal data-target=#profile-edit' : '' }}>
+                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Gender</span>
-                                <span
-                                    class="data-value">{{ Auth::user()->gender == 'male' ? 'Male' : 'Female' }}</span>
+                                <span class="data-value">{{ Auth::user()->gender == 'male' ? 'Male' : 'Female' }}</span>
                             </div>
                             <div class="data-col data-col-end">
                                 @if (Auth::user()->role != 'student')
                                     <span class="data-more"><em class="icon ni ni-forward-ios"></em></span>
-
                                 @else
                                     <span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span>
                                 @endif
@@ -104,27 +96,27 @@
             </div><!-- .card-inner -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
-    @if (Auth::user()->role != 'student')
-        <div class="modal fade" role="dialog" id="profile-edit">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
-                    <div class="modal-body modal-body-lg">
-                        <h5 class="title">Update Profile</h5>
-                        <ul class="nk-nav nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#personal">Personal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#password">Password</a>
-                            </li>
-                        </ul><!-- .nav-tabs -->
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="personal">
-                                <form action="{{ route('profile.information') }}" class="form-validate"
-                                    novalidate="novalidate" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row gy-4">
+    <div class="modal fade" role="dialog" id="profile-edit">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-lg">
+                    <h5 class="title">Update Profile</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#personal">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#password">Password</a>
+                        </li>
+                    </ul><!-- .nav-tabs -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="personal">
+                            <form action="{{ route('profile.information') }}" class="form-validate" novalidate="novalidate"
+                                method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row gy-4">
+                                    @if (Auth::user()->role != 'student')
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label" for="firstname">First name</label>
@@ -151,9 +143,8 @@
                                                                 class="custom-control custom-radio custom-control-pro no-control">
                                                                 <input type="radio" class="custom-control-input"
                                                                     name="gender" id="sex-male" value="male"
-                                                                    @if ($user->gender == 'male')
-                                                                checked
-                                                                @endif required="">
+                                                                    @if ($user->gender == 'male') checked @endif
+                                                                    required="">
                                                                 <label class="custom-control-label"
                                                                     for="sex-male">Male</label>
                                                             </div>
@@ -163,9 +154,8 @@
                                                                 class="custom-control custom-radio custom-control-pro no-control">
                                                                 <input type="radio" class="custom-control-input"
                                                                     name="gender" id="sex-female" value="female"
-                                                                    @if ($user->gender == 'female')
-                                                                checked
-                                                                @endif required="">
+                                                                    @if ($user->gender == 'female') checked @endif
+                                                                    required="">
                                                                 <label class="custom-control-label"
                                                                     for="sex-female">Female</label>
                                                             </div>
@@ -174,110 +164,112 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="col-md-6">
+                                    @endif
+                                    {{-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label" for="phone-no">Phone Number</label>
                                                 <input type="tel" class="form-control form-control-lg" name="phone"
                                                     id="phone-no" value="{{ $user->phone }}" placeholder="Phone Number">
                                             </div>
                                         </div> --}}
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label" for="birth-day">Date of Birth</label>
-                                                <input type="text" class="form-control date-picker-alt" name="birthday"
-                                                    value="{{ $user->birthday }}" data-date-format="yyyy-mm-dd"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group"><label class="form-label">Image upload <span
-                                                        class="valid-form">*</span></label>
-                                                <div class="form-control-wrap">
-                                                    <div class="form-file">
-                                                        <input type="file" class="form-file-input" name="imageupload" tabindex="10"
-                                                            id="imageupload" required>
-                                                        <label class="form-file-label" for="imageupload">Choose file</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                                <li>
-                                                    <input type="hidden" name="update_action" value="personal">
-                                                    <input type="hidden" name="id" value="{{ $user->id }}">
-                                                    <a href="#" onclick="event.preventDefault();
-                                                    this.closest('form').submit();"
-                                                        class="btn btn-lg btn-primary">Update
-                                                        Profile</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
-                                                </li>
-                                            </ul>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="birth-day">Date of Birth</label>
+                                            <input type="text" class="form-control date-picker-alt" name="birthday"
+                                                value="{{ $user->birthday }}" data-date-format="yyyy-mm-dd" required>
                                         </div>
                                     </div>
-                                </form>
-                            </div><!-- .tab-pane -->
-                            <div class="tab-pane" id="password">
-                                <form action="{{ route('profile.information') }}" class="form-validate"
-                                    novalidate="novalidate" method="POST">
-                                    @csrf
-                                    <div class="row gy-4">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label" for="password">Password</label>
-                                                <div class="form-control-wrap">
-                                                    <a href="#" class="form-icon form-icon-right passcode-switch toggle-password"
-                                                        data-target="password">
-                                                        <em class="passcode-icon icon-show icon ni ni-eye"></em>
-                                                        <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
-                                                    </a>
-                                                    <input type="password" class="form-control" id="password"
-                                                        name="password" required="">
+                                    <div class="col-sm-6">
+                                        <div class="form-group"><label class="form-label">Image upload <span
+                                                    class="valid-form">*</span></label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" name="imageupload"
+                                                        tabindex="10" id="imageupload" required>
+                                                    <label class="form-file-label" for="imageupload">Choose file</label>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label" for="password_confirmation">Confirm
-                                                    Password</label>
-                                                <div class="form-control-wrap">
-                                                    <a href="#" class="form-icon form-icon-right passcode-switch toggle-password"
-                                                        data-target="password">
-                                                        <em class="passcode-icon icon-show icon ni ni-eye"></em>
-                                                        <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
-                                                    </a>
-                                                    <input type="password" class="form-control"
-                                                        id="password_confirmation" name="password_confirmation"
-                                                        required="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                                <li>
-                                                    <input type="hidden" name="update_action" value="password">
-                                                    <input type="hidden" name="id" value="{{ $user->id }}">
-                                                    <a href="#" onclick="event.preventDefault();
-                                                    this.closest('form').submit();"
-                                                        class="btn btn-lg btn-primary">Update
-                                                        Password</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
-                                                </li>
-                                            </ul>
                                         </div>
                                     </div>
-                                </form>
-                            </div><!-- .tab-pane -->
-                        </div><!-- .tab-content -->
-                    </div><!-- .modal-body -->
-                </div><!-- .modal-content -->
-            </div><!-- .modal-dialog -->
-        </div><!-- .modal -->
-    @endif
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <input type="hidden" name="update_action" value="personal">
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                                <a href="#"
+                                                    onclick="event.preventDefault();
+                                                    this.closest('form').submit();"
+                                                    class="btn btn-lg btn-primary">Update
+                                                    Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div><!-- .tab-pane -->
+                        <div class="tab-pane" id="password">
+                            <form action="{{ route('profile.information') }}" class="form-validate"
+                                novalidate="novalidate" method="POST">
+                                @csrf
+                                <div class="row gy-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="password">Password</label>
+                                            <div class="form-control-wrap">
+                                                <a href="#"
+                                                    class="form-icon form-icon-right passcode-switch toggle-password"
+                                                    data-target="password">
+                                                    <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                    <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                                </a>
+                                                <input type="password" class="form-control" id="password"
+                                                    name="password" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="password_confirmation">Confirm
+                                                Password</label>
+                                            <div class="form-control-wrap">
+                                                <a href="#"
+                                                    class="form-icon form-icon-right passcode-switch toggle-password"
+                                                    data-target="password">
+                                                    <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                    <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                                </a>
+                                                <input type="password" class="form-control" id="password_confirmation"
+                                                    name="password_confirmation" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <input type="hidden" name="update_action" value="password">
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                                <a href="#"
+                                                    onclick="event.preventDefault();
+                                                    this.closest('form').submit();"
+                                                    class="btn btn-lg btn-primary">Update
+                                                    Password</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div><!-- .tab-pane -->
+                    </div><!-- .tab-content -->
+                </div><!-- .modal-body -->
+            </div><!-- .modal-content -->
+        </div><!-- .modal-dialog -->
+    </div><!-- .modal -->
 
     <script>
         $(".toggle-password").click(function() {

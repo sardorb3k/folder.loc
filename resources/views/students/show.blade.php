@@ -431,7 +431,7 @@
                                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();"
                                                     class="btn btn-lg btn-primary">Update
-                                                    Address</a>
+                                                    Password</a>
                                             </li>
                                             <li>
                                                 <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>

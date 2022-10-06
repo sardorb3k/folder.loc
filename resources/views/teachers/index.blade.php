@@ -72,7 +72,7 @@
                     </td>
                     <td class="nk-tb-col">
                         <div class="user-card">
-                            <a href="{{ route('students.show', $teacher->id) }}">
+                            <a href="{{ route('teachers.show', $teacher->id) }}">
                                 <div class="user-card">
                                     <div class="user-avatar" style="{{ $teacher->image ? '' : 'background: #798bff;'}}">
                                         <img src="{{ $teacher->image ? asset('uploads/teacher/'.$teacher->image) : 'https://ui-avatars.com/api/?name='. $teacher->lastname . '+' . $teacher->firstname .'&background=random' }}"

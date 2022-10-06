@@ -127,6 +127,7 @@ class DashboardRepository implements DashboardRepositoryInterface
 
         // Exam results
         $exams = DB::select(DB::raw("SELECT
+        exams.id,
         exam_results.result,
         exams.exam_type,
         (
@@ -168,6 +169,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         payments.student_id = :user_id LIMIT 20"), [
             'user_id' => $user_id
         ]);
+        // dd($attendance);
         return view('dashboard.student', compact('groups', 'exams', 'attendance', 'payments'));
     }
 }
