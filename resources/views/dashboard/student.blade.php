@@ -158,8 +158,10 @@
                                             <span class="text-capitalize">{{ $exam->group_level }}</span>
                                         </td>
                                         <td class="nk-tb-col tb-col-lg">
-                                            <span onclick="editPayment({{ $exam->id }})" class="text-capitalize badge" data-toggle="modal"
-                                                data-target="#exam-anw">{{ $exam->result }}</span>
+                                            <span onclick="editPayment({{ $exam->id }})"
+                                                class="text-capitalize badge"
+                                                style="background-color: {{ $exam->result && $exam->result >= 80 ? '#1ee0ac' : '#e85347' }};color: white;"
+                                                data-toggle="modal" data-target="#exam-anw">{{ $exam->result }}</span>
                                         </td>
                                     </tr>
                                 @endforeach
