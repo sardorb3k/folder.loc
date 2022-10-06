@@ -79,7 +79,7 @@ class ExamsService implements ExamsServiceInterface
         try {
             $exam = DB::select(
                 DB::raw(
-                    "SELECT ex.id,gp.`name` AS group_name,gp.id AS group_id,ex.exam_type,ex.`level`,(
+                    "SELECT ex.id,gp.`name` AS group_name,gp.id AS group_id,ex.exam_type,ex.created_at,ex.`level`,(
                     SELECT COUNT(*) FROM exam_results WHERE exam_results.exam_id=ex.id AND exam_results.mark=1) AS accepted,(
                     SELECT COUNT(*) FROM exam_results WHERE exam_results.exam_id=ex.id AND exam_results.mark=0) AS notaccepted FROM exams AS ex LEFT JOIN groups AS gp ON gp.id=ex.group_id WHERE ex.id=:examid;"
                 ),

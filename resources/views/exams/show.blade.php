@@ -19,7 +19,7 @@
                                 </p>
                                 <p>Exam type: <span class="badge badge-secondary">{{ strtoupper($exam->exam_type) }}</span>
                                 </p>
-                                <p>Date: <span class="badge badge-secondary">{{ date('Y-M-d -- D') }}</span></p>
+                                <p>Date: <span class="badge badge-secondary">{{ $exam->created_at }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -48,19 +48,24 @@
                     <p>Number of students in the group: <span class="badge badge-secondary">{{ $count }}</span></p>
                 </div><!-- .card-inner -->
                 <div class="card-inner p-10">
-                    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false"
+                        id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                         <thead>
                             <tr class="nk-tb-item nk-tb-head">
-                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                    rowspan="1" colspan="1">
                                     <span class="sub-text">#</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                    rowspan="1" colspan="1">
                                     <span class="sub-text">Student</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                    rowspan="1" colspan="1">
                                     <span class="sub-text">Birthday</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                    rowspan="1" colspan="1">
                                     <span class="sub-text">Result</span>
                                 </th>
                             </tr>
@@ -75,8 +80,9 @@
                                         <div class="user-card">
                                             <a href="{{ route('students.show', $student->id) }}">
                                                 <div class="user-card">
-                                                    <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;'}}">
-                                                        <img src="{{ $student->image ? asset('uploads/student/'.$student->image) : 'https://ui-avatars.com/api/?name='. $student->lastname . '+' . $student->firstname .'&background=random' }}"
+                                                    <div class="user-avatar"
+                                                        style="{{ $student->image ? '' : 'background: #798bff;' }}">
+                                                        <img src="{{ $student->image ? asset('uploads/student/' . $student->image) : 'https://ui-avatars.com/api/?name=' . $student->lastname . '+' . $student->firstname . '&background=random' }}"
                                                             alt="">
                                                     </div>
                                                     <div class="user-info">
@@ -92,9 +98,11 @@
                                         <span>{{ $student->birthday }}</span>
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
-                                        <button class="btn btn-{{ $student->result && $student->result >= 80 ? 'success' : 'danger' }}" id="edit-button"
-                                        value="{{ $student->id }}-{{ $exam->id }}" data-toggle="modal"
-                                        data-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
+                                        <button
+                                            class="btn btn-{{ $student->result && $student->result >= 80 ? 'success' : 'danger' }}"
+                                            id="edit-button" value="{{ $student->id }}-{{ $exam->id }}"
+                                            data-toggle="modal"
+                                            data-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -120,7 +128,8 @@
                             <div class="form-group">
                                 <label class="form-label" for="listening">Listening</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[listening]" class="form-control exam-result-input" id="listening" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
+                                    <input type="text" name="exam[listening]" class="form-control exam-result-input"
+                                        id="listening" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
                                 </div>
                             </div>
                         </div>
@@ -128,7 +137,8 @@
                             <div class="form-group">
                                 <label class="form-label" for="reading">Reading</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[reading]" class="form-control exam-result-input" id="reading" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[reading]') }}">
+                                    <input type="text" name="exam[reading]" class="form-control exam-result-input"
+                                        id="reading" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[reading]') }}">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +146,8 @@
                             <div class="form-group">
                                 <label class="form-label" for="writing">Writing</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[writing]" class="form-control exam-result-input" id="writing" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[writing]') }}">
+                                    <input type="text" name="exam[writing]" class="form-control exam-result-input"
+                                        id="writing" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[writing]') }}">
                                 </div>
                             </div>
                         </div>
@@ -144,7 +155,8 @@
                             <div class="form-group">
                                 <label class="form-label" for="speaking">Speaking</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[speaking]" class="form-control exam-result-input" id="speaking" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
+                                    <input type="text" name="exam[speaking]" class="form-control exam-result-input"
+                                        id="speaking" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
                                 </div>
                             </div>
                         </div>
@@ -152,7 +164,8 @@
                             <div class="form-group">
                                 <label class="form-label" for="grammar">Grammar</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input" id="grammar" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[grammar]') }}">
+                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input"
+                                        id="grammar" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[grammar]') }}">
                                 </div>
                             </div>
                         </div>
@@ -160,7 +173,8 @@
                             <div class="form-group">
                                 <label class="form-label" for="team">Team</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[team]" class="form-control exam-result-input" id="team" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[team]') }}">
+                                    <input type="text" name="exam[team]" class="form-control exam-result-input"
+                                        id="team" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[team]') }}">
                                 </div>
                             </div>
                         </div>
@@ -171,16 +185,21 @@
                     <input type="hidden" name="exam_id" id="exam_id">
                     <p>Exam result: <span class="badge badge-secondary" id="result">0</span></p>
                     @if (Auth::user()->role == 'superadmin')
-                    <span class="sub-text"><button type="button" id="exam-save"
-                            class="btn btn-primary">Submit</button></span>
+                        <span class="sub-text"><button type="button" id="exam-save"
+                                class="btn btn-primary">Submit</button></span>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script>
-        new AutoNumeric.multiple('.exam-result-input', {decimalPlaces: 0, minimumValue: 0, maximumValue: 100,  watchExternalChanges: true});
+        new AutoNumeric.multiple('.exam-result-input', {
+            decimalPlaces: 0,
+            minimumValue: 0,
+            maximumValue: 100,
+            watchExternalChanges: true
+        });
 
         $('body').on('click', '#edit-button', function() {
             var link_id = $(this).val();

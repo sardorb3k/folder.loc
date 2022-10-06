@@ -9,6 +9,7 @@
             </div>
         </div>
     </div><!-- .nk-block-head -->
+    @include('error')
     <div class="nk-block">
         <div class="card card-bordered">
             @include('profile.navigation-menu', ['id' => Auth::user()->id])

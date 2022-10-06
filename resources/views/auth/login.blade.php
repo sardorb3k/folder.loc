@@ -6,9 +6,9 @@
             <a href="/" class="logo-link">
                 <h1 style="font-size: 40px;">Rexar Academy</h1>
                 <!--img class="logo-light logo-img logo-img-lg" src="./images/logo.png" srcset="./images/logo2x.png 2x"
-                            alt="logo">
-                        <img class="logo-dark logo-img logo-img-lg" src="./images/logo-dark.png"
-                            srcset="./images/logo-dark2x.png 2x" alt="logo-dark"-->
+                                alt="logo">
+                            <img class="logo-dark logo-img logo-img-lg" src="./images/logo-dark.png"
+                                srcset="./images/logo-dark2x.png 2x" alt="logo-dark"-->
             </a>
         </div>
         <div class="card card-bordered">
@@ -60,7 +60,8 @@
                 </div>
                 @if ($errors->any())
                     <div class="example-alert">
-                        <div class="alert alert-primary alert-icon">
+                        <div
+                            class="alert @if (session('error')) alert-danger @endif @if (session('success')) alert-primary @endif alert-icon">
                             <em class="icon ni ni-alert-circle"></em>
                             @if (session('status'))
                                 <div class="mb-4 font-medium text-sm text-green-600">
@@ -82,14 +83,14 @@
                 <div class="col-lg-6 order-lg-last">
                     <ul class="nav nav-sm justify-content-center justify-content-lg-end">
                         <!--li class="nav-item">
-                                    <a class="nav-link" href="#">Terms & Condition</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Privacy Policy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Help</a>
-                                </li -->
+                                        <a class="nav-link" href="#">Terms & Condition</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Privacy Policy</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Help</a>
+                                    </li -->
                         <li class="nav-item dropup">
                             <a class="dropdown-toggle dropdown-indicator has-indicator nav-link" data-toggle="dropdown"
                                 data-offset="0,10"><span>{{ Config::get('languages')[App::getLocale()]['display'] }}</span></a>

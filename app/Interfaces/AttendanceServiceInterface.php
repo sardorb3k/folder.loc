@@ -18,5 +18,6 @@ interface AttendanceServiceInterface
     public function storeAttendance(Request $request);
     // updateAttendance
     public function updateAttendance(Request $attendance, int $id);
+    public function getAllGroupsPagination(int $prePage);
 }
 //

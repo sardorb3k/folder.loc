@@ -13,13 +13,17 @@ use App\Models\GroupStudents;
 use App\Interfaces\AttendanceServiceInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Groups;
+use Auth;
 
 class AttendanceService implements AttendanceServiceInterface
 {
     private $attendance;
-    public function __construct(Attendance $attendance)
+    private $groups;
+    public function __construct(Attendance $attendance, Groups $groups)
     {
         $this->attendance = $attendance;
+        $this->groups = $groups;
     }
     /**
      * Attendance Service indexService
@@ -172,6 +176,49 @@ class AttendanceService implements AttendanceServiceInterface
                 }
             }
         }
+    }
+
+    // get All Groups pagination
+    public function getAllGroupsPagination($perPage = 10)
+    {
+        // User role if teacher or assistant
+
+        if (Auth::user()->getRole() != 'teacher' && Auth::user()->getRole() != 'assistant') {
+            $date_year = Date('Y');
+            $date_month = Date('m');
+            $groups = $this->groups
+                ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'),
+                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and mark = 1 and group_id = groups.id) as mark_atten'),
+                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and mark = 0 and group_id = groups.id) as mark_notatten'),
+                'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname',
+                'ua.lastname as assistant_lastname', 'groups.*')
+                ->latest('groups.created_at')
+                ->get();
+            // dd($groups);
+        } else {
+            $userid = Auth::user()->id;
+            if (Auth::user()->getRole() == 'teacher') {
+                $groups = $this->groups
+                    ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                    ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->where('ut.id', $userid)
+                    ->latest('groups.created_at')
+                    ->get();
+            } else {
+                $groups = $this->groups
+                    ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                    ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->where('ua.id', $userid)
+                    ->latest('groups.created_at')
+                    ->get();
+            }
+        }
+        // dd($groups);
+        return $groups ?? [];
     }
 }
 //

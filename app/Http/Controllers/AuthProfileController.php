@@ -19,7 +19,7 @@ class AuthProfileController extends Controller
             'gender' => 'nullable',
             'update_action' => 'required',
             'imageupload' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'birthday' => 'required',
+            'birthday' => 'nullable',
         ]);
         if(Auth::user()->id == $request->id) {
             if ($request->update_action == "personal") {

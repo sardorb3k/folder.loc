@@ -61,7 +61,7 @@ class ExamsRepository implements ExamsRepositoryInterface
     LEFT JOIN group_students ON users.id = group_students.student_id
     WHERE
         group_students.group_id =$exam->group_id");
-        // dd($students);
+        // dd($exam);
         $count = $this->groupService->getCountGroupStudents($exam->group_id);
         return view('exams.show', compact('exam', 'count', 'students'));
     }

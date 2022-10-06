@@ -33,6 +33,9 @@
                 <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Time</span>
                 </th>
+                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">A/NoA</span>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -44,7 +47,7 @@
                     <td class="nk-tb-col">
                         <a href="{{ route('attendance.show_red', $group->id) }}">
                             <span class="text-capitalize">{{ $group->level }}
-                                {{ $group->name }}</span>
+                                {{ $group->name }} </span>
                         </a>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
@@ -77,6 +80,11 @@
                     <td class="nk-tb-col tb-col-lg">
                         <span class="badge">{{ $group->lessonstarttime }}</span>
                         <span class="badge">{{ $group->lessonendtime }}</span>
+                    </td>
+                    <td class="nk-tb-col tb-col-lg">
+                        <span class="badge text-capitalize">
+                            {{ $group->mark_atten }}/{{ $group->mark_notatten }}
+                        </span>
                     </td>
                 </tr>
             @endforeach
