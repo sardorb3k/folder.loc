@@ -61,7 +61,7 @@
                 @if ($errors->any())
                     <div class="example-alert">
                         <div
-                            class="alert @if (session('error')) alert-danger @endif @if (session('success')) alert-primary @endif alert-icon">
+                            class="alert @if (session('errors')) alert-danger @endif @if (session('success')) alert-primary @endif alert-icon">
                             <em class="icon ni ni-alert-circle"></em>
                             @if (session('status'))
                                 <div class="mb-4 font-medium text-sm text-green-600">
