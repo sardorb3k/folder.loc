@@ -20,38 +20,38 @@
                         <div class="card-title-group pb-3 g-2">
                             <div class="card-title card-title-sm">
                                 <h6 class="title">Audience Overview</h6>
-                                <p>How have your users, sessions, bounce rate metrics trended.</p>
+                                <p>What is the trend of your students, teachers, indicators.</p>
                             </div>
-                            <div class="card-tools shrink-0 d-none d-sm-block">
+                            {{-- <div class="card-tools shrink-0 d-none d-sm-block">
                                 <ul class="nav nav-switch-s2 nav-tabs bg-white">
                                     <li class="nav-item"><a href="#" class="nav-link">7 D</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link active">1 M</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link">3 M</a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="analytic-ov">
                             <div class="analytic-data-group analytic-ov-group g-3">
                                 <div class="analytic-data analytic-ov-data">
-                                    <div class="title">Users</div>
-                                    <div class="amount">2.57K</div>
-                                    <div class="change up"><em class="icon ni ni-arrow-long-up"></em>12.37%</div>
+                                    <div class="title">Students</div>
+                                    <div class="amount">{{ $audience_student_count[0]->count }}</div>
+                                    {{-- <div class="change up"><em class="icon ni ni-arrow-long-up"></em>12.37%</div> --}}
                                 </div>
                                 <div class="analytic-data analytic-ov-data">
-                                    <div class="title">Sessions</div>
-                                    <div class="amount">3.98K</div>
-                                    <div class="change up"><em class="icon ni ni-arrow-long-up"></em>47.74%</div>
+                                    <div class="title">Teacher</div>
+                                    <div class="amount">{{ $audience_teacher_count[0]->count }}</div>
+                                    {{-- <div class="change up"><em class="icon ni ni-arrow-long-up"></em>47.74%</div> --}}
                                 </div>
                                 <div class="analytic-data analytic-ov-data">
-                                    <div class="title">Users</div>
-                                    <div class="amount">28.49%</div>
-                                    <div class="change down"><em class="icon ni ni-arrow-long-down"></em>12.37%</div>
+                                    <div class="title">Group</div>
+                                    <div class="amount">{{ $audience_group_count[0]->count }}</div>
+                                    {{-- <div class="change down"><em class="icon ni ni-arrow-long-down"></em>12.37%</div> --}}
                                 </div>
-                                <div class="analytic-data analytic-ov-data">
+                                {{-- <div class="analytic-data analytic-ov-data">
                                     <div class="title">Users</div>
                                     <div class="amount">7m 28s</div>
                                     <div class="change down"><em class="icon ni ni-arrow-long-down"></em>0.35%</div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="analytic-ov-ck">
                                 <canvas class="analytics-line-large" id="analyticOvData"></canvas>
@@ -132,9 +132,9 @@
                                 @foreach ($student_hear as $item)
                                     <div class="traffic-channel-data">
                                         <div class="title"><span class="dot dot-lg sq" data-bg="#9cabff"
-                                                style="background: rgb(156, 171, 255);"></span><span>{{ $item->title }}</span>
+                                                style="background: rgb(156, 171, 255);"></span><span style="text-transform:capitalize;">{{ $item->title }}</span>
                                         </div>
-                                        <div class="amount">{{ $item->result }} <small>**%</small></div>
+                                        <div class="amount">{{ $item->result }}</div>
                                     </div>
                                 @endforeach
                             </div><!-- .traffic-channel-group -->

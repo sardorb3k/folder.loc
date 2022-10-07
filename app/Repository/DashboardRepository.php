@@ -52,7 +52,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         FROM
             attendance
         WHERE
-            attendance.mark > 0 AND attendance.student_id = users.id AND YEAR(attendance.attendance_date) = $date_y AND MONTH(attendance.attendance_date) = $date_m
+            attendance.mark = 0 AND attendance.student_id = users.id AND YEAR(attendance.attendance_date) = $date_y AND MONTH(attendance.attendance_date) = $date_m
     ) AS day
     FROM
         users
@@ -61,6 +61,13 @@ class DashboardRepository implements DashboardRepositoryInterface
     ORDER BY day  DESC LIMIT 8");
 
         $student_hear = DB::select("SELECT coalesce(hear_about, 'Null') as title, count(*) as result FROM `users` where hear_about is not null  and hear_about != 'others-radio' GROUP BY hear_about");
+
+        $audience_student_count = DB::select("SELECT count(*) as count FROM `users` where role = 'student' and status = 'active'");
+        $audience_teacher_count = DB::select("SELECT count(*) as count FROM `users` where role = 'teacher' and status = 'active'");
+
+        $audience_group_count = DB::select("SELECT count(*) as count FROM `groups`");
+
+
 
         // $students = GroupItems::join('users', 'group_items.student_id', '=', 'users.id')->select("users.id", "group_items.id as group_id", "users.lastname", "users.firstname", "users.phone")->where('group_id', $group->id)->get();
         $groups = DB::select(
@@ -76,7 +83,8 @@ class DashboardRepository implements DashboardRepositoryInterface
                 'user_id' => $user_id
             ]
         );
-        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear'));
+        // dd($audience_student_count);
+        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count'));
     }
 
     // studentDashboard
