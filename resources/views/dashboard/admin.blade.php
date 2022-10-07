@@ -6,7 +6,7 @@
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">Dashboard</h3>
                 <div class="nk-block-des text-soft">
-                    <p>{{ __('dashboard.welcome')}}, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</p>
+                    <p>{{ __('dashboard.welcome') }}, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</p>
                 </div>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
@@ -129,27 +129,14 @@
                                     height="160"></canvas>
                             </div>
                             <div class="traffic-channel-group g-2">
-                                <div class="traffic-channel-data">
-                                    <div class="title"><span class="dot dot-lg sq" data-bg="#9cabff"
-                                            style="background: rgb(156, 171, 255);"></span><span>Organic s</span>
+                                @foreach ($student_hear as $item)
+                                    <div class="traffic-channel-data">
+                                        <div class="title"><span class="dot dot-lg sq" data-bg="#9cabff"
+                                                style="background: rgb(156, 171, 255);"></span><span>{{ $item->title }}</span>
+                                        </div>
+                                        <div class="amount">{{ $item->result }} <small>**%</small></div>
                                     </div>
-                                    <div class="amount">4,305 <small>58.63%</small></div>
-                                </div>
-                                <div class="traffic-channel-data">
-                                    <div class="title"><span class="dot dot-lg sq" data-bg="#b8acff"
-                                            style="background: rgb(184, 172, 255);"></span><span>Social Media</span></div>
-                                    <div class="amount">859 <small>23.94%</small></div>
-                                </div>
-                                <div class="traffic-channel-data">
-                                    <div class="title"><span class="dot dot-lg sq" data-bg="#ffa9ce"
-                                            style="background: rgb(255, 169, 206);"></span><span>Referrals</span></div>
-                                    <div class="amount">482 <small>12.94%</small></div>
-                                </div>
-                                <div class="traffic-channel-data">
-                                    <div class="title"><span class="dot dot-lg sq" data-bg="#f9db7b"
-                                            style="background: rgb(249, 219, 123);"></span><span>Others</span></div>
-                                    <div class="amount">138 <small>4.49%</small></div>
-                                </div>
+                                @endforeach
                             </div><!-- .traffic-channel-group -->
                         </div><!-- .traffic-channel -->
                     </div>
@@ -157,15 +144,26 @@
             </div>
         </div>
     </div>
+    {{-- {{ $student_hear }} --}}
     <script>
         var TrafficChannelDoughnutData = {
-            labels: ["Organic s", "Social Media", "Referrals", "Others"],
-            dataUnit: 'People',
+            labels: [
+                @foreach ($student_hear as $item_student)
+                    "{{ $item_student->title }}",
+                @endforeach
+            ],
+            dataUnit: 'relatives',
             legend: false,
             datasets: [{
                 borderColor: "#fff",
-                background: ["#798bff", "#b8acff", "#ffa9ce", "#f9db7b"],
-                data: [4305, 859, 482, 138]
+                background: ["#798bff", "#b8acff", "#ffa9ce", "#f9db7b", "#9cabff", "#ff9a9e", "#f6f5f7",
+                    "#a3d2ca"
+                ],
+                data: [
+                    @foreach ($student_hear as $item_student)
+                        {{ $item_student->result }},
+                    @endforeach
+                ]
             }]
         };
     </script>
