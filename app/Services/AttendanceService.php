@@ -186,12 +186,13 @@ class AttendanceService implements AttendanceServiceInterface
         if (Auth::user()->getRole() != 'teacher' && Auth::user()->getRole() != 'assistant') {
             $date_year = Date('Y');
             $date_month = Date('m');
+            $date_day = Date('d');
             $groups = $this->groups
                 ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                 ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                 ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'),
-                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and mark = 1 and group_id = groups.id) as mark_atten'),
-                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and mark = 0 and group_id = groups.id) as mark_notatten'),
+                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and day(attendance_date) = "'.$date_day.'" and mark = 1 and group_id = groups.id) as mark_atten'),
+                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and day(attendance_date) = "'.$date_day.'" and mark = 0 and group_id = groups.id) as mark_notatten'),
                 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname',
                 'ua.lastname as assistant_lastname', 'groups.*')
                 ->latest('groups.created_at')
