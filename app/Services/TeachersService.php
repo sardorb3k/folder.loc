@@ -123,7 +123,7 @@ class TeachersService implements TeachersServiceInterface
             'gender' => $request->gender,
             'role' => $request->role,
             'image' => $name ?? $teacher->image,
-            'status' => $request->graduation == 'on' ? 'inactive' : 'active',
+            'status' => $request->status,
         ]);
         // dd($teacher);
         return $teacher;

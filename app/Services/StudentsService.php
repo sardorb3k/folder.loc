@@ -116,7 +116,7 @@ class StudentsService implements StudentsServiceInterface
             'hear_about' => $request->hear_about,
             'course' => $request->course,
             'image' => $name ?? $student->image,
-            'status' => $request->graduation == 'on' ? 'inactive' : 'active',
+            'status' => $request->status,
         ]);
     }
     /**

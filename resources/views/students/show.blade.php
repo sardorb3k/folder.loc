@@ -367,7 +367,10 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="custom-control custom-switch">
+                                            <input name="status" type="hidden"
+                                                value="inactive">
                                             <input type="checkbox" name="status" class="custom-control-input"
+                                            value="active"
                                                 @if ($student->status == 'active') checked @endif id="latest-sale">
                                             <label class="custom-control-label" for="latest-sale">Status </label>
                                         </div>
