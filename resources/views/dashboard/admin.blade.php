@@ -142,6 +142,33 @@
                     </div>
                 </div><!-- .card -->
             </div>
+            <div class="col-md-5 col-xxl-3">
+                <div class="card card-bordered h-100">
+                    <div class="card-inner mb-n2">
+                        <div class="card-title-group">
+                            <div class="card-title card-title-sm">
+                                <h6 class="title">Payments</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nk-tb-list is-compact">
+                        <div class="nk-tb-item nk-tb-head">
+                            <div class="nk-tb-col"><span>User</span></div>
+                            <div class="nk-tb-col tb-col-sm text-end"><span>Day</span></div>
+                        </div><!-- .nk-tb-head -->
+                        @foreach ($payments as $payment_item)
+                            <div class="nk-tb-item">
+                                <div class="nk-tb-col">
+                                    <span class="tb-sub">{{ $payment_item->fullname }}</span>
+                                </div>
+                                <div class="nk-tb-col text-end">
+                                    <span class="tb-sub tb-amount">{{ $payment_item->payment_end }}</span>
+                                </div>
+                            </div><!-- .nk-tb-item -->
+                        @endforeach
+                    </div><!-- .nk-tb-list -->
+                </div><!-- .card -->
+            </div>
         </div>
     </div>
     {{-- {{ $student_hear }} --}}

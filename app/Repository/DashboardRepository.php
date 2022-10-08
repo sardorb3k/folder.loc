@@ -44,6 +44,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         // return $user_id."Salom";
         $date_y = date('Y');
         $date_m = date('m');
+        $date_d = date('d');
         $attendance_n = DB::select("SELECT
         CONCAT(firstname, ' ', lastname) AS fullname,
         (
@@ -67,7 +68,15 @@ class DashboardRepository implements DashboardRepositoryInterface
 
         $audience_group_count = DB::select("SELECT count(*) as count FROM `groups`");
 
-
+        $payments = DB::select("SELECT
+        CONCAT(users.firstname, ' ', users.lastname) AS fullname,
+        payments.payment_end 
+    FROM
+        `payments`
+    LEFT JOIN users ON users.id = payments.student_id
+    WHERE
+        YEAR(payment_end) = '" . $date_y . "' AND MONTH(payment_end) = '" . $date_m . "' AND DAY(payment_end) >= " . $date_d . "
+    ORDER BY payments.payment_end ASC LIMIT 8;");
 
         // $students = GroupItems::join('users', 'group_items.student_id', '=', 'users.id')->select("users.id", "group_items.id as group_id", "users.lastname", "users.firstname", "users.phone")->where('group_id', $group->id)->get();
         $groups = DB::select(
@@ -84,7 +93,7 @@ class DashboardRepository implements DashboardRepositoryInterface
             ]
         );
         // dd($audience_student_count);
-        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count'));
+        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count', 'payments'));
     }
 
     // studentDashboard
