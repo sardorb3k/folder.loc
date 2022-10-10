@@ -158,7 +158,7 @@
                     </div>
                 </div><!-- .card -->
             </div>
-            <div class="col-md-5 col-xxl-3">
+            <div class="col-md-6 col-xxl-3">
                 <div class="card card-bordered h-100">
                     <div class="card-inner mb-n2">
                         <div class="card-title-group">
