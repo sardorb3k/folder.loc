@@ -59,7 +59,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         users
     WHERE
         users.role = 'student'
-    ORDER BY day  DESC LIMIT 8");
+    ORDER BY day  DESC LIMIT 30");
 
         $student_hear = DB::select("SELECT coalesce(hear_about, 'Null') as title, count(*) as result FROM `users` where hear_about is not null  and hear_about != 'others-radio' GROUP BY hear_about");
 
@@ -69,6 +69,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         $audience_group_count = DB::select("SELECT count(*) as count FROM `groups`");
 
         $payments = DB::select("SELECT
+        payments.group_id,
         CONCAT(users.firstname, ' ', users.lastname) AS fullname,
         payments.payment_end 
     FROM
@@ -76,7 +77,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     LEFT JOIN users ON users.id = payments.student_id
     WHERE
         YEAR(payment_end) = '" . $date_y . "' AND MONTH(payment_end) = '" . $date_m . "' AND DAY(payment_end) >= " . $date_d . "
-    ORDER BY payments.payment_end ASC LIMIT 8;");
+    ORDER BY payments.payment_end ASC LIMIT 30;");
 
         // $students = GroupItems::join('users', 'group_items.student_id', '=', 'users.id')->select("users.id", "group_items.id as group_id", "users.lastname", "users.firstname", "users.phone")->where('group_id', $group->id)->get();
         $groups = DB::select(

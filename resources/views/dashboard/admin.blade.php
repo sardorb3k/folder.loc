@@ -74,22 +74,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="nk-tb-list is-compact">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>User</span></div>
-                            <div class="nk-tb-col tb-col-sm text-end"><span>Day</span></div>
-                        </div><!-- .nk-tb-head -->
-                        @foreach ($attendance_n as $item)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col">
-                                    <span class="tb-sub">{{ $item->fullname }}</span>
-                                </div>
-                                <div class="nk-tb-col text-end">
-                                    <span class="tb-sub tb-amount">{{ $item->day }}</span>
-                                </div>
-                            </div><!-- .nk-tb-item -->
-                        @endforeach
-                    </div><!-- .nk-tb-list -->
+                    <div class="card-inner">
+                        <table class="datatable-init nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">#</span>
+                                    </th>
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">Student</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">Missed days</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($attendance_n as $attendance)
+                                    <tr class="nk-tb-item odd">
+                                        <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                            <span>{{ $loop->iteration }}</span>
+                                        </td>
+                                        <td class="nk-tb-col">
+                                            <span class="text-capitalize">{{ $attendance->fullname }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span>{{ $attendance->day }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div><!-- .card -->
             </div>
             <div class="col-md-6 col-xxl-3">
@@ -151,22 +167,40 @@
                             </div>
                         </div>
                     </div>
-                    <div class="nk-tb-list is-compact">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col"><span>User</span></div>
-                            <div class="nk-tb-col tb-col-sm text-end"><span>Day</span></div>
-                        </div><!-- .nk-tb-head -->
-                        @foreach ($payments as $payment_item)
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col">
-                                    <span class="tb-sub">{{ $payment_item->fullname }}</span>
-                                </div>
-                                <div class="nk-tb-col text-end">
-                                    <span class="tb-sub tb-amount">{{ $payment_item->payment_end }}</span>
-                                </div>
-                            </div><!-- .nk-tb-item -->
-                        @endforeach
-                    </div><!-- .nk-tb-list -->
+                    <div class="card-inner">
+                        <table class="datatable-init nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                            <thead>
+                                <tr class="nk-tb-item nk-tb-head">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">#</span>
+                                    </th>
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">Student</span>
+                                    </th>
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                        <span class="sub-text">Payment Date</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($payments as $payment)
+                                    <tr class="nk-tb-item odd" @if($loop->iteration <= 10) style="background: #ff5571; color: white;" @endif>
+                                        <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                            <span>{{ $loop->iteration }}</span>
+                                        </td>
+                                        <td class="nk-tb-col">
+                                            <a href="{{ route('payments.show_red', $payment->group_id) }}" @if($loop->iteration <= 10) style="color: white;" @endif>
+                                                <span class="text-capitalize">{{ $payment->fullname }}</span>
+                                            </a>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span>{{ date('d M, Y', strtotime($payment->payment_end)) }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div><!-- .card -->
             </div>
         </div>
