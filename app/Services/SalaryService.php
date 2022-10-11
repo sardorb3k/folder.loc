@@ -137,8 +137,10 @@ class SalaryService implements SalaryServiceInterface
             ON
                 grs.id = gr_s.group_id
             WHERE
-                grs.teacher_id = usr.id
-                or grs.assistant_id = usr.id
+                (grs.teacher_id = usr.id
+                or grs.assistant_id = usr.id) AND 
+                year(gr_s.created_at) <= $year AND 
+                month(gr_s.created_at) <= $month
         ) AS students_count,
         (
             SELECT
