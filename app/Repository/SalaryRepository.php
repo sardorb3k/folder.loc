@@ -102,7 +102,7 @@ class SalaryRepository implements SalaryRepositoryInterface
      */
     public function showSalary($date, $id)
     {
-        $groups = app(SalaryServiceInterface::class)->getGroupById($id);
+        $groups = app(SalaryServiceInterface::class)->getGroupById($date, $id);
         return view('salary.show', compact('groups', 'id', 'date'));
     }
     public function showStudents($date, $teacher_id, $id)
