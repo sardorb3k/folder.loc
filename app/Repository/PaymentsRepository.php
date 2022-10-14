@@ -44,7 +44,8 @@ class PaymentsRepository implements PaymentsRepositoryInterface
     {
         $count = $this->groups->getCountGroupStudents($id);
         $students = $this->payments->getStudents($id, $date);
-        return view('payments.show', compact('students', 'count', 'date', 'id'));
+        $group = $this->groups->getGroupInfoById($id);
+        return view('payments.show', compact('students', 'count', 'date', 'id', 'group'));
     }
 
     // public function show(int $id): View
@@ -95,7 +96,11 @@ class PaymentsRepository implements PaymentsRepositoryInterface
         foreach ($request->payments as $key => $value) {
             // payment where student_id = $key and group_id = $id
             if ($request->amount[$key]) {
-                $payment = Payment::where('student_id', $key)->where('group_id', $id)->where('payment_date', $request->salarydate)->first();
+                $payment = Payment::where('student_id', $key)
+                    ->where('group_id', $id)
+                    ->whereYear('payment_date', date('Y', strtotime($request->salarydate)))
+                    ->whereMonth('payment_date', date('m', strtotime($request->salarydate)))->first();
+
                 if (isset($payment)) {
                     $payment->amount = (int) str_replace(',', '', $request->amount[$key]);
                     $payment->payment_start = $value['start'];

@@ -45,6 +45,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         $date_y = date('Y');
         $date_m = date('m');
         $date_d = date('d');
+        $date_all = date('Y-m-d');
         $attendance_n = DB::select("SELECT
         CONCAT(firstname, ' ', lastname) AS fullname,
         (
@@ -67,17 +68,25 @@ class DashboardRepository implements DashboardRepositoryInterface
         $audience_teacher_count = DB::select("SELECT count(*) as count FROM `users` where role = 'teacher' and status = 'active'");
 
         $audience_group_count = DB::select("SELECT count(*) as count FROM `groups`");
-
+        // dd($date_all);
         $payments = DB::select("SELECT
-        payments.group_id,
-        CONCAT(users.firstname, ' ', users.lastname) AS fullname,
-        payments.payment_end 
-    FROM
-        `payments`
-    LEFT JOIN users ON users.id = payments.student_id
-    WHERE
-        YEAR(payment_end) = '" . $date_y . "' AND MONTH(payment_end) = '" . $date_m . "' AND DAY(payment_end) >= " . $date_d . "
-    ORDER BY payments.payment_end ASC LIMIT 30;");
+                    DISTINCT users.id,
+                    pp.group_id,
+                    CONCAT(
+                        users.firstname,
+                        ' ',
+                        users.lastname
+                    ) AS fullname,
+                    pp.payment_end
+                FROM
+                    `payments` as pp
+                LEFT JOIN users ON users.id = pp.student_id
+                WHERE
+                    #pp.payment_end >= $date_all and
+                    pp.payment_end = (select max(p.payment_end) from payments as p where users.id = p.student_id)
+                ORDER BY
+                    pp.payment_end ASC
+                LIMIT 30;");
 
         // $students = GroupItems::join('users', 'group_items.student_id', '=', 'users.id')->select("users.id", "group_items.id as group_id", "users.lastname", "users.firstname", "users.phone")->where('group_id', $group->id)->get();
         $groups = DB::select(

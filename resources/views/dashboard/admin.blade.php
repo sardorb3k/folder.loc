@@ -184,12 +184,12 @@
                             </thead>
                             <tbody>
                                 @foreach ($payments as $payment)
-                                    <tr class="nk-tb-item odd" @if($loop->iteration <= 10) style="background: #ff5571; color: white;" @endif>
+                                    <tr class="nk-tb-item odd">
                                         <td class="nk-tb-col nk-tb-col-check sorting_1">
                                             <span>{{ $loop->iteration }}</span>
                                         </td>
                                         <td class="nk-tb-col">
-                                            <a href="{{ route('payments.show_red', $payment->group_id) }}" @if($loop->iteration <= 10) style="color: white;" @endif>
+                                            <a href="{{ route('payments.show_red', $payment->group_id) }}">
                                                 <span class="text-capitalize">{{ $payment->fullname }}</span>
                                             </a>
                                         </td>
