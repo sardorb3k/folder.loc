@@ -108,7 +108,7 @@
                                     <tr class="nk-tb-item odd"
                                         style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
                                         <td class="nk-tb-col">
-                                            <span class="text-capitalize">{{ $group->level }} {{ $group->name }}</span>
+                                            <span class="text-capitalize">{{ $item->level }} {{ $item->name }}</span>
                                         </td>
                                         <td class="nk-tb-col tb-col-lg">
                                             <span>{{ $item->attendance_date }}</span>

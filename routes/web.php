@@ -115,7 +115,7 @@ Route::group(['prefix' => 'exams'], function () {
     // -- Exam Get show
     Route::get('/{id}', ['as' => 'exams.show', 'uses' => 'App\Http\Controllers\ExamsController@show'])->middleware(['auth', 'roles:superadmin,admin,teacher']);
     // -- Exam by id
-    Route::get('/{id}/{examid}/getExamId', ['as' => 'exams.getByID', 'uses' => 'App\Http\Controllers\ExamsController@getExamId'])->middleware(['auth', 'roles:superadmin,admin,teacher']);
+    Route::get('/{id}/{examid}/getExamId', ['as' => 'exams.getByID', 'uses' => 'App\Http\Controllers\ExamsController@getExamId'])->middleware(['auth', 'roles:superadmin,admin,teacher,student']);
     Route::post('/{id}/{examid}/getExamId', ['as' => 'exams.updateExam', 'uses' => 'App\Http\Controllers\ExamsController@updateExam'])->middleware(['auth', 'roles:superadmin,admin']);
     // -- Exam Get create | i update -> POST
     Route::post('/create', ['as' => 'exams.create', 'uses' => 'App\Http\Controllers\ExamsController@create'])->middleware(['auth', 'roles:superadmin,admin']);

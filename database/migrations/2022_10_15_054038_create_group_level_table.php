@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('group_level', function (Blueprint $table) {
             $table->id();
-            $table->string('attendance_day');
-            $table->string('exam_pass');
-            // Price float
-            $table->float('price', 10, 2);
+            $table->string('name');
+            // Status
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('group_level');
     }
 };

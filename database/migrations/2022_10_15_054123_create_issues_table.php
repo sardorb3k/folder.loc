@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('issues', function (Blueprint $table) {
             $table->id();
-            $table->string('attendance_day');
-            $table->string('exam_pass');
-            // Price float
-            $table->float('price', 10, 2);
+            // Issue title
+            $table->string('title');
+            // Issue users json
+            // $table->json('users');
+            // Issue status (enum: 'active', 'inactive') (default: 'inactive')
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('issues');
     }
 };

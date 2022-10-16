@@ -3,12 +3,12 @@
 @section('content') <div class="nk-block-head">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Students Lists</h3>
+                <h3 class="nk-block-title page-title">Students Lists - {{ $group->name }}</h3>
                 <div class="nk-block-des text-soft">
                     <p>You have total {{ $count }} students.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
-            @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+            @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                 <div class="nk-block-head-content">
                     <div class="toggle-wrap nk-block-tools-toggle">
                         <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
@@ -30,25 +30,31 @@
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
     @include('error')
-    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false"
+        id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
         <thead>
             <tr class="nk-tb-item nk-tb-head">
-                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
+                    colspan="1">
                     <span class="sub-text">#</span>
                 </th>
-                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
+                    colspan="1">
                     <span class="sub-text">Student</span>
                 </th>
-                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
+                    colspan="1">
                     <span class="sub-text">Birthday</span>
                 </th>
-                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
+                    colspan="1">
                     <span class="sub-text">Status</span>
                 </th>
-                @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
-                <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">Action</span>
-                </th>
+                @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                    <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1">
+                        <span class="sub-text">Action</span>
+                    </th>
                 @endif
             </tr>
         </thead>
@@ -62,8 +68,8 @@
                         <div class="user-card">
                             <a href="{{ route('students.show', $student->id) }}">
                                 <div class="user-card">
-                                    <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;'}}">
-                                        <img src="{{ $student->image ? asset('uploads/student/'.$student->image) : 'https://ui-avatars.com/api/?name='. $student->lastname . '+' . $student->firstname .'&background=random' }}"
+                                    <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;' }}">
+                                        <img src="{{ $student->image ? asset('uploads/student/' . $student->image) : 'https://ui-avatars.com/api/?name=' . $student->lastname . '+' . $student->firstname . '&background=random' }}"
                                             alt="">
                                     </div>
                                     <div class="user-info">
@@ -87,7 +93,7 @@
                             @endif
                         </span>
                     </td>
-                    @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
+                    @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
                         <td class="nk-tb-col tb-col-lg">
                             <ul class="nk-tb-actions gx-1">
                                 <li>
@@ -97,8 +103,8 @@
                                             <input type="hidden" name="student_id" value="{{ $student->group_id }}">
                                             <input type="hidden" name="group_id" value="{{ $group->id }}">
                                             <a href="#" onclick="unsubscribeStudent(this)"
-                                                class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-toggle="dropdown"><em class="icon ni ni-trash"></em></a>
+                                                class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em
+                                                    class="icon ni ni-trash"></em></a>
                                         </form>
                                     </div>
                                 </li>
@@ -124,7 +130,8 @@
                                         <div class="form-group">
                                             <label class="form-label">Student list</label>
                                             <div class="form-control-wrap">
-                                                <select class="form-select js-select2" multiple="multiple" name="student_id[]" data-placeholder="Select Multiple options">
+                                                <select class="form-select js-select2" multiple="multiple"
+                                                    name="student_id[]" data-placeholder="Select Multiple options">
                                                     @foreach ($unsubscribelist as $item)
                                                         @if ($item->role == 'student')
                                                             <option value="{{ $item->id }}">
@@ -140,7 +147,8 @@
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                             <li>
                                                 <input type="hidden" name="group_id" value="{{ $group->id }}">
-                                                <a href="#" onclick="event.preventDefault();
+                                                <a href="#"
+                                                    onclick="event.preventDefault();
                                                         this.closest('form').submit();"
                                                     class="btn btn-lg btn-primary">Add</a>
                                             </li>
@@ -161,20 +169,19 @@
     </div><!-- .modal -->
 
     <script>
-
-       async function unsubscribeStudent (element) {
-           const result = await Swal.fire({
-               title: 'Are you sure?',
-               text: "You won't be able to revert this!",
-               icon: 'warning',
-               showCancelButton: true,
-               confirmButtonColor: '#3085d6',
-               cancelButtonColor: '#d33',
-               confirmButtonText: 'Yes, delete it!'
-           });
-           if (result.isConfirmed) {
-               await element.closest('form').submit();
-           }
-       }
-   </script>
+        async function unsubscribeStudent(element) {
+            const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            });
+            if (result.isConfirmed) {
+                await element.closest('form').submit();
+            }
+        }
+    </script>
 @endsection

@@ -31,6 +31,7 @@ class SettingsService implements SettingsServiceInterface
             $settings->update([
                 'attendance_day' => $request->attendance_day,
                 'exam_pass' => $request->exam_pass,
+                'price' => $request->price,
             ]);
             $settings->save();
             return redirect()->route('settings.index')->with('success', 'Settings Updated Successfully');

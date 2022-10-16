@@ -55,6 +55,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="price">Price
+                                    <span class="valid-form">*</span></label>
+                                <div class="form-control-wrap">
+                                    <input type="number" class="form-control" id="price" name="price" tabindex="2"
+                                        value="{{ $info->price }}" required="">
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <button type="submit" onclick="this.form.setAttribute('novalidate', 'novalidate');'"
@@ -67,4 +77,26 @@
         </div>
     </div><!-- .nk-block -->
 
+    <div class="nk-block">
+        <h6 class="overline-title title">Group level</h6>
+        <div class="card card-bordered">
+            <div class="card-inner">
+                <ul class="custom-control-group custom-control-vertical w-100">
+                    <li>
+                        <div class="custom-control custom-control-sm custom-control-pro">
+                            <label class="custom-control-label"><em
+                                    class="icon icon-lg ni ni-cc-paypal"></em><span>Paypal</span></label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="form-control-wrap">
+                    <div class="input-group"><input type="text" class="form-control"
+                            placeholder="Recipient's username">
+                        <div class="input-group-append"><button class="btn btn-outline-primary btn-dim">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

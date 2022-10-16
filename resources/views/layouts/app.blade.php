@@ -159,7 +159,7 @@
                                                 <div class="user-avatar sm"
                                                     style="{{ Auth::user()->image == null ? 'background: #798bff;' : '' }}">
                                                     @if (Auth::user()->image != null)
-                                                        <img src="{{ asset('uploads/' . Auth::user()->role. '/' . Auth::user()->image) }}"
+                                                        <img src="{{ asset('uploads/' . Auth::user()->role . '/' . Auth::user()->image) }}"
                                                             alt="{{ Auth::user()->firstname }}">
                                                     @else
                                                         <em class='icon ni ni-user'></em>
@@ -196,8 +196,16 @@
                                                     <li>
                                                         <a href="{{ route('profile.show') }}">
                                                             <em class="icon ni ni-setting-alt"></em>
-                                                            <span class="text-capitalize">{{ __('dashboard.account_settings')}}</span>
+                                                            <span
+                                                                class="text-capitalize">{{ __('dashboard.account_settings') }}</span>
                                                         </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="dropdown-inner">
+                                                <ul class="link-list">
+                                                    <li><a class="" onclick="DarkMode()" href="#"><em
+                                                                class="icon ni ni-moon"></em><span>Dark Mode</span></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -205,12 +213,13 @@
                                                 <ul class="link-list">
                                                     <form method="POST" action="{{ route('logout') }}">
                                                         @csrf
-                                                        <li><a onclick="event.preventDefault();
+                                                        <li><a
+                                                                onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                            <em class="icon ni ni-signout"></em>
-                                                                    <span>{{ __('dashboard.sign_out')}}</span>
-                                                                </a>
-                                                            </li>
+                                                                <em class="icon ni ni-signout"></em>
+                                                                <span>{{ __('dashboard.sign_out') }}</span>
+                                                            </a>
+                                                        </li>
                                                     </form>
                                                 </ul>
                                             </div>
@@ -294,6 +303,27 @@
     </div>
     <!-- app-root @e -->
     <!-- JavaScript -->
+    <script>
+        var darkM = localStorage.getItem("darkMode");
+        var body = document.body;
+        if (darkM) {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+        }
+
+        function DarkMode() {
+            var darkM = localStorage.getItem("darkMode");
+            var body = document.body;
+            if (darkM) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+            localStorage.getItem("darkMode", false);
+            console.log(darkM)
+        }
+    </script>
     <script src="{{ asset('assets/js/bundle.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/scripts.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/charts/gd-analytics.js?ver=2.9.1') }}"></script>

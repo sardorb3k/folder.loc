@@ -102,7 +102,7 @@
         NioApp.Passcode('.passcode-switch');
     };
 
-    // Toastr Message @v1.0 
+    // Toastr Message @v1.0
     NioApp.Toast = function (msg, ttype, opt) {
         var ttype = (ttype) ? ttype : 'info', msi = '',
             ticon = (ttype === 'info') ? 'ni ni-info-fill' : ((ttype === 'success') ? 'ni ni-check-circle-fill' : ((ttype === 'error') ? 'ni ni-cross-circle-fill' : ((ttype === 'warning') ? 'ni ni-alert-fill' : ''))),
@@ -507,10 +507,13 @@
     // Dark Mode Switch @since v2.0
     NioApp.ModeSwitch = function () {
         var toggle = $('.dark-switch');
-        if ($body.hasClass('dark-mode')) {
-            toggle.addClass('active');
+        var darkStorage = localStorage.getItem('darkMode');
+        if ($body.hasClass('dark-mode') && darkStorage) {
+            localStorage.setItem("darkMode", true);
+          toggle.addClass('active');
         } else {
-            toggle.removeClass('active');
+          toggle.removeClass('active');
+          localStorage.setItem("darkMode", false);
         }
         toggle.on('click', function (e) {
             e.preventDefault();

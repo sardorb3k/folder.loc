@@ -4,7 +4,7 @@
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Attendance</h3>
+                <h3 class="nk-block-title page-title">Attendance - {{ $group[0]->name }}</h3>
                 <div class="nk-block-des text-soft">
                     <p>You have total {{ $count }} students.</p>
                 </div>
@@ -109,8 +109,8 @@
                                             <div class="form-control-wrap">
                                                 <input name="attendance[{{ $student->id }}]" type="hidden"
                                                     value="0">
-                                                <div class="custom-control custom-switch">    
-                                                    <input name="attendance[{{ $student->id }}]" value="1" type="checkbox" @if ($student->mark == 1) checked @endif class="custom-control-input" id="attendanceSwitch{{$student->id}}">    
+                                                <div class="custom-control custom-switch">
+                                                    <input name="attendance[{{ $student->id }}]" value="1" type="checkbox" @if ($student->mark == 1) checked @endif class="custom-control-input" id="attendanceSwitch{{$student->id}}">
                                                     <label class="custom-control-label" for="attendanceSwitch{{$student->id}}"></label>
                                                 </div>
                                             </div>
