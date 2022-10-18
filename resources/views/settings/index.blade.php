@@ -78,13 +78,13 @@
     </div><!-- .nk-block -->
 
     <div class="nk-block">
-        <h6 class="overline-title title">Group level</h6>
+        <h6 class="overline-title title">Group levels</h6>
         <div class="card card-bordered">
             <div class="card-inner">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">First Name</th>
+                            <th scope="col">Name</th>
                             <th scope="col" style="width: 10px">Action</th>
                         </tr>
                     </thead>
