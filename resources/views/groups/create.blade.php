@@ -24,8 +24,7 @@
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">
-                <form action="{{ route('groups.store') }}" class="form-validate" novalidate="novalidate"
-                    method="post">
+                <form action="{{ route('groups.store') }}" class="form-validate" novalidate="novalidate" method="post">
                     @csrf
                     <div class="row g-gs">
                         <div class="col-md-6">
@@ -50,7 +49,7 @@
                                 <label class="form-label" for="lastname">End time</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control time-picker" name="lessonendtime"
-                                        placeholder="Time" required autocomplete="off"> 
+                                        placeholder="Time" required autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -115,12 +114,13 @@
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
                                         <select class="form-control" name="level" id="default-06" required>
-                                            <option value="freshman">Freshman</option>
-                                            <option value="sophomore">Sophomore</option>
-                                            <option value="junior">Junior</option>
-                                            <option value="senior">Senior</option>
-                                            <option value="ielts-junior">IELTS Junior</option>
-                                            <option value="ielts-senior">IELTS Senior</option>
+                                            @forelse ($grouplevel as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @empty
+                                                <option value="">No level</option>
+                                            @endforelse
                                         </select>
                                     </div>
                                 </div>

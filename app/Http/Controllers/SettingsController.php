@@ -31,4 +31,24 @@ class SettingsController extends Controller
         return $this->settings->storeSettings($request);
         return redirect()->back();
     }
+    // Group levels
+    public function groupLevel(Request $request)
+    {
+        return $this->settings->groupLevel($request);
+    }
+    // Group Level delete
+    public function groupLevelDelete($id)
+    {
+        return $this->settings->groupLevelDelete($id);
+    }
+    // Group Level get
+    public function groupLevelGetById($id)
+    {
+        return $this->settings->groupLevelGetById($id);
+    }
+    // Group Level update
+    public function groupLevelUpdate(Request $request)
+    {
+        return $this->settings->groupLevelUpdate($request);
+    }
 }

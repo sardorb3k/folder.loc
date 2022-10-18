@@ -121,12 +121,14 @@
                                 <div class="form-control-wrap ">
                                     <div class="form-control-select">
                                         <select class="form-control" name="level" id="fv-level" required>
-                                            <option value="freshman" {{ 'freshman' == $group->level ? 'selected' : '' }}>Freshman</option>
-                                            <option value="sophomore" {{ 'sophomore' == $group->level ? 'selected' : '' }}>Sophomore</option>
-                                            <option value="junior" {{ 'junior' == $group->level ? 'selected' : '' }}>Junior</option>
-                                            <option value="senior" {{ 'senior' == $group->level ? 'selected' : '' }}>Senior</option>
-                                            <option value="ielts-junior" {{ 'ielts-junior' == $group->level ? 'selected' : '' }}>IELTS Junior</option>
-                                            <option value="ielts-senior" {{ 'ielts-senior' == $group->level ? 'selected' : '' }}>IELTS Senior</option>
+                                            @forelse ($grouplevel as $item)
+                                                <option value="{{ $item->id }}"
+                                                    {{ $item->id == $group->level ? 'selected' : '' }}>
+                                                    {{ $item->name }}
+                                                </option>
+                                            @empty
+                                                <option value="">No level</option>
+                                            @endforelse
                                         </select>
                                     </div>
                                 </div>

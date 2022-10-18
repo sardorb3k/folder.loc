@@ -133,6 +133,14 @@ Route::group(['prefix' => 'exams'], function () {
 Route::group(['prefix' => 'settings'], function () {
     Route::get('/', 'App\Http\Controllers\SettingsController@index')->name('settings.index')->middleware(['auth','roles:superadmin']);
     Route::post('/', 'App\Http\Controllers\SettingsController@store')->name('settings.store')->middleware(['auth', 'roles:superadmin']);
+    // Level
+    Route::post('/groupLevel', 'App\Http\Controllers\SettingsController@groupLevel')->name('settings.groupLevel')->middleware(['auth', 'roles:superadmin']);
+    // Level delete
+    Route::post('/groupLevel/{id}', 'App\Http\Controllers\SettingsController@groupLevelDelete')->name('settings.groupLevelDelete')->middleware(['auth', 'roles:superadmin']);
+    // Group level get by id
+    Route::get('/groupLevel/{id}', 'App\Http\Controllers\SettingsController@groupLevelGetById')->name('settings.groupLevelGetById')->middleware(['auth', 'roles:superadmin']);
+    // Group level update
+    Route::put('/groupLevel/{id}', 'App\Http\Controllers\SettingsController@groupLevelUpdate')->name('settings.groupLevelUpdate')->middleware(['auth', 'roles:superadmin']);
 });
 
 

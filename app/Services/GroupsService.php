@@ -45,7 +45,7 @@ class GroupsService implements GroupsServiceInterface
             if (Auth::user()->getRole() != 'teacher' && Auth::user()->getRole() != 'assistant') {
                 $groups = DB::select(
                     DB::raw(
-                        'SELECT gi.id, gi.`name`,gi.lessonstarttime,lessonendtime, gi.days, gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
+                        'SELECT gi.id, gi.`name`,gi.lessonstarttime,lessonendtime, gi.days, gl.name, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN group_level AS gl ON gi.id=gl.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id'
                     )
                 );
                 // $groups = Groups::leftJoin('users as teachers', 'teachers.id', '=', 'groups.teacher_id')
@@ -55,9 +55,9 @@ class GroupsService implements GroupsServiceInterface
             } else {
                 $userid == Auth::user()->id;
                 if (Auth::user()->getRole() == 'teacher') {
-                    $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ut.id = $userid");
+                    $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gl.name, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN group_level AS gl ON gl.id=gi.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ut.id = $userid");
                 } else {
-                    $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gi.level, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ua.id = $userid");
+                    $groups = DB::select("SELECT gi.id,gi.`name`,gi.lessonstarttime,lessonendtime,gi.days,gl.name, ut.firstname AS teacher_firstname, ut.lastname AS teacher_lastname, ua.firstname AS assistant_firstname, ua.lastname AS assistant_lastname FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN group_level AS gl ON gl.id=gi.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id where ua.id = $userid");
                 }
             }
             return $groups ?? [];
@@ -74,7 +74,8 @@ class GroupsService implements GroupsServiceInterface
             $groups = $this->groups
                 ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                 ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
+                ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
                 ->latest('groups.created_at')
                 ->get();
         } else {
@@ -83,7 +84,8 @@ class GroupsService implements GroupsServiceInterface
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
                     ->where('ut.id', $userid)
                     ->latest('groups.created_at')
                     ->get();
@@ -91,7 +93,8 @@ class GroupsService implements GroupsServiceInterface
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
                     ->where('ua.id', $userid)
                     ->latest('groups.created_at')
                     ->get();
@@ -142,7 +145,7 @@ class GroupsService implements GroupsServiceInterface
          */
         $group = DB::select(
             DB::raw(
-                "SELECT gi.id,gi.`name`,gi.lessonstarttime,gi.days,gi.level,concat(ut.lastname,' ',ut.firstname) AS teacher_id,concat(ua.lastname,' ',ua.firstname) AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id WHERE gi.id=:id"
+                "SELECT gi.id,gi.`name`,gi.lessonstarttime,gi.days,gl.name as level,concat(ut.lastname,' ',ut.firstname) AS teacher_id,concat(ua.lastname,' ',ua.firstname) AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN group_level AS gl ON gl.id=gi.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id WHERE gi.id=:id"
             ),
             ['id' => $id]
         );

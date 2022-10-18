@@ -7,6 +7,7 @@ use App\Interfaces\TeachersServiceInterface;
 use App\Http\Requests\UpdateGroupsRequest;
 use App\Interfaces\GroupsServiceInterface;
 use App\Http\Requests\StoreGroupsRequest;
+use App\Models\GroupLevel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -60,7 +61,8 @@ class GroupsRepository implements GroupsRepositoryInterface
     {
         $teachers = $this->teachersService->getAllTeachers();
         $assistants = $this->teachersService->getAllAssistant();
-        return view('groups.create', compact('teachers','assistants'));
+        $grouplevel = GroupLevel::where('status', 1)->get();
+        return view('groups.create', compact('teachers', 'assistants', 'grouplevel'));
     }
     /**
      * EditGroups method for GroupsController class to display the form for editing a group.
@@ -70,7 +72,8 @@ class GroupsRepository implements GroupsRepositoryInterface
         $group = $this->groupService->getGroupById($id);
         $teachers = $this->teachersService->getAllTeachers();
         $assistants = $this->teachersService->getAllAssistant();
-        return view('groups.edit', compact('group', 'teachers','assistants'));
+        $grouplevel = GroupLevel::where('status', 1)->get();
+        return view('groups.edit', compact('group', 'teachers', 'assistants', 'grouplevel'));
     }
     /**
      * StoreGroups method for GroupsController class to store a new group in the database.

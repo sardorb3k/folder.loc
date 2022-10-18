@@ -42,8 +42,9 @@ class StudentsService implements StudentsServiceInterface
         return $this->students
             ->leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
             ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')
+            ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
             ->where('users.role', 'student')
-            ->select('groups.level as group_level', 'groups.name as group_name', 'users.*')
+            ->select('gl.name as group_level', 'groups.name as group_name', 'users.*')
             ->latest('users.created_at')
             ->get();
     }
@@ -61,7 +62,7 @@ class StudentsService implements StudentsServiceInterface
     {
         return DB::select(
             DB::raw(
-                "SELECT att.id, att.attendance_date, att.mark, gp.name, gp.level FROM `attendance` as att LEFT JOIN groups as gp on att.group_id = gp.id WHERE att.student_id = :id ORDER BY att.attendance_date DESC"
+                "SELECT att.id, att.attendance_date, att.mark, gp.name, gl.name FROM `attendance` as att LEFT JOIN groups as gp on att.group_id = gp.id LEFT JOIN group_level as gl on gl.id = gp.id WHERE att.student_id = :id ORDER BY att.attendance_date DESC"
             ),
             ['id' => $id]
         );
@@ -198,9 +199,9 @@ class StudentsService implements StudentsServiceInterface
     {
         return DB::select(
             DB::raw(
-                "SELECT gp.id,gp.`name`,gp.lessonstarttime,gp.days,gp.LEVEL,(
+                "SELECT gp.id,gp.`name`,gp.lessonstarttime,gp.days,gl.name as level,(
                     SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.teacher_id) AS teacher_fullname,(
-                    SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.assistant_id) AS assistant_fullname FROM group_students AS gi LEFT JOIN groups AS gp ON gi.group_id=gp.id WHERE gi.student_id=:id"
+                    SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.assistant_id) AS assistant_fullname FROM group_students AS gi LEFT JOIN groups AS gp ON gi.group_id=gp.id LEFT JOIN group_level AS gl ON gl.id=gp.id WHERE gi.student_id=:id"
             ),
             ['id' => $id]
         );

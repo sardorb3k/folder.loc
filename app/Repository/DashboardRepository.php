@@ -182,7 +182,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         ]);
 
         $attendance = app(StudentsServiceInterface::class)->getStudentByAttendance($user_id);
-
+        
         // Payments
         $payments = DB::select(DB::raw("SELECT
         payments.amount,

@@ -17,4 +17,6 @@ class GroupLevel extends Model
         'days',
         'level',
     ];
+    // Table name
+    protected $table = 'group_level';
 }

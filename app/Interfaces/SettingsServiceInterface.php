@@ -11,5 +11,7 @@ interface SettingsServiceInterface {
      * @return array
      */
     public function storeSettings(Request $request);
+    // Group levels
+    public function groupLevel(Request $request);
 }
 //
