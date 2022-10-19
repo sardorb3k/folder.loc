@@ -90,8 +90,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-phone">Sex /
-                                    Gender <span class="valid-form">*</span></label>
+                                <label class="form-label" for="fv-phone">Gender <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <ul class="custom-control-group">
                                         <li>
@@ -119,7 +118,7 @@
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-gift"></em>
                                     </div>
-                                    <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false" 
+                                    <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false"
                                         tabindex="4" value="{{ old('birthday') }}" data-date-format="yyyy-mm-dd"
                                         required  autocomplete="off">
                                 </div>

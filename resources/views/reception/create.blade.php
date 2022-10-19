@@ -93,8 +93,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-phone">Sex /
-                                    Gender <span class="valid-form">*</span></label>
+                                <label class="form-label" for="fv-phone">Gender <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
                                     <ul class="custom-control-group">
                                         <li>
@@ -131,7 +130,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-homeaddress">Home
-                                    address <span class="valid-form">*</span></label>
+                                    address</label>
                                 <div class="form-control-wrap">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-home"></em>
@@ -144,7 +143,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-why-english">Why
-                                    are you going to learn English <span class="valid-form">*</span></label>
+                                    are you going to learn English</label>
                                 <div class="form-control-wrap">
                                     <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-target"></em>
@@ -170,7 +169,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-about" tabindex="12">Where did you hear about us
-                                    <span class="valid-form">*</span></label>
+                                   </label>
                                 <ul class="custom-control-group" id="hear_about">
                                     <li>
                                         <div class="custom-control custom-control-sm custom-radio custom-control-pro">
@@ -247,7 +246,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="fv-about" tabindex="13">Course
-                                    <span class="valid-form">*</span></label>
+                                   </label>
                                 <ul class="custom-control-group">
                                     <li>
                                         <div class="custom-control custom-control-sm custom-checkbox custom-control-pro">
