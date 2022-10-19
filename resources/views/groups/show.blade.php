@@ -3,7 +3,7 @@
 @section('content') <div class="nk-block-head">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Students Lists - {{ $group->name }}</h3>
+                <h3 class="nk-block-title page-title">Students Lists - {{ $group->level }} {{ $group->name }}</h3>
                 <div class="nk-block-des text-soft">
                     <p>You have total {{ $count }} students.</p>
                 </div>

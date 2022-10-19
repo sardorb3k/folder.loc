@@ -190,11 +190,12 @@ class AttendanceService implements AttendanceServiceInterface
             $groups = $this->groups
                 ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                 ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
                 ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'),
                 DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and day(attendance_date) = "'.$date_day.'" and mark = 1 and group_id = groups.id) as mark_atten'),
                 DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and day(attendance_date) = "'.$date_day.'" and mark = 0 and group_id = groups.id) as mark_notatten'),
                 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname',
-                'ua.lastname as assistant_lastname', 'groups.*')
+                'ua.lastname as assistant_lastname', 'gl.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
                 ->latest('groups.created_at')
                 ->get();
             // dd($groups);
@@ -204,7 +205,8 @@ class AttendanceService implements AttendanceServiceInterface
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'gl.name as level', 'gl.name as level', 'groups.id', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.name', 'groups.days', 'groups.created_at')
                     ->where('ut.id', $userid)
                     ->latest('groups.created_at')
                     ->get();
@@ -212,13 +214,15 @@ class AttendanceService implements AttendanceServiceInterface
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'groups.*')
+                    ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'gl.name as level', 'gl.name as level', 'groups.id', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.name', 'groups.days', 'groups.created_at')
                     ->where('ua.id', $userid)
                     ->latest('groups.created_at')
                     ->get();
             }
         }
         // dd($groups);
+
         return $groups ?? [];
     }
 }

@@ -51,7 +51,7 @@ class StudentsService implements StudentsServiceInterface
 
     public function getCountStudents(): int
     {
-        return $this->students->where('role', 'student')->count();
+        return $this->students->where('role', 'student')->where('status', 'active')->count();
     }
     public function getStudentById($id)
     {
