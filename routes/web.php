@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\AuthProfileController;
+use App\Http\Controllers\ReceptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::get('/', ['as' => 'dashboard', 'uses' => 'App\Http\Controllers\HomeContro
 
 // Group routes
 Route::resource('groups', GroupsController::class)->middleware(['auth', 'roles:superadmin,admin,teacher']);
+
+// reception routes
+Route::resource('reception', ReceptionController::class)->middleware(['auth', 'roles:superadmin,admin']);
 // Student routes
 Route::resource('students', GroupsController::class)->middleware(['auth', 'roles:superadmin,admin,teacher']);
 // Group subscription student routes

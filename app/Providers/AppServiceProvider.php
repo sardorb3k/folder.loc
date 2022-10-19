@@ -108,6 +108,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Interfaces\SettingsServiceInterface',
             'App\Services\SettingsService'
         );
+        // Reception Repository
+        $this->app->bind(
+            'App\Interfaces\ReceptionRepositoryInterface',
+            'App\Repository\ReceptionRepository'
+        );
     }
 
     /**
