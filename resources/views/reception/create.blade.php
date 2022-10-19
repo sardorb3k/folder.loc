@@ -86,8 +86,7 @@
                                             <span class="input-group-text" id="fv-phone">+998</span>
                                         </div>
                                         <input type="phone" class="form-control" id="phone_contact" tabindex="4"
-                                            pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone_contact" value="{{ old('phone_contact') }}"
-                                            required="">
+                                            pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone_contact" value="{{ old('phone_contact') }}">
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +124,7 @@
                                     </div>
                                     <input type="text" class="form-control date-picker-alt" name="birthday" onkeydown="return false"
                                         tabindex="4" value="{{ old('birthday') }}" data-date-format="yyyy-mm-dd"
-                                        required  autocomplete="off">
+                                        autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -138,7 +137,7 @@
                                         <em class="icon ni ni-home"></em>
                                     </div>
                                     <input type="text" class="form-control" id="fv-homeaddress" name="homeaddress"
-                                        value="{{ old('homeaddress') }}" tabindex="7" required>
+                                        value="{{ old('homeaddress') }}" tabindex="7">
                                 </div>
                             </div>
                         </div>
@@ -151,7 +150,7 @@
                                         <em class="icon ni ni-target"></em>
                                     </div>
                                     <input type="text" class="form-control" id="fv-why-english" name="reasontostudy"
-                                        value="{{ old('reasontostudy') }}" tabindex="8" required>
+                                        value="{{ old('reasontostudy') }}" tabindex="8">
                                 </div>
                             </div>
                         </div>
@@ -164,7 +163,7 @@
                                         <em class="icon ni ni-tag"></em>
                                     </div>
                                     <input type="text" class="form-control" id="fv-interests" name="interests"
-                                        value="{{ old('interests') }}" tabindex="9" required>
+                                        value="{{ old('interests') }}" tabindex="9">
                                 </div>
                             </div>
                         </div>
