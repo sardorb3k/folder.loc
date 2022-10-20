@@ -7,7 +7,7 @@
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">Dashboard</h3>
                 <div class="nk-block-des text-soft">
-                    <p>{{ __('dashboard.welcome') }}, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}!</p>
+                    <p>{{ __('dashboard.welcome') }}, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}!  @if (Auth::user()->id == 12) ❤️ @endif</p>
                 </div>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->

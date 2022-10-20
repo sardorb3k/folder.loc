@@ -62,7 +62,7 @@ class StudentsService implements StudentsServiceInterface
     {
         return DB::select(
             DB::raw(
-                "SELECT att.id, att.attendance_date, att.mark, gp.name, gl.name FROM `attendance` as att LEFT JOIN groups as gp on att.group_id = gp.id LEFT JOIN group_level as gl on gl.id = gp.id WHERE att.student_id = :id ORDER BY att.attendance_date DESC"
+                "SELECT att.id, att.attendance_date, att.mark, gp.name, gl.name as level FROM `attendance` as att LEFT JOIN groups as gp on att.group_id = gp.id LEFT JOIN group_level as gl on gl.id = gp.id WHERE att.student_id = :id ORDER BY att.attendance_date DESC"
             ),
             ['id' => $id]
         );
