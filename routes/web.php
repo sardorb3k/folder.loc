@@ -50,7 +50,7 @@ Route::get('/', ['as' => 'dashboard', 'uses' => 'App\Http\Controllers\HomeContro
 Route::resource('groups', GroupsController::class)->middleware(['auth', 'roles:superadmin,admin,teacher']);
 
 // reception routes
-Route::resource('reception', ReceptionController::class)->middleware(['auth', 'roles:superadmin,admin']);
+// Route::resource('reception', ReceptionController::class)->middleware(['auth', 'roles:superadmin,admin']);
 // Student routes
 Route::resource('students', GroupsController::class)->middleware(['auth', 'roles:superadmin,admin,teacher']);
 // Group subscription student routes

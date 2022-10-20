@@ -148,7 +148,7 @@ class GroupsService implements GroupsServiceInterface
          */
         $group = DB::select(
             DB::raw(
-                "SELECT gi.id,gi.`name`,gi.lessonstarttime,gi.days,gl.name as level,concat(ut.lastname,' ',ut.firstname) AS teacher_id,concat(ua.lastname,' ',ua.firstname) AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN group_level AS gl ON gl.id=gi.id LEFT JOIN users AS ua ON gi.assistant_id=ua.id WHERE gi.id=:id"
+                "SELECT gi.id,gi.`name`,gi.lessonstarttime,gi.days,gl.name as level,concat(ut.lastname,' ',ut.firstname) AS teacher_id,concat(ua.lastname,' ',ua.firstname) AS assistant_id FROM groups AS gi LEFT JOIN users AS ut ON gi.teacher_id=ut.id LEFT JOIN group_level AS gl ON gl.id=gi.level LEFT JOIN users AS ua ON gi.assistant_id=ua.id WHERE gi.id=:id"
             ),
             ['id' => $id]
         );

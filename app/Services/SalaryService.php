@@ -27,7 +27,8 @@ class SalaryService implements SalaryServiceInterface
         return $this->groups
             ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
             ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
-            ->select(DB::raw('CONCAT(ut.lastname," ", ut.firstname) AS teacher_id'), DB::raw('CONCAT(ua.lastname," ", ua.firstname) AS assistant_id'), 'groups.*')
+            ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
+            ->select(DB::raw('CONCAT(ut.lastname," ", ut.firstname) AS teacher_id'), DB::raw('CONCAT(ua.lastname," ", ua.firstname) AS assistant_id'), 'gl.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
             ->whereYear('groups.created_at', '<=', date('Y', strtotime($date)))
             ->whereMonth('groups.created_at', '<=', date('m', strtotime($date)))
             ->where('groups.teacher_id', $id)
@@ -51,41 +52,41 @@ class SalaryService implements SalaryServiceInterface
                 (
                     SELECT COUNT(*) AS count
                     FROM attendance
-                    WHERE student_id = us.id AND 
-                        mark = 1 AND 
-                        MONTH(attendance_date) = :mon AND 
+                    WHERE student_id = us.id AND
+                        mark = 1 AND
+                        MONTH(attendance_date) = :mon AND
                         YEAR(attendance_date) = :yo
                 ) AS att_ap,
                 (
                     SELECT amount
                     FROM payments
-                    WHERE student_id = us.id AND 
+                    WHERE student_id = us.id AND
                         group_id = gp_s.group_id AND
-                        MONTH(payment_start) = :payM AND 
-                        YEAR(payment_start) = :payY 
+                        MONTH(payment_start) = :payM AND
+                        YEAR(payment_start) = :payY
                 ) AS payment,
-                (   
+                (
                     SELECT amount
                     FROM salary_students
-                    WHERE student_id = us.id AND 
-                        group_id = gp_s.group_id AND 
-                        MONTH(salarydate) = :amountM AND 
-                        YEAR(salarydate) = :amountY and 
-                        teacher_id = :teacher_id 
+                    WHERE student_id = us.id AND
+                        group_id = gp_s.group_id AND
+                        MONTH(salarydate) = :amountM AND
+                        YEAR(salarydate) = :amountY and
+                        teacher_id = :teacher_id
                 ) AS amount,
                 (
                     SELECT COUNT(*) AS count
                     FROM attendance
-                    WHERE student_id = us.id AND 
-                    mark = 0 and 
-                    MONTH(attendance_date) = :mon2 AND 
+                    WHERE student_id = us.id AND
+                    mark = 0 and
+                    MONTH(attendance_date) = :mon2 AND
                     YEAR(attendance_date) = :yo2
                 ) AS att_attended
-                
+
             FROM group_students AS gp_s
             LEFT JOIN users AS us ON us.id = gp_s.student_id
-            WHERE group_id = :id AND 
-            year(gp_s.created_at) <= :yo3 AND 
+            WHERE group_id = :id AND
+            year(gp_s.created_at) <= :yo3 AND
             month(gp_s.created_at) <= :mon3"
             ),
             [
@@ -138,8 +139,8 @@ class SalaryService implements SalaryServiceInterface
                 grs.id = gr_s.group_id
             WHERE
                 (grs.teacher_id = usr.id
-                or grs.assistant_id = usr.id) AND 
-                year(gr_s.created_at) <= $year AND 
+                or grs.assistant_id = usr.id) AND
+                year(gr_s.created_at) <= $year AND
                 month(gr_s.created_at) <= $month
         ) AS students_count,
         (

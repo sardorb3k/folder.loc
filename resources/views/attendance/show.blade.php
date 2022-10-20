@@ -4,7 +4,7 @@
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Attendance - {{ $group[0]->name }}</h3>
+                <h3 class="nk-block-title page-title">Attendance - {{ $group[0]->level }} {{ $group[0]->name }}</h3>
                 <div class="nk-block-des text-soft">
                     <p>You have total {{ $count }} students.</p>
                 </div>

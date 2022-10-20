@@ -62,18 +62,6 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label" for="fv-email">Email
-                                    address</label>
-                                <div class="form-control-wrap">
-                                    <div class="form-icon form-icon-right">
-                                        <em class="icon ni ni-mail"></em>
-                                    </div>
-                                    <input type="email" class="form-control" id="fv-email" name="email" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label class="form-label" for="fv-phone">Phone
                                     <span class="valid-form">*</span></label>
                                 <div class="form-control-wrap">
@@ -84,6 +72,20 @@
                                         <input type="phone" class="form-control" id="phone" tabindex="3"
                                             pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone" value="{{ old('phone') }}"
                                             required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="phone_contact1">Phone Other</label>
+                                <div class="form-control-wrap">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="fv-phone">+998</span>
+                                        </div>
+                                        <input type="phone" class="form-control" id="phone_contact" tabindex="4"
+                                            pattern="^\d{2}-\d{3}-\d{2}-\d{2}$" name="phone_contact" value="{{ old('phone_contact') }}">
                                     </div>
                                 </div>
                             </div>
@@ -356,6 +358,7 @@
         });
         $(document).ready(function() {
             $('.phone').inputmask('(999)-999-9999');
+            $('#phone_contact').inputmask('(99)-999-9999');
         });
 
 

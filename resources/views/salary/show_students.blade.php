@@ -4,7 +4,7 @@
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Salary</h3>
+                <h3 class="nk-block-title page-title">Salary - {{ $group->level }} {{ $group->name }}</h3>
                 <p></p>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
@@ -86,7 +86,7 @@
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
                                         <div class="form-control-wrap">
-                                            <input type="text" name="amount[{{ $student->id }}]" id="amount" 
+                                            <input type="text" name="amount[{{ $student->id }}]" id="amount"
                                                 value="{{ $student->amount }}" class="form-control payment-amount" autocomplete="off">
                                         </div>
                                     </td>

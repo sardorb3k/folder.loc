@@ -80,6 +80,7 @@ class StudentsService implements StudentsServiceInterface
             'firstname' => 'required',
             'lastname' => 'required',
             'phone' => 'required',
+            'phone_contact' => 'nullable',
             'birthday' => 'required',
             'gender' => 'required',
             'homeaddress' => 'required',
@@ -109,6 +110,7 @@ class StudentsService implements StudentsServiceInterface
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'phone' => str_replace(["(", ")", "-", " ", "+"], "", $request->phone),
+            'phone_contact' => str_replace(["(", ")", "-", " ", "+"], "", $request->phone_contact ?? ''),
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'homeaddress' => $request->homeaddress,
@@ -157,10 +159,12 @@ class StudentsService implements StudentsServiceInterface
          *  Validate request
          */
         $request['phone'] = '998' . str_replace(["(", ")", "-", " ", "+"], "", $request->phone);
+        $request['phone_contact'] = '998' . str_replace(["(", ")", "-", " ", "+"], "", $request->phone_contact);
         $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'phone' => 'required|unique:users,phone',
+            'phone_contact' => 'nullable',
             'birthday' => 'required|date',
             'gender' => 'required',
             'homeaddress' => 'required',
@@ -182,6 +186,7 @@ class StudentsService implements StudentsServiceInterface
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'phone' => $request->phone,
+            'phone_contact' => $request->phone_contact ?? '',
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'homeaddress' => $request->homeaddress,

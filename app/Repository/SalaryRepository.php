@@ -9,6 +9,7 @@ use App\Interfaces\TeachersServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\SalaryStudents;
+use App\Interfaces\GroupsServiceInterface;
 
 class SalaryRepository implements SalaryRepositoryInterface
 {
@@ -109,11 +110,13 @@ class SalaryRepository implements SalaryRepositoryInterface
     {
         $date_all = explode('-', $date);
         $students = app(SalaryServiceInterface::class)->getStudent($id, $date, $teacher_id);
+        $group = app(GroupsServiceInterface::class)->getGroupById($id);
+        // dd($group);
         $form = DB::select('SELECT amount FROM salary_students WHERE group_id = ? and MONTH(salarydate) = ? AND YEAR(salarydate) = ? and teacher_id = ? LIMIT 1', [$id, $date_all[1], $date_all[0], $teacher_id]);
         $formStatus = $form ? false : true;
         $crm_attendance_day = DB::select('SELECT attendance_day FROM settings WHERE id = 1')[0]->attendance_day;
         // dd($form);
-        return view('salary.show_students', compact('students', 'teacher_id', 'id', 'date', 'formStatus', 'crm_attendance_day'));
+        return view('salary.show_students', compact('students', 'teacher_id', 'id', 'date', 'formStatus', 'crm_attendance_day', 'group'));
     }
 
     /**
