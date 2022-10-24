@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,5 +38,34 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        return [
+            $this->username() => str_replace(["(", ")", "-", " ", "_"], "", $request['phone']),
+            'password' => $request['password']
+        ];
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        $login = str_replace(["(", ")", "-", " ", "_"], "", request()->input('phone'));
+        // Check if the login field is an email.
+        if (is_numeric($login)) {
+            $field = 'phone';
+        }
+        return $field;
     }
 }
