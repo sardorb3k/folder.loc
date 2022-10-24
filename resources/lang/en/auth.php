@@ -19,11 +19,11 @@ return [
 
     // Login
     'sign_in' => 'Sign-In',
-    'sign_in_decs' => 'Access the Rexar panel using your phone and passcode.',
+    'sign_in_decs' => 'Access the Rexar panel using your phone and password.',
     'phone' => 'Phone number',
     'phone_feed' => 'Enter your phone number',
-    'passcode' => 'Passcode',
-    'passcode_feed' => 'Enter your passcode',
+    'passcode' => 'Password',
+    'passcode_feed' => 'Enter your password',
     'forgot_code' => 'Forgot Code?',
     'signin_submit' => 'Sign in',
     'signin_register' => 'Create an account',
@@ -32,19 +32,17 @@ return [
     // Register
     'register' => 'Register',
     'register_fistname' => 'Fist name',
-    'register_fistname_feed' => 'Enter your fist name',
+    'register_fistname_feed' => 'Enter your first name',
     'register_lastname' => 'Last name',
     'register_lastname_feed' => 'Enter your last name',
     'register_phone' => 'Phone number',
     'register_phone_feed' => 'Enter your phone number',
-    'register_passcode' => 'Passcode',
-    'register_passcode_feed' => 'Enter your passcode',
-    'register_confirm' => 'Confirm Passcode',
-    'register_confirm_feed' => 'Enter your confirm passcode',
+    'register_passcode' => 'Password',
+    'register_passcode_feed' => 'Enter your password',
+    'register_confirm' => 'Confirm Password',
+    'register_confirm_feed' => 'Enter your confirm password',
     'register_submit' => 'Register',
     'register_login_desc' => 'Already have an account? ',
     'register_signin' => 'Sign in instead',
-    'register_signin' => 'Sign in instead',
-
-
+    'register_subtitle' => 'Become a student at Rexar Academy school'
 ];

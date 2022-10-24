@@ -14,7 +14,7 @@
                     <div class="nk-block-head-content">
                         <h4 class="nk-block-title">{{ __('auth.register') }}</h4>
                         <div class="nk-block-des">
-                            <p>Create New Rexar Student Account</p>
+                            <p>{{ __('auth.register_subtitle') }}</p>
                         </div>
                     </div>
                 </div>

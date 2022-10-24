@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-control-wrap">
                             <input type="tel" name="phone" value="{{ old('phone') }}"
-                                class="form-control form-control-lg" id="phone-no"
+                                class="form-control form-control-lg" id="phone-no" tabindex="1"
                                 placeholder="{{ __('auth.phone_feed') }}" required autofocus>
                         </div>
                     </div>
@@ -47,17 +47,19 @@
                                 <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                             </a>
                             <input type="password" name="password" value="{{ old('password') }}"
-                                class="form-control form-control-lg" id="password"
+                                class="form-control form-control-lg" id="password" tabindex="2"
                                 placeholder="{{ __('auth.passcode_feed') }}" required autocomplete="current-password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-lg btn-primary btn-block">{{ __('auth.signin_submit') }}</button>
+                        <button class="btn btn-lg btn-primary btn-block" tabindex="3">{{ __('auth.signin_submit') }}</button>
                     </div>
                 </form>
-                <div class="form-note-s2 text-center pt-4"> {{ __('auth.signin_register_desc') }} <a
-                        href="{{ route('register') }}">{{ __('auth.signin_register') }}</a>
+                <div class="form-note-s2 text-center pt-4"> 
+                    {{ __('auth.signin_register_desc') }} 
+                    <a href="{{ route('register') }}">{{ __('auth.signin_register') }}</a>
                 </div>
+                <!-- Errors Start -->
                 @if ($errors->any())
                     <div class="example-alert">
                         <div
@@ -74,6 +76,7 @@
                         </div>
                     </div>
                 @endif
+                <!-- End Errors -->
             </div>
         </div>
     </div>
@@ -82,15 +85,6 @@
             <div class="row g-3">
                 <div class="col-lg-6 order-lg-last">
                     <ul class="nav nav-sm justify-content-center justify-content-lg-end">
-                        <!--li class="nav-item">
-                                        <a class="nav-link" href="#">Terms & Condition</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Privacy Policy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Help</a>
-                                    </li -->
                         <li class="nav-item dropup">
                             <a class="dropdown-toggle dropdown-indicator has-indicator nav-link" data-toggle="dropdown"
                                 data-offset="0,10"><span>{{ Config::get('languages')[App::getLocale()]['display'] }}</span></a>
@@ -114,7 +108,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="nk-block-content text-center text-lg-left">
-                        <p class="text-soft">&copy; 2022 {{ __('dashboard.footer') }}</p>
+                        <p class="text-soft">&copy; {{ date('Y') }} {{ __('dashboard.footer') }}</p>
                     </div>
                 </div>
             </div>

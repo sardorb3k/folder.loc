@@ -4,7 +4,7 @@ return [
     'welcome' => 'Xush kelibsiz',
     'account_settings' => 'Profil sozlamalari',
     'sign_out' => 'Chiqish',
-    'footer' => 'Rexar Academy. All Rights Reserved.',
+    'footer' => 'Rexar Academy. Barcha huquqlar himoyalangan.',
     'groups' => 'Guruhlar',
     'group' => 'Guruh',
     'day' => 'Kun',
