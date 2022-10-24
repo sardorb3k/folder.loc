@@ -49,12 +49,12 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        throw ValidationException::withMessages([
-            'phone' => [trans('auth.failed')],
-        ]);
-    }
+    // protected function sendFailedLoginResponse(Request $request)
+    // {
+    //     throw ValidationException::withMessages([
+    //         'phone' => [trans('auth.failed')],
+    //     ]);
+    // }
 
     /**
      * Get the login username to be used by the controller.
@@ -74,7 +74,7 @@ class LoginController extends Controller
         //     $field = 'username';
         // }
 
-        request()->merge([$field => $login]);
+        // request()->merge([$field => $login]);
 
         return $field;
     }

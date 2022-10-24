@@ -59,6 +59,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     FROM
         users
     WHERE
+        users.status = 'active' AND
         users.role = 'student'
     ORDER BY day  DESC LIMIT 30");
 
@@ -83,6 +84,7 @@ class DashboardRepository implements DashboardRepositoryInterface
                 LEFT JOIN users ON users.id = pp.student_id
                 WHERE
                     #pp.payment_end >= $date_all and
+                    users.status = 'active' and
                     pp.payment_end = (select max(p.payment_end) from payments as p where users.id = p.student_id)
                 ORDER BY
                     pp.payment_end ASC
