@@ -42,9 +42,9 @@ class StudentsService implements StudentsServiceInterface
         return $this->students
             ->leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
             ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')
-            ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
+            ->leftJoin('group_level', 'group_level.id', '=', 'groups.level')
             ->where('users.role', 'student')
-            ->select('gl.name as group_level', 'groups.name as group_name', 'users.*')
+            ->select('group_level.name as group_level', 'groups.name as group_name', 'users.*')
             ->latest('users.created_at')
             ->get();
     }
@@ -204,9 +204,13 @@ class StudentsService implements StudentsServiceInterface
     {
         return DB::select(
             DB::raw(
-                "SELECT gp.id,gp.`name`,gp.lessonstarttime,gp.days,gl.name as level,(
-                    SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.teacher_id) AS teacher_fullname,(
-                    SELECT CONCAT(firstname,' ',lastname) FROM users WHERE id=gp.assistant_id) AS assistant_fullname FROM group_students AS gi LEFT JOIN groups AS gp ON gi.group_id=gp.id LEFT JOIN group_level AS gl ON gl.id=gp.id WHERE gi.student_id=:id"
+                "SELECT groups.id, groups.name, groups.lessonstarttime, groups.days, group_level.name as level,
+                (SELECT CONCAT(firstname,' ',lastname) FROM users WHERE users.id=groups.teacher_id) AS teacher_fullname,
+                (SELECT CONCAT(firstname,' ',lastname) FROM users WHERE users.id=groups.assistant_id) AS assistant_fullname
+                FROM group_students 
+                LEFT JOIN groups ON groups.id=group_students.group_id 
+                LEFT JOIN group_level ON group_level.id=groups.level 
+                WHERE group_students.student_id=:id"
             ),
             ['id' => $id]
         );

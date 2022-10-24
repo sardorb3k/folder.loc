@@ -59,7 +59,7 @@
                                 </td>
                                 <td class="nk-tb-col tb-col-mb">
                                     <a href="{{ route('groups.show', $group->id ?? '0') }}" class="text-capitalize">
-                                        {{ $group->LEVEL }} {{ $group->name }}
+                                        {{ $group->level }} {{ $group->name }}
                                     </a>
                                 </td>
                                 <td class="nk-tb-col tb-col-lg">
