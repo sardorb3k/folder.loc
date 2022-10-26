@@ -96,7 +96,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             $payment->payment_start = $request->payment_start_date;
             $payment->payment_end = $request->payment_end_date;
             $payment->group_id = GroupStudents::select('group_id')->where('student_id', $studentId)->first()->group_id;
-            $payment->payment_date = $request->payments_date . '-' . date('d');
+            $payment->payment_date = date('Y-m-d');
             $payment->user_id = auth()->user()->id;
             $payment->save();
         }
