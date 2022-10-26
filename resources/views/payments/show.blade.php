@@ -143,6 +143,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{$studentPayments}}
                             @foreach ($studentPayments as $payment)
                                 <tr class="nk-tb-item odd">
                                     <td class="nk-tb-col nk-tb-col-check sorting_1">
@@ -167,6 +168,7 @@
                                         </div>
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
+                                        <span hidden>{{ $payment->payment_end }}</span>
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="input-daterange input-group" id="dateonemot">
