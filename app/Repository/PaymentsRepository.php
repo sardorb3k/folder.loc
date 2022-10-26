@@ -66,7 +66,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
     {
         $student = User::select('firstname', 'lastname', 'image')->where('id', $studentId)->first();
         $studentPaymentByDate =  Payment::select('amount', 'payment_start', 'payment_end')->where('student_id', $studentId)->whereMonth('payment_start', date('m', strtotime($date)))->first();
-        $studentPayments = Payment::where('student_id', $studentId)->latest()->get();
+        $studentPayments = Payment::where('student_id', $studentId)->orderBy('payment_end')->get();
         return view('payments.show', compact('studentPayments', 'student', 'studentPaymentByDate', 'date', 'studentId'));
     }
 
