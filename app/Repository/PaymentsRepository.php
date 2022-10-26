@@ -79,9 +79,8 @@ class PaymentsRepository implements PaymentsRepositoryInterface
             'payments_date' => 'required'
         ]);
         $payment = Payment::where('student_id', $studentId)
-            ->whereYear('payment_date', date('Y', strtotime($request->payments_date)))
-            ->whereMonth('payment_date', date('m', strtotime($request->payments_date)))->first();
-
+            ->whereYear('payment_start', date('Y', strtotime($request->payment_start_date)))
+            ->whereMonth('payment_start', date('m', strtotime($request->payment_start_date)))->first();
         if (isset($payment)) {
             // update payment
             $payment->amount = (int) str_replace(',', '', $request->payment_amount);
