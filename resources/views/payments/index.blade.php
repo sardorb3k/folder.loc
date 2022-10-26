@@ -6,7 +6,7 @@
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">Payments</h3>
                 <div class="nk-block-des text-soft">
-                    <p>You have a total of {{ $count }} groups.</p>
+                    <p>You have a total of {{ count($students) }} students.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
@@ -19,64 +19,49 @@
                     <span class="sub-text">#</span>
                 </th>
                 <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Student</span>
+                </th>
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Group</span>
                 </th>
-                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">Teacher</span>
-                </th>
-                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">Assistant</span>
-                </th>
                 <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">Days</span>
-                </th>
-                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">Time</span>
+                    <span class="sub-text">Payment Due</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($groups as $group)
+            @foreach ($students as $student)
                 <tr class="nk-tb-item odd">
                     <td class="nk-tb-col nk-tb-col-check sorting_1">
                         <span>{{ $loop->iteration }}</span>
                     </td>
-                    <td class="nk-tb-col">
-                        <a href="{{ route('payments.show_red', $group->id) }}">
-                            <span class="text-capitalize">{{ $group->level }}
-                                {{ $group->name }}</span>
+                    <td class="nk-tb-col tb-col-lg">
+                        <a href="{{ route('payments.show_red', $student->id) }}">
+                            <div class="user-card">
+                                <div class="user-card">
+                                    <div class="user-info">
+                                        <span class="tb-lead">{{ $student->firstname }}
+                                        </span>
+                                        <span>{{ $student->lastname }}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </a>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <div class="user-card">
-                            <div class="user-card">
-                                <div class="user-info">
-                                    <span class="tb-lead">{{ $group->teacher_firstname }}
-                                    </span>
-                                    <span>{{ $group->teacher_lastname }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <div class="user-card">
-                            <div class="user-card">
-                                <div class="user-info">
-                                    <span class="tb-lead">{{ $group->assistant_firstname }}
-                                    </span>
-                                    <span>{{ $group->assistant_lastname }}</span>
-                                </div>
-                            </div>
-                        </div>
+                    <td class="nk-tb-col">
+                        @if($student->group_level)
+                            <span class="text-capitalize">
+                                {{ $student->group_level }}
+                                {{ $student->group_name }}
+                            </span>
+                        @else
+                            <span class="text-danger">Not Assigned</span>
+                        @endif
                     </td>
                     <td class="nk-tb-col tb-col-lg">
                         <span class="badge text-capitalize">
-                            {{ $group->days }}
+                            {{ date('d M, Y', strtotime($student->payment_end)) }}
                         </span>
-                    </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <span class="badge">{{ $group->lessonstarttime }}</span>
-                        <span class="badge">{{ $group->lessonendtime }}</span>
                     </td>
                 </tr>
             @endforeach

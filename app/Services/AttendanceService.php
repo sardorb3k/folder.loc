@@ -37,31 +37,11 @@ class AttendanceService implements AttendanceServiceInterface
         $date_all = explode('-', $date);
 
         if ($count[0]->count == 0) {
-            // $students = GroupStudents::join(
-            //     'users',
-            //     'group_students.student_id',
-            //     '=',
-            //     'users.id'
-            // )
-            //     ->select(
-            //         'users.id',
-            //         'group_students.id as group_id',
-            //         'users.lastname',
-            //         'users.firstname',
-            //         'users.phone',
-            //         'users.image',
-            //         'users.birthday'
-            //     )
-            //     ->where('group_id', $id)
-            //     ->get();
             $students = DB::select("SELECT
                         us.id,
                         us.firstname,
                         us.lastname,
                         us.image,
-                        us.birthday,
-                        us.phone,
-                        us.`status`,
                         (
                         SELECT
                             COUNT(*)
@@ -93,9 +73,6 @@ class AttendanceService implements AttendanceServiceInterface
                     us.firstname,
                     us.lastname,
                     us.image,
-                    us.birthday,
-                    us.phone,
-                    us.`status`,
                     (
                     SELECT
                         COUNT(*)
@@ -191,11 +168,22 @@ class AttendanceService implements AttendanceServiceInterface
                 ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                 ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                 ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
-                ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'),
-                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and day(attendance_date) = "'.$date_day.'" and mark = 1 and group_id = groups.id) as mark_atten'),
-                DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "'.$date_year.'" and MONTH(attendance_date) = "'.$date_month.'" and day(attendance_date) = "'.$date_day.'" and mark = 0 and group_id = groups.id) as mark_notatten'),
-                'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname',
-                'ua.lastname as assistant_lastname', 'gl.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
+                ->select(
+                    DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'),
+                    DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "' . $date_year . '" and MONTH(attendance_date) = "' . $date_month . '" and day(attendance_date) = "' . $date_day . '" and mark = 1 and group_id = groups.id) as mark_atten'),
+                    DB::raw('(SELECT COUNT(*) FROM `attendance` WHERE YEAR(attendance_date) = "' . $date_year . '" and MONTH(attendance_date) = "' . $date_month . '" and day(attendance_date) = "' . $date_day . '" and mark = 0 and group_id = groups.id) as mark_notatten'),
+                    'ut.firstname as teacher_firstname',
+                    'ut.lastname as teacher_lastname',
+                    'ua.firstname as assistant_firstname',
+                    'ua.lastname as assistant_lastname',
+                    'gl.name as level',
+                    'groups.id',
+                    'groups.name',
+                    'groups.lessonstarttime',
+                    'groups.lessonendtime',
+                    'groups.days',
+                    'groups.created_at'
+                )
                 ->latest('groups.created_at')
                 ->get();
             // dd($groups);

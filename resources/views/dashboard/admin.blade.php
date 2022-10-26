@@ -185,7 +185,7 @@
                                         <span class="sub-text">Student</span>
                                     </th>
                                     <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                                        <span class="sub-text">Payment Date</span>
+                                        <span class="sub-text">Payment Due</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -196,7 +196,7 @@
                                             <span>{{ $loop->iteration }}</span>
                                         </td>
                                         <td class="nk-tb-col">
-                                            <a href="{{ route('payments.show_red', $payment->group_id) }}">
+                                            <a href="{{ route('payments.show_red', $payment->userId) }}">
                                                 <span class="text-capitalize">{{ $payment->fullname }}</span>
                                             </a>
                                         </td>

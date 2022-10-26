@@ -41,9 +41,7 @@ class PaymentsService implements PaymentsServiceInterface
                     'group_students.id as group_id',
                     'users.lastname',
                     'users.firstname',
-                    'users.phone',
                     'users.image',
-                    'users.birthday'
                 )
                 ->where('group_id', $id)
                 ->get();
@@ -53,25 +51,31 @@ class PaymentsService implements PaymentsServiceInterface
             $date_m = $date_all[1] ?? NULL;
             $date_y = $date_all[0] ?? NULL;
             $students = DB::select(
-                        "SELECT us.id,us.firstname,us.lastname,us.birthday,us.image,us.phone,us.`status`,(
-                            SELECT pay2.amount
-                            FROM payments AS pay2
-                            WHERE pay2.student_id=us.id AND pay2.group_id=$id AND MONTH (pay2.payment_start)=$date_m AND YEAR (pay2.payment_start)=$date_y) AS amount,
-                            (
-                            SELECT pay.payment_start
-                            FROM payments AS pay
-                            WHERE pay.student_id=us.id AND pay.group_id=gs.group_id AND MONTH (pay.payment_start)=$date_m AND YEAR (pay.payment_start)=$date_y) AS payment_start,(
-                            SELECT pay.payment_end
-                            FROM payments AS pay
-                            WHERE pay.student_id=us.id AND pay.group_id=gs.group_id AND MONTH (pay.payment_start)=$date_m AND YEAR (pay.payment_start)=$date_y) AS payment_end
-                            FROM group_students AS gs LEFT JOIN users AS us ON us.id=gs.student_id
-                            WHERE gs.group_id=$id"
+                "SELECT us.id, us.firstname, us.lastname, us.image,
+                    (
+                    SELECT pay2.amount
+                    FROM payments AS pay2
+                    WHERE pay2.student_id=us.id AND pay2.group_id=$id AND MONTH (pay2.payment_start)=$date_m AND YEAR (pay2.payment_start)=$date_y
+                    ) AS amount,
+                    (
+                    SELECT pay.payment_start
+                    FROM payments AS pay
+                    WHERE pay.student_id=us.id AND pay.group_id=gs.group_id AND MONTH (pay.payment_start)=$date_m AND YEAR (pay.payment_start)=$date_y
+                    ) AS payment_start,
+                    (
+                    SELECT pay.payment_end
+                    FROM payments AS pay
+                    WHERE pay.student_id=us.id AND pay.group_id=gs.group_id AND MONTH (pay.payment_start)=$date_m AND YEAR (pay.payment_start)=$date_y
+                    ) AS payment_end
+                FROM group_students AS gs 
+                LEFT JOIN users AS us ON us.id=gs.student_id
+                WHERE gs.group_id=$id"
             );
             $status = true;
             $date_salary = DB::select(
                 "SELECT payment_date FROM `payments`
                 WHERE MONTH(payment_date) = $date_m and YEAR(payment_date) = $date_y LIMIT 1"
-    );
+            );
         }
         return array("status" => $status, "students" => $students, "date_salary" => $date_salary[0]->payment_date ?? NULL);
     }

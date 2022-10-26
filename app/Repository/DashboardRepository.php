@@ -71,8 +71,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         $audience_group_count = DB::select("SELECT count(*) as count FROM `groups`");
         // dd($date_all);
         $payments = DB::select("SELECT
-                    DISTINCT users.id,
-                    pp.group_id,
+                    DISTINCT users.id as userId,
                     CONCAT(
                         users.firstname,
                         ' ',
@@ -90,7 +89,6 @@ class DashboardRepository implements DashboardRepositoryInterface
                     pp.payment_end ASC
                 LIMIT 30;");
 
-        // $students = GroupItems::join('users', 'group_items.student_id', '=', 'users.id')->select("users.id", "group_items.id as group_id", "users.lastname", "users.firstname", "users.phone")->where('group_id', $group->id)->get();
         $groups = DB::select(
             DB::raw("select student_id, g.name,
         concat(uo.lastname, ' ', uo.firstname) as assistant,

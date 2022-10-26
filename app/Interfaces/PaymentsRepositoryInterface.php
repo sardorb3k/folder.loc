@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Interfaces;
+
 /**
  * Payments Repository Interface
  */
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,7 +19,6 @@ interface PaymentsRepositoryInterface
     public function indexPayments(): View;
     public function show(int $id, Request $request): RedirectResponse;
     public function showPayments(int $id, $date): View;
-    public function storePayments(Request $request);
     public function updatePayments(Request $payments, int $id): RedirectResponse;
 }
 //

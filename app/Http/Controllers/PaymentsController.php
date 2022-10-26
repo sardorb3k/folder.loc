@@ -9,7 +9,8 @@ use App\Interfaces\PaymentsRepositoryInterface;
 class PaymentsController extends Controller
 {
     private $paymentService;
-    public function __construct(PaymentsRepositoryInterface $paymentService) {
+    public function __construct(PaymentsRepositoryInterface $paymentService)
+    {
         $this->paymentService = $paymentService;
         // Middleware
         $this->middleware('auth');
@@ -32,7 +33,7 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->paymentService->storePayments($request);
+        return;
     }
 
     /**
