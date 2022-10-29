@@ -331,6 +331,8 @@
     <script src="{{ asset('assets/js/libs/datatable-btns.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/example-toastr.js?ver=2.4.0') }}"></script>
     <script src="{{ asset('assets/js/jquery.inputmask.min.js') }}"></script>
+    <script src="{{ asset('assets/js/libs/fullcalendar.js') }}"></script>
+    <script src="{{ asset('assets/js/apps/calendar.js') }}"></script>
     <!-- select region modal -->
 
 </html>

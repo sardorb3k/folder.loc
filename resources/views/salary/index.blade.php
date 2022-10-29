@@ -138,7 +138,8 @@
         $('#mesVigencia').datepicker({
             format: "yyyy-mm",
             viewMode: "months",
-            minViewMode: "months"
+            minViewMode: "months",
+            autoclose: true
         });
 
         new AutoNumeric.multiple('.payment-amount', {decimalPlaces: 0, minimumValue: 0});

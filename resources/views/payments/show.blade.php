@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="col-sm-6" style="align-self: center;">
-                        <input type="hidden" name="group" value="{{ $studentId }}">
+                        <input type="hidden" name="student" value="{{ $studentId }}">
                         <div class="form-group"><a href="#" class="btn btn-secondary"
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">Search</a>
@@ -204,7 +204,8 @@
         $('#mesVigencia').datepicker({
             format: "yyyy-mm",
             viewMode: "months",
-            minViewMode: "months"
+            minViewMode: "months",
+            autoclose: true
         });
 
         function addnull(y, m, d) {

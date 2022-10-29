@@ -10,3 +10,43 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.span-box-success {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #1ee0ac;
+}
+
+.span-box-danger {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #e85347;
+}
+
+.attendance-card-title {
+    display: none;
+}
+
+@media (max-width:480px) {
+    .fc .fc-daygrid-day-top {
+        display: flex;
+        flex-direction: unset;
+        justify-content: center;
+    }
+
+    .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+        height: 0;
+        min-height: 0;
+    }
+
+    .fc-h-event .fc-event-title-container {
+        display: none;
+    }
+
+    .attendance-card-title {
+        margin-top: 10px;
+        display: block;
+    }
+}

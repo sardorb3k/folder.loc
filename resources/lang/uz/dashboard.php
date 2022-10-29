@@ -28,6 +28,7 @@ return [
     'amount' => 'Miqdor',
     'attendance' => 'Davomat',
     'absent' => 'Kelmagan',
+    'present' => 'Kelgan',
     'result' => 'Natija',
     'timetable' => 'Dars jadvali',
     'assessment' => 'Baholash',

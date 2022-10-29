@@ -28,6 +28,7 @@ return [
     'amount' => 'Сумма',
     'attendance' => 'Посещаемость',
     'absent' => 'Oтсутствовал(a)',
+    'present' => 'Присутствует',
     'result' => 'Результат',
     'timetable' => 'Расписание',
     'assessment' => 'Оценка',

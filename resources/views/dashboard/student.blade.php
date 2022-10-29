@@ -84,39 +84,16 @@
                         <div class="card-title-group">
                             <div class="card-title card-title-sm">
                                 <h6 class="title">{{ __('dashboard.attendance') }}</h6>
-                                <p style="border-left: 10px solid antiquewhite;"> &nbsp; {{ __('dashboard.absent') }}</p>
+                                <p class="attendance-card-title">
+                                    <span class="span-box-success"></span> {{ __('dashboard.present') }} &nbsp;
+                                    <span class="span-box-danger"></span> {{ __('dashboard.absent') }}
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="card-inner p-10">
-                        <table class="datatable-init-nohelpers nk-tb-list nk-tb-ulist no-footer"
-                            data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
-                            <thead>
-                                <tr class="nk-tb-item nk-tb-head">
-                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1"
-                                        rowspan="1" colspan="1">
-                                        <span class="sub-text">{{ __('dashboard.group') }}</span>
-                                    </th>
-                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0"
-                                        aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                                        <span class="sub-text">{{ __('dashboard.date') }}</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($attendance as $item)
-                                    <tr class="nk-tb-item odd"
-                                        style="{{ $item->mark == 0 ? 'background:antiquewhite' : '' }}">
-                                        <td class="nk-tb-col">
-                                            <span class="text-capitalize">{{ $item->level }} {{ $item->name }}</span>
-                                        </td>
-                                        <td class="nk-tb-col tb-col-lg">
-                                            <span>{{ $item->attendance_date }}</span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <div class="card-inner">
+                        <div id="attendanceCalendar">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -219,6 +196,14 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <div id="attendanceCalendar">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div><!-- .nk-block -->
 
@@ -299,13 +284,7 @@
     </div>
 
     <script>
-        new AutoNumeric.multiple('.exam-result-input', {
-            decimalPlaces: 0,
-            minimumValue: 0,
-            maximumValue: 100,
-            watchExternalChanges: true
-        });
-
+       
         // button click event modal open and data set
         function editPayment(id) {
             $.ajax({
@@ -337,11 +316,6 @@
             $('#exam-anw').modal('show');
         }
 
-        $(".col-sm-4").on("input", function() {
-            $("#result").text(resultExam());
-        });
-        $('#result').text(resultExam());
-
         function resultExam() {
             var sum = 0;
             var result = 0;
@@ -355,11 +329,55 @@
             });
             return result;
         }
-    </script>
-    <script>
-        new AutoNumeric('.payment-amount', {
-            decimalPlaces: 0,
-            minimumValue: 0
+
+        $(document).ready(function () {
+            // initialize calendar
+            const attendance = {!! json_encode($attendance) !!};
+            const events = [];
+            attendance.forEach(attend => {
+                events.push({
+                    id: 'attendance-' + attend.id,
+                    title: attend.mark == 1 ? "{{ __('dashboard.present') }}" : "{{ __('dashboard.absent') }}",
+                    start: attend.attendance_date,
+                    className: attend.mark == 1 ? 'fc-event-success' : 'fc-event-danger'
+                });
+            });
+
+            var calendarEl = document.getElementById('attendanceCalendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'UTC',
+                initialView: 'dayGridMonth',
+                themeSystem: 'bootstrap',
+                headerToolbar: {
+                    left: 'title prev,next',
+                    center: null,
+                    right: 'today'
+                },
+                firstDay: 1,
+                height: 520,
+                nowIndicator: true,
+                events: events,
+            });
+            calendar.render();
+
+            new AutoNumeric.multiple('.exam-result-input', {
+                decimalPlaces: 0,
+                minimumValue: 0,
+                maximumValue: 100,
+                watchExternalChanges: true
+            });
+
+            if($('.payment-amount').length > 0) {
+                new AutoNumeric('.payment-amount', {
+                    decimalPlaces: 0,
+                    minimumValue: 0
+                });
+            }
+            
+            $(".col-sm-4").on("input", function() {
+                $("#result").text(resultExam());
+            });
+            $('#result').text(resultExam());
         });
     </script>
 @endsection

@@ -76,47 +76,49 @@
                         </thead>
                         <tbody>
                             @foreach ($students['students'] as $student)
-                                <tr class="nk-tb-item odd">
-                                    <td class="nk-tb-col nk-tb-col-check sorting_1">
-                                        <span>{{ $loop->iteration }}</span>
-                                    </td>
-                                    <td class="nk-tb-col tb-col-mb">
-                                        <div class="user-card">
-                                            <a href="{{ route('students.show', $student->id) }}">
-                                                <div class="user-card">
-                                                    <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;'}}">
-                                                        <img src="{{ $student->image ? asset('uploads/student/'.$student->image) : 'https://ui-avatars.com/api/?name='. $student->lastname . '+' . $student->firstname .'&background=random' }}"
-                                                            alt="">
+                                @if($student->id)
+                                    <tr class="nk-tb-item odd">
+                                        <td class="nk-tb-col nk-tb-col-check sorting_1">
+                                            <span>{{ $loop->iteration }}</span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-mb">
+                                            <div class="user-card">
+                                                <a href="{{ route('students.show', $student->id) }}">
+                                                    <div class="user-card">
+                                                        <div class="user-avatar" style="{{ $student->image ? '' : 'background: #798bff;'}}">
+                                                            <img src="{{ $student->image ? asset('uploads/student/'.$student->image) : 'https://ui-avatars.com/api/?name='. $student->lastname . '+' . $student->firstname .'&background=random' }}"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <span class="tb-lead">{{ $student->firstname }}
+                                                            </span>
+                                                            <span>{{ $student->lastname }}</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="user-info">
-                                                        <span class="tb-lead">{{ $student->firstname }}
-                                                        </span>
-                                                        <span>{{ $student->lastname }}</span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <span>
+                                                <span class="badge badge-outline-primary">{{ $student->attendance_a }}</span>
+                                                /
+                                                <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span>
+                                            </span>
+                                        </td>
+                                        <td class="nk-tb-col tb-col-lg">
+                                            <div class="form-group">
+                                                <div class="form-control-wrap">
+                                                    <input name="attendance[{{ $student->id }}]" type="hidden"
+                                                        value="0">
+                                                    <div class="custom-control custom-switch">
+                                                        <input name="attendance[{{ $student->id }}]" value="1" type="checkbox" @if ($student->mark == 1) checked @endif class="custom-control-input" id="attendanceSwitch{{$student->id}}">
+                                                        <label class="custom-control-label" for="attendanceSwitch{{$student->id}}"></label>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="nk-tb-col tb-col-lg">
-                                        <span>
-                                            <span class="badge badge-outline-primary">{{ $student->attendance_a }}</span>
-                                            /
-                                            <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span>
-                                        </span>
-                                    </td>
-                                    <td class="nk-tb-col tb-col-lg">
-                                        <div class="form-group">
-                                            <div class="form-control-wrap">
-                                                <input name="attendance[{{ $student->id }}]" type="hidden"
-                                                    value="0">
-                                                <div class="custom-control custom-switch">
-                                                    <input name="attendance[{{ $student->id }}]" value="1" type="checkbox" @if ($student->mark == 1) checked @endif class="custom-control-input" id="attendanceSwitch{{$student->id}}">
-                                                    <label class="custom-control-label" for="attendanceSwitch{{$student->id}}"></label>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

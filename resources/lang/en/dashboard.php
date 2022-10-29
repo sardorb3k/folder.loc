@@ -28,6 +28,7 @@ return [
     'amount' => 'Amount',
     'attendance' => 'Attendance',
     'absent' => 'Absent',
+    'present' => 'Present',
     'result' => 'Result',
     'timetable' => 'Timetable',
     'assessment' => 'Assessment',

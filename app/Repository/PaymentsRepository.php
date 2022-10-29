@@ -62,6 +62,7 @@ class PaymentsRepository implements PaymentsRepositoryInterface
         $date = $request->input('datetime') ?? date('Y-m');
         return redirect()->route('payments.show', ['id' => $id, 'date' => $date]);
     }
+
     public function showPayments(int $studentId, $date): View
     {
         $student = User::select('firstname', 'lastname', 'image')->where('id', $studentId)->first();
