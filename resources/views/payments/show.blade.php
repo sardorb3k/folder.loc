@@ -6,6 +6,12 @@
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
+                <nav>
+                    <ul class="breadcrumb breadcrumb-arrow">
+                        <li class="breadcrumb-item"><a href="{{ route('payments.index') }}">Payments List</a></li>
+                        <li class="breadcrumb-item active">Student Payment Details</li>
+                    </ul>
+                </nav>
                 <h3 class="nk-block-title page-title">Payments - {{ $student->firstname}} {{ $student->lastname }}</h3>
                 <div class="nk-block-des text-soft">
                     <p>Student has total {{ count($studentPayments) }} payment history.</p>

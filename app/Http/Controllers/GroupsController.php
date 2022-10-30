@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Interfaces\GroupsRepositoryInterface;
-use App\Http\Requests\StoreGroupsRequest;
-use App\Http\Requests\UpdateGroupsRequest;
+use App\Models\Groups;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GroupsController extends Controller
 {
@@ -26,7 +28,37 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        return $this->groups->indexGroups();
+        if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin') {
+            $groups = Groups
+                ::leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
+                ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
+                ->where('groups.status', 'active')
+                ->latest('groups.created_at')
+                ->get();
+        } else {
+            $userid = Auth::user()->id;
+            if (Auth::user()->role == 'teacher') {
+                $groups = Groups::leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                    ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                    ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
+                    ->where([['ut.id', $userid], ['groups.status', 'active']])
+                    ->latest('groups.created_at')
+                    ->get();
+            } else {
+                $groups = Groups::leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+                    ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+                    ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
+                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
+                    ->where([['ut.id', $userid], ['groups.status', 'active']])
+                    ->latest('groups.created_at')
+                    ->get();
+            }
+        };
+
+        return view('groups.index', compact('groups'));
     }
 
     /**
@@ -90,7 +122,7 @@ class GroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         return $this->groups->destroyGroups($id);
     }
@@ -109,5 +141,39 @@ class GroupsController extends Controller
     public function unsubscribe(Request $request)
     {
         return $this->groups->groupUnsubscriptionStudents($request);
+    }
+
+    public function archives()
+    {
+        $groups = Groups::leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
+            ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
+            ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
+            ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'groups.*', 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'group_level.name as level',)
+            ->where('groups.status', 'inactive')
+            ->latest('groups.created_at')
+            ->get();
+        return view('groups.archives', ['groups' => $groups]);
+    }
+
+    // archive group
+    public function archive(Request $request, $id)
+    {
+        $group = Groups::findOrFail($id);
+        $group->status = 'inactive';
+        $group->archive_reason = $request->archive_reason;
+        $group->archived_at = Carbon::now();
+        $group->save();
+        return redirect()->route('groups.index')->with('success', 'Group has been archived');
+    }
+
+    // unarchive group
+    public function unarchive($id)
+    {
+        $group = Groups::findOrFail($id);
+        $group->status = 'active';
+        $group->archive_reason = '';
+        $group->archived_at = Carbon::now();
+        $group->save();
+        return redirect()->route('groups.archives')->with('success', 'Group has been unarchived');
     }
 }

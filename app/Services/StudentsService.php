@@ -43,7 +43,7 @@ class StudentsService implements StudentsServiceInterface
             ->leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
             ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')
             ->leftJoin('group_level', 'group_level.id', '=', 'groups.level')
-            ->where('users.role', 'student')
+            ->where([['users.role', 'student'], ['users.status', 'active']])
             ->select('group_level.name as group_level', 'groups.name as group_name', 'users.*')
             ->latest('users.created_at')
             ->get();
@@ -67,7 +67,6 @@ class StudentsService implements StudentsServiceInterface
             ['id' => $id]
         );
     }
-
 
     /**
      * Update teacher information.
@@ -182,7 +181,7 @@ class StudentsService implements StudentsServiceInterface
             $destinationPath = public_path('/uploads/student');
             $image->move($destinationPath, $name);
         }
-        $students = $this->students->create([
+        $this->students->create([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'phone' => $request->phone,

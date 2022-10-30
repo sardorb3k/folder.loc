@@ -344,7 +344,7 @@
             });
 
             var calendarEl = document.getElementById('attendanceCalendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            var attendanceCalendar = new FullCalendar.Calendar(calendarEl, {
                 timeZone: 'UTC',
                 initialView: 'dayGridMonth',
                 themeSystem: 'bootstrap',
@@ -358,7 +358,7 @@
                 nowIndicator: true,
                 events: events,
             });
-            calendar.render();
+            attendanceCalendar.render();
 
             new AutoNumeric.multiple('.exam-result-input', {
                 decimalPlaces: 0,

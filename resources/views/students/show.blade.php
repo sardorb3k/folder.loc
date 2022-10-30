@@ -3,6 +3,12 @@
 @section('content')
     <div class="nk-block-head">
         <div class="nk-block-head-content">
+            <nav>
+                <ul class="breadcrumb breadcrumb-arrow">
+                    <li class="breadcrumb-item"><a href="{{ route('students.index') }}">Students List</a></li>
+                    <li class="breadcrumb-item active">Student Profile</li>
+                </ul>
+            </nav>
             <h3 class="nk-block-title page-title">{{ $student->lastname . ' ' . $student->firstname }}</h3>
             <div class="nk-block-des">
                 <p>You have full control to manage your own account setting.</p>

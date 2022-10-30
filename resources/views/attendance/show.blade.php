@@ -4,6 +4,12 @@
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
+                <nav>
+                    <ul class="breadcrumb breadcrumb-arrow">
+                        <li class="breadcrumb-item"><a href="{{ route('attendance.index') }}">Attendance List</a></li>
+                        <li class="breadcrumb-item active">Group Attendance List</li>
+                    </ul>
+                </nav>
                 <h3 class="nk-block-title page-title">Attendance - {{ $group[0]->level }} {{ $group[0]->name }}</h3>
                 <div class="nk-block-des text-soft">
                     <p>You have total {{ $count }} students.</p>

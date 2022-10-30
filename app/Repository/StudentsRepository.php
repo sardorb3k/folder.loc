@@ -15,6 +15,7 @@ use Illuminate\View\View;
 use App\Models\Student;
 use App\Interfaces\StudentsServiceInterface;
 use App\Interfaces\StudentsRepositoryInterface;
+use App\Models\User;
 
 class StudentsRepository implements StudentsRepositoryInterface
 {
@@ -26,31 +27,6 @@ class StudentsRepository implements StudentsRepositoryInterface
         $this->examsService = $examsService;
     }
 
-    /**
-     * Students Repository indexRepository
-     */
-    public function indexStudents(): View
-    {
-
-        $students = $this->studentsService->getAllStudentsPaginated(10);
-        $count = $this->studentsService->getCountStudents();
-        return view('students.index', [
-            'students' => $students,
-            'count' => $count
-        ]);
-    }
-    public function showStudents(int $id): View
-    {
-        return view('students.show', ['student' => $this->studentsService->getStudentById($id)]);
-    }
-    public function createStudents(): View
-    {
-        return view('students.create');
-    }
-    public function editStudents(int $id): View
-    {
-        return view('students.show', ['student' => $this->studentsService->getStudentById($id)]);
-    }
     public function storeStudents(Request $request): RedirectResponse
     {
         /**
@@ -85,7 +61,8 @@ class StudentsRepository implements StudentsRepositoryInterface
     }
     public function group(int $id): View
     {
-        return view('students.group', ['groups' => $this->studentsService->GetStudentGroupById($id), 'id' => $id]);
+        $student = User::where('users.id', $id)->first();
+        return view('students.group', ['groups' => $this->studentsService->GetStudentGroupById($id), 'id' => $id, 'student' => $student]);
     }
     public function payments(int $id): View
     {
@@ -93,11 +70,13 @@ class StudentsRepository implements StudentsRepositoryInterface
     }
     public function attendance(int $id): View
     {
-        return view('students.attendance', ['attendance' => $this->studentsService->getStudentByAttendance($id), 'id' => $id]);
+        $student = User::where('users.id', $id)->first();
+        return view('students.attendance', ['attendance' => $this->studentsService->getStudentByAttendance($id), 'id' => $id, 'student' => $student]);
     }
     public function exam(int $id): View
     {
-        return view('students.exam', ['exams' => $this->examsService->getStudentById($id), 'id' => $id]);
+        $student = User::where('users.id', $id)->first();
+        return view('students.exam', ['exams' => $this->examsService->getStudentById($id), 'id' => $id, 'student' => $student]);
     }
 }
 

@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use App\Interfaces\StudentsRepositoryInterface;
 use App\Http\Requests\UpdateStudentsRequest;
 use App\Http\Requests\StoreStudentsRequest;
+use App\Models\ExamResults;
+use App\Models\GroupStudents;
+use App\Models\SalaryStudents;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\User;
+use Carbon\Carbon;
 use DataTables;
 
 class StudentsController extends Controller
@@ -27,12 +32,19 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        /**
-         * Index Students method. Get all students.
-         */
-        return $this->studentService->indexStudents();
+        $students = User::leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
+            ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')
+            ->leftJoin('group_level', 'group_level.id', '=', 'groups.level')
+            ->where([['users.role', 'student'], ['users.status', 'active']])
+            ->select('group_level.name as group_level', 'groups.name as group_name', 'users.*')
+            ->latest('users.created_at')
+            ->get();
+
+        return  view('students.index', [
+            'students' => $students,
+        ]);
     }
 
     /**
@@ -42,7 +54,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return $this->studentService->createStudents();
+        return view('students.create');
     }
 
     /**
@@ -64,7 +76,8 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        return $this->studentService->showStudents($id);
+        $student = User::findOrFail($id);
+        return view('students.show', ['student' => $student]);
     }
 
     /**
@@ -75,7 +88,8 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
-        return $this->studentService->editStudents($id);
+        $student = User::findOrFail($id);
+        return view('students.show', ['student' => $student]);
     }
 
     /**
@@ -96,9 +110,17 @@ class StudentsController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        return $this->studentService->destroyStudents($id);
+        $student = User::findOrFail($id);
+        $file_path = 'uploads/student/' . $student->image;
+        unlink($file_path);
+        GroupStudents::where('student_id', $id)->delete();
+        SalaryStudents::where('student_id', $id)->delete();
+        ExamResults::where('student_id', $id)->delete();
+        $student->delete();
+
+        return redirect()->route('students.archives')->with('success', 'Student has been deleted successfully');
     }
     public function group($id)
     {
@@ -119,5 +141,39 @@ class StudentsController extends Controller
     public function exam($id)
     {
         return $this->studentService->exam($id);
+    }
+
+    public function archives()
+    {
+        $students = User::leftJoin('group_students', 'group_students.student_id', '=', 'users.id')
+            ->leftJoin('groups', 'groups.id', '=', 'group_students.group_id')
+            ->leftJoin('group_level', 'group_level.id', '=', 'groups.level')
+            ->where([['users.role', 'student'], ['users.status', 'inactive']])
+            ->select('group_level.name as group_level', 'groups.name as group_name', 'users.*')
+            ->latest('users.created_at')
+            ->get();
+        return view('students.archives', ['students' => $students]);
+    }
+
+    // archive student
+    public function archive(Request $request, $id)
+    {
+        $student = User::findOrFail($id);
+        $student->status = 'inactive';
+        $student->archive_reason = $request->archive_reason;
+        $student->archived_at = Carbon::now();
+        $student->save();
+        return redirect()->route('students.index')->with('success', 'Student has been archived');
+    }
+
+    // unarchive student
+    public function unarchive($id)
+    {
+        $student = User::findOrFail($id);
+        $student->status = 'active';
+        $student->archive_reason = '';
+        $student->archived_at = Carbon::now();
+        $student->save();
+        return redirect()->route('students.archives')->with('success', 'Student has been unarchived');
     }
 }

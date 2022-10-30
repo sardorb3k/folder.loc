@@ -3,7 +3,13 @@
 @section('content')
     <div class="nk-block-head">
         <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">My Profile</h3>
+            <nav>
+                <ul class="breadcrumb breadcrumb-arrow">
+                    <li class="breadcrumb-item"><a href="{{ route('students.index') }}">Students List</a></li>
+                    <li class="breadcrumb-item active">Student Profile</li>
+                </ul>
+            </nav>
+            <h3 class="nk-block-title page-title">{{ $student->lastname . ' ' . $student->firstname }}</h3>
             <div class="nk-block-des">
                 <p>You have full control to manage your own account setting.</p>
             </div>
@@ -46,12 +52,12 @@
                     id: 'attendance-' + attend.id,
                     title: attend.mark == 1 ? "{{ __('dashboard.present') }}" : "{{ __('dashboard.absent') }}",
                     start: attend.attendance_date,
-                    className: attend.mark == 1 ? 'fc-event-success' : 'fc-event-danger'
+                    className: attend.mark == 1 ? 'fc-event-success' : 'fc-event-danger',
                 });
             });
 
-            var calendarEl = document.getElementById('attendanceCalendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            var calendarElement = document.getElementById('attendanceCalendar');
+            var attendanceCalendar = new FullCalendar.Calendar(calendarElement, {
                 timeZone: 'UTC',
                 initialView: 'dayGridMonth',
                 themeSystem: 'bootstrap',
@@ -65,7 +71,7 @@
                 nowIndicator: true,
                 events: events,
             });
-            calendar.render();
+            attendanceCalendar.render();
 
             new AutoNumeric.multiple('.exam-result-input', {
                 decimalPlaces: 0,
@@ -80,11 +86,6 @@
                     minimumValue: 0
                 });
             }
-            
-            $(".col-sm-4").on("input", function() {
-                $("#result").text(resultExam());
-            });
-            $('#result').text(resultExam());
         });
     </script>
 @endsection

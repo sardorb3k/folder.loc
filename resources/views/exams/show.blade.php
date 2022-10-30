@@ -4,6 +4,12 @@
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
+                <nav>
+                    <ul class="breadcrumb breadcrumb-arrow">
+                        <li class="breadcrumb-item"><a href="{{ route('exams.index') }}">Exams List</a></li>
+                        <li class="breadcrumb-item active">Group Exam Details</li>
+                    </ul>
+                </nav>
                 <h3 class="nk-block-title page-title" style="margin-bottom: 1rem">Exam</h3>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
@@ -135,6 +141,15 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
+                                <label class="form-label" for="grammar">Grammar</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input"
+                                        id="grammar" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[grammar]') }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
                                 <label class="form-label" for="reading">Reading</label>
                                 <div class="form-control-wrap">
                                     <input type="text" name="exam[reading]" class="form-control exam-result-input"
@@ -162,15 +177,6 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label class="form-label" for="grammar">Grammar</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input"
-                                        id="grammar" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[grammar]') }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
                                 <label class="form-label" for="team">Team</label>
                                 <div class="form-control-wrap">
                                     <input type="text" name="exam[team]" class="form-control exam-result-input"
@@ -183,7 +189,7 @@
                 <div class="modal-footer bg-light">
                     <input type="hidden" name="student_id" id="student_id">
                     <input type="hidden" name="exam_id" id="exam_id">
-                    <p>Exam result: <span class="badge badge-secondary" id="result">0</span></p>
+                    <p>Exam result: <span class="badge badge-secondary" id="result"></span></p>
                     @if (Auth::user()->role == 'superadmin')
                         <span class="sub-text"><button type="button" id="exam-save"
                                 class="btn btn-primary">Submit</button></span>
@@ -272,23 +278,25 @@
                 });
             });
         @endif
-        $(".col-sm-4").on("input", function() {
+        $(".exam-result-input").on("input", function() {
             $("#result").text(resultExam());
         });
-        $('#result').text(resultExam());
 
         function resultExam() {
             var sum = 0;
             var result = 0;
-            $('.col-sm-4 input').each(function() {
-                if (this.id != 'team') {
-                    sum += Number($(this).val());
-                }
-                if (this.id == 'team') {
-                    result = sum / 5 + Number($(this).val());
+            $('.exam-result-input').each(function() {
+                res = parseInt($(this).val());
+                if(!isNaN(res)) {
+                    if (this.id != 'team') {
+                        sum += res;
+                    }
+                    if (this.id == 'team') {
+                        result = sum / 5 + res;
+                    }
                 }
             });
-            return result;
+            return result > 100 ? 100 : Math.ceil(result);
         }
     </script>
 @endsection

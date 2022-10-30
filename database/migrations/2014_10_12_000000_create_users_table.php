@@ -33,9 +33,9 @@ return new class extends Migration
             $table->string('homeaddress')->nullable();
             $table->string('reasontostudy')->nullable();
             $table->string('interests')->nullable();
-            // $table->enum('hear_about', ['friends', 'relatives', 'teacher', 'banner', 'social_media', 'flyer', 'seminar', 'other'])->default('relatives');
             $table->string('hear_about')->nullable();
             $table->json('course')->nullable();
+            
             // Exam fields
             $table->string('midexam')->nullable();
             $table->string('finalexam')->nullable();

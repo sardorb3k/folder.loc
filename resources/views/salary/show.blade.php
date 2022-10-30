@@ -4,6 +4,12 @@
     <div class="nk-block-head">
         <div class="nk-block-between g-3">
             <div class="nk-block-head-content">
+                <nav>
+                    <ul class="breadcrumb breadcrumb-arrow">
+                        <li class="breadcrumb-item"><a href="{{ route('salary.index', ['date' => $date]) }}">Salary List</a></li>
+                        <li class="breadcrumb-item active">Teacher Salary Details</li>
+                    </ul>
+                </nav>
                 <h3 class="nk-block-title page-title">Salary</h3>
             </div><!-- .nk-block-head-content -->
             <div class="nk-block-head-content">

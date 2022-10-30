@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTeachersRequest;
 use App\Http\Requests\UpdateTeachersRequest;
 use App\Interfaces\TeachersRepositoryInterface;
+use App\Models\Salary;
+use App\Models\SalaryStudents;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TeachersController extends Controller
@@ -28,7 +32,14 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        return $this->teachers->indexTeachers();
+        $teachers = User::where('status', 'active')
+            ->where(function ($query) {
+                $query->where('role', 'teacher')
+                    ->orWhere('role', 'assistant');
+            })
+            ->latest()
+            ->get();
+        return view('teachers.index', compact('teachers'));
     }
 
     /**
@@ -92,8 +103,49 @@ class TeachersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        return $this->teachers->destroyTeachers($id);
+        $teacher = User::findOrFail($id);
+        $file_path = 'uploads/teacher/' . $teacher->image;
+        unlink($file_path);
+        Salary::where('teacher_id', $id)->delete();
+        SalaryStudents::where('teacher_id', $id)->delete();
+        $teacher->delete();
+
+        return redirect()->route('teachers.archives')->with('success', 'Teacher deleted successfully.');
+    }
+
+    public function archives()
+    {
+        $teachers = User::where('status', 'inactive')
+            ->where(function ($query) {
+                $query->where('role', 'teacher')
+                    ->orWhere('role', 'assistant');
+            })
+            ->latest()
+            ->get();
+        return view('teachers.archives', ['teachers' => $teachers]);
+    }
+
+    // archive teacher
+    public function archive(Request $request, $id)
+    {
+        $teacher = User::findOrFail($id);
+        $teacher->status = 'inactive';
+        $teacher->archive_reason = $request->archive_reason;
+        $teacher->archived_at = Carbon::now();
+        $teacher->save();
+        return redirect()->route('teachers.index')->with('success', 'Teacher has been archived');
+    }
+
+    // unarchive teacher
+    public function unarchive($id)
+    {
+        $teacher = User::findOrFail($id);
+        $teacher->status = 'active';
+        $teacher->archive_reason = '';
+        $teacher->archived_at = Carbon::now();
+        $teacher->save();
+        return redirect()->route('teachers.archives')->with('success', 'Teacher has been unarchived');
     }
 }

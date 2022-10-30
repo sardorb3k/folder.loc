@@ -8,6 +8,8 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\AuthProfileController;
 use App\Http\Controllers\ReceptionController;
+use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\TeachersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,25 +49,65 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('/', ['as' => 'dashboard', 'uses' => 'App\Http\Controllers\HomeController@index'])->middleware(['auth', 'roles:superadmin,admin,teacher,student']);
 
 // Group routes
-Route::resource('groups', GroupsController::class)->middleware(['auth', 'roles:superadmin,admin,teacher']);
+Route::group(['prefix' => 'groups'], function () {
+    Route::get('/', [GroupsController::class, 'index'])->name('groups.index')->middleware(['auth', 'roles:superadmin,admin,teacher']);
+    Route::get('/create', [GroupsController::class, 'create'])->name('groups.create')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}/edit', [GroupsController::class, 'edit'])->name('groups.edit')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::post('/', [GroupsController::class, 'store'])->name('groups.store')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}', [GroupsController::class, 'show'])->name('groups.show')->middleware(['auth', 'roles:superadmin,admin,teacher']);
+    Route::put('/{id}', [GroupsController::class, 'update'])->name('groups.update')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::delete('/{id}', [GroupsController::class, 'delete'])->name('groups.delete')->middleware(['auth', 'roles:superadmin,admin']);
 
-// reception routes
-// Route::resource('reception', ReceptionController::class)->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/archives/view', [GroupsController::class, 'archives'])->name('groups.archives')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}/archive', [GroupsController::class, 'archive'])->name('groups.archive')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}/unarchive', [GroupsController::class, 'unarchive'])->name('groups.unarchive')->middleware(['auth', 'roles:superadmin,admin']);
+});
+
 // Student routes
-Route::resource('students', GroupsController::class)->middleware(['auth', 'roles:superadmin,admin,teacher']);
+// Route::resource('students', GroupsController::class)->middleware(['auth', 'roles:superadmin,admin,teacher']);
+
 // Group subscription student routes
 Route::post('groups/subscription', [GroupsController::class, 'subscription'])->name('groups.subscription')->middleware(['auth', 'roles:superadmin,admin']);
 Route::post('groups/unsubscribe', [GroupsController::class, 'unsubscribe'])->name('groups.unsubscribe')->middleware(['auth', 'roles:superadmin,admin']);
 
 // Teacher routes
-Route::resource('teachers', 'App\Http\Controllers\TeachersController')->middleware(['auth', 'roles:superadmin,admin']);
+// Route::resource('teachers', 'App\Http\Controllers\TeachersController')->middleware(['auth', 'roles:superadmin,admin']);
+
+Route::group(['prefix' => 'teachers'], function () {
+    Route::get('/', [TeachersController::class, 'index'])->name('teachers.index')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/create', [TeachersController::class, 'create'])->name('teachers.create')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}/edit', [TeachersController::class, 'edit'])->name('teachers.edit')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::post('/', [TeachersController::class, 'store'])->name('teachers.store')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}', [TeachersController::class, 'show'])->name('teachers.show')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}', [TeachersController::class, 'update'])->name('teachers.update')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::delete('/{id}', [TeachersController::class, 'delete'])->name('teachers.delete')->middleware(['auth', 'roles:superadmin,admin']);
+
+    Route::get('/archives/view', [TeachersController::class, 'archives'])->name('teachers.archives')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}/archive', [TeachersController::class, 'archive'])->name('teachers.archive')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}/unarchive', [TeachersController::class, 'unarchive'])->name('teachers.unarchive')->middleware(['auth', 'roles:superadmin,admin']);
+});
 
 // Student routes
-Route::resource('students', 'App\Http\Controllers\StudentsController')->middleware(['auth', 'roles:superadmin,admin,teacher']);
-Route::get('students/{id}/exam', 'App\Http\Controllers\StudentsController@exam')->name('students.exam')->middleware(['auth', 'roles:superadmin,admin']);
-Route::get('students/{id}/group', 'App\Http\Controllers\StudentsController@group')->name('students.group')->middleware(['auth', 'roles:superadmin,admin']);
-Route::get('students/{id}/payments', 'App\Http\Controllers\StudentsController@payments')->name('students.payments')->middleware(['auth', 'roles:superadmin,admin']);
-Route::get('students/{id}/attendance', 'App\Http\Controllers\StudentsController@attendance')->name('students.attendance')->middleware(['auth', 'roles:superadmin,admin']);
+// Route::resource('students', 'App\Http\Controllers\StudentsController')->middleware(['auth', 'roles:superadmin,admin,teacher']);
+Route::group(['prefix' => 'students'], function () {
+    Route::get('/', [StudentsController::class, 'index'])->name('students.index')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/create', [StudentsController::class, 'create'])->name('students.create')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}/edit', [StudentsController::class, 'edit'])->name('students.edit')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::post('/', [StudentsController::class, 'store'])->name('students.store')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}', [StudentsController::class, 'show'])->name('students.show')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}', [StudentsController::class, 'update'])->name('students.update')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::delete('/{id}', [StudentsController::class, 'delete'])->name('students.delete')->middleware(['auth', 'roles:superadmin,admin']);
+
+    Route::get('/{id}/exam', [StudentsController::class, 'exam'])->name('students.exam')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}/group', [StudentsController::class, 'group'])->name('students.group')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}/payments', [StudentsController::class, 'payments'])->name('students.payments')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/{id}/attendance', [StudentsController::class, 'attendance'])->name('students.attendance')->middleware(['auth', 'roles:superadmin,admin']);
+
+    Route::get('/archives/view', [StudentsController::class, 'archives'])->name('students.archives')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}/archive', [StudentsController::class, 'archive'])->name('students.archive')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::put('/{id}/unarchive', [StudentsController::class, 'unarchive'])->name('students.unarchive')->middleware(['auth', 'roles:superadmin,admin']);
+});
+
 
 // Payments routes
 Route::group(['prefix' => 'payments'], function () {
@@ -86,6 +128,7 @@ Route::group(['prefix' => 'attendance'], function () {
     Route::get('/{id}/{date}', 'App\Http\Controllers\AttendanceController@show')->name('attendance.show')->middleware(['auth', 'roles:superadmin,admin,teacher']);
     Route::put('/{id}', 'App\Http\Controllers\AttendanceController@update')->name('attendance.update')->middleware(['auth', 'roles:superadmin,admin,teacher']);
 });
+
 // Salary routes
 // Route::resource('salary', 'App\Http\Controllers\SalaryController');
 Route::group(['prefix' => 'salary', 'middleware' => ['auth']], function () {
@@ -135,7 +178,7 @@ Route::group(['prefix' => 'exams'], function () {
 
 // Settings
 Route::group(['prefix' => 'settings'], function () {
-    Route::get('/', 'App\Http\Controllers\SettingsController@index')->name('settings.index')->middleware(['auth','roles:superadmin']);
+    Route::get('/', 'App\Http\Controllers\SettingsController@index')->name('settings.index')->middleware(['auth', 'roles:superadmin']);
     Route::post('/', 'App\Http\Controllers\SettingsController@store')->name('settings.store')->middleware(['auth', 'roles:superadmin']);
     // Level
     Route::post('/groupLevel', 'App\Http\Controllers\SettingsController@groupLevel')->name('settings.groupLevel')->middleware(['auth', 'roles:superadmin']);

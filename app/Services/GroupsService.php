@@ -135,7 +135,7 @@ class GroupsService implements GroupsServiceInterface
             ->select('gl.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
             ->where('groups.id', $id)
             ->first();
-        return $group ?? [];
+        return $group;
     }
 
     /**

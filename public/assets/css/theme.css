@@ -29,6 +29,10 @@
     display: none;
 }
 
+.min-height-50 {
+    min-height: 50px !important;
+}
+
 @media (max-width:480px) {
     .fc .fc-daygrid-day-top {
         display: flex;

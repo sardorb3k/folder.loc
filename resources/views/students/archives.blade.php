@@ -1,35 +1,21 @@
-@section('title', 'Student list')
+@section('title', 'Archived Student list')
 @extends('layouts.app')
 @section('content')
     <div class="nk-block-head">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Students Lists</h3>
+                <nav>
+                    <ul class="breadcrumb breadcrumb-arrow">
+                        <li class="breadcrumb-item"><a href="{{ route('students.index') }}">Students List</a></li>
+                        <li class="breadcrumb-item active">Archives</li>
+                    </ul>
+                </nav>
+                <h3 class="nk-block-title page-title">
+                    Archived Students Lists
+                </h3>
                 <div class="nk-block-des text-soft">
-                    <p>You have total {{ count($students) }} students.</p>
+                    <p>You have total {{ count($students) }} students in archive.</p>
                 </div>
-            </div><!-- .nk-block-head-content -->
-            <div class="nk-block-head-content">
-                <div class="toggle-wrap nk-block-tools-toggle">
-                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
-                            class="icon ni ni-menu-alt-r"></em></a>
-                    <div class="toggle-expand-content" data-content="pageMenu">
-                        <ul class="nk-block-tools g-3">
-                            <li>
-                                <a href="{{ route('students.archives') }}" class="btn btn-white btn-outline-light">
-                                    <em class="icon ni ni-archived"></em>
-                                    <span>Archives</span>
-                                </a>
-                            </li>
-                            <li class="nk-block-tools-opt">
-                                <a href="{{ route('students.create') }}"
-                                    class="btn btn-icon btn-primary">
-                                    <em class="icon ni ni-plus"></em>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div><!-- .toggle-wrap -->
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
@@ -44,16 +30,16 @@
                     <span class="sub-text">Student</span>
                 </th>
                 <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">Group</span>
-                </th>
-                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Phone</span>
                 </th>
                 <th class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Birthday</span>
                 </th>
                 <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">Created Date</span>
+                    <span class="sub-text">Reason</span>
+                </th>
+                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                    <span class="sub-text">Archived Date</span>
                 </th>
                 <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"></th>
             </tr>
@@ -81,19 +67,23 @@
                             </a>
                         </div>
                     </td>
-                    <td class="nk-tb-col tb-col-mb">
-                        <span class="text-capitalize" style="@if(!$student_data->group_level) color: red; @endif">
-                            {{ $student_data->group_level ? $student_data->group_level . ' ' . $student_data->group_name : 'No Group'}} 
-                        </span>
-                    </td>
                     <td class="nk-tb-col tb-col-lg">
                         <input type="text" class="phone border-0 bg-transparent text-soft no-focus-outline cursor-pointer"  value="{{ $student_data->phone }}" onclick="window.location = 'tel:+{{ $student_data->phone }}'" readonly>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span>{{ date('d M, Y', strtotime($student_data->birthday)) }}</span>
+                        <span>{{ $student_data->birthday }}</span>
+                    </td>
+                    <td class="nk-tb-col tb-col-md">
+                        <span class="tb-status">
+                            @if($student_data->archive_reason != '') 
+                                <textarea readonly class="form-control no-resize min-height-50" id="default-textarea">{{ $student_data->archive_reason }}</textarea>
+                            @else 
+                                *
+                            @endif
+                        </span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span>{{ date_format($student_data->created_at, 'd M, Y') }}</span>
+                        <span>{{ date('d M, Y', strtotime($student_data->archived_at)) }}</span>
                     </td>
                     <td class="nk-tb-col nk-tb-col-tools">
                         <ul class="nk-tb-actions gx-1">
@@ -105,20 +95,30 @@
                                     <div class="dropdown-menu dropdown-menu-end" style="">
                                         <ul class="link-list-opt no-bdr">
                                             <li>
-                                                <a href="{{ route('students.edit', $student_data->id) }}">
-                                                    <em class="icon ni ni-edit"></em>
-                                                    <span>Edit</span>
-                                                </a>
+                                                <a href="{{ route('students.edit', $student_data->id) }}"><em
+                                                class="icon ni ni-edit"></em><span>Edit</span></a>
                                             </li>
                                             <li class="divider"></li>
-                                            <form action="{{ route('students.archive', $student_data->id) }}"
+                                            <form action="{{ route('students.unarchive', $student_data->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <input id="archive_reason" type="hidden" name="archive_reason" value="">
                                                 <li class="cursor-pointer">
-                                                    <a onclick="archiveStudent(this)">
-                                                        <em class="icon ni ni-archive"></em><span>Archive</span>
+                                                    <a onclick="this.closest('form').submit()">
+                                                        <em class="icon ni ni-unarchive"></em>
+                                                        <span>Unarchive</span>
+                                                    </a>
+                                                </li>
+                                            </form>
+                                            <li class="divider"></li>
+                                            <form action="{{ route('students.delete', $student_data->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="id" value="{{ $student_data->id }}">
+                                                <li>
+                                                    <a onclick="deleteStudent(this)">
+                                                        <em class="icon ni ni-na"></em><span>Delete</span>
                                                     </a>
                                                 </li>
                                             </form>
@@ -137,32 +137,19 @@
             $('.phone').inputmask('+999 (99) 999 99 99');
         });
 
-        async function archiveStudent (element) {
+        async function deleteStudent (element) {
             const result = await Swal.fire({
                 title: 'Are you sure?',
-                text: "Please enter a reason.",
-                input: 'text',
+                text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Archive',
-                showLoaderOnConfirm: true,
-                preConfirm: (reason) => {
-                    if(reason == '') {
-                        Swal.showValidationMessage(
-                            `Please enter a reason`
-                        )
-                    }
-                    $('#archive_reason').val(reason);
-                },
-                allowOutsideClick: () => !Swal.isLoading()
+                confirmButtonText: 'Yes, delete it!'
             });
-
             if (result.isConfirmed) {
                 await element.closest('form').submit();
             }
-            
         }
     </script>
 @endsection

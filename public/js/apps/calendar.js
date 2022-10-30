@@ -5,8 +5,8 @@
     // Variable
     var $win = $(window), $body = $('body'), breaks = NioApp.Break;
 
-    NioApp.Calendar = function(){
-    	
+    NioApp.Calendar = function () {
+
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -47,8 +47,8 @@
         var previewEventPopup = $('#previewEventPopup');
 
         var deleteEventBtn = $('#deleteEvent');
-        
-        var mobileView = (NioApp.Win.width < NioApp.Break.md ) ? true : false;
+
+        var mobileView = (NioApp.Win.width < NioApp.Break.md) ? true : false;
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
             timeZone: 'UTC',
@@ -62,7 +62,7 @@
             height: 800,
             contentHeight: 780,
             aspectRatio: 3,
-            
+
             editable: true,
             droppable: true,
             views: {
@@ -74,10 +74,10 @@
 
             nowIndicator: true,
             now: TODAY + 'T09:25:00',
-            eventDragStart: function(info){
+            eventDragStart: function (info) {
                 $('.popover').popover('hide');
             },
-            eventMouseEnter: function(info) {
+            eventMouseEnter: function (info) {
                 $(info.el).popover({
                     template: '<div class="popover"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
                     title: info.event._def.title,
@@ -86,19 +86,19 @@
                 });
                 info.event._def.extendedProps.description ? $(info.el).popover('show') : $(info.el).popover('hide');
             },
-            eventMouseLeave: function(info) {
+            eventMouseLeave: function (info) {
                 $(info.el).popover('hide');
             },
-            eventClick: function(info) {
+            eventClick: function (info) {
                 // Get data
                 var title = info.event._def.title;
                 var description = info.event._def.extendedProps.description;
                 var start = info.event._instance.range.start;
                 var startDate = start.getFullYear() + '-' + String(start.getMonth() + 1).padStart(2, '0') + '-' + String(start.getDate()).padStart(2, '0');
-                var startTime = start.toUTCString().split(' '); startTime = startTime[startTime.length-2]; startTime = (startTime == '00:00:00') ? '' : startTime;
+                var startTime = start.toUTCString().split(' '); startTime = startTime[startTime.length - 2]; startTime = (startTime == '00:00:00') ? '' : startTime;
                 var end = info.event._instance.range.end;
                 var endDate = end.getFullYear() + '-' + String(end.getMonth() + 1).padStart(2, '0') + '-' + String(end.getDate()).padStart(2, '0');
-                var endTime = end.toUTCString().split(' '); endTime = endTime[endTime.length-2]; endTime = (endTime == '00:00:00') ? '' : endTime;
+                var endTime = end.toUTCString().split(' '); endTime = endTime[endTime.length - 2]; endTime = (endTime == '00:00:00') ? '' : endTime;
                 var className = info.event._def.ui.classNames[0].slice(3);
                 var eventId = info.event._def.publicId;
 
@@ -121,7 +121,7 @@
                 $('#preview-event-start').text(previewStart);
                 $('#preview-event-end').text(previewEnd);
                 $('#preview-event-description').text(description);
-                !description ? $('#preview-event-description-check').css('display','none') : null ;
+                !description ? $('#preview-event-description-check').css('display', 'none') : null;
 
                 previewEventPopup.modal('show');
                 $('.popover').popover('hide');
@@ -129,14 +129,14 @@
 
             events: [
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Reader will be distracted',
                     start: YM + '-03T13:30:00',
                     className: "fc-event-danger",
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Rabfov va hezow.',
                     start: YM + '-14T13:30:00',
                     end: YM + '-14',
@@ -144,7 +144,7 @@
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'The leap into electronic',
                     start: YM + '-05',
                     end: YM + '-06',
@@ -152,7 +152,7 @@
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Lorem Ipsum passage - Product Release',
                     start: YM + '-02',
                     end: YM + '-04',
@@ -167,14 +167,14 @@
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Jidehse gegoj fupelone.',
                     start: YM + '-07T16:00:00',
                     className: "fc-event-danger-dim",
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Ke uzipiz zip.',
                     start: YM + '-16T16:00:00',
                     end: YM + '-14',
@@ -182,7 +182,7 @@
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Piece of classical Latin literature',
                     start: TODAY,
                     end: TODAY + '-01',
@@ -190,35 +190,35 @@
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Nogok kewwib ezidbi.',
                     start: TODAY + 'T10:00:00',
                     className: "fc-event-info",
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Mifebi ik cumean.',
                     start: TODAY + 'T14:30:00',
                     className: "fc-event-warning-dim",
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Play Time',
                     start: TODAY + 'T17:30:00',
                     className: "fc-event-info",
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'Rujfogve kabwih haznojuf.',
                     start: YESTERDAY + 'T05:00:00',
                     className: "fc-event-danger",
                     description: "Use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.",
                 },
                 {
-                    id: 'default-event-id-' + Math.floor(Math.random()*9999999),
+                    id: 'default-event-id-' + Math.floor(Math.random() * 9999999),
                     title: 'simply dummy text of the printing',
                     start: YESTERDAY + 'T07:00:00',
                     className: "fc-event-primary-dim",
@@ -230,7 +230,7 @@
 
         //Add event
 
-        addEventBtn.on("click", function(e) {
+        addEventBtn.on("click", function (e) {
             e.preventDefault();
             var eventTitle = $('#event-title').val();
             var eventStartDate = $('#event-start-date').val();
@@ -245,7 +245,7 @@
             console.log(eventStartTime);
 
             calendar.addEvent({
-                id: 'added-event-id-' + Math.floor(Math.random()*9999999),
+                id: 'added-event-id-' + Math.floor(Math.random() * 9999999),
                 title: eventTitle,
                 start: eventStartDate + eventStartTimeCheck,
                 end: eventEndDate + eventEndTimeCheck,
@@ -255,7 +255,7 @@
             addEventPopup.modal('hide');
         });
 
-        updateEventBtn.on("click", function(e) {
+        updateEventBtn.on("click", function (e) {
             e.preventDefault();
             var eventTitle = $('#edit-event-title').val();
             var eventStartDate = $('#edit-event-start-date').val();
@@ -280,26 +280,26 @@
             editEventPopup.modal('hide');
         });
 
-        deleteEventBtn.on("click", function(e) {
+        deleteEventBtn.on("click", function (e) {
             e.preventDefault();
             var selectEvent = calendar.getEventById(editEventForm[0].dataset.id);
             selectEvent.remove();
         });
 
-        function to12 (time) {
-            time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        function to12(time) {
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
-            if (time.length > 1) { 
-                time = time.slice (1);
+            if (time.length > 1) {
+                time = time.slice(1);
                 time.pop();
                 time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
                 time[0] = +time[0] % 12 || 12;
             }
-            time = time.join ('');
+            time = time.join('');
             return time;
         }
 
-        function customCalSelect (cat) {
+        function customCalSelect(cat) {
             if (!cat.id) {
                 return cat.text;
             }
@@ -312,7 +312,7 @@
         });
 
         addEventPopup.on('hidden.bs.modal', function (e) {
-            setTimeout(function(){ 
+            setTimeout(function () {
                 $('#addEventForm input,#addEventForm textarea').val('');
                 $('#event-theme').val('event-primary');
                 $('#event-theme').trigger('change.select2');
