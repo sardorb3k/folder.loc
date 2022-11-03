@@ -333,6 +333,8 @@
     <script src="{{ asset('assets/js/jquery.inputmask.min.js') }}"></script>
     <script src="{{ asset('assets/js/libs/fullcalendar.js') }}"></script>
     <script src="{{ asset('assets/js/apps/calendar.js') }}"></script>
+    <script src="{{ asset('assets/js/libs/jkanban.js') }}"></script>
+    <script src="{{ asset('assets/js/apps/kanban.js') }}"></script>
     <!-- select region modal -->
 
 </html>

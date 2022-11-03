@@ -9,7 +9,8 @@ use App\Interfaces\AttendanceRepositoryInterface;
 class AttendanceController extends Controller
 {
     private $attendanceService;
-    public function __construct(AttendanceRepositoryInterface $attendanceService) {
+    public function __construct(AttendanceRepositoryInterface $attendanceService)
+    {
         $this->attendanceService = $attendanceService;
         // Middleware
         $this->middleware('auth');
@@ -44,6 +45,7 @@ class AttendanceController extends Controller
     {
         return $this->attendanceService->show($id, $request);
     }
+
     public function show($id, $date)
     {
         return $this->attendanceService->showAttendance($id, $date);
@@ -60,5 +62,4 @@ class AttendanceController extends Controller
     {
         return $this->attendanceService->updateAttendance($request, $id);
     }
-
 }

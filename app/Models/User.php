@@ -43,7 +43,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getRole() {
+    public function getRole()
+    {
         return $this->role;
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function boards()
+    {
+        return $this->hasMany(Boards::class)->orderBy('order_number');
     }
 }

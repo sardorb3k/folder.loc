@@ -62,6 +62,7 @@ class LoginController extends Controller
     public function username()
     {
         $login = str_replace(["(", ")", "-", " ", "_"], "", request()->input('phone'));
+        $field = 'email';
         // Check if the login field is an email.
         if (is_numeric($login)) {
             $field = 'phone';

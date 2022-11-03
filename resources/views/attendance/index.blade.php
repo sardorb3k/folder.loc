@@ -34,7 +34,7 @@
                     <span class="sub-text">Time</span>
                 </th>
                 <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
-                    <span class="sub-text">A/NoA</span>
+                    <span class="sub-text">Today P / A</span>
                 </th>
             </tr>
         </thead>

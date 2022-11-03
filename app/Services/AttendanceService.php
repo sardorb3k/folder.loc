@@ -14,7 +14,7 @@ use App\Interfaces\AttendanceServiceInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Groups;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceService implements AttendanceServiceInterface
 {
@@ -158,9 +158,7 @@ class AttendanceService implements AttendanceServiceInterface
     // get All Groups pagination
     public function getAllGroupsPagination($perPage = 10)
     {
-        // User role if teacher or assistant
-
-        if (Auth::user()->getRole() != 'teacher' && Auth::user()->getRole() != 'assistant') {
+        if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin') {
             $date_year = Date('Y');
             $date_month = Date('m');
             $date_day = Date('d');
@@ -184,18 +182,19 @@ class AttendanceService implements AttendanceServiceInterface
                     'groups.days',
                     'groups.created_at'
                 )
+                ->where('groups.status', 'active')
                 ->latest('groups.created_at')
                 ->get();
             // dd($groups);
         } else {
             $userid = Auth::user()->id;
-            if (Auth::user()->getRole() == 'teacher') {
+            if (Auth::user()->role == 'teacher') {
                 $groups = $this->groups
                     ->leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                     ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
                     ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'gl.name as level', 'gl.name as level', 'groups.id', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.name', 'groups.days', 'groups.created_at')
-                    ->where('ut.id', $userid)
+                    ->where([['ut.id', $userid], ['groups.status', 'active']])
                     ->latest('groups.created_at')
                     ->get();
             } else {
@@ -204,13 +203,11 @@ class AttendanceService implements AttendanceServiceInterface
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                     ->leftJoin('group_level as gl', 'gl.id', '=', 'groups.level')
                     ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'gl.name as level', 'gl.name as level', 'groups.id', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.name', 'groups.days', 'groups.created_at')
-                    ->where('ua.id', $userid)
+                    ->where([['ut.id', $userid], ['groups.status', 'active']])
                     ->latest('groups.created_at')
                     ->get();
             }
         }
-        // dd($groups);
-
         return $groups ?? [];
     }
 }

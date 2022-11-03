@@ -15,16 +15,12 @@ return new class extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            // Board name
             $table->string('name');
-            // Board status (enum: 'active', 'inactive') (default: 'inactive')
             $table->enum('status', ['active', 'inactive'])->default('active');
-            // Board Visibility (enum: 'public', 'private') (default: 'public')
             $table->enum('visibility', ['public', 'private'])->default('public');
-            // Board Workspace (enum: 'personal', 'work', 'school') (default: 'personal')
             $table->enum('workspace', ['personal', 'work', 'school'])->default('personal');
-            // Issue id (foreign key)
             $table->unsignedBigInteger('issue_id');
+            $table->smallInteger('order_number')->default(0);
             $table->timestamps();
         });
     }

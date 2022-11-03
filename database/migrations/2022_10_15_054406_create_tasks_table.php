@@ -15,20 +15,14 @@ return new class extends Migration
     {
         Schema::create('task', function (Blueprint $table) {
             $table->id();
-            // Task name
             $table->string('name');
-            // Task description
             $table->text('description');
-            // Task labels JSON
             $table->json('labels');
-            // Task deadline
             $table->date('deadline');
-            // Task users JSON
             $table->json('users');
-            // Task board id (foreign key)
             $table->unsignedBigInteger('board_id');
-            // Task status (enum: 'active', 'inactive') (default: 'inactive')
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->smallInteger('order_number')->default(0);
             $table->timestamps();
         });
     }

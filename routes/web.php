@@ -7,8 +7,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\AuthProfileController;
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ReceptionController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeachersController;
 
 /*
@@ -189,6 +191,19 @@ Route::group(['prefix' => 'settings'], function () {
     // Group level update
     Route::put('/groupLevel/{id}', 'App\Http\Controllers\SettingsController@groupLevelUpdate')->name('settings.groupLevelUpdate')->middleware(['auth', 'roles:superadmin']);
 });
+
+Route::group(['prefix' => 'tasks', 'middleware' => ['auth']], function () {
+    Route::get('/', [TaskController::class, 'index'])->name('tasks.index')->middleware(['roles:superadmin']);
+    Route::post('/', [TaskController::class, 'store'])->name('tasks.store')->middleware(['roles:superadmin']);
+    Route::put('/sync', [TaskController::class, 'sync'])->name('tasks.sync')->middleware(['roles:superadmin']);
+    Route::put('/{task}', [TaskController::class, 'update'])->name('tasks.update')->middleware(['roles:superadmin']);
+});
+
+Route::group(['prefix' => 'boards', 'middleware' => ['auth']], function () {
+    Route::post('/', [BoardController::class, 'store'])->name('boards.store')->middleware(['roles:superadmin']);
+    Route::put('/', [BoardController::class, 'update'])->name('boards.update')->middleware(['roles:superadmin']);
+});
+
 
 
 // Language routes

@@ -35,11 +35,13 @@ class AttendanceRepository implements AttendanceRepositoryInterface
         $count = $this->groupService->getCountGroups();
         return view('attendance.index', compact('groups', 'count'));
     }
+    
     public function show(int $id,  Request $request): RedirectResponse
     {
         $date = $request->input('date') ?? date('Y-m-d');
         return redirect()->route('attendance.show', ['id' => $id, 'date' => $date]);
     }
+
     public function showAttendance(int $id, $date): View
     {
         $count = $this->groupService->getCountGroupStudents($id);
