@@ -11,19 +11,20 @@
             </div><!-- .nk-block-head-content -->
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle"><a href="#"
-                        class="btn btn-icon btn-trigger toggle-expand me-n1"
-                        data-target="pageMenu"><em
+                        class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
                             class="icon ni ni-menu-alt-r"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#task-create" class="btn btn-white btn-outline-light dropdown-toggle">
+                                <a href="#" data-toggle="modal" data-target="#task-create"
+                                    class="btn btn-white btn-outline-light dropdown-toggle">
                                     <em class="icon ni ni-plus"></em>
                                     <span>Add Task</span>
                                 </a>
                             </li>
                             <li class="nk-block-tools-opt">
-                                <a href="#" data-toggle="modal" data-target="#board-create" class="btn btn-primary dropdown-toggle">
+                                <a href="#" data-toggle="modal" data-target="#board-create"
+                                    class="btn btn-primary dropdown-toggle add-new-board">
                                     <em class="icon ni ni-plus"></em>
                                     <span>Add Board</span>
                                 </a>
@@ -40,6 +41,7 @@
             <div class="nk-content-body">
                 <div class="ng-block">
                     <div id="rexarTaskBoard" class="nk-kanban"></div>
+
                 </div>
             </div>
         </div>
@@ -127,7 +129,7 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             const tasks = {!! json_encode($tasks) !!};
             const boards = {!! json_encode($boards) !!};
@@ -135,16 +137,18 @@
             const boardsWithTasks = boards.map((board, index) => {
                 var boardTasks = [];
                 tasks.forEach(task => {
-                    if(task.board_id == board.id) {
+                    console.log(task);
+                    if (task.board_id == board.id) {
                         boardTasks.push({
                             id: task.id,
                             title: taskTemplate(task)
                         });
                     }
                 });
+                console.log(boardTasks);
                 return {
                     'id': '_' + board.name.replace(' ', '_').toLowerCase(),
-                    'title': titletemplate(board.name, "3"),
+                    'title': titletemplate(board.name, boardTasks.length),
                     'class': 'kanban-light',
                     'item': boardTasks
                 };
@@ -167,39 +171,29 @@
                     </button>`);
             }
 
+
+
+
+
             function titletemplate(title, count) {
                 var optionicon = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "more-h";
                 return `<div class='kanban-title-content'>
                             <h6 class='title'>${title}</h6>
-                            <span class='badge badge-pill badge-outline-light text-dark'>${count}</span>
+                            <span class='badge badge-pill badge-outline-light text-dark board-count'>${count}</span>
                         </div>
                         <div class='kanban-title-content'>
                             <div class='drodown'>
                                 <a href='#' class='dropdown-toggle btn btn-sm btn-icon btn-trigger mr-n1' data-toggle='dropdown'>
                                     <em class='icon ni ni-${optionicon}'></em>
                                 </a>
-                            <div class='dropdown-menu dropdown-menu-right'>
-                                <ul class='link-list-opt no-bdr'>
-                                    <li>
-                                        <a href='#'>
-                                            <em class='icon ni ni-edit'></em>
-                                            <span>Edit Board</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href='#'>
-                                            <em class='icon ni ni-plus-sm'></em>
-                                            <span>Add Task</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href='#'>
-                                            <em class='icon ni ni-plus-sm'></em>
-                                            <span>Add Option</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class='dropdown-menu dropdown-menu-right'>
+                                    <ul class='link-list-opt no-bdr kanban-title-action'>
+                                        <li><a class="edit-board"><em class='icon ni ni-edit'></em><span>Edit Board</span></a></li>
+                                        <li><a class="remove-board"><em class='icon ni ni-trash'></em><span>Remove Board</span></a></li>
+                                    </ul>
+                                </div>
                             </div>
+
                         </div>
                     </div>`;
             }
@@ -280,16 +274,78 @@
                         </form>`;
             }
 
-            $('.footer-kanban-add-task').click((e) => {
+            $('.kanban-container .kanban-board').on('click', '.kanban-add-task', (e) => {
                 var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
-                var className = 'newly-created-task-'+currentBoard;
+                console.log(currentBoard);
+                var className = 'newly-created-task-' + currentBoard;
                 kanban.addElement(
-                    currentBoard,
-                    {
-                        'title': newTaskTemplate(),
+                    currentBoard, {
+                        'title': taskTemplate({
+                            name: 'New Task',
+                            description: 'New Task Description',
+                            deadline: '12/12/2020'
+                        }),
                     }
                 );
-                $('.'+className).focus();
+                // $('.' + className).focus();
+                // board count update
+                var board = kanban.findBoard(currentBoard);
+                var count = $(board).find('.kanban-item').length;
+                $(board).find('.kanban-title-content .board-count').html(count);
+            });
+
+            $('.add-new-board').click((e) => {
+                var id = '_' + Math.floor(Math.random() * 1000);
+                kanban.addBoards([{
+                    'id': id,
+                    'title': titletemplate('New Board', 0),
+                    'class': 'kanban-board',
+                    'item': []
+                }]);
+                // board footer add button
+                var board = kanban.findBoard(id);
+                $(board).find("footer").html(
+                    `<button class='kanban-add-task btn btn-block footer-kanban-add-task'>
+                        <em class='icon ni ni-plus-sm'></em>
+                        <span>Add another task</span>
+                    </button>`);
+            });
+
+            // Kanban board remove
+            $('.kanban-board').on('click', '.kanban-title-action .remove-board', (e) => {
+                var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
+                kanban.removeBoard(currentBoard);
+            });
+            // Kanban board edit
+            $('.kanban-board').on('click', '.kanban-title-action .edit-board', (e) => {
+                var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
+                var board = kanban.findBoard(currentBoard);
+                var boardTitle = $(board).find('.kanban-title-content .title').html();
+                console.log(boardTitle);
+                $(board).find('.kanban-title-content .title').html(
+                    `<div style='display: flex;'><input class='form-control form-control-sm form-title' value='${boardTitle}' />
+                    <button class='btn btn-sm btn-icon btn-trigger ml-2 form-save'>Save</button></div>`);
+                $(board).find('.kanban-title-content .title input').focus();
+                // kanban title content drodown hide
+                $(board).find('.kanban-title-content .drodown').hide();
+                // kanban board-count hide
+                $(board).find('.kanban-title-content .board-count').hide();
+                // kanban title content add new a tag
+                // $(board).find('.kanban-title-content .title input').on('blur', (e) => {
+                //     var newTitle = e.currentTarget.value;
+                //     $(board).find('.kanban-title-content .kanban-title').html(newTitle);
+                // });
+            });
+            // Kanban board title save
+            $('.kanban-board').on('click', '.kanban-title-content .form-save', (e) => {
+                var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
+                var board = kanban.findBoard(currentBoard);
+                var newTitle = $(board).find('.kanban-title-content .form-title').val();
+                $(board).find('.kanban-title-content .title').html(newTitle);
+                // kanban title content drodown show
+                $(board).find('.kanban-title-content .drodown').show();
+                // kanban board-count show
+                $(board).find('.kanban-title-content .board-count').show();
             });
         });
     </script>
