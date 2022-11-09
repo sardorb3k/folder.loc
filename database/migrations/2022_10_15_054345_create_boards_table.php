@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
+            $table->string('data_id');
             $table->string('name');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('visibility', ['public', 'private'])->default('public');
