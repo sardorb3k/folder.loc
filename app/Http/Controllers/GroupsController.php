@@ -33,7 +33,7 @@ class GroupsController extends Controller
                 ::leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                 ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                 ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
-                ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
+                ->select(DB::raw('(SELECT count(*) from group_students left join users on users.id = group_students.student_id where group_id = groups.id AND users.status = "active") as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname', 'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
                 ->where('groups.status', 'active')
                 ->latest('groups.created_at')
                 ->get();
@@ -43,7 +43,7 @@ class GroupsController extends Controller
                 $groups = Groups::leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                     ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
-                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
+                    ->select(DB::raw('(SELECT count(*) from group_students left join users on users.id = group_students.student_id where group_id = groups.id AND users.status = "active") as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
                     ->where([['ut.id', $userid], ['groups.status', 'active']])
                     ->latest('groups.created_at')
                     ->get();
@@ -51,7 +51,7 @@ class GroupsController extends Controller
                 $groups = Groups::leftJoin('users as ut', 'ut.id', '=', 'groups.teacher_id')
                     ->leftJoin('users as ua', 'ua.id', '=', 'groups.assistant_id')
                     ->leftJoin('group_level as group_level', 'group_level.id', '=', 'groups.level')
-                    ->select(DB::raw('(SELECT count(*) from group_students where group_id = groups.id) as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
+                    ->select(DB::raw('(SELECT count(*) from group_students left join users on users.id = group_students.student_id where group_id = groups.id AND users.status = "active") as students_count'), 'ut.firstname as teacher_firstname', 'ut.lastname as teacher_lastname', 'ua.firstname as assistant_firstname', 'ua.lastname as assistant_lastname',  'group_level.name as level', 'groups.id', 'groups.name', 'groups.lessonstarttime', 'groups.lessonendtime', 'groups.days', 'groups.created_at')
                     ->where([['ut.id', $userid], ['groups.status', 'active']])
                     ->latest('groups.created_at')
                     ->get();
