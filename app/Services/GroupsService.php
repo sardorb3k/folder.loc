@@ -193,7 +193,7 @@ class GroupsService implements GroupsServiceInterface
                 'users.status',
                 'users.birthday'
             )
-            ->where('group_id', $id)
+            ->where([['group_id', $id], ['users.status', 'active']])
             ->get();
         return $students ?? [];
     }

@@ -65,15 +65,15 @@ class AttendanceService implements AttendanceServiceInterface
                     ON
                         us.id = gs.student_id
                     WHERE
-                        gs.group_id = $id");
+                        gs.group_id = $id AND us.status = 'active'");
             $status = false;
         } else {
             $students = DB::select("SELECT
-                    us.id,
-                    us.firstname,
-                    us.lastname,
-                    us.image,
-                    (
+                us.id,
+                us.firstname,
+                us.lastname,
+                us.image,
+                (
                     SELECT
                         COUNT(*)
                     FROM
@@ -103,7 +103,7 @@ class AttendanceService implements AttendanceServiceInterface
                 ON
                     us.id = gs.student_id
                 WHERE
-                    gs.group_id = $id");
+                    gs.group_id = $id AND us.status = 'active'");
             $status = true;
         }
         return array("status" => $status, "students" => $students);

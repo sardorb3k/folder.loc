@@ -35,7 +35,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
         $count = $this->groupService->getCountGroups();
         return view('attendance.index', compact('groups', 'count'));
     }
-    
+
     public function show(int $id,  Request $request): RedirectResponse
     {
         $date = $request->input('date') ?? date('Y-m-d');
@@ -44,11 +44,10 @@ class AttendanceRepository implements AttendanceRepositoryInterface
 
     public function showAttendance(int $id, $date): View
     {
-        $count = $this->groupService->getCountGroupStudents($id);
         $students = $this->attendanceService->getStudents($id, $date);
+        $count = count($students);
         $group = $this->groupService->getGroupInfoById($id);
         $crm_attendance_day = DB::select('SELECT attendance_day FROM settings WHERE id = 1')[0]->attendance_day;
-
         return view('attendance.show', compact('students', 'count', 'date', 'id', 'crm_attendance_day', 'group'));
     }
     public function storeAttendance(Request $request): RedirectResponse

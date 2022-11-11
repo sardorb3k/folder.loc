@@ -274,7 +274,7 @@
                         </form>`;
             }
 
-            $('.kanban-container .kanban-board').on('click', '.kanban-add-task', (e) => {
+            $('.kanban-container').on('click', '.kanban-add-task', (e) => {
                 var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
                 console.log(currentBoard);
                 var className = 'newly-created-task-' + currentBoard;

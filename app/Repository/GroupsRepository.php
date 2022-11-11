@@ -50,7 +50,7 @@ class GroupsRepository implements GroupsRepositoryInterface
         $unsubscribelist = $this->groupService->getUnsubscribeList($id);
 
         $students = $this->groupService->getGroupStudents($id);
-        $count = $this->groupService->getCountGroupStudents($id);
+        $count = count($students);
         return view('groups.show', compact('group', 'count', 'students', 'unsubscribelist'));
     }
     /**
