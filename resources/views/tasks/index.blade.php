@@ -17,7 +17,7 @@
                         <ul class="nk-block-tools g-3">
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#task-create"
-                                    class="btn btn-white btn-outline-light dropdown-toggle">
+                                    class="btn btn-white btn-outline-light dropdown-toggle boardupdate">
                                     <em class="icon ni ni-plus"></em>
                                     <span>Add Task</span>
                                 </a>
@@ -41,7 +41,6 @@
             <div class="nk-content-body">
                 <div class="ng-block">
                     <div id="rexarTaskBoard" class="nk-kanban"></div>
-
                 </div>
             </div>
         </div>
@@ -309,19 +308,53 @@
                         <em class='icon ni ni-plus-sm'></em>
                         <span>Add another task</span>
                     </button>`);
+                // Ajax call to create new board
+                $.ajax({
+                    url: '{{ route("boards.store") }}',
+                    type: 'POST',
+                    data: {
+                        action: 'addBoard',
+                        id: id,
+                        title: 'New Board'
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+
             });
 
+            // Board count update function
+            $('.boardupdate').click((e) => {
+                console.log('board count update');
+                var boards = kanban.getBoards();
+                boards.forEach(board => {
+                    var count = $(board).find('.kanban-item').length;
+                    $(board).find('.kanban-title-content .board-count').html(count);
+                });
+            });
+
+
             // Kanban board remove
-            $('.kanban-board').on('click', '.kanban-title-action .remove-board', (e) => {
+            $('.kanban-container').on('click', '.remove-board', (e) => {
+                // Board remove
+                // Board
+
                 var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
+                console.log(e);
+                console.log($(this).data('data-id'));
                 kanban.removeBoard(currentBoard);
             });
             // Kanban board edit
-            $('.kanban-board').on('click', '.kanban-title-action .edit-board', (e) => {
+            $('.kanban-container').on('click', '.edit-board', (e) => {
+                // Kanban board edit
                 var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
                 var board = kanban.findBoard(currentBoard);
                 var boardTitle = $(board).find('.kanban-title-content .title').html();
-                console.log(boardTitle);
+                console.log(currentBoard);
                 $(board).find('.kanban-title-content .title').html(
                     `<div style='display: flex;'><input class='form-control form-control-sm form-title' value='${boardTitle}' />
                     <button class='btn btn-sm btn-icon btn-trigger ml-2 form-save'>Save</button></div>`);
@@ -337,7 +370,7 @@
                 // });
             });
             // Kanban board title save
-            $('.kanban-board').on('click', '.kanban-title-content .form-save', (e) => {
+            $('.kanban-container').on('click', '.form-save', (e) => {
                 var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
                 var board = kanban.findBoard(currentBoard);
                 var newTitle = $(board).find('.kanban-title-content .form-title').val();
@@ -346,6 +379,22 @@
                 $(board).find('.kanban-title-content .drodown').show();
                 // kanban board-count show
                 $(board).find('.kanban-title-content .board-count').show();
+                // Ajax call to update board title
+                $.ajax({
+                    url: '{{ route("boards.update") }}',
+                    type: 'POST',
+                    data: {
+                        action: 'updateBoard',
+                        id: currentBoard,
+                        title: newTitle
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
             });
         });
     </script>
