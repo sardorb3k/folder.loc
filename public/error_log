@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [26-Sep-2022 03:09:13 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/public_html/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
 [26-Sep-2022 03:53:21 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/public_html/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
 [26-Sep-2022 03:53:34 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/public_html/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
@@ -24,3 +25,15 @@
 [14-Oct-2022 05:27:14 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/public_html/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
 [20-Oct-2022 11:16:03 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/public_html/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
 [20-Oct-2022 11:17:42 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/public_html/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+=======
+[21-Oct-2022 05:02:43 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:03:32 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:03:37 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:04:22 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:04:30 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:05:03 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:05:24 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:05:32 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:05:42 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+[21-Oct-2022 05:05:44 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rexaruz/mitan.rexar.uz/vendor/symfony/polyfill-mbstring/Mbstring.php on line 635
+>>>>>>> f6885110151123f7b49b11d73e232085de24cfc5
