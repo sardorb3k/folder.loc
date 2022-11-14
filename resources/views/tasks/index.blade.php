@@ -16,8 +16,7 @@
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#task-create"
-                                    class="btn btn-white btn-outline-light dropdown-toggle boardupdate">
+                                <a class="btn btn-white btn-outline-light dropdown-toggle boardupdate">
                                     <em class="icon ni ni-update"></em>
                                     <span>Update Board</span>
                                 </a>
@@ -178,6 +177,8 @@
             }
 
             $('.add-new-board').click(addNewBoard);
+            
+            $('.boardupdate').click(updateAllBoards);
 
             function titletemplate(title, count) {
                 return `<div class='kanban-title-content'>
