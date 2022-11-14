@@ -158,26 +158,27 @@ class DashboardRepository implements DashboardRepositoryInterface
         exams.id,
         exam_results.result,
         exams.exam_type,
+        exams.level,
         (
-        SELECT
-            groups.name
+            SELECT
+                groups.name
+            FROM
+                groups
+            WHERE
+                groups.id = exams.group_id
+        ) AS group_name,
+        (
+            SELECT
+                groups.level
+            FROM
+                groups
+            WHERE
+                groups.id = exams.group_id
+        ) AS group_level
         FROM
-            groups
+            `exam_results`
+        LEFT JOIN exams ON exam_results.exam_id = exams.id
         WHERE
-            groups.id = exams.group_id
-    ) AS group_name,
-    (
-        SELECT
-            groups.level
-        FROM
-            groups
-        WHERE
-            groups.id = exams.group_id
-    ) AS group_level
-    FROM
-        `exam_results`
-    LEFT JOIN exams ON exam_results.exam_id = exams.id
-    WHERE
         exam_results.student_id = :user_id LIMIT 20"), [
             'user_id' => $user_id
         ]);
@@ -189,11 +190,15 @@ class DashboardRepository implements DashboardRepositoryInterface
         payments.amount,
         payments.payment_date,
         groups.name,
-        groups.level
-    FROM
-        `payments`
-    LEFT JOIN groups ON groups.id = payments.group_id
-    WHERE
+        (
+            SELECT group_level.name 
+            FROM group_level 
+            WHERE group_level.id = groups.level
+        ) as group_level
+        FROM
+            `payments`
+        LEFT JOIN groups ON groups.id = payments.group_id
+        WHERE
         payments.student_id = :user_id LIMIT 20"), [
             'user_id' => $user_id
         ]);
