@@ -289,7 +289,7 @@
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
                     }
-                    $('#result').text(resultExam());
+                    $('.exam-result-input').length > 0 ? $('#result').text(resultExam()) : $('#result').text(resultIELTSExam());
                 }
             });
         });
