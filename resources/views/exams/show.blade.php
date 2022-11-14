@@ -106,8 +106,8 @@
                                     <td class="nk-tb-col tb-col-lg">
                                         <button
                                             class="btn btn-{{ ($student->result && $student->result >= 80) 
-                                            || ($student->result && $student->result >= 6 && str_contains(strtolower($exam->level), 'ielts-junior'))
-                                            || ($student->result && $student->result >= 7 && str_contains(strtolower($exam->level), 'ielts-senior')) 
+                                            || ($student->result && $student->result >= 6 && str_contains(strtolower($exam->level), 'junior'))
+                                            || ($student->result && $student->result >= 7 && str_contains(strtolower($exam->level), 'senior')) 
                                             ? 'success' : 'danger' }}"
                                             id="edit-button" value="{{ $student->id }}-{{ $exam->id }}"
                                             data-toggle="modal"
