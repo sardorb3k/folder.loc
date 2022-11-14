@@ -129,7 +129,6 @@
 
     <script>
         $(document).ready(function() {
-
             const tasks = {!! json_encode($tasks) !!};
             const boards = {!! json_encode($boards) !!};
             const colors = ['light', 'primary', 'warning', 'success'];
@@ -144,7 +143,6 @@
                         });
                     }
                 });
-                console.log(boardTasks);
                 return {
                     'id': '_' + board.name.replace(' ', '_').toLowerCase(),
                     'title': titletemplate(board.name, boardTasks.length),
@@ -158,7 +156,11 @@
                 gutter: '0',
                 widthBoard: '320px',
                 responsivePercentage: false,
-                boards: boardsWithTasks
+                boards: boardsWithTasks,
+                buttonClick: function(el, boardId) {
+                    console.log(boardId);
+                },   
+
             });
 
             for (var i = 0; i < kanban.options.boards.length; i++) {
@@ -169,10 +171,6 @@
                         <span>Add another task</span>
                     </button>`);
             }
-
-
-
-
 
             function titletemplate(title, count) {
                 var optionicon = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "more-h";
@@ -188,11 +186,10 @@
                                 <div class='dropdown-menu dropdown-menu-right'>
                                     <ul class='link-list-opt no-bdr kanban-title-action'>
                                         <li><a class="edit-board"><em class='icon ni ni-edit'></em><span>Edit Board</span></a></li>
-                                        <li><a class="remove-board"><em class='icon ni ni-trash'></em><span>Remove Board</span></a></li>
+                                        <li><a onclick="removeSelectedBoard(this, ${kanban})"><em class='icon ni ni-trash'></em><span>Remove Board</span></a></li>
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
                     </div>`;
             }
@@ -275,7 +272,6 @@
 
             $('.kanban-container').on('click', '.kanban-add-task', (e) => {
                 var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
-                console.log(currentBoard);
                 var className = 'newly-created-task-' + currentBoard;
                 kanban.addElement(
                     currentBoard, {
@@ -329,7 +325,6 @@
 
             // Board count update function
             $('.boardupdate').click((e) => {
-                console.log('board count update');
                 var boards = kanban.getBoards();
                 boards.forEach(board => {
                     var count = $(board).find('.kanban-item').length;
@@ -337,16 +332,9 @@
                 });
             });
 
-
             // Kanban board remove
             $('.kanban-container').on('click', '.remove-board', (e) => {
-                // Board remove
-                // Board
-
-                var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
-                console.log(e);
-                console.log($(this).data('data-id'));
-                kanban.removeBoard(currentBoard);
+                
             });
             // Kanban board edit
             $('.kanban-container').on('click', '.edit-board', (e) => {
@@ -354,7 +342,6 @@
                 var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
                 var board = kanban.findBoard(currentBoard);
                 var boardTitle = $(board).find('.kanban-title-content .title').html();
-                console.log(currentBoard);
                 $(board).find('.kanban-title-content .title').html(
                     `<div style='display: flex;'><input class='form-control form-control-sm form-title' value='${boardTitle}' />
                     <button class='btn btn-sm btn-icon btn-trigger ml-2 form-save'>Save</button></div>`);
@@ -397,5 +384,11 @@
                 });
             });
         });
+
+        function removeSelectedBoard(element, kanban) {
+            console.log(element);
+            // var currentBoard = element.currentTarget.closest('.kanban-board').getAttribute('data-id');
+            // kanban.removeBoard(currentBoard);
+        }
     </script>
 @endsection
