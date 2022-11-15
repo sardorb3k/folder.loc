@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('task', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->json('labels');
-            $table->date('deadline');
-            $table->json('users');
-            $table->unsignedBigInteger('board_id');
+            $table->text('description')->nullable();
+            $table->json('labels')->nullable();
+            $table->date('deadline')->nullable();
+            $table->json('users')->nullable();
+            $table->integer('board_id');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->smallInteger('order_number')->default(0);
             $table->timestamps();

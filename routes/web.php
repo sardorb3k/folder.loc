@@ -202,6 +202,7 @@ Route::group(['prefix' => 'tasks', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => 'boards', 'middleware' => ['auth']], function () {
     Route::post('/', [BoardController::class, 'store'])->name('boards.store')->middleware(['roles:superadmin']);
     Route::put('/', [BoardController::class, 'update'])->name('boards.update')->middleware(['roles:superadmin']);
+    Route::delete('/', [BoardController::class, 'delete'])->name('boards.delete')->middleware(['roles:superadmin']);
 });
 
 

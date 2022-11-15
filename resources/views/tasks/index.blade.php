@@ -142,7 +142,7 @@
                     }
                 });
                 return {
-                    'id': '_' + board.name.replace(' ', '_').toLowerCase(),
+                    'id': board.board_id,
                     'title': titletemplate(board.name, boardTasks.length),
                     'class': 'kanban-light',
                     'item': boardTasks
@@ -161,6 +161,9 @@
                     footer: false,
                 },
                 boards: boardsWithTasks,
+                click: (el) => {
+                    console.log(el);
+                },
                 buttonClick: (el, boardId) => {
                     var func = el.getAttribute('id');
 
@@ -279,9 +282,8 @@
                     url: '{{ route("boards.store") }}',
                     type: 'POST',
                     data: {
-                        action: 'addBoard',
-                        id: id,
-                        title: 'New Board'
+                        board_id: id,
+                        name: 'New Board',
                     },
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -307,6 +309,20 @@
 
             function removeCurrentBoard(currentBoardId) {
                 kanban.removeBoard(currentBoardId);
+
+                $.ajax({
+                    url: '{{ route("boards.delete") }}',
+                    type: 'DELETE',
+                    data: {
+                        board_id: currentBoardId,
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
             }
             
             function editBoardTitle(currentBoardId) {
@@ -337,13 +353,13 @@
                 $(board).find('.kanban-title-content .title').html(newTitle);
                 $(board).find('.kanban-title-content .drodown').show();
                 $(board).find('.kanban-title-content .board-count').show();
+
                 $.ajax({
                     url: '{{ route("boards.update") }}',
-                    type: 'POST',
+                    type: 'PUT',
                     data: {
-                        action: 'updateBoard',
-                        id: currentBoardId,
-                        title: newTitle
+                        board_id: currentBoardId,
+                        name: newTitle
                     },
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -355,10 +371,10 @@
             }
 
             function addNewTask(e) {
-                var currentBoard = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
-                var className = 'new-task-' + currentBoard + new Date().toISOString();
+                var currentBoardId = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
+                var className = 'new-task-' + currentBoardId + new Date().toISOString();
                 kanban.addElement(
-                    currentBoard, {
+                    currentBoardId, {
                         'title': taskTemplate({
                             name: 'New Task',
                             description: 'New Task Description',
@@ -366,9 +382,24 @@
                         }),
                     }
                 );
-                var board = kanban.findBoard(currentBoard);
+                var board = kanban.findBoard(currentBoardId);
                 var count = $(board).find('.kanban-item').length;
                 $(board).find('.kanban-title-content .board-count').html(count);
+
+                $.ajax({
+                    url: '{{ route("tasks.store") }}',
+                    type: 'POST',
+                    data: {
+                        name: 'New Task',
+                        board_id: currentBoardId,
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
             }
         });
     </script>

@@ -20,14 +20,25 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:56'],
-            'description' => ['required', 'string'],
-            'status' => ['required', 'exists:statuses,id']
+            'name' => 'required',
+            'board_id' => 'required',
         ]);
 
-        return $request->user()
-            ->tasks()
-            ->create($request->only('name', 'description', 'status'));
+        try {
+            $task = new Task();
+            $task->name = $request->name;
+            $task->board_id = $request->board_id;
+            $task->save();
+
+            return response()->json([
+                'message' => 'Task created successfully',
+                'task' => $task
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 404);
+        }
     }
 
     public function update()
