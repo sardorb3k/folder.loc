@@ -20,7 +20,7 @@ return new class extends Migration
             $table->json('labels')->nullable();
             $table->date('deadline')->nullable();
             $table->json('users')->nullable();
-            $table->integer('board_id');
+            $table->string('board_id');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->smallInteger('order_number')->default(0);
             $table->timestamps();

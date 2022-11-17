@@ -17,6 +17,13 @@
     <script src="{{ asset('assets/js/autonumeric.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.inputmask.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.0/js/selectize.min.js"
+        integrity="sha512-yPolz8xdNko3x+XY5yvuS5Inib7HXh7xD269BZOgyfv2GrNPisWLelUblxN5CdOoBAO0Siwfg4+QsAOVfUryCg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.0/css/selectize.bootstrap5.min.css"
+        integrity="sha512-Z0R/M2/XDJJvF5CJ0LzS6LkaqhiXpmT03VBD9oJ7WQHTx9HXcGPwhMax0l45OqDLm8BtClBWNFq7tTc2I1IWWA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=2.9.1') }}">
 </head>
 

@@ -196,7 +196,7 @@ Route::group(['prefix' => 'tasks', 'middleware' => ['auth']], function () {
     Route::get('/', [TaskController::class, 'index'])->name('tasks.index')->middleware(['roles:superadmin']);
     Route::post('/', [TaskController::class, 'store'])->name('tasks.store')->middleware(['roles:superadmin']);
     Route::put('/sync', [TaskController::class, 'sync'])->name('tasks.sync')->middleware(['roles:superadmin']);
-    Route::put('/{task}', [TaskController::class, 'update'])->name('tasks.update')->middleware(['roles:superadmin']);
+    Route::put('/', [TaskController::class, 'update'])->name('tasks.update')->middleware(['roles:superadmin']);
 });
 
 Route::group(['prefix' => 'boards', 'middleware' => ['auth']], function () {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Boards;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,8 @@ class TaskController extends Controller
     {
         $tasks = Task::get();
         $boards = Boards::get();
-        return view('tasks.index', compact(['tasks', 'boards']));
+        $users = User::get();
+        return view('tasks.index', compact(['tasks', 'boards', 'users']));
     }
 
 
@@ -41,8 +43,28 @@ class TaskController extends Controller
         }
     }
 
-    public function update()
+    public function update(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'nullable',
+            'deadline' => 'nullable',
+            'labels' => 'nullable',
+            'users' => 'nullable',
+            'task_id' => 'required',
+        ]);
+        try {
+            $task = Task::find($request->task_id);
+            $task->name = $request->name;
+            $task->description = $request->description ?? '';
+            $task->deadline = $request->deadline ?? '';
+            $task->labels = explode(',', $request->labels) ?? [];
+            $task->users = $request->users ?? [];
+            $task->save();
+            return redirect()->back()->with('success', 'Task updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function sync(Request $request)

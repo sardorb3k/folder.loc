@@ -57,4 +57,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Boards::class)->orderBy('order_number');
     }
+
+    // Avator image
+    public function getAvatarAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5($this->firstname) . '?s=45&d=mm';
+    }
+
+    public function getInitialsAttribute()
+    {
+        return strtoupper(substr($this->firstname, 0, 1) . substr($this->lastname, 0, 1));
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    // Avator
+    public function getAvator()
+    {
+        return $this->image;
+    }
 }

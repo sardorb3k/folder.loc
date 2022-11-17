@@ -34,6 +34,7 @@
             </div>
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
+    @include('error')
 
     <div class="nk-block">
         <div class="row g-gs">
@@ -44,89 +45,108 @@
             </div>
         </div>
     </div>
+    <style>
+        .title-task {
+            max-width: 400px;
+            width: 100%;
+        }
 
+        .title-task:focus {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+
+        }
+    </style>
     <!-- Modal Content Code -->
-    <div class="modal fade" tabindex="-1" id="task-create-modal">
+    <div class="modal fade" tabindex="-1" id="task">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <em class="icon ni ni-cross"></em>
                 </a>
-                <div class="modal-header">
-                    <h5 class="modal-title">Exam</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="row gy-4" id="exam-data">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="form-label" for="listening">Listening</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" name="exam[listening]" class="form-control exam-result-input"
-                                        id="listening" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
-                                </div>
+                <form method="POST" action="{{ route('tasks.update') }}">
+                    @method('PUT')
+                    @csrf
+                    <div class="modal-header">
+                        <div class="col-sm-12">
+                            <div class="form-control-wrap">
+                                <input type="text" name="name" class="form-control title-task"
+                                    onkeyup="updateTask(this)" id="task-name">
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="form-label" for="grammar">Grammar</label>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row gy-4">
+
+                            <div class="col-sm-12">
+                                <label class="form-label" for="default-01">Description</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" name="exam[grammar]" class="form-control exam-result-input"
-                                        id="grammar" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[grammar]') }}">
+                                    <textarea name="description" id="task-description" name="description" class="form-control no-resize" rows="5"
+                                        onkeyup="updateTask(this)"></textarea>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="form-label" for="reading">Reading</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" name="exam[reading]" class="form-control exam-result-input"
-                                        id="reading" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[reading]') }}">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Deadline</label>
+                                    <div class="form-control-wrap">
+                                        <input type="text" class="form-control date-picker" name="deadline"
+                                            id="task-deadline" onkeyup="updateTask(this)">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="form-label" for="writing">Writing</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" name="exam[writing]" class="form-control exam-result-input"
-                                        id="writing" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[writing]') }}">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="labels">Labels</label>
+                                    <div class="form-control-wrap">
+                                        <input type="text" class="form-control" name="labels" id="labels">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="form-label" for="speaking">Speaking</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" name="exam[speaking]" class="form-control exam-result-input"
-                                        id="speaking" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="form-label" for="team">Team</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" name="exam[team]" class="form-control exam-result-input"
-                                        id="team" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[team]') }}">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Users</label>
+                                    <div class="form-control-wrap">
+                                        <select class="form-select js-select2" name="users[]" multiple="multiple">
+                                            @forelse ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->firstname }}
+                                                    {{ $user->lastname }}</option>
+                                            @empty
+                                                <option value="">No user</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer bg-light">
-                    <input type="hidden" name="student_id" id="student_id">
-                    <input type="hidden" name="exam_id" id="exam_id">
-                    <p>Exam result: <span class="badge badge-secondary" id="result"></span></p>
-                    @if (Auth::user()->role == 'superadmin')
-                        <span class="sub-text"><button type="button" id="exam-save"
-                                class="btn btn-primary">Submit</button></span>
-                    @endif
-                </div>
+                    <div class="modal-footer bg-light">
+                        <input type="hidden" name="task_id" id="task_id">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
     <script>
+        $("#labels").selectize({
+            delimiter: ",",
+            persist: true,
+            // list of labels
+
+            create: function(input) {
+                return {
+                    value: input,
+                    text: input,
+                };
+            },
+        });
+
+        function updateTask(el) {
+            var task_id = $('#task').val();
+            var task_name = $(el).val();
+            console.log(el.value);
+        }
         $(document).ready(function() {
             const tasks = {!! json_encode($tasks) !!};
             const boards = {!! json_encode($boards) !!};
@@ -134,7 +154,7 @@
             const boardsWithTasks = boards.map((board, index) => {
                 var boardTasks = [];
                 tasks.forEach(task => {
-                    if (task.board_id == board.id) {
+                    if (task.board_id == board.board_id) {
                         boardTasks.push({
                             id: task.id,
                             title: taskTemplate(task)
@@ -157,19 +177,32 @@
                 itemAddOptions: {
                     enabled: true,
                     content: ':-', // : for edit board; - remove board buttons
-                    class: 'kanban-title-button btn btn-default btn-xs',  
+                    class: 'kanban-title-button btn btn-default btn-xs',
                     footer: false,
                 },
                 boards: boardsWithTasks,
                 click: (el) => {
-                    console.log(el);
+                    var task = tasks.find(task => task.id == el.dataset.eid);
+                    $('#task-name').val(task.name);
+                    $('#task-description').val(task.description);
+                    $('#task-deadline').val(task.deadline);
+                    $('#task_id').val(task.id);
+
+                    $('#task').val(el.dataset.eid).modal('show');
+                },
+                context: (el, e) => {
+                    console.log(el, '-', e);
+                },
+                dropEl: (el, target, source, sibling) => {
+                    console.log(el.dataset.eid);
+                    // console.log(el, target, source, sibling);
                 },
                 buttonClick: (el, boardId) => {
                     var func = el.getAttribute('id');
 
-                    if(func.includes('edit')) {
+                    if (func.includes('edit')) {
                         editBoardTitle(boardId);
-                    } else if(func.includes('remove')) {
+                    } else if (func.includes('remove')) {
                         removeCurrentBoard(boardId);
                     }
                 }
@@ -180,7 +213,7 @@
             }
 
             $('.add-new-board').click(addNewBoard);
-            
+
             $('.boardupdate').click(updateAllBoards);
 
             function titletemplate(title, count) {
@@ -191,15 +224,16 @@
                     </div>`;
             }
 
+
             function taskTemplate(task) {
                 return `<div class='kanban-item-title'>
                             <h6 class='title'>${task.name}</h6>
                             <div class='drodown'>
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
                                     <div class='user-avatar-group'>
-                                        <div class='user-avatar xs bg-primary'>
-                                            <span>A</span>
-                                        </div>
+                                        ${task.users != null ? JSON.parse(task.users)?.slice(0, 4).map(user => {
+                                            return `<div class='user-avatar xs'><img src='{{ Auth::user(1)->getAvatarAttribute() }}'></div>`;
+                                        }).join('') : ''}
                                     </div>
                                 </a>
                                 <div class='dropdown-menu dropdown-menu-right'>
@@ -222,33 +256,13 @@
                             <p>${task.description}</p>
                         </div>
                         <ul class='kanban-item-tags'>
-                            <li>
-                                <span class='badge badge-success'>Dashlite</span>
-                            </li>
-                            <li>
-                                <span class='badge badge-light'>UI Design</span>
-                            </li>
+                            ${task.labels != null && task.labels != undefined ? JSON.parse(task.labels)?.map(label => {
+                                return `<li><span class='badge badge-outline-light text-dark'>${label.name}</span></li>`;
+                            }).join('') : ''}
                         </ul>
                         <div class='kanban-item-meta'>
                             <ul class='kanban-item-meta-list'>
-                                <li class='text-danger'>
-                                    <em class='icon ni ni-calendar'></em>
-                                    <span>${task.deadline}</span>
-                                </li>
-                                <li>
-                                    <em class='icon ni ni-notes'></em>
-                                    <span>Design</span>
-                                </li>
-                            </ul>
-                            <ul class='kanban-item-meta-list'>
-                                <li>
-                                    <em class='icon ni ni-clip'></em>
-                                    <span>1</span>
-                                </li>
-                                <li>
-                                    <em class='icon ni ni-comments'></em>
-                                    <span>4</span>
-                                </li>
+                                ${task.deadline != null && task.labels != undefined ? `<li class='text-danger'><em class='icon ni ni-calendar'></em><span>${task.deadline}</span></li>` : ''}
                             </ul>
                         </div>`;
             }
@@ -279,7 +293,7 @@
 
                 // Ajax call to create new board
                 $.ajax({
-                    url: '{{ route("boards.store") }}',
+                    url: '{{ route('boards.store') }}',
                     type: 'POST',
                     data: {
                         board_id: id,
@@ -288,7 +302,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data);
                     }
                 });
@@ -311,7 +325,7 @@
                 kanban.removeBoard(currentBoardId);
 
                 $.ajax({
-                    url: '{{ route("boards.delete") }}',
+                    url: '{{ route('boards.delete') }}',
                     type: 'DELETE',
                     data: {
                         board_id: currentBoardId,
@@ -319,12 +333,12 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data);
                     }
                 });
             }
-            
+
             function editBoardTitle(currentBoardId) {
                 var board = kanban.findBoard(currentBoardId);
                 var boardTitle = $(board).find('.kanban-title-content .title');
@@ -355,7 +369,7 @@
                 $(board).find('.kanban-title-content .board-count').show();
 
                 $.ajax({
-                    url: '{{ route("boards.update") }}',
+                    url: '{{ route('boards.update') }}',
                     type: 'PUT',
                     data: {
                         board_id: currentBoardId,
@@ -364,7 +378,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data);
                     }
                 });
@@ -387,7 +401,7 @@
                 $(board).find('.kanban-title-content .board-count').html(count);
 
                 $.ajax({
-                    url: '{{ route("tasks.store") }}',
+                    url: '{{ route('tasks.store') }}',
                     type: 'POST',
                     data: {
                         name: 'New Task',
@@ -396,7 +410,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data);
                     }
                 });
