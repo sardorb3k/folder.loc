@@ -290,7 +290,7 @@
             function taskTemplate(task) {
                 console.log(task);
                 return `<div class='kanban-item-title'>
-                            <h6 class='title'>${fn(task.name, 10)}</h6>
+                            <h6 class='title'>${fn(task.name, 25)}</h6>
                             <div class='drodown'>
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
                                     <div class='user-avatar-group'>
