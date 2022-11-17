@@ -62,7 +62,7 @@
     <div class="modal fade" tabindex="-1" id="task">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <a class="close" data-bs-dismiss="modal" aria-label="Close">
+                <a class="close" data-bs-dismiss="modal" aria-label="Close" id="closemodal">
                     <em class="icon ni ni-cross"></em>
                 </a>
                 <form method="POST" action="{{ route('tasks.update') }}">
@@ -122,6 +122,9 @@
                     </div>
                     <div class="modal-footer bg-light">
                         <input type="hidden" name="task_id" id="task_id">
+                        {{-- Button modal data id delete task --}}
+                        
+                        <button type="button" class="btn btn-secondary"  onclick="archiveStudent()">Delete</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
@@ -196,9 +199,14 @@
                 },
                 boards: boardsWithTasks,
                 click: (el) => {
-                    var task = tasks.find(task => task.id == el.dataset.eid);
-                    console.log(task);
-                    console.log(el);
+                    var task = tasks.find(task => task.id == el.dataset.eid) || {
+                        name: 'New Task',
+                        description: '',
+                        deadline: '',
+                        labels: '',
+                        users: []
+                    };
+
                     $('#task-name').val(task?.name);
                     $('#task-description').val(task?.description);
                     $('#task-deadline').val(task?.deadline);
@@ -276,6 +284,14 @@
                 }
 
             }
+            async function deleteTask(this) {
+                // button data id is task id
+                kanban.removeElement(this.dataset.id);
+            }
+
+            $('#closemodal').click(function() {
+                $('#task').modal('hide');
+            });
 
 
             function titletemplate(title, count) {
@@ -288,7 +304,6 @@
 
 
             function taskTemplate(task) {
-                console.log(task);
                 return `<div class='kanban-item-title'>
                             <h6 class='title'>${fn(task.name, 25)}</h6>
                             <div class='drodown'>
@@ -302,7 +317,7 @@
                             </div>
                         </div>
                         <div class='kanban-item-text'>
-                            <p>${fn(task?.description ?? '', 10)}</p>
+                            <p style='word-break: break-word;'>${fn(task?.description ?? '', 100)}</p>
                         </div>
                         <ul class='kanban-item-tags'>
                             ${task.labels != null && task.labels != undefined ? JSON.parse(task?.labels)?.slice(0, 3).map(label => {
@@ -427,23 +442,14 @@
                 });
             }
 
-            function addNewTask(e) {
+
+
+
+            async function addNewTask(e) {
                 var currentBoardId = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
                 var className = 'new-task-' + currentBoardId + new Date().toISOString();
-                kanban.addElement(
-                    currentBoardId, {
-                        'title': taskTemplate({
-                            name: 'New Task',
-                            description: 'New Task Description',
-                            deadline: '12/12/2020'
-                        }),
-                    }
-                );
-                var board = kanban.findBoard(currentBoardId);
-                var count = $(board).find('.kanban-item').length;
-                $(board).find('.kanban-title-content .board-count').html(count);
-
-                $.ajax({
+                task_id = '';
+                await $.ajax({
                     url: '{{ route('tasks.store') }}',
                     type: 'POST',
                     data: {
@@ -452,9 +458,23 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
+                        task_id = data.task.id;
                         toastr.success('Task has been created.', 'Created!');
                     }
                 });
+                kanban.addElement(
+                    currentBoardId, {
+                        'id': task_id,
+                        'title': taskTemplate({
+                            name: 'New Task',
+                            description: '',
+                        }),
+                    }
+                );
+                var board = kanban.findBoard(currentBoardId);
+                var count = $(board).find('.kanban-item').length;
+                $(board).find('.kanban-title-content .board-count').html(count);
+
             }
         });
     </script>
