@@ -123,7 +123,7 @@
                     <div class="modal-footer bg-light">
                         <input type="hidden" name="task_id" id="task_id">
                         {{-- Button modal data id delete task --}}
-                        
+
                         <button type="button" class="btn btn-secondary"  onclick="archiveStudent()">Delete</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
@@ -284,9 +284,9 @@
                 }
 
             }
-            async function deleteTask(this) {
+            async function deleteTask(id) {
                 // button data id is task id
-                kanban.removeElement(this.dataset.id);
+                kanban.removeElement(id.dataset.id);
             }
 
             $('#closemodal').click(function() {
