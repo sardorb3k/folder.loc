@@ -180,6 +180,9 @@
                 "hideMethod": "fadeOut"
             }
 
+            function fn(text, count) {
+                return text.slice(0, count) + (text.length > count ? "..." : "");
+            }
             var kanban = new jKanban({
                 element: '#rexarTaskBoard',
                 gutter: '0',
@@ -287,7 +290,7 @@
             function taskTemplate(task) {
                 console.log(task);
                 return `<div class='kanban-item-title'>
-                            <h6 class='title'>${task.name}</h6>
+                            <h6 class='title'>${fn(task.name, 10)}</h6>
                             <div class='drodown'>
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
                                     <div class='user-avatar-group'>
@@ -299,10 +302,10 @@
                             </div>
                         </div>
                         <div class='kanban-item-text'>
-                            <p>${task?.description ?? ''}</p>
+                            <p>${fn(task?.description ?? '', 10)}</p>
                         </div>
                         <ul class='kanban-item-tags'>
-                            ${task.labels != null && task.labels != undefined ? JSON.parse(task?.labels)?.map(label => {
+                            ${task.labels != null && task.labels != undefined ? JSON.parse(task?.labels)?.slice(0, 3).map(label => {
                                 return `<li><span class='badge badge-outline-light text-dark'>${label.name}</span></li>`;
                             }).join('') : ''}
                         </ul>
