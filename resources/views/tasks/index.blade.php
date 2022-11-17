@@ -306,7 +306,7 @@
                         </div>
                         <ul class='kanban-item-tags'>
                             ${task.labels != null && task.labels != undefined ? JSON.parse(task?.labels)?.slice(0, 3).map(label => {
-                                return `<li><span class='badge badge-outline-light text-dark'>${label.name}</span></li>`;
+                                return `<li><span class='badge badge-outline-light text-dark'>${label}</span></li>`;
                             }).join('') : ''}
                         </ul>
                         <div class='kanban-item-meta'>
