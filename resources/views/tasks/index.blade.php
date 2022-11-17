@@ -62,19 +62,18 @@
     <div class="modal fade" tabindex="-1" id="task">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <a class="close" data-bs-dismiss="modal" aria-label="Close">
                     <em class="icon ni ni-cross"></em>
                 </a>
                 <form method="POST" action="{{ route('tasks.update') }}">
                     @method('PUT')
                     @csrf
                     <div class="modal-header">
-                        <div class="col-sm-12">
-                            <div class="form-control-wrap">
-                                <input type="text" name="name" class="form-control title-task"
-                                    onkeyup="updateTask(this)" id="task-name">
-                            </div>
+                        {{-- <div class="col-sm-12"> --}}
+                        <div class="title-task form-control-wrap">
+                            <input type="text" name="name" class="form-control" id="task-name">
                         </div>
+                        {{-- </div> --}}
                     </div>
                     <div class="modal-body">
                         <div class="row gy-4">
@@ -82,8 +81,7 @@
                             <div class="col-sm-12">
                                 <label class="form-label" for="default-01">Description</label>
                                 <div class="form-control-wrap">
-                                    <textarea name="description" id="task-description" name="description" class="form-control no-resize" rows="5"
-                                        onkeyup="updateTask(this)"></textarea>
+                                    <textarea name="description" id="task-description" name="description" class="form-control no-resize" rows="5"></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -91,7 +89,8 @@
                                     <label class="form-label">Deadline</label>
                                     <div class="form-control-wrap">
                                         <input type="text" class="form-control date-picker" name="deadline"
-                                            id="task-deadline" onkeyup="updateTask(this)">
+                                            data-date-format="yyyy-mm-dd" onkeydown="return false" autocomplete="off"
+                                            id="task-deadline">
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +106,8 @@
                                 <div class="form-group">
                                     <label class="form-label">Users</label>
                                     <div class="form-control-wrap">
-                                        <select class="form-select js-select2" name="users[]" multiple="multiple">
+                                        <select class="form-select js-select2" name="users[]" name="users"
+                                            multiple="multiple">
                                             @forelse ($users as $user)
                                                 <option value="{{ $user->id }}">{{ $user->firstname }}
                                                     {{ $user->lastname }}</option>
@@ -132,8 +132,6 @@
         $("#labels").selectize({
             delimiter: ",",
             persist: true,
-            // list of labels
-
             create: function(input) {
                 return {
                     value: input,
@@ -142,11 +140,6 @@
             },
         });
 
-        function updateTask(el) {
-            var task_id = $('#task').val();
-            var task_name = $(el).val();
-            console.log(el.value);
-        }
         $(document).ready(function() {
             const tasks = {!! json_encode($tasks) !!};
             const boards = {!! json_encode($boards) !!};
@@ -168,6 +161,24 @@
                     'item': boardTasks
                 };
             });
+            // toastr.options
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
 
             var kanban = new jKanban({
                 element: '#rexarTaskBoard',
@@ -183,19 +194,32 @@
                 boards: boardsWithTasks,
                 click: (el) => {
                     var task = tasks.find(task => task.id == el.dataset.eid);
-                    $('#task-name').val(task.name);
-                    $('#task-description').val(task.description);
-                    $('#task-deadline').val(task.deadline);
+                    console.log(task);
+                    console.log(el);
+                    $('#task-name').val(task?.name);
+                    $('#task-description').val(task?.description);
+                    $('#task-deadline').val(task?.deadline);
                     $('#task_id').val(task.id);
 
                     $('#task').val(el.dataset.eid).modal('show');
                 },
                 context: (el, e) => {
-                    console.log(el, '-', e);
+                    archiveStudent(el.dataset.eid);
                 },
                 dropEl: (el, target, source, sibling) => {
-                    console.log(el.dataset.eid);
-                    // console.log(el, target, source, sibling);
+                    // Ajax update
+                    $.ajax({
+                        url: "{{ route('tasks.updateBoard') }}",
+                        type: 'PUT',
+                        data: {
+                            task_id: el.dataset.eid,
+                            board_id: kanban.getParentBoardID(el.dataset.eid),
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            toastr.success('Task moved successfully');
+                        }
+                    });
                 },
                 buttonClick: (el, boardId) => {
                     var func = el.getAttribute('id');
@@ -216,6 +240,41 @@
 
             $('.boardupdate').click(updateAllBoards);
 
+            // Task delete
+            async function archiveStudent(id) {
+                const result = await Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Delete',
+                    showLoaderOnConfirm: true,
+                });
+
+                if (result.isConfirmed) {
+                    // Ajax delete task
+                    $.ajax({
+                        url: "{{ route('tasks.destroy') }}",
+                        type: 'DELETE',
+                        data: {
+                            task_id: id,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.status == 'success') {
+                                toastr.success('Task has been deleted.', 'Deleted!');
+                                kanban.removeElement(id);
+                            } else {
+                                toastr.error('Task has not been deleted.', 'Failed!');
+                            }
+                        }
+                    });
+                }
+
+            }
+
+
             function titletemplate(title, count) {
                 return `<div class='kanban-title-content'>
                             <h6 class='title'>${title}</h6>
@@ -226,6 +285,7 @@
 
 
             function taskTemplate(task) {
+                console.log(task);
                 return `<div class='kanban-item-title'>
                             <h6 class='title'>${task.name}</h6>
                             <div class='drodown'>
@@ -236,33 +296,19 @@
                                         }).join('') : ''}
                                     </div>
                                 </a>
-                                <div class='dropdown-menu dropdown-menu-right'>
-                                    <ul class='link-list-opt no-bdr p-3 g-2'>
-                                        <li>
-                                            <div class=user-card>
-                                                <div class=user-avatar sm bg-primary>
-                                                    <span>AB</span>
-                                                </div>
-                                                <div class='user-name'>
-                                                    <span class='tb-lead'>Abu Bin Ishtiyak</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                         <div class='kanban-item-text'>
-                            <p>${task.description}</p>
+                            <p>${task?.description ?? ''}</p>
                         </div>
                         <ul class='kanban-item-tags'>
-                            ${task.labels != null && task.labels != undefined ? JSON.parse(task.labels)?.map(label => {
+                            ${task.labels != null && task.labels != undefined ? JSON.parse(task?.labels)?.map(label => {
                                 return `<li><span class='badge badge-outline-light text-dark'>${label.name}</span></li>`;
                             }).join('') : ''}
                         </ul>
                         <div class='kanban-item-meta'>
                             <ul class='kanban-item-meta-list'>
-                                ${task.deadline != null && task.labels != undefined ? `<li class='text-danger'><em class='icon ni ni-calendar'></em><span>${task.deadline}</span></li>` : ''}
+                                ${task?.deadline != null && task?.labels != undefined ? `<li class='text-danger'><em class='icon ni ni-calendar'></em><span>${task?.deadline}</span></li>` : ''}
                             </ul>
                         </div>`;
             }
@@ -298,12 +344,10 @@
                     data: {
                         board_id: id,
                         name: 'New Board',
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
-                        console.log(data);
+                        toastr.success('Board has been created.', 'Created!');
                     }
                 });
             }
@@ -329,12 +373,10 @@
                     type: 'DELETE',
                     data: {
                         board_id: currentBoardId,
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
-                        console.log(data);
+                        toastr.success('Board has been deleted.', 'Deleted!');
                     }
                 });
             }
@@ -373,13 +415,11 @@
                     type: 'PUT',
                     data: {
                         board_id: currentBoardId,
-                        name: newTitle
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        name: newTitle,
+                        _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
-                        console.log(data);
+                        toastr.success('Board has been updated.', 'Updated!');
                     }
                 });
             }
@@ -406,12 +446,10 @@
                     data: {
                         name: 'New Task',
                         board_id: currentBoardId,
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
-                        console.log(data);
+                        toastr.success('Task has been created.', 'Created!');
                     }
                 });
             }

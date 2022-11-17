@@ -45,6 +45,7 @@ class TaskController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'description' => 'nullable',
@@ -57,8 +58,8 @@ class TaskController extends Controller
             $task = Task::find($request->task_id);
             $task->name = $request->name;
             $task->description = $request->description ?? '';
-            $task->deadline = $request->deadline ?? '';
-            $task->labels = explode(',', $request->labels) ?? [];
+            $task->deadline = $request->deadline ?? null;
+            $task->labels = $request->labels ? explode(',', $request->labels) : [];
             $task->users = $request->users ?? [];
             $task->save();
             return redirect()->back()->with('success', 'Task updated successfully');
@@ -85,5 +86,54 @@ class TaskController extends Controller
         }
 
         return $request->user()->statuses()->with('tasks')->get();
+    }
+
+    // Task update board_id and order_number
+    public function updateBoard(Request $request)
+    {
+        $this->validate($request, [
+            'board_id' => 'required',
+            'task_id' => 'required',
+        ]);
+        try {
+            $task = Task::find($request->task_id);
+            $task->board_id = $request->board_id;
+            $task->save();
+            return response()->json([
+                'message' => 'Task updated successfully',
+                'task' => $task
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 404);
+        }
+    }
+
+    // Task delete
+    public function destroy(Request $request)
+    {
+        $this->validate($request, [
+            'task_id' => 'required',
+        ]);
+        try {
+            $task = Task::find($request->task_id);
+            // task no longer exists
+            if (!$task) {
+                return response()->json([
+                    'message' => 'Task not found',
+                ], 200);
+            }
+            $task->delete();
+            return response()->json([
+                'message' => 'Task deleted successfully',
+                'status' => 'success',
+                'task' => $task
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 404);
+        }
     }
 }
