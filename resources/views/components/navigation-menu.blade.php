@@ -87,6 +87,12 @@
                 <h6 class="overline-title text-primary-alt">{{__('dashboard.settings')}}</h6>
             </li><!-- .nk-menu-heading -->
             <li class="nk-menu-item">
+                <a href="{{ route('staff.index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-box"></em></span>
+                    <span class="nk-menu-text">Staff</span>
+                </a>
+            </li><!-- .nk-menu-item -->
+            <li class="nk-menu-item">
                 <a href="{{ route('settings.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-box"></em></span>
                     <span class="nk-menu-text">CRM</span>

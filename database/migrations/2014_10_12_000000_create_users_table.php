@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('phone')->unique();
             $table->json('phone_contact')->nullable();
-            $table->enum('role', ['admin', 'teacher', 'student', 'superadmin','assistant'])->default('student');
+            $table->enum('role', ['admin', 'teacher', 'student', 'superadmin', 'assistant', 'accounting', 'marketing'])->default('student');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('birthday')->nullable();
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('interests')->nullable();
             $table->string('hear_about')->nullable();
             $table->json('course')->nullable();
-            
+
             // Exam fields
             $table->string('midexam')->nullable();
             $table->string('finalexam')->nullable();
@@ -54,5 +54,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
-
 };

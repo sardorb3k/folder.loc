@@ -12,7 +12,7 @@ use App\Http\Controllers\ReceptionController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeachersController;
-
+use App\Http\Controllers\StaffController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -206,6 +206,15 @@ Route::group(['prefix' => 'boards', 'middleware' => ['auth']], function () {
     Route::put('/', [BoardController::class, 'update'])->name('boards.update')->middleware(['roles:superadmin']);
     Route::delete('/', [BoardController::class, 'delete'])->name('boards.delete')->middleware(['roles:superadmin']);
 });
+
+Route::group(['prefix' => 'staff', 'middleware' => ['auth']], function () {
+    // Route::get('/', 'livewire.sta')
+    Route::get('/', [StaffController::class, 'index'])->name('staff.index')->middleware(['roles:superadmin']);
+    Route::post('/', [StaffController::class, 'store'])->name('staff.store')->middleware(['roles:superadmin']);
+    Route::put('/', [StaffController::class, 'update'])->name('staff.update')->middleware(['roles:superadmin']);
+    Route::delete('/', [StaffController::class, 'delete'])->name('staff.delete')->middleware(['roles:superadmin']);
+});
+
 
 
 

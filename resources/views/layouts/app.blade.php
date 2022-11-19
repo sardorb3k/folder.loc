@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=2.9.1') }}">
+    @livewireStyles
 </head>
 
 <body class="nk-body bg-white npc-default has-aside ">
@@ -332,6 +333,12 @@
             localStorage.getItem("darkMode", false);
             console.log(darkM)
         }
+    </script>
+    @livewireScripts
+    <script type="text/javascript">
+        window.livewire.on('userStore', () => {
+            $('#exampleModal').modal('hide');
+        });
     </script>
     <script src="{{ asset('assets/js/bundle.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/scripts.js?ver=2.9.1') }}"></script>
