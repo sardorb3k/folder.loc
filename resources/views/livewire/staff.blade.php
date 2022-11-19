@@ -99,12 +99,12 @@
                             class="icon ni ni-menu-alt-r"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('students.archives') }}" class="btn btn-white btn-outline-light">
                                     <em class="icon ni ni-archived"></em>
                                     <span>Archives</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             @include('livewire.create')
                         </ul>
                     </div>
@@ -135,7 +135,7 @@
                 </th>
                 <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1"
                     rowspan="1" colspan="1">
-                    <span class="sub-text">Created Date</span>
+                    <span class="sub-text">Role</span>
                 </th>
                 <th class="nk-tb-col nk-tb-col-tools text-end sorting" tabindex="0"
                     aria-controls="DataTables_Table_1" rowspan="1" colspan="1"></th>
@@ -175,7 +175,7 @@
                         <span>{{ date('d M, Y', strtotime($student_data->birthday)) }}</span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span>{{ date_format($student_data->created_at, 'd M, Y') }}</span>
+                        <span>{{ $student_data->role }}</span>
                     </td>
                     <td class="nk-tb-col nk-tb-col-tools">
                         <ul class="nk-tb-actions gx-1">
@@ -194,7 +194,7 @@
                                                     <span>Edit</span>
                                                 </a>
                                             </li>
-                                            <li class="divider"></li>
+                                            {{-- <li class="divider"></li>
                                             <form action="{{ route('students.archive', $student_data->id) }}"
                                                 method="POST">
                                                 @csrf
@@ -206,7 +206,7 @@
                                                         <em class="icon ni ni-archive"></em><span>Archive</span>
                                                     </a>
                                                 </li>
-                                            </form>
+                                            </form> --}}
                                         </ul>
                                     </div>
                                 </div>
