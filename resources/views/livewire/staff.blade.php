@@ -113,8 +113,7 @@
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
     @include('error')
-    <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false"
-        id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+    <table class="nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false">
         <thead>
             <tr class="nk-tb-item nk-tb-head">
                 <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
@@ -194,19 +193,19 @@
                                                     <span>Edit</span>
                                                 </a>
                                             </li>
-                                            {{-- <li class="divider"></li>
-                                            <form action="{{ route('students.archive', $student_data->id) }}"
+                                            <li class="divider"></li>
+                                            {{-- <form action="{{ route('students.archive', $student_data->id) }}"
                                                 method="POST">
                                                 @csrf
-                                                @method('PUT')
-                                                <input id="archive_reason" type="hidden" name="archive_reason"
-                                                    value="">
+                                                @method('PUT') --}}
+                                                {{-- <input id="archive_reason" type="hidden" name="archive_reason"
+                                                    value=""> --}}
                                                 <li class="cursor-pointer">
-                                                    <a onclick="archiveStudent(this)">
+                                                    <a wire:click="delete({{ $student_data->id }})">
                                                         <em class="icon ni ni-archive"></em><span>Archive</span>
                                                     </a>
                                                 </li>
-                                            </form> --}}
+                                            {{-- </form> --}}
                                         </ul>
                                     </div>
                                 </div>

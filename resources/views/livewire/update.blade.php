@@ -28,8 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="email" class="form-control" id="phone" wire:model="phone"
-                            placeholder="Enter phone" required>
+                        <input type="phone" class="form-control" id="phone" placeholder="Enter phone" wire:model="phone" disabled>
                         @error('phone')
                             <span class="text-danger error">{{ $message }}</span>
                         @enderror
@@ -49,7 +48,7 @@
                     <input type="hidden" wire:model="user_id">
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="text" class="form-control" id="password" placeholder="Enter password"
+                        <input type="password" class="form-control" id="password" placeholder="Enter password"
                             wire:model="password">
                         @error('password')
                             <span class="text-danger error">{{ $message }}</span>
