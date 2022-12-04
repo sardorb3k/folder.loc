@@ -335,11 +335,6 @@
         }
     </script>
     @livewireScripts
-    <script type="text/javascript">
-        window.livewire.on('userStore', () => {
-            $('#exampleModal').modal('hide');
-        });
-    </script>
     <script src="{{ asset('assets/js/bundle.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/scripts.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/charts/gd-analytics.js?ver=2.9.1') }}"></script>

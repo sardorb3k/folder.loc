@@ -138,7 +138,7 @@
                                 el.classList.add('is-moving')
 
                                 self.options.dragEl(el, source)
-
+                                console.log(source.parentNode.dataset.id);
                                 var boardJSON = __findBoardJSON(source.parentNode.dataset.id)
                                 if (boardJSON.dragTo !== undefined) {
                                     self.options.boards.map(function (board) {
@@ -466,7 +466,7 @@
 
                 this.removeBoard = function (board) {
                     var boardElement = null
-                    if (typeof board === 'string')
+                    if (board != null)
                         boardElement = self.element.querySelector('[data-id="' + board + '"]')
                     if (boardElement !== null) {
                         //fallback for IE
@@ -571,7 +571,7 @@
                 function __findBoardJSON(id) {
                     var el = []
                     self.options.boards.map(function (board) {
-                        if (board.id === id) {
+                        if (board.id == id) {
                             return el.push(board)
                         }
                     })

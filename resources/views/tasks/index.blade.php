@@ -62,22 +62,19 @@
     <div class="modal fade" tabindex="-1" id="task">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <a class="close" data-bs-dismiss="modal" aria-label="Close" id="closemodal">
+                <a class="close cursor-pointer" data-bs-dismiss="modal" aria-label="Close" id="closemodal">
                     <em class="icon ni ni-cross"></em>
                 </a>
                 <form method="POST" action="{{ route('tasks.update') }}">
                     @method('PUT')
                     @csrf
                     <div class="modal-header">
-                        {{-- <div class="col-sm-12"> --}}
                         <div class="title-task form-control-wrap">
                             <input type="text" name="name" class="form-control" id="task-name">
                         </div>
-                        {{-- </div> --}}
                     </div>
                     <div class="modal-body">
                         <div class="row gy-4">
-
                             <div class="col-sm-12">
                                 <label class="form-label" for="default-01">Description</label>
                                 <div class="form-control-wrap">
@@ -122,9 +119,7 @@
                     </div>
                     <div class="modal-footer bg-light">
                         <input type="hidden" name="task_id" id="task_id">
-                        {{-- Button modal data id delete task --}}
-
-                        <button type="button" class="btn btn-secondary"  onclick="archiveStudent()">Delete</button>
+                        <button id="delete-task-button" type="button" class="btn btn-danger">Delete</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
@@ -143,26 +138,34 @@
             },
         });
 
+
+        $('#closemodal').click(function() {
+            $('#task').modal('hide');
+        });
+
         $(document).ready(function() {
             const tasks = {!! json_encode($tasks) !!};
             const boards = {!! json_encode($boards) !!};
-            const colors = ['light', 'primary', 'warning', 'success'];
+            const colors = ['danger', 'primary', 'warning', 'success'];
+            var colorIndex = 0;
             const boardsWithTasks = boards.map((board, index) => {
                 var boardTasks = [];
                 tasks.forEach(task => {
-                    if (task.board_id == board.board_id) {
+                    if (task.board_id == board.id) {
                         boardTasks.push({
                             id: task.id,
                             title: taskTemplate(task)
                         });
                     }
                 });
-                return {
-                    'id': board.board_id,
+                var board = {
+                    'id': board.id,
                     'title': titletemplate(board.name, boardTasks.length),
-                    'class': 'kanban-light',
+                    'class': 'kanban-' + colors[colorIndex],
                     'item': boardTasks
                 };
+                colorIndex == colors.length - 1 ? colorIndex = 0 : colorIndex++;
+                return board;
             });
             // toastr.options
             toastr.options = {
@@ -183,9 +186,10 @@
                 "hideMethod": "fadeOut"
             }
 
-            function fn(text, count) {
+            function formatLongText(text, count) {
                 return text.slice(0, count) + (text.length > count ? "..." : "");
             }
+
             var kanban = new jKanban({
                 element: '#rexarTaskBoard',
                 gutter: '0',
@@ -198,25 +202,8 @@
                     footer: false,
                 },
                 boards: boardsWithTasks,
-                click: (el) => {
-                    var task = tasks.find(task => task.id == el.dataset.eid) || {
-                        name: 'New Task',
-                        description: '',
-                        deadline: '',
-                        labels: '',
-                        users: []
-                    };
-
-                    $('#task-name').val(task?.name);
-                    $('#task-description').val(task?.description);
-                    $('#task-deadline').val(task?.deadline);
-                    $('#task_id').val(task.id);
-
-                    $('#task').val(el.dataset.eid).modal('show');
-                },
-                context: (el, e) => {
-                    archiveStudent(el.dataset.eid);
-                },
+                click: (el) => openEditTaskModal(el),
+                context: (el, e) => deleteCurrentTask(el.dataset.eid),
                 dropEl: (el, target, source, sibling) => {
                     // Ajax update
                     $.ajax({
@@ -251,8 +238,33 @@
 
             $('.boardupdate').click(updateAllBoards);
 
+            $('#delete-task-button').click((event) => {
+                const taskId = $('#task_id').val();
+                if(taskId != null && taskId != '') {
+                    deleteCurrentTask(taskId);
+                }
+            });
+
+            // open edit task Modal Window
+            function openEditTaskModal(el) {
+                var task = tasks.find(task => task.id == el.dataset.eid) || {
+                    name: 'New Task',
+                    description: '',
+                    deadline: '',
+                    labels: '',
+                    users: []
+                };
+
+                $('#task-name').val(task.name);
+                $('#task-description').val(task.description);
+                $('#task-deadline').val(task.deadline);
+                $('#task_id').val(task.id || el.dataset.eid);
+
+                $('#task').val(el.dataset.eid).modal('show');
+            }
+
             // Task delete
-            async function archiveStudent(id) {
+            async function deleteCurrentTask(taskId) {
                 const result = await Swal.fire({
                     title: 'Are you sure?',
                     icon: 'warning',
@@ -269,30 +281,25 @@
                         url: "{{ route('tasks.destroy') }}",
                         type: 'DELETE',
                         data: {
-                            task_id: id,
+                            task_id: taskId,
                             _token: '{{ csrf_token() }}'
                         },
                         success: function(response) {
                             if (response.status == 'success') {
+                                var task = kanban.findElement(taskId);
+                                var currentBoard = $(task).parent().parent();
+                                kanban.removeElement(taskId);
+                                getTasksCountByBoard(currentBoard);
                                 toastr.success('Task has been deleted.', 'Deleted!');
-                                kanban.removeElement(id);
                             } else {
                                 toastr.error('Task has not been deleted.', 'Failed!');
                             }
+                            $('#task').modal('hide');
                         }
                     });
                 }
 
             }
-            async function deleteTask(id) {
-                // button data id is task id
-                kanban.removeElement(id.dataset.id);
-            }
-
-            $('#closemodal').click(function() {
-                $('#task').modal('hide');
-            });
-
 
             function titletemplate(title, count) {
                 return `<div class='kanban-title-content'>
@@ -302,10 +309,9 @@
                     </div>`;
             }
 
-
             function taskTemplate(task) {
                 return `<div class='kanban-item-title'>
-                            <h6 class='title'>${fn(task.name, 25)}</h6>
+                            <h6 class='title'>${formatLongText(task.name, 25)}</h6>
                             <div class='drodown'>
                                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
                                     <div class='user-avatar-group'>
@@ -317,7 +323,7 @@
                             </div>
                         </div>
                         <div class='kanban-item-text'>
-                            <p style='word-break: break-word;'>${fn(task?.description ?? '', 100)}</p>
+                            <p style='word-break: break-word;'>${formatLongText(task?.description ?? '', 100)}</p>
                         </div>
                         <ul class='kanban-item-tags'>
                             ${task.labels != null && task.labels != undefined ? JSON.parse(task?.labels)?.slice(0, 3).map(label => {
@@ -331,40 +337,23 @@
                         </div>`;
             }
 
-            function newTaskTemplate(className) {
-                return `<form action="{{ route('tasks.store') }}" class="form-validate" method="POST">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <input class="form-control ${className}">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Create</button>
-                                    <button type="button" class="btn btn-light">Cancel</button>
-                                </div>
-                            </div>
-                        </form>`;
-            }
-
             function addNewBoard() {
-                var id = '_' + new Date().toISOString();
-                kanban.addBoards([{
-                    'id': id,
-                    'title': titletemplate('New Board', 0),
-                    'class': 'kanban-board',
-                    'item': []
-                }]);
-                addBoardFooter(id);
-
                 // Ajax call to create new board
                 $.ajax({
                     url: '{{ route('boards.store') }}',
                     type: 'POST',
                     data: {
-                        board_id: id,
                         name: 'New Board',
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
+                        kanban.addBoards([{
+                            'id': data.board.id,
+                            'title': titletemplate('New Board', 0),
+                            'class': 'kanban-light',
+                            'item': []
+                        }]);
+                        addBoardFooter(data.board.id);
                         toastr.success('Board has been created.', 'Created!');
                     }
                 });
@@ -390,7 +379,7 @@
                     url: '{{ route('boards.delete') }}',
                     type: 'DELETE',
                     data: {
-                        board_id: currentBoardId,
+                        id: currentBoardId,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
@@ -432,7 +421,7 @@
                     url: '{{ route('boards.update') }}',
                     type: 'PUT',
                     data: {
-                        board_id: currentBoardId,
+                        id: currentBoardId,
                         name: newTitle,
                         _token: '{{ csrf_token() }}'
                     },
@@ -442,14 +431,9 @@
                 });
             }
 
-
-
-
-            async function addNewTask(e) {
+            function addNewTask(e) {
                 var currentBoardId = e.currentTarget.closest('.kanban-board').getAttribute('data-id');
-                var className = 'new-task-' + currentBoardId + new Date().toISOString();
-                task_id = '';
-                await $.ajax({
+                $.ajax({
                     url: '{{ route('tasks.store') }}',
                     type: 'POST',
                     data: {
@@ -458,23 +442,27 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
-                        task_id = data.task.id;
+                        kanban.addElement(
+                        currentBoardId, {
+                            'id': data.task.id,
+                            'title': taskTemplate({
+                                    name: 'New Task',
+                                    description: '',
+                                }),
+                            }
+                        );
+                        var board = kanban.findBoard(currentBoardId);
+                        var count = $(board).find('.kanban-item').length;
+                        $(board).find('.kanban-title-content .board-count').html(count);
                         toastr.success('Task has been created.', 'Created!');
                     }
                 });
-                kanban.addElement(
-                    currentBoardId, {
-                        'id': task_id,
-                        'title': taskTemplate({
-                            name: 'New Task',
-                            description: '',
-                        }),
-                    }
-                );
-                var board = kanban.findBoard(currentBoardId);
-                var count = $(board).find('.kanban-item').length;
-                $(board).find('.kanban-title-content .board-count').html(count);
+              
+            }
 
+            function getTasksCountByBoard(currentBoard) {
+                var count = $(currentBoard).find('.kanban-item').length;
+                $(currentBoard).find('.kanban-title-content .board-count').html(count);
             }
         });
     </script>

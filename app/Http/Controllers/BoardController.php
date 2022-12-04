@@ -12,14 +12,12 @@ class BoardController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'board_id' => 'required',
             'name' => 'required',
         ]);
 
         try {
             $board = new Boards();
             $board->name = $request->name;
-            $board->board_id = $request->board_id;
             $board->issuer_id = Auth::user()->id;
             $board->save();
 
@@ -38,10 +36,10 @@ class BoardController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'board_id' => 'required',
+            'id' => 'required',
         ]);
         try {
-            $board = Boards::where('board_id', $request->board_id)->first();
+            $board = Boards::where('id', $request->id)->first();
             $board->name = $request->name;
             $board->issuer_id = Auth::user()->id;
             $board->save();
@@ -60,11 +58,11 @@ class BoardController extends Controller
     public function delete(Request $request)
     {
         $request->validate([
-            'board_id' => 'required',
+            'id' => 'required',
         ]);
 
         try {
-            Boards::where('board_id', $request->board_id)->delete();
+            Boards::where('id', $request->id)->delete();
             return response()->json([
                 'message' => 'Board deleted successfully',
             ], 200);
