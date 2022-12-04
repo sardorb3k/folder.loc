@@ -13,7 +13,7 @@ class Staff extends Component
 
     public function render()
     {
-        $this->users = StaffModel::whereIn('role', ['admin', 'superadmin', 'accounting', 'marketing'])->get();
+        $this->users = StaffModel::where('status', 'active')->whereIn('role', ['admin', 'superadmin', 'accounting', 'marketing'])->get();
         return view('livewire.staff');
     }
 
@@ -64,7 +64,6 @@ class Staff extends Component
         $validatedDate = $this->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            'phone' => 'required|unique:users',
             'role' => 'required',
             'status' => 'nullable',
             'password' => 'nullable',
@@ -74,7 +73,6 @@ class Staff extends Component
             $user->update([
                 'firstname' => $this->firstname,
                 'lastname' => $this->lastname,
-                'phone' => $this->phone,
                 'role' => $this->role,
                 // 'status' => $this->status,
                 'password' => $this->password ? bcrypt($this->password) : $user->password,
@@ -89,8 +87,9 @@ class Staff extends Component
         if ($id) {
             $user = StaffModel::find($id);
             $user->status = 'inactive';
-            $user->archive_reason = $request->archive_reason;
+            $user->archive_reason ='deleted';
             $user->archived_at = Carbon::now();
+            $user->save();
             session()->flash('message', 'Staff Deleted Successfully.');
         }
     }
