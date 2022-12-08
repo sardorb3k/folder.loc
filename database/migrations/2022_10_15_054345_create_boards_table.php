@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('visibility', ['public', 'private'])->default('public');
             $table->enum('workspace', ['personal', 'work', 'school'])->default('personal');
             $table->integer('issuer_id')->nullable();
+            $table->string('color')->default('#dbdfea');
             $table->integer('category_id')->nullable();
             $table->smallInteger('order_number')->default(0);
             $table->timestamps();

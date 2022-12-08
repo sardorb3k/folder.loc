@@ -138,7 +138,7 @@
                                 el.classList.add('is-moving')
 
                                 self.options.dragEl(el, source)
-                                console.log(source.parentNode.dataset.id);
+                                // console.log(source.parentNode.dataset.id);
                                 var boardJSON = __findBoardJSON(source.parentNode.dataset.id)
                                 if (boardJSON.dragTo !== undefined) {
                                     self.options.boards.map(function (board) {
@@ -301,6 +301,7 @@
                             value = value.replace(/^[ ]+/g, '')
                             headerBoard.classList.add(value)
                         })
+                        headerBoard.setAttribute('style', 'border-top-color:' + board.color)
                         headerTitleBoardContainer.classList.add('kanban-title-board')
                         headerTitleBoardContainer.innerHTML = board.title;
                         headerBoard.appendChild(headerTitleBoardContainer)

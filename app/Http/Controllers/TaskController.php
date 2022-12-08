@@ -12,9 +12,9 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::get();
-        $boards = Boards::get();
-        $users = User::get();
+        $tasks = Task::orderBy('order_number')->get();
+        $boards = Boards::orderBy('order_number')->get();
+        $users = User::where('role', '<>', 'student')->get();
         return view('tasks.index', compact(['tasks', 'boards', 'users']));
     }
 
@@ -94,11 +94,31 @@ class TaskController extends Controller
         $this->validate($request, [
             'board_id' => 'required',
             'task_id' => 'required',
+            'source_board' => 'required',
+            'targetBoardTasks' => 'required',
+            'sourceBoardTasks' => 'required',
         ]);
         try {
             $task = Task::find($request->task_id);
             $task->board_id = $request->board_id;
             $task->save();
+
+            $targetBoardTasks = json_decode($request->targetBoardTasks);
+            for ($i = 0; $i < count($targetBoardTasks); $i++) {
+                $boardTask = Task::find($targetBoardTasks[$i]);
+                $boardTask->order_number = $i + 1;
+                $boardTask->save();
+            }
+
+            if ($request->board_id != $request->source_board) {
+                $sourceBoardTasks = json_decode($request->sourceBoardTasks);
+                for ($i = 0; $i < count($sourceBoardTasks); $i++) {
+                    $boardTask = Task::find($sourceBoardTasks[$i]);
+                    $boardTask->order_number = $i + 1;
+                    $boardTask->save();
+                }
+            }
+
             return response()->json([
                 'message' => 'Task updated successfully',
                 'task' => $task

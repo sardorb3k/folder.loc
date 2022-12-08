@@ -9,7 +9,7 @@ class Boards extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'status', 'visibility', 'workspace', 'issuer_id', 'order_number', 'board_id'];
+    protected $fillable = ['name', 'status', 'visibility', 'workspace', 'issuer_id', 'color', 'order_number', 'board_id'];
 
     public $timestamps = false;
 

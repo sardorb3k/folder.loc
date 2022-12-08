@@ -17,20 +17,17 @@
     <script src="{{ asset('assets/js/autonumeric.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.inputmask.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.0/js/selectize.min.js"
-        integrity="sha512-yPolz8xdNko3x+XY5yvuS5Inib7HXh7xD269BZOgyfv2GrNPisWLelUblxN5CdOoBAO0Siwfg4+QsAOVfUryCg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.0/css/selectize.bootstrap5.min.css"
-        integrity="sha512-Z0R/M2/XDJJvF5CJ0LzS6LkaqhiXpmT03VBD9oJ7WQHTx9HXcGPwhMax0l45OqDLm8BtClBWNFq7tTc2I1IWWA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="{{ asset('js/libs/selectize.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/selectize.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    <script src="{{ asset('js/libs/toastr.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/nano.pickr.css') }}">
+    <script src="{{ asset('js/libs/pickr.min.js') }}"></script>
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css?ver=2.9.1') }}">
     @livewireStyles
 </head>
 
-<body class="nk-body bg-white npc-default has-aside ">
+<body class="nk-body npc-default has-aside ">
     <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
@@ -334,7 +331,6 @@
             console.log(darkM)
         }
     </script>
-    @livewireScripts
     <script src="{{ asset('assets/js/bundle.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/scripts.js?ver=2.9.1') }}"></script>
     <script src="{{ asset('assets/js/charts/gd-analytics.js?ver=2.9.1') }}"></script>

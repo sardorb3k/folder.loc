@@ -26,7 +26,6 @@
             </div>
         </div>
     </div>
-    @livewireScripts
     <script type="text/javascript">
         window.livewire.on('userStore', () => {
             $('#exampleModal').modal('hide');

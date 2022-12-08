@@ -30068,6 +30068,8 @@ span.fc-event-teal-dim .dot {
 
 .kanban-board .kanban-drag {
   min-height: 100px;
+  max-height: 400px;
+  overflow-y: scroll;
   margin-bottom: 1rem;
 }
 
@@ -30111,6 +30113,7 @@ span.fc-event-teal-dim .dot {
   display: flex;
   padding-top: 0.5rem;
   margin: -.125rem;
+  flex-wrap: wrap;
 }
 
 .kanban-item-tags li {
@@ -31020,7 +31023,7 @@ body.nav-shown {
 }
 
 .nk-header-fixed+.nk-content {
-  margin-top: 65px;
+  margin-top: 35px;
   position: relative;
 }
 

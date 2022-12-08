@@ -103,13 +103,13 @@
                                 <div class="form-group">
                                     <label class="form-label">Users</label>
                                     <div class="form-control-wrap">
-                                        <select class="form-select js-select2" name="users[]" name="users"
+                                        <select id="task-users" class="form-select js-select2" name="users[]"
                                             multiple="multiple">
                                             @forelse ($users as $user)
                                                 <option value="{{ $user->id }}">{{ $user->firstname }}
                                                     {{ $user->lastname }}</option>
                                             @empty
-                                                <option value="">No user</option>
+                                                <option value="">No user</option> 
                                             @endforelse
                                         </select>
                                     </div>
@@ -127,7 +127,7 @@
         </div>
     </div>
     <script>
-        $("#labels").selectize({
+        const labelSelect = $("#labels").selectize({
             delimiter: ",",
             persist: true,
             create: function(input) {
@@ -138,7 +138,6 @@
             },
         });
 
-
         $('#closemodal').click(function() {
             $('#task').modal('hide');
         });
@@ -146,8 +145,7 @@
         $(document).ready(function() {
             const tasks = {!! json_encode($tasks) !!};
             const boards = {!! json_encode($boards) !!};
-            const colors = ['danger', 'primary', 'warning', 'success'];
-            var colorIndex = 0;
+            const users = {!! json_encode($users) !!};
             const boardsWithTasks = boards.map((board, index) => {
                 var boardTasks = [];
                 tasks.forEach(task => {
@@ -161,12 +159,12 @@
                 var board = {
                     'id': board.id,
                     'title': titletemplate(board.name, boardTasks.length),
-                    'class': 'kanban-' + colors[colorIndex],
-                    'item': boardTasks
+                    'item': boardTasks,
+                    'color': board.color
                 };
-                colorIndex == colors.length - 1 ? colorIndex = 0 : colorIndex++;
                 return board;
             });
+
             // toastr.options
             toastr.options = {
                 "closeButton": false,
@@ -186,10 +184,6 @@
                 "hideMethod": "fadeOut"
             }
 
-            function formatLongText(text, count) {
-                return text.slice(0, count) + (text.length > count ? "..." : "");
-            }
-
             var kanban = new jKanban({
                 element: '#rexarTaskBoard',
                 gutter: '0',
@@ -206,19 +200,54 @@
                 context: (el, e) => deleteCurrentTask(el.dataset.eid),
                 dropEl: (el, target, source, sibling) => {
                     // Ajax update
+                    var targetBoardTasks = [];
+                    var sourceBoardTasks = [];
+                    kanban.getBoardElements(kanban.getParentBoardID(el.dataset.eid)).forEach((task) => {
+                        targetBoardTasks.push(task.dataset.eid);
+                    });
+                    if(target.parentNode.dataset.id != source.parentNode.dataset.id) {
+                        kanban.getBoardElements(source.parentNode.dataset.id).forEach((task) => {
+                            sourceBoardTasks.push(task.dataset.eid);
+                        });
+                    }
                     $.ajax({
                         url: "{{ route('tasks.updateBoard') }}",
                         type: 'PUT',
                         data: {
                             task_id: el.dataset.eid,
                             board_id: kanban.getParentBoardID(el.dataset.eid),
+                            source_board: source.parentNode.dataset.id,
+                            targetBoardTasks: JSON.stringify(targetBoardTasks),
+                            sourceBoardTasks: JSON.stringify(sourceBoardTasks),
                             _token: '{{ csrf_token() }}'
                         },
                         success: function(response) {
+                            getTasksCountByBoard(target.parentNode);
+                            getTasksCountByBoard(source.parentNode);
                             toastr.success('Task moved successfully');
                         }
                     });
                 },
+                dragendBoard: (el) => {
+                    var boardIds = [];
+                    $('.kanban-board').each((index, board) => {
+                        boardIds.push(board.getAttribute('data-id'));
+                    });
+                    $.ajax({
+                        url: '{{ route('boards.reorder') }}',
+                        type: 'PUT',
+                        data: {
+                            boardIds: JSON.stringify(boardIds),
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(data) {
+                            toastr.success('Board has been updated.', 'Updated!');
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                },                             
                 buttonClick: (el, boardId) => {
                     var func = el.getAttribute('id');
 
@@ -247,20 +276,26 @@
 
             // open edit task Modal Window
             function openEditTaskModal(el) {
-                var task = tasks.find(task => task.id == el.dataset.eid) || {
-                    name: 'New Task',
-                    description: '',
-                    deadline: '',
-                    labels: '',
-                    users: []
-                };
-
-                $('#task-name').val(task.name);
-                $('#task-description').val(task.description);
-                $('#task-deadline').val(task.deadline);
-                $('#task_id').val(task.id || el.dataset.eid);
-
-                $('#task').val(el.dataset.eid).modal('show');
+                if(!$(el).find('.drodown').hasClass('show')) {
+                    var task = tasks.find(task => task.id == el.dataset.eid) || {
+                        name: 'New Task',
+                        description: '',
+                        deadline: '',
+                        labels: '',
+                        users: []
+                    };
+                    var selectize = labelSelect[0].selectize;
+                    selectize.addOption(JSON.parse(task.labels).map((label) => {
+                        return {'text': label, 'value': label};
+                    }));
+                    selectize.setValue(JSON.parse(task.labels));
+                    $('#task-name').val(task.name);
+                    $('#task-description').val(task.description);
+                    $('#task-deadline').val(task.deadline);
+                    $('#task_id').val(task.id || el.dataset.eid);
+                    $('#task-users').val(JSON.parse(task.users)).trigger('change');
+                    $('#task').val(el.dataset.eid).modal('show');
+                }
             }
 
             // Task delete
@@ -310,23 +345,47 @@
             }
 
             function taskTemplate(task) {
+                var currentTaskUsers = [];
+                if(task.users != null && task.users.length > 0) {
+                    JSON.parse(task.users).forEach(taskUser => {
+                        currentTaskUsers.push(users.find((user) => user.id == taskUser));
+                    });
+                }
                 return `<div class='kanban-item-title'>
-                            <h6 class='title'>${formatLongText(task.name, 25)}</h6>
-                            <div class='drodown'>
-                                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+                            <h6 class='title' style='word-break: break-word;'>${task.name}</h6>
+                            <div class='drodown' onclick="this.classList.add('show')">
+                                <a class='dropdown-toggle' data-toggle='dropdown'>
                                     <div class='user-avatar-group'>
-                                        ${task.users != null ? JSON.parse(task.users)?.slice(0, 4).map(user => {
-                                            return `<div class='user-avatar xs'><img src='{{ Auth::user(1)->getAvatarAttribute() }}'></div>`;
+                                        ${currentTaskUsers != null ? currentTaskUsers.map(user => {
+                                            return `<div class='user-avatar xs bg-primary'>
+                                                        <span>${user.firstname[0]}${user.lastname[0]}</span>
+                                                    </div>`;
                                         }).join('') : ''}
                                     </div>
                                 </a>
+                                <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end">
+                                    <ul class="link-list-opt no-bdr p-3 g-2">
+                                        ${currentTaskUsers != null ? currentTaskUsers.map(user => {
+                                            return `<li>
+                                                        <div class="user-card">
+                                                            <div class="user-avatar sm bg-primary">
+                                                                <span>${user.firstname[0]}${user.lastname[0]}</span>
+                                                            </div>
+                                                            <div class="user-name">
+                                                                <span class="tb-lead">${user.firstname} ${user.lastname}</span>
+                                                            </div>
+                                                        </div>
+                                                    </li>`;
+                                        }).join('') : ''}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class='kanban-item-text'>
-                            <p style='word-break: break-word;'>${formatLongText(task?.description ?? '', 100)}</p>
+                            <pre style='word-break: break-word;'>${task.description ?? ''}</pre>
                         </div>
                         <ul class='kanban-item-tags'>
-                            ${task.labels != null && task.labels != undefined ? JSON.parse(task?.labels)?.slice(0, 3).map(label => {
+                            ${task.labels != null && task.labels != undefined ? JSON.parse(task.labels).map(label => {
                                 return `<li><span class='badge badge-outline-light text-dark'>${label}</span></li>`;
                             }).join('') : ''}
                         </ul>
@@ -354,6 +413,7 @@
                             'item': []
                         }]);
                         addBoardFooter(data.board.id);
+                        $('#rexarTaskBoard').scrollLeft($('#rexarTaskBoard').get(0).scrollWidth);
                         toastr.success('Board has been created.', 'Created!');
                     }
                 });
@@ -391,20 +451,63 @@
             function editBoardTitle(currentBoardId) {
                 var board = kanban.findBoard(currentBoardId);
                 var boardTitle = $(board).find('.kanban-title-content .title');
+                var borderTopColor = $(board).find('.kanban-board-header').css('borderTopColor');
                 var boardTitleText = boardTitle.text();
                 var formContainer = document.createElement('div');
                 var formInput = document.createElement('input');
+                var colorPicker = document.createElement('input');
+                var colorPickerVal = document.createElement('input');
                 var formSaveButton = document.createElement('button');
 
                 formSaveButton.classList.add('btn', 'btn-sm', 'btn-icon', 'btn-trigger', 'ml-2');
                 formSaveButton.innerHTML = 'Save';
                 formSaveButton.addEventListener('click', () => saveBoardTitle(currentBoardId));
-                formInput.classList.add('form-control', 'form-control-sm', 'form-title');
+                formInput.classList.add('form-control', 'form-control-sm', 'form-title', 'mr-1');
+                colorPicker.classList.add('color-picker');
+                colorPickerVal.classList.add('color-picker-val');
+                colorPickerVal.setAttribute('type', 'hidden');
                 formInput.value = boardTitleText;
                 formContainer.setAttribute('style', 'display: flex;');
                 formContainer.appendChild(formInput);
+                formContainer.appendChild(colorPicker);
+                formContainer.appendChild(colorPickerVal);
                 formContainer.appendChild(formSaveButton);
                 boardTitle.html(formContainer);
+                const pickr = Pickr.create({
+                    el: '.color-picker',
+                    theme: 'nano', // or 'monolith', or 'nano'
+                    comparison: false,
+                    default: borderTopColor,
+                    swatches: [
+                        'rgba(244, 67, 54, 1)',
+                        'rgba(233, 30, 99, 1)',
+                        'rgba(156, 39, 176, 1)',
+                        'rgba(103, 58, 183, 1)',
+                        'rgba(63, 81, 181, 1)',
+                        'rgba(33, 150, 243, 1)',
+                        'rgba(3, 169, 244, 1)',
+                        'rgba(0, 188, 212, 1)',
+                        'rgba(0, 150, 136, 1)',
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(139, 195, 74, 1)',
+                        'rgba(205, 220, 57, 1)',
+                        'rgba(255, 235, 59, 1)',
+                        'rgba(255, 193, 7, 1)'
+                    ],
+                    components: {
+                        // Main components
+                        preview: true,
+                        opacity: true,
+                        hue: true,
+                        // Input / output Options
+                        interaction: {
+                            rgba: true,
+                            input: true,
+                        }
+                    }
+                }).on('change', (color, source, instance) => {
+                    colorPickerVal.value = color.toHEXA().toString();
+                });
                 $(board).find('.kanban-title-content .title input').focus();
                 $(board).find('.kanban-title-content .drodown').hide();
                 $(board).find('.kanban-title-content .board-count').hide();
@@ -413,16 +516,18 @@
             function saveBoardTitle(currentBoardId) {
                 var board = kanban.findBoard(currentBoardId);
                 var newTitle = $(board).find('.kanban-title-content .form-title').val();
+                var newColor = $(board).find('.kanban-title-content .color-picker-val').val();
                 $(board).find('.kanban-title-content .title').html(newTitle);
+                $(board).find('.kanban-board-header').css('borderTopColor', newColor);
                 $(board).find('.kanban-title-content .drodown').show();
                 $(board).find('.kanban-title-content .board-count').show();
-
                 $.ajax({
                     url: '{{ route('boards.update') }}',
                     type: 'PUT',
                     data: {
                         id: currentBoardId,
                         name: newTitle,
+                        color: newColor,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
@@ -452,8 +557,9 @@
                             }
                         );
                         var board = kanban.findBoard(currentBoardId);
-                        var count = $(board).find('.kanban-item').length;
-                        $(board).find('.kanban-title-content .board-count').html(count);
+                        var tasksContainer = $(board).find('.kanban-drag');
+                        $(tasksContainer).scrollTop($(tasksContainer)[0].scrollHeight);
+                        getTasksCountByBoard(board);
                         toastr.success('Task has been created.', 'Created!');
                     }
                 });
@@ -464,6 +570,7 @@
                 var count = $(currentBoard).find('.kanban-item').length;
                 $(currentBoard).find('.kanban-title-content .board-count').html(count);
             }
+
         });
     </script>
 @endsection
