@@ -37,7 +37,7 @@
                     <div class="container-lg wide-xl">
                         <div class="nk-header-wrap">
                             <div class="nk-header-brand">
-                                <a href="{{ url('/dashboard') }}" class="logo-link">
+                                <a href="{{ url('/') }}" class="logo-link">
                                     <h4 style="font-family: 'Nioicon';">Rexar Academy</h4>
                                 </a>
                             </div><!-- .nk-header-brand -->
@@ -262,7 +262,8 @@
                                 <div class="nk-footer">
                                     <div class="container wide-xl">
                                         <div class="nk-footer-wrap g-2">
-                                            <div class="nk-footer-copyright"> &copy; 2022 Rexar Academy
+                                            <div class="nk-footer-copyright">
+                                                 &copy; 2022 Rexar Academy
                                             </div>
                                             <div class="nk-footer-links">
                                                 <ul class="nav nav-sm">

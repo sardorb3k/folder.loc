@@ -9,7 +9,7 @@
                 <span class="nk-menu-text">Dashboard</span>
             </a>
         </li><!-- .nk-menu-item -->
-        @if(Auth::user()->getRole() == 'superadmin')
+        @if(Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-item">
                 <a href="{{ route('tasks.index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-note-add-fill"></em></span>

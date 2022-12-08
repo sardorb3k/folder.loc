@@ -11,14 +11,7 @@
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
-
-
-
-
-
-
-
-
+    
     <div class="nk-block">
         <div class="row g-gs">
             <div class="col-lg-6 col-xxl-6">
