@@ -284,16 +284,20 @@
                         labels: '',
                         users: []
                     };
-                    var selectize = labelSelect[0].selectize;
-                    selectize.addOption(JSON.parse(task.labels).map((label) => {
-                        return {'text': label, 'value': label};
-                    }));
-                    selectize.setValue(JSON.parse(task.labels));
+                    if(task.labels != null) {
+                        var selectize = labelSelect[0].selectize;
+                        selectize.addOption(JSON.parse(task.labels).map((label) => {
+                            return {'text': label, 'value': label};
+                        }));
+                        selectize.setValue(JSON.parse(task.labels));
+                    }
                     $('#task-name').val(task.name);
                     $('#task-description').val(task.description);
                     $('#task-deadline').val(task.deadline);
                     $('#task_id').val(task.id || el.dataset.eid);
-                    $('#task-users').val(JSON.parse(task.users)).trigger('change');
+                    if(task.users != null) {
+                        $('#task-users').val(JSON.parse(task.users)).trigger('change');
+                    }
                     $('#task').val(el.dataset.eid).modal('show');
                 }
             }
