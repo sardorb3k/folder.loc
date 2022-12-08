@@ -386,7 +386,7 @@
                             </div>
                         </div>
                         <div class='kanban-item-text'>
-                            <pre style='word-break: break-word;'>${task.description ?? ''}</pre>
+                            <pre style='word-break: break-word; white-space: break-spaces;'>${task.description ?? ''}</pre>
                         </div>
                         <ul class='kanban-item-tags'>
                             ${task.labels != null && task.labels != undefined ? JSON.parse(task.labels).map(label => {
