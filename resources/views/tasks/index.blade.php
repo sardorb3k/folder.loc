@@ -284,7 +284,7 @@
                         labels: '',
                         users: []
                     };
-                    if(task.labels != null) {
+                    if(task.labels != null || task.labels != '') {
                         var selectize = labelSelect[0].selectize;
                         selectize.addOption(JSON.parse(task.labels).map((label) => {
                             return {'text': label, 'value': label};
