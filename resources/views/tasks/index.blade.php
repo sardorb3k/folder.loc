@@ -295,7 +295,6 @@
                     $('#task-description').val(task.description);
                     $('#task-deadline').val(task.deadline);
                     $('#task_id').val(task.id || el.dataset.eid);
-                    console.log(task.users);
                     if(task.users != null && task.users.length > 0) {
                         $('#task-users').val(JSON.parse(task.users)).trigger('change');
                     }
