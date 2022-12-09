@@ -477,6 +477,7 @@
                 formContainer.appendChild(colorPickerVal);
                 formContainer.appendChild(formSaveButton);
                 boardTitle.html(formContainer);
+                colorPickerVal.value = borderTopColor;
                 const pickr = Pickr.create({
                     el: '.color-picker',
                     theme: 'nano', // or 'monolith', or 'nano'
@@ -505,7 +506,6 @@
                         hue: true,
                         // Input / output Options
                         interaction: {
-                            rgba: true,
                             input: true,
                         }
                     }
