@@ -19,7 +19,7 @@ class BoardController extends Controller
         try {
             $board = new Boards();
             $board->name = $request->name;
-            $board->order_number = Boards::max('order_number');
+            $board->order_number = Boards::max('order_number') ?? 1;
             $board->issuer_id = Auth::user()->id;
             $board->save();
 
