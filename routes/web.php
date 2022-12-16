@@ -203,20 +203,20 @@ Route::group(['prefix' => 'course'], function () {
 
 
 Route::group(['prefix' => 'tasks', 'middleware' => ['auth']], function () {
-    Route::get('/', [TaskController::class, 'index'])->name('tasks.index')->middleware(['roles:superadmin']);
-    Route::post('/', [TaskController::class, 'store'])->name('tasks.store')->middleware(['roles:superadmin']);
-    Route::put('/sync', [TaskController::class, 'sync'])->name('tasks.sync')->middleware(['roles:superadmin']);
-    Route::put('/', [TaskController::class, 'update'])->name('tasks.update')->middleware(['roles:superadmin']);
-    Route::put('/updateBoard', [TaskController::class, 'updateBoard'])->name('tasks.updateBoard')->middleware(['roles:superadmin']);
-    Route::delete('/', [TaskController::class, 'destroy'])->name('tasks.destroy')->middleware(['roles:superadmin']);
+    Route::get('/', [TaskController::class, 'index'])->name('tasks.index')->middleware(['roles:superadmin,admin,teacher']);
+    Route::post('/', [TaskController::class, 'store'])->name('tasks.store')->middleware(['roles:superadmin,admin,teacher']);
+    Route::put('/sync', [TaskController::class, 'sync'])->name('tasks.sync')->middleware(['roles:superadmin,admin,teacher']);
+    Route::put('/', [TaskController::class, 'update'])->name('tasks.update')->middleware(['roles:superadmin,admin,teacher']);
+    Route::put('/updateBoard', [TaskController::class, 'updateBoard'])->name('tasks.updateBoard')->middleware(['roles:superadmin,admin,teacher']);
+    Route::delete('/', [TaskController::class, 'destroy'])->name('tasks.destroy')->middleware(['roles:superadmin,admin,teacher']);
 });
 
 Route::group(['prefix' => 'boards', 'middleware' => ['auth']], function () {
-    Route::get('/', [BoardController::class, 'index'])->name('boards.index')->middleware(['roles:superadmin']);
-    Route::post('/', [BoardController::class, 'store'])->name('boards.store')->middleware(['roles:superadmin']);
-    Route::put('/', [BoardController::class, 'update'])->name('boards.update')->middleware(['roles:superadmin']);
-    Route::put('/reorder', [BoardController::class, 'reorder'])->name('boards.reorder')->middleware(['roles:superadmin']);
-    Route::delete('/', [BoardController::class, 'delete'])->name('boards.delete')->middleware(['roles:superadmin']);
+    Route::get('/', [BoardController::class, 'index'])->name('boards.index')->middleware(['roles:superadmin,admin,teacher']);
+    Route::post('/', [BoardController::class, 'store'])->name('boards.store')->middleware(['roles:superadmin,admin,teacher']);
+    Route::put('/', [BoardController::class, 'update'])->name('boards.update')->middleware(['roles:superadmin,admin,teacher']);
+    Route::put('/reorder', [BoardController::class, 'reorder'])->name('boards.reorder')->middleware(['roles:superadmin,admin,teacher']);
+    Route::delete('/', [BoardController::class, 'delete'])->name('boards.delete')->middleware(['roles:superadmin,admin,teacher']);
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => ['auth']], function () {
