@@ -82,6 +82,14 @@
                 </a>
             </li><!-- .nk-menu-item -->
         @endif
+        @if (Auth::user()->getRole() == 'admin' or Auth::user()->getRole() == 'teacher' or Auth::user()->getRole() == 'assistant' or Auth::user()->getRole() == 'superadmin')
+            <li class="nk-menu-item">
+                <a href="{{ route('course.index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-calendar-booking"></em></span>
+                    <span class="nk-menu-text">{{__('dashboard.course')}}</span>
+                </a>
+            </li><!-- .nk-menu-item -->
+        @endif
         @if (Auth::user()->getRole() == 'superadmin')
             <li class="nk-menu-heading">
                 <h6 class="overline-title text-primary-alt">{{__('dashboard.settings')}}</h6>

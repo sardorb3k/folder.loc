@@ -192,6 +192,16 @@ Route::group(['prefix' => 'settings'], function () {
     Route::put('/groupLevel/{id}', 'App\Http\Controllers\SettingsController@groupLevelUpdate')->name('settings.groupLevelUpdate')->middleware(['auth', 'roles:superadmin']);
 });
 
+// Course
+Route::group(['prefix' => 'course'], function () {
+    Route::get('/', 'App\Http\Controllers\CourseController@index')->name('course.index')->middleware(['auth', 'roles:superadmin']);
+    Route::get('/{id}/create', 'App\Http\Controllers\CourseController@create')->name('course.create')->middleware(['auth', 'roles:superadmin']);
+    Route::post('/', 'App\Http\Controllers\CourseController@store')->name('course.store')->middleware(['auth', 'roles:superadmin']);
+    Route::get('/{id}', ['as' => 'course.show', 'uses' => 'App\Http\Controllers\CourseController@show'])->middleware(['auth', 'roles:superadmin,admin,teacher']);
+    Route::get('/{id}/{courseid}', ['as' => 'course.course', 'uses' => 'App\Http\Controllers\CourseController@course'])->middleware(['auth', 'roles:superadmin,admin,teacher']);
+});
+
+
 Route::group(['prefix' => 'tasks', 'middleware' => ['auth']], function () {
     Route::get('/', [TaskController::class, 'index'])->name('tasks.index')->middleware(['roles:superadmin']);
     Route::post('/', [TaskController::class, 'store'])->name('tasks.store')->middleware(['roles:superadmin']);

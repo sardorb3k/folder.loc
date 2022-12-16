@@ -33,6 +33,7 @@ return [
     'timetable' => 'Timetable',
     'assessment' => 'Assessment',
     'accounting' => 'Accounting',
+    'course' => 'Courses',
     'salary' => 'Salary',
     'academy' => 'Academy',
     'settings' => 'Settings',
