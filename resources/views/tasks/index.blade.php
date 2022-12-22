@@ -1,63 +1,7 @@
 @section('title', 'Task Board')
 @extends('layouts.app')
 @section('content')
-    <div class="nk-block-head nk-block-head-sm">
-        <div class="nk-block-between">
-            <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Task Board</h3>
-                <div class="nk-block-des text-soft">
-                    <p>{{ __('dashboard.welcome') }}, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</p>
-                </div>
-            </div><!-- .nk-block-head-content -->
-            <div class="nk-block-head-content">
-                <div class="toggle-wrap nk-block-tools-toggle"><a href="#"
-                        class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
-                            class="icon ni ni-menu-alt-r"></em></a>
-                    <div class="toggle-expand-content" data-content="pageMenu">
-                        <ul class="nk-block-tools g-3">
-                            <li>
-                                <a class="btn btn-white btn-outline-light dropdown-toggle boardupdate">
-                                    <em class="icon ni ni-update"></em>
-                                    <span>Update Board</span>
-                                </a>
-                            </li>
-                            <li class="nk-block-tools-opt">
-                                <a href="#" data-toggle="modal" data-target="#board-create"
-                                    class="btn btn-primary dropdown-toggle add-new-board">
-                                    <em class="icon ni ni-plus"></em>
-                                    <span>Add Board</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div><!-- .nk-block-between -->
-    </div><!-- .nk-block-head -->
-    @include('error')
 
-    <div class="nk-block">
-        <div class="row g-gs">
-            <div class="nk-content-body">
-                <div class="ng-block">
-                    <div id="rexarTaskBoard" class="nk-kanban"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        .title-task {
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .title-task:focus {
-            -webkit-box-shadow: none;
-            box-shadow: none;
-            outline: none;
-
-        }
-    </style>
     <!-- Modal Content Code -->
     <div class="modal fade" tabindex="-1" id="task">
         <div class="modal-dialog" role="document">
@@ -126,6 +70,63 @@
             </div>
         </div>
     </div>
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title">Task Board</h3>
+                <div class="nk-block-des text-soft">
+                    <p>{{ __('dashboard.welcome') }}, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</p>
+                </div>
+            </div><!-- .nk-block-head-content -->
+            <div class="nk-block-head-content">
+                <div class="toggle-wrap nk-block-tools-toggle"><a href="#"
+                        class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
+                            class="icon ni ni-menu-alt-r"></em></a>
+                    <div class="toggle-expand-content" data-content="pageMenu">
+                        <ul class="nk-block-tools g-3">
+                            <li>
+                                <a class="btn btn-white btn-outline-light dropdown-toggle boardupdate">
+                                    <em class="icon ni ni-update"></em>
+                                    <span>Update Board</span>
+                                </a>
+                            </li>
+                            <li class="nk-block-tools-opt">
+                                <a href="#" data-toggle="modal" data-target="#board-create"
+                                    class="btn btn-primary dropdown-toggle add-new-board">
+                                    <em class="icon ni ni-plus"></em>
+                                    <span>Add Board</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block-between -->
+    </div><!-- .nk-block-head -->
+    @include('error')
+
+    <div class="nk-block">
+        <div class="row g-gs">
+            <div class="nk-content-body">
+                <div class="ng-block">
+                    <div id="rexarTaskBoard" class="nk-kanban"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .title-task {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .title-task:focus {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+
+        }
+    </style>
     <script>
         const labelSelect = $("#labels").selectize({
             delimiter: ",",
