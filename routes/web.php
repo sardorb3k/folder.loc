@@ -49,6 +49,7 @@ Route::group(['middleware' => ['web']], function () {
 
 // Home page route for logged in users only (middleware auth)
 Route::get('/', ['as' => 'dashboard', 'uses' => 'App\Http\Controllers\HomeController@index'])->middleware(['auth', 'roles:superadmin,admin,teacher,student']);
+Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'App\Http\Controllers\HomeController@index'])->middleware(['auth', 'roles:superadmin,admin,teacher,student']);
 
 // Group routes
 Route::group(['prefix' => 'groups'], function () {
