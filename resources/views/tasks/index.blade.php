@@ -126,6 +126,10 @@
             outline: none;
 
         }
+        .kanban-board .kanban-drag {
+            max-height: 450px;
+            overflow-y: scroll;
+        }
     </style>
     <script>
         const labelSelect = $("#labels").selectize({
