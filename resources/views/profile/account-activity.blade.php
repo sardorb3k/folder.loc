@@ -59,7 +59,7 @@ function user_os($user_agent)
                             </div>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
-                            <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em
+                            <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-bs-target="userAside"><em
                                     class="icon ni ni-menu-alt-r"></em></a>
                         </div>
                     </div>

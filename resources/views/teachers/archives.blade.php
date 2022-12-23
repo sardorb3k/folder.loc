@@ -21,7 +21,7 @@
         @if (Auth::user()->getRole() == 'superadmin')
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle">
-                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
+                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-bs-target="pageMenu"><em
                             class="icon ni ni-menu-alt-r"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
@@ -103,9 +103,9 @@
                         <span>{{ date('d M, Y', strtotime($teacher->birthday)) }}</span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        @if($teacher->archive_reason != '') 
+                        @if($teacher->archive_reason != '')
                             <textarea readonly class="form-control no-resize min-height-50" id="default-textarea">{{ $student_data->archive_reason }}</textarea>
-                        @else 
+                        @else
                             *
                         @endif
                     </td>

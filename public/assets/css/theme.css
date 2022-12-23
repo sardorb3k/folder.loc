@@ -1,56 +1,8 @@
-/* Form input validation */
-.valid-form {
-    color: #f44336 !important;
-}
-
-.no-focus-outline {
-    outline: 0;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.span-box-success {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #1ee0ac;
-}
-
-.span-box-danger {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #e85347;
-}
-
-.attendance-card-title {
-    display: none;
-}
-
-.min-height-50 {
-    min-height: 50px !important;
-}
-
-@media (max-width:480px) {
-    .fc .fc-daygrid-day-top {
-        display: flex;
-        flex-direction: unset;
-        justify-content: center;
-    }
-
-    .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
-        height: 0;
-        min-height: 0;
-    }
-
-    .fc-h-event .fc-event-title-container {
-        display: none;
-    }
-
-    .attendance-card-title {
-        margin-top: 10px;
-        display: block;
-    }
-}
+/*!
+ * Theme Name: Default
+ * Package : DashLite
+ * Author: Softnio
+ * Author URI: http://themeforest.net/user/softnio
+ * Version	 :	1.0.0
+ * Updated	 :	07.23.2020
+**/

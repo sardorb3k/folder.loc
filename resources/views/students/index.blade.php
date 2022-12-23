@@ -11,7 +11,7 @@
             </div><!-- .nk-block-head-content -->
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle">
-                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
+                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-bs-target="pageMenu"><em
                             class="icon ni ni-menu-alt-r"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
@@ -83,7 +83,7 @@
                     </td>
                     <td class="nk-tb-col tb-col-mb">
                         <span class="text-capitalize" style="@if(!$student_data->group_level) color: red; @endif">
-                            {{ $student_data->group_level ? $student_data->group_level . ' ' . $student_data->group_name : 'No Group'}} 
+                            {{ $student_data->group_level ? $student_data->group_level . ' ' . $student_data->group_name : 'No Group'}}
                         </span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
@@ -162,7 +162,7 @@
             if (result.isConfirmed) {
                 await element.closest('form').submit();
             }
-            
+
         }
     </script>
 @endsection

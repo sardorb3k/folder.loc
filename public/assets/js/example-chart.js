@@ -14,11 +14,11 @@
     dataUnit: 'People',
     datasets: [{
       label: "join",
-      color: "#b695ff",
+      color: "#9cabff",
       data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 75, 90]
     }, {
       label: "join",
-      color: "#b695ff",
+      color: "#9cabff",
       data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 75, 90]
     }]
   };
@@ -27,7 +27,7 @@
     dataUnit: 'USD',
     datasets: [{
       label: "Income",
-      color: "#b695ff",
+      color: "#9cabff",
       data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
     }, {
       label: "Expense",
@@ -41,7 +41,7 @@
     dataUnit: 'USD',
     datasets: [{
       label: "Income",
-      color: "#b695ff",
+      color: "#9cabff",
       data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
     }, {
       label: "Expense",
@@ -124,7 +124,8 @@
               ticks: {
                 beginAtZero: true,
                 fontSize: 12,
-                fontColor: '#9eaecf'
+                fontColor: '#9eaecf',
+                padding: 5
               },
               gridLines: {
                 color: NioApp.hexRGB("#526484", .2),
@@ -139,6 +140,7 @@
                 fontSize: 12,
                 fontColor: '#9eaecf',
                 source: 'auto',
+                padding: 5,
                 reverse: NioApp.State.isRTL
               },
               gridLines: {
@@ -173,7 +175,7 @@
       data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
     }, {
       label: "Total Send",
-      color: "#9d72ff",
+      color: "#798bff",
       background: 'transparent',
       data: [80, 54, 105, 120, 82, 85, 60, 80, 54, 105, 120, 82]
     }]
@@ -184,8 +186,8 @@
     lineTension: .4,
     datasets: [{
       label: "Total Received",
-      color: "#9d72ff",
-      background: NioApp.hexRGB('#9d72ff', .4),
+      color: "#798bff",
+      background: NioApp.hexRGB('#798bff', .4),
       data: [110, 80, 125, 65, 95, 75, 90, 110, 80, 125, 70, 95]
     }]
   };
@@ -195,8 +197,8 @@
     lineTension: 0,
     datasets: [{
       label: "Total Received",
-      color: "#9d72ff",
-      background: NioApp.hexRGB('#9d72ff', .3),
+      color: "#798bff",
+      background: NioApp.hexRGB('#798bff', .3),
       data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
     }]
   };
@@ -323,7 +325,7 @@
     legend: false,
     datasets: [{
       borderColor: "#fff",
-      background: ["#b695ff", "#f4aaa4", "#8feac5"],
+      background: ["#9cabff", "#f4aaa4", "#8feac5"],
       data: [110, 80, 125]
     }]
   };
@@ -402,7 +404,7 @@
     legend: false,
     datasets: [{
       borderColor: "#fff",
-      background: ["#b695ff", "#f4aaa4", "#8feac5"],
+      background: ["#9cabff", "#f4aaa4", "#8feac5"],
       data: [110, 80, 125]
     }]
   };
@@ -482,7 +484,7 @@
     legend: false,
     datasets: [{
       borderColor: "#fff",
-      background: [NioApp.hexRGB("#b695ff", .8), NioApp.hexRGB("#f4aaa4", .8), NioApp.hexRGB("#8feac5", .8)],
+      background: [NioApp.hexRGB("#9cabff", .8), NioApp.hexRGB("#f4aaa4", .8), NioApp.hexRGB("#8feac5", .8)],
       data: [110, 80, 125]
     }]
   };

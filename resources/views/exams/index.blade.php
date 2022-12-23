@@ -12,13 +12,13 @@
             @if (Auth::user()->role == 'superadmin')
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle">
-                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
+                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-bs-target="pageMenu"><em
                             class="icon ni ni-menu-alt-r"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
                             <li class="nk-block-tools-opt">
                                 <div class="drodown">
-                                    <a href="#" data-toggle="modal" data-target="#group-create"
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#group-create"
                                         class="dropdown-toggle btn btn-icon btn-primary">
                                         <em class="icon ni ni-plus"></em></a>
                                 </div>

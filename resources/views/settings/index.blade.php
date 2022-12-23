@@ -94,7 +94,7 @@
                                 <th scope="row">{{ $item->name }}</th>
                                 <td>
                                     <button class="btn btn-sm btn-primary" id="edit-button" value="{{ $item->id }}"
-                                        data-toggle="modal" data-target="#exam-anw">Edit</button>
+                                        data-bs-toggle="modal" data-bs-target="#exam-anw">Edit</button>
                                     <form action="{{ route('settings.groupLevelDelete', $item->id) }}" method="post"
                                         id="level-delete">
                                         @csrf

@@ -27,7 +27,7 @@
                         <div class="data-head">
                             <h6 class="overline-title">Basics</h6>
                         </div>
-                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                        <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Full Name</span>
                                 <span class="data-value">{{ Auth::user()->lastname . ' ' . Auth::user()->firstname }}</span>
@@ -66,7 +66,7 @@
 
                             </div>
                         </div><!-- data-item -->
-                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                        <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Date of Birth</span>
                                 <span class="data-value">{{ Auth::user()->birthday }}</span>
@@ -79,7 +79,7 @@
                                 @endif
                             </div>
                         </div><!-- data-item -->
-                        <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                        <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                             <div class="data-col">
                                 <span class="data-label">Gender</span>
                                 <span class="data-value">{{ Auth::user()->gender == 'male' ? 'Male' : 'Female' }}</span>
@@ -105,10 +105,10 @@
                     <h5 class="title">Update Profile</h5>
                     <ul class="nk-nav nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#personal">Personal</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#personal">Personal</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#password">Password</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#password">Password</a>
                         </li>
                     </ul><!-- .nav-tabs -->
                     <div class="tab-content">

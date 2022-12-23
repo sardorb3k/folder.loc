@@ -25,7 +25,7 @@
                             <h4 class="nk-block-title">Exams</h4>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
-                            <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em
+                            <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-bs-target="userAside"><em
                                     class="icon ni ni-menu-alt-r"></em></a>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                 </td>
                                 <td class="nk-tb-col tb-col-mb">
                                     <span class="text-capitalize">
-                                        {{  $exam->level . ' ' . $exam->name }} 
+                                        {{  $exam->level . ' ' . $exam->name }}
                                     </span>
                                 </td>
                                 <td class="nk-tb-col tb-col-lg">

@@ -53,7 +53,7 @@
                                                 <option value="{{ $user->id }}">{{ $user->firstname }}
                                                     {{ $user->lastname }}</option>
                                             @empty
-                                                <option value="">No user</option> 
+                                                <option value="">No user</option>
                                             @endforelse
                                         </select>
                                     </div>
@@ -80,7 +80,7 @@
             </div><!-- .nk-block-head-content -->
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle"><a href="#"
-                        class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
+                        class="btn btn-icon btn-trigger toggle-expand me-n1" data-bs-target="pageMenu"><em
                             class="icon ni ni-menu-alt-r"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
@@ -91,7 +91,7 @@
                                 </a>
                             </li>
                             <li class="nk-block-tools-opt">
-                                <a href="#" data-toggle="modal" data-target="#board-create"
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#board-create"
                                     class="btn btn-primary dropdown-toggle add-new-board">
                                     <em class="icon ni ni-plus"></em>
                                     <span>Add Board</span>
@@ -248,7 +248,7 @@
                             console.log(error);
                         }
                     });
-                },                             
+                },
                 buttonClick: (el, boardId) => {
                     var func = el.getAttribute('id');
 
@@ -568,7 +568,7 @@
                         toastr.success('Task has been created.', 'Created!');
                     }
                 });
-              
+
             }
 
             function getTasksCountByBoard(currentBoard) {
