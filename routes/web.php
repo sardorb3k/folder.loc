@@ -115,6 +115,7 @@ Route::group(['prefix' => 'students'], function () {
 Route::group(['prefix' => 'payments'], function () {
     Route::get('/', 'App\Http\Controllers\PaymentsController@index')->name('payments.index')->middleware(['auth', 'roles:superadmin,admin']);
     Route::post('/', 'App\Http\Controllers\PaymentsController@store')->name('payments.store')->middleware(['auth', 'roles:superadmin,admin']);
+    Route::get('/export','App\Http\Controllers\PaymentsController@exportPayments')->name('payments.export')->middleware(['auth', 'roles:superadmin,admin']);
     Route::get('/{id}', 'App\Http\Controllers\PaymentsController@show_red')->name('payments.show_red')->middleware(['auth', 'roles:superadmin,admin']);
     Route::get('/{id}/{date}', 'App\Http\Controllers\PaymentsController@show')->name('payments.show')->middleware(['auth', 'roles:superadmin,admin']);
     Route::put('/{id}', 'App\Http\Controllers\PaymentsController@update')->name('payments.update')->middleware(['auth', 'roles:superadmin,admin']);

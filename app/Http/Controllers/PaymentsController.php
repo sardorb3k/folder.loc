@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Interfaces\PaymentsRepositoryInterface;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExportPayment;
 
 class PaymentsController extends Controller
 {
@@ -62,5 +64,10 @@ class PaymentsController extends Controller
     public function update(Request $request, $id)
     {
         return $this->paymentService->updatePayments($request, $id);
+    }
+    public function exportPayments(Request $request){
+        return Excel::download(new ExportPayment, 'payments.xlsx');
+        // return (new ExportPayment)->download('invoices.html', Excel::HTML);
+        // return Excel::HTML->download(new ExportPayment, 'payments.html');
     }
 }

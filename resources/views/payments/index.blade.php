@@ -9,6 +9,18 @@
                     <p>You have a total of {{ count($students) }} students.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
+            @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
+                <div class="nk-block-head-content">
+                    <ul class="nk-block-tools g-3">
+                        <li>
+                            <a href="{{ route('payments.export') }}" class="btn btn-white btn-outline-light">
+                                <em class="icon ni ni-download-cloud"></em>
+                                <span>Export</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div><!-- .nk-block-head-content -->
+            @endif
         </div><!-- .nk-block-between -->
         @include('error')
     </div><!-- .nk-block-head -->
