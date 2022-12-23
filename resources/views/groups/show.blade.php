@@ -23,7 +23,7 @@
                             <ul class="nk-block-tools g-3">
                                 <li class="nk-block-tools-opt">
                                     <div class="drodown">
-                                        <a href="#" data-bs-toggle="modal" dat-bs-target="#group-create"
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#group-create"
                                             class="dropdown-toggle btn btn-icon btn-primary">
                                             <em class="icon ni ni-plus"></em></a>
                                     </div>
