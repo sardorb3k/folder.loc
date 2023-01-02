@@ -75,8 +75,8 @@
                                         </div>
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
-                                        <span class="badge badge-outline-primary">{{ $student->att_ap }}</span> /
-                                        <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span>
+                                        <span class="badge badge-outline-secondary">{{ $student->att_ap }}</span> /
+                                        <span class="badge badge-outline-secondary">{{ $crm_attendance_day }}</span>
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
                                         <div class="form-control-wrap">

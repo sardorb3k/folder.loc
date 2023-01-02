@@ -71,11 +71,11 @@
                         <span>{{ ucfirst($exam->exam_type) }}</span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span class="badge badge-outline-primary">{{ $exam->accepted }}</span>
+                        <span class="badge badge-outline-secondary">{{ $exam->accepted }}</span>
                         <span class="badge">{{ $exam->notaccepted }}</span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        <span class="badge badge-outline-primary">{{ date("d-M-Y", strtotime($exam->created_at)) }}</span>
+                        <span class="badge badge-outline-secondary">{{ date("d-M-Y", strtotime($exam->created_at)) }}</span>
                     </td>
                     @if (Auth::user()->role == 'superadmin')
                         <td class="nk-tb-col nk-tb-col-tools">

@@ -106,9 +106,9 @@
                                         </td>
                                         <td class="nk-tb-col tb-col-lg">
                                             <span>
-                                                <span class="badge badge-outline-primary">{{ $student->attendance_a }}</span>
+                                                <span class="badge badge-outline-secondary">{{ $student->attendance_a }}</span>
                                                 /
-                                                <span class="badge badge-outline-primary">{{ $crm_attendance_day }}</span>
+                                                <span class="badge badge-outline-secondary">{{ $crm_attendance_day }}</span>
                                             </span>
                                         </td>
                                         <td class="nk-tb-col tb-col-lg">
