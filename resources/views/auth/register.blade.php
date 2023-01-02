@@ -109,7 +109,7 @@
                                 <a class="nav-link" href="#">Help</a>
                             </li -->
                         <li class="nav-item dropup">
-                            <a class="dropdown-toggle dropdown-indicator has-indicator nav-link" data-toggle="dropdown"
+                            <a class="dropdown-toggle dropdown-indicator has-indicator nav-link" data-bs-toggle="dropdown"
                                 data-offset="0,10"><span>{{ Config::get('languages')[App::getLocale()]['display'] }}</span></a>
                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                 <ul class="language-list">

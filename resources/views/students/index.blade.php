@@ -99,7 +99,7 @@
                         <ul class="nk-tb-actions gx-1">
                             <li>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown" aria-expanded="true">
+                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="true">
                                         <em class="icon ni ni-more-h"></em>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" style="">

@@ -55,8 +55,8 @@
                         <button class="btn btn-lg btn-primary btn-block" tabindex="3">{{ __('auth.signin_submit') }}</button>
                     </div>
                 </form>
-                <div class="form-note-s2 text-center pt-4"> 
-                    {{ __('auth.signin_register_desc') }} 
+                <div class="form-note-s2 text-center pt-4">
+                    {{ __('auth.signin_register_desc') }}
                     <a href="{{ route('register') }}">{{ __('auth.signin_register') }}</a>
                 </div>
                 <!-- Errors Start -->
@@ -86,7 +86,7 @@
                 <div class="col-lg-6 order-lg-last">
                     <ul class="nav nav-sm justify-content-center justify-content-lg-end">
                         <li class="nav-item dropup">
-                            <a class="dropdown-toggle dropdown-indicator has-indicator nav-link" data-toggle="dropdown"
+                            <a class="dropdown-toggle dropdown-indicator has-indicator nav-link" data-bs-toggle="dropdown"
                                 data-offset="0,10"><span>{{ Config::get('languages')[App::getLocale()]['display'] }}</span></a>
                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                 <ul class="language-list">

@@ -105,12 +105,12 @@
                                     </td>
                                     <td class="nk-tb-col tb-col-lg">
                                         <button
-                                            class="btn btn-{{ ($student->result && $student->result >= 80 && !str_contains(strtolower($exam->level), 'ielts')) 
+                                            class="btn btn-{{ ($student->result && $student->result >= 80 && !str_contains(strtolower($exam->level), 'ielts'))
                                             || ($student->result && $student->result >= 6 && str_contains(strtolower($exam->level), 'junior'))
-                                            || ($student->result && $student->result >= 7 && str_contains(strtolower($exam->level), 'senior')) 
+                                            || ($student->result && $student->result >= 7 && str_contains(strtolower($exam->level), 'senior'))
                                             ? 'success' : 'danger' }}"
                                             id="edit-button" value="{{ $student->id }}-{{ $exam->id }}"
-                                            data-toggle="modal"
+                                            data-bs-toggle="modal"
                                             data-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
                                     </td>
                                 </tr>
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                    @else 
+                    @else
                         <div class="row gy-4" id="exam-data">
                             <div class="col-sm-4">
                                 <div class="form-group">
@@ -250,7 +250,7 @@
                 maximumValue: 100,
                 watchExternalChanges: true
             });
-        }  
+        }
 
         if($('.ielts-exam-result-input').length > 0) {
             new AutoNumeric.multiple('.ielts-exam-result-input', {

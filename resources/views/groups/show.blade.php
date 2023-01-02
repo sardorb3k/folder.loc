@@ -109,7 +109,7 @@
                                             <input type="hidden" name="student_id" value="{{ $student->group_id }}">
                                             <input type="hidden" name="group_id" value="{{ $group->id }}">
                                             <a href="#" onclick="unsubscribeStudent(this)"
-                                                class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em
+                                                class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em
                                                     class="icon ni ni-trash"></em></a>
                                         </form>
                                     </div>

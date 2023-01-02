@@ -10,7 +10,7 @@
                 <div class="nk-tb-col tb-col-md"><span class="sub-text">Status  </span></div>
                 <div class="nk-tb-col nk-tb-col-tools text-right">
                     <div class="dropdown">
-                        <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle" data-toggle="dropdown"
+                        <a href="#" class="btn btn-xs btn-outline-light btn-icon dropdown-toggle" data-bs-toggle="dropdown"
                             data-offset="0,5"><em class="icon ni ni-plus"></em></a>
                     </div>
                 </div>

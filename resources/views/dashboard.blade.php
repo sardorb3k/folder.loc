@@ -18,7 +18,7 @@
                             <li>
                                 <div class="drodown">
                                     <a href="#" class="dropdown-toggle btn btn-white btn-dim btn-outline-light"
-                                        data-toggle="dropdown"><em
+                                    data-bs-toggle="dropdown"><em
                                             class="d-none d-sm-inline icon ni ni-calender-date"></em><span><span
                                                 class="d-none d-md-inline">Last</span> 30 Days</span><em
                                             class="dd-indc icon ni ni-chevron-right"></em></a>

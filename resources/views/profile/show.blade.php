@@ -41,7 +41,7 @@
                             </div>
                         </div><!-- data-item -->
                         {{-- <div class="data-item"
-                            {{ Auth::user()->role != 'student' ? 'data-toggle=modal data-target=#profile-edit' : '' }}>
+                            {{ Auth::user()->role != 'student' ? 'data-bs-toggle=modal data-target=#profile-edit' : '' }}>
                             <div class="data-col">
                                 <span class="data-label">Email</span>
                                 <span

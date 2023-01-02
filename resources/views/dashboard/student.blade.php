@@ -149,7 +149,7 @@
                                                 ($exam->result && $exam->result >= 7 && str_contains(strtolower($exam->level), 'senior'))
                                                     ? '#1ee0ac'
                                                     : '#e85347' }};color: white;"
-                                                data-toggle="modal" data-target="#exam-anw">{{ $exam->result }}</span>
+                                                data-bs-toggle="modal" data-target="#exam-anw">{{ $exam->result }}</span>
                                         </td>
                                     </tr>
                                 @endforeach

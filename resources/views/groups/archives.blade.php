@@ -106,9 +106,9 @@
                         <span class="badge">{{ $group->lessonendtime }}</span>
                     </td>
                     <td class="nk-tb-col tb-col-lg">
-                        @if($group->archive_reason != '') 
+                        @if($group->archive_reason != '')
                             <textarea readonly class="form-control no-resize min-height-50" id="default-textarea">{{ $group->archive_reason }}</textarea>
-                        @else 
+                        @else
                             *
                         @endif
                     </td>
@@ -120,7 +120,7 @@
                             <ul class="nk-tb-actions gx-1">
                                 <li>
                                     <div class="drodown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown" aria-expanded="true">
+                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="true">
                                             <em class="icon ni ni-more-h"></em>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end" style="">

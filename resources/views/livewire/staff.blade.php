@@ -181,13 +181,13 @@
                             <li>
                                 <div class="drodown">
                                     <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                        data-toggle="dropdown" aria-expanded="true">
+                                    data-bs-toggle="dropdown" aria-expanded="true">
                                         <em class="icon ni ni-more-h"></em>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" style="">
                                         <ul class="link-list-opt no-bdr">
                                             <li>
-                                                <a data-toggle="modal" data-target="#updateModal"
+                                                <a data-bs-toggle="modal" data-target="#updateModal"
                                                     wire:click="edit({{ $student_data->id }})">
                                                     <em class="icon ni ni-edit"></em>
                                                     <span>Edit</span>

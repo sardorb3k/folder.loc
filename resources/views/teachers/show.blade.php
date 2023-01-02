@@ -83,10 +83,10 @@
                         <h5 class="title">Update Teacher Profile</h5>
                         <ul class="nk-nav nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#personal">Personal</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#personal">Personal</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#password">Password</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#password">Password</a>
                             </li>
                         </ul><!-- .nav-tabs -->
                         <div class="tab-content">

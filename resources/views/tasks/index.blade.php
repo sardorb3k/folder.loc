@@ -363,7 +363,7 @@
                 return `<div class='kanban-item-title'>
                             <h6 class='title' style='word-break: break-word;'>${task.name}</h6>
                             <div class='drodown' onclick="this.classList.add('show')">
-                                <a class='dropdown-toggle' data-toggle='dropdown'>
+                                <a class='dropdown-toggle' data-bs-toggle='dropdown'>
                                     <div class='user-avatar-group'>
                                         ${currentTaskUsers != null ? currentTaskUsers.map(user => {
                                             return `<div class='user-avatar xs bg-primary'>
