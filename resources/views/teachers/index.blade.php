@@ -87,10 +87,10 @@
                             </a>
                         </div>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <span style="text-transform: capitalize">{{ $teacher->role }}</span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <input type="text" class="phone border-0 bg-transparent text-soft no-focus-outline cursor-pointer"  value="{{ $teacher->phone }}" onclick="window.location = 'tel:+{{ $teacher->phone }}'" readonly>
                     </td>
                     <td class="nk-tb-col tb-col-lg">

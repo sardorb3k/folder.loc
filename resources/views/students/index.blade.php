@@ -86,7 +86,7 @@
                             {{ $student_data->group_level ? $student_data->group_level . ' ' . $student_data->group_name : 'No Group'}}
                         </span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <input type="text" class="phone border-0 bg-transparent text-soft no-focus-outline cursor-pointer"  value="{{ $student_data->phone }}" onclick="window.location = 'tel:+{{ $student_data->phone }}'" readonly>
                     </td>
                     <td class="nk-tb-col tb-col-lg">

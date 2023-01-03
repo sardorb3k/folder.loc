@@ -14,7 +14,7 @@
                 </div>
                 <div class="kanban-title-content">
                     <div class="drodown">
-                        <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mr-n1" data-toggle="dropdown"><em class="icon ni ni-${optionicon}"></em></a>
+                        <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mr-n1" data-bs-toggle="dropdown"><em class="icon ni ni-${optionicon}"></em></a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <ul class="link-list-opt no-bdr">
                                 <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Board</span></a></li>
@@ -31,7 +31,7 @@
             element: '#kanban',
             gutter:'0',
             widthBoard:'320px',
-            responsivePercentage: false, 
+            responsivePercentage: false,
             boards: [
                 {
                     'id': '_open',
@@ -42,7 +42,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Dashlite Design Kit Update</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-primary"><span>A</span></div>
                                         </div>
@@ -86,7 +86,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Implement Design into Template</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-dark"><span>S</span></div>
                                         </div>
@@ -129,7 +129,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Dashlite React Version</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-blue"><span>C</span></div>
                                         </div>
@@ -179,7 +179,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Techyspec Keyword Research</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-danger"><span>V</span></div>
                                         </div>
@@ -224,7 +224,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Fitness Next Website Design</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-pink"><span>P</span></div>
                                         </div>
@@ -268,7 +268,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Runnergy Website Redesign</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-purple">
                                                 <span>J</span>
@@ -327,7 +327,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Wordlab Android App</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-primary"><span>J</span></div>
                                         </div>
@@ -377,7 +377,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">Oberlo Development</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-purple">
                                                 <span>A</span>
@@ -436,7 +436,7 @@
                             <div class="kanban-item-title">
                                 <h6 class="title">IOS app for Getsocio</h6>
                                 <div class="drodown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                         <div class="user-avatar-group">
                                             <div class="user-avatar xs bg-pink"><span>P</span></div>
                                         </div>

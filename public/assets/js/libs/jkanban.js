@@ -358,7 +358,7 @@
                             var removeButton = document.createElement('li')
                             buttonsContainer.classList.add('kanban-title-content')
                             dropdownButtonContainer.classList.add('dropdown')
-                            dropdownButtonContainer.innerHTML = `<a href='#' class='dropdown-toggle btn btn-sm btn-icon btn-trigger mr-n1' data-toggle='dropdown'>
+                            dropdownButtonContainer.innerHTML = `<a href='#' class='dropdown-toggle btn btn-sm btn-icon btn-trigger mr-n1' data-bs-toggle='dropdown'>
                                                                     <em class='icon ni ni-more-h'></em>
                                                                 </a>`
                             dropdownMenuContainer.classList.add('dropdown-menu', 'dropdown-menu-right')

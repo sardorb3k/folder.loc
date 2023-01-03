@@ -20,12 +20,12 @@
                         <div class="card-inner">
                             <span class="preview-title overline-title">Group information</span>
                             <div class="nk-block-des text-soft">
-                                <p>Group name: <span class="badge badge-primary">{{ $exam->group_name }}</span></p>
-                                <p>Level: <span class="badge badge-secondary">{{ strtoupper($exam->level) }}</span>
+                                <p>Group name: <span class="badge bg-primary">{{ $exam->group_name }}</span></p>
+                                <p>Level: <span class="badge bg-primary">{{ strtoupper($exam->level) }}</span>
                                 </p>
-                                <p>Exam type: <span class="badge badge-secondary">{{ strtoupper($exam->exam_type) }}</span>
+                                <p>Exam type: <span class="badge bg-primary">{{ strtoupper($exam->exam_type) }}</span>
                                 </p>
-                                <p>Date: <span class="badge badge-secondary">{{ $exam->created_at }}</span></p>
+                                <p>Date: <span class="badge bg-primary">{{ $exam->created_at }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
             <div class="card-inner-group">
                 <div class="card-inner position-relative card-tools-toggle">
                     <h5 class="title">All Students</h5>
-                    <p>Number of students in the group: <span class="badge badge-secondary">{{ $count }}</span></p>
+                    <p>Number of students in the group: <span class="badge bg-primary">{{ $count }}</span></p>
                 </div><!-- .card-inner -->
                 <div class="card-inner p-10">
                     <table class="datatable-init-export nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false"
@@ -100,10 +100,10 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <span>{{ $student->birthday }}</span>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <button
                                             class="btn btn-{{ ($student->result && $student->result >= 80 && !str_contains(strtolower($exam->level), 'ielts'))
                                             || ($student->result && $student->result >= 6 && str_contains(strtolower($exam->level), 'junior'))
@@ -233,7 +233,7 @@
                 <div class="modal-footer bg-light">
                     <input type="hidden" name="student_id" id="student_id">
                     <input type="hidden" name="exam_id" id="exam_id">
-                    <p>Exam result: <span class="badge badge-secondary" id="result"></span></p>
+                    <p>Exam result: <span class="badge bg-primary" id="result"></span></p>
                     @if (Auth::user()->role == 'superadmin')
                         <span class="sub-text"><button type="button" id="exam-save" class="btn btn-primary">Submit</button></span>
                     @endif

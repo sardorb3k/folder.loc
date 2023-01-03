@@ -166,19 +166,19 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <div class="form-control-wrap">
                                             <input data-affixes-stay="true" value="{{ $payment->amount }}"
                                                 class="form-control payment-amount" disabled>
                                         </div>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <span hidden>{{ $payment->payment_end }}</span>
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="input-daterange input-group" id="dateonemot">
                                                     <input type="text" class="form-control"
-                                                        data-date-format="yyyy-mm-dd" 
+                                                        data-date-format="yyyy-mm-dd"
                                                         value="{{ $payment->payment_start }}"
                                                         disabled/>
                                                     <div class="input-group-addon">TO</div>

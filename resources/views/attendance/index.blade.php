@@ -27,13 +27,13 @@
                 <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Assistant</span>
                 </th>
-                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Days</span>
                 </th>
-                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Time</span>
                 </th>
-                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Today P / A</span>
                 </th>
             </tr>
@@ -50,7 +50,7 @@
                                 {{ $group->name }} </span>
                         </a>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <div class="user-card">
                             <div class="user-card">
                                 <div class="user-info">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <div class="user-card">
                             <div class="user-card">
                                 <div class="user-info">
@@ -72,17 +72,17 @@
                             </div>
                         </div>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <span class="badge text-capitalize">
+                    <td class="nk-tb-col">
+                        <span class="badge bg-primary">
                             {{ $group->days }}
                         </span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <span class="badge">{{ $group->lessonstarttime }}</span>
-                        <span class="badge">{{ $group->lessonendtime }}</span>
+                    <td class="nk-tb-col">
+                        <span class="badge bg-primary">{{ $group->lessonstarttime }}</span>
+                        <span class="badge bg-primary">{{ $group->lessonendtime }}</span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <span class="badge text-capitalize">
+                    <td class="nk-tb-col">
+                        <span class="badge bg-primary">
                             {{ $group->mark_atten }}/{{ $group->mark_notatten }}
                         </span>
                     </td>

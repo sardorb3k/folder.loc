@@ -14,10 +14,10 @@
                         <div class="card-inner">
                             <span class="preview-title overline-title">Group information</span>
                             <div class="nk-block-des text-soft">
-                                <p>Group name: <span class="badge badge-primary">{{ $exam->group_name }}</span></p>
-                                <p>Level: <span class="badge badge-secondary">{{ strtoupper($exam->level) }}</span>
+                                <p>Group name: <span class="badge bg-primary">{{ $exam->group_name }}</span></p>
+                                <p>Level: <span class="badge bg-primary">{{ strtoupper($exam->level) }}</span>
                                 </p>
-                                <p>Exam type: <span class="badge badge-secondary">{{ strtoupper($exam->exam_type) }}</span></p>
+                                <p>Exam type: <span class="badge bg-primary">{{ strtoupper($exam->exam_type) }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
             <div class="card-inner-group">
                 <div class="card-inner position-relative card-tools-toggle">
                     <h5 class="title">All Students</h5>
-                    <p>Number of students in the group: <span class="badge badge-secondary">{{ $count }}</span></p>
+                    <p>Number of students in the group: <span class="badge bg-primary">{{ $count }}</span></p>
                 </div><!-- .card-inner -->
                 <form action="{{ route('exams.update',$exam->id) }}" method="POST">
                     @csrf

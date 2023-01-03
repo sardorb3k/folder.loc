@@ -47,13 +47,13 @@
                 <th class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Students #</span>
                 </th>
-                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Days</span>
                 </th>
-                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Time</span>
                 </th>
-                <th class="nk-tb-col tb-col-lg sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Created Date</span>
                 </th>
                 @if(Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
@@ -73,7 +73,7 @@
                                 {{ $group->name }}</span>
                         </a>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <div class="user-card">
                             <div class="user-card">
                                 <div class="user-info">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <div class="user-card">
                             <div class="user-card">
                                 <div class="user-info">
@@ -95,19 +95,19 @@
                             </div>
                         </div>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <span> {{$group->students_count}} </span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <span class="badge text-capitalize">
+                    <td class="nk-tb-col">
+                        <span class="badge bg-primary">
                             {{ $group->days }}
                         </span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <span class="badge">{{ $group->lessonstarttime }}</span>
                         <span class="badge">{{ $group->lessonendtime }}</span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <span>{{ date_format($group->created_at, 'd-m-Y') }}</span>
                     </td>
                     @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')

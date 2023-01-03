@@ -104,14 +104,14 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td class="nk-tb-col tb-col-lg">
+                                        <td class="nk-tb-col">
                                             <span>
                                                 <span class="badge badge-outline-secondary">{{ $student->attendance_a }}</span>
                                                 /
                                                 <span class="badge badge-outline-secondary">{{ $crm_attendance_day }}</span>
                                             </span>
                                         </td>
-                                        <td class="nk-tb-col tb-col-lg">
+                                        <td class="nk-tb-col">
                                             <div class="form-group">
                                                 <div class="form-control-wrap">
                                                     <input name="attendance[{{ $student->id }}]" type="hidden"

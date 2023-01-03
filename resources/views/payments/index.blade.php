@@ -47,7 +47,7 @@
                     <td class="nk-tb-col nk-tb-col-check sorting_1">
                         <span>{{ $loop->iteration }}</span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <a href="{{ route('payments.show_red', $student->id) }}">
                             <div class="user-card">
                                 <div class="user-card">
@@ -70,8 +70,8 @@
                             <span class="text-danger">Not Assigned</span>
                         @endif
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
-                        <span class="badge text-capitalize">
+                    <td class="nk-tb-col">
+                        <span class="badge bg-primary">
                             {{ date('d M, Y', strtotime($student->payment_end)) }}
                         </span>
                     </td>

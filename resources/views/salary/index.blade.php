@@ -14,7 +14,7 @@
     </div><!-- .nk-block-head -->
     <div class="card card-preview">
         <div class="card-inner">
-            <div class="row gy-4">
+            <div class="gy-4">
                 <form action="{{ route('salary.index_red') }}" method="get" style="display: contents;">
                     @csrf
                     <div class="col-sm-6">
@@ -92,7 +92,7 @@
                                     <td class="nk-tb-col nk-tb-col-check sorting_1">
                                         <span>{{ $loop->iteration }}</span>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <a @if(Auth::user()->getRole() == 'superadmin') href="{{  route('salary.show', ['date' => $date, 'id' => $teacher->id]) }}" @endif>
                                             <span>{{ $teacher->firstname }}  {{ $teacher->lastname }}</span>
                                         </a>
@@ -106,7 +106,7 @@
                                     <td class="nk-tb-col tb-col-mb">
                                         <input type="text" class="payment-amount border-0 bg-transparent text-soft no-focus-outline"  value="{{ $teacher->role == 'teacher' ? $teacher->salary : $teacher->salary_assistent }}" readonly>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg nk-tb-col-tools">
+                                    <td class="nk-tb-col nk-tb-col-tools">
                                         <input value="{{ $teacher->salary_action }}" class="form-control payment-amount"
                                             @disabled(Auth::user()->getRole() != 'superadmin')
                                             name="salary[{{ $teacher->id }}]" autocomplete="off">
