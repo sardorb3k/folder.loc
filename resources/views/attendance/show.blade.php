@@ -21,7 +21,7 @@
     </div><!-- .nk-block-head -->
     <div class="card card-preview">
         <div class="card-inner">
-            <div class="row gy-4">
+            <div class="gy-4">
                 <form action="{{ route('attendance.show_red', $id) }}" method="get" style="display: contents;">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -106,9 +106,9 @@
                                         </td>
                                         <td class="nk-tb-col">
                                             <span>
-                                                <span class="badge badge-outline-secondary">{{ $student->attendance_a }}</span>
+                                                <span class="badge bg-primary">{{ $student->attendance_a }}</span>
                                                 /
-                                                <span class="badge badge-outline-secondary">{{ $crm_attendance_day }}</span>
+                                                <span class="badge bg-primary">{{ $crm_attendance_day }}</span>
                                             </span>
                                         </td>
                                         <td class="nk-tb-col">

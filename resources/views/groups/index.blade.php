@@ -104,8 +104,8 @@
                         </span>
                     </td>
                     <td class="nk-tb-col">
-                        <span class="badge">{{ $group->lessonstarttime }}</span>
-                        <span class="badge">{{ $group->lessonendtime }}</span>
+                        <span class="badge bg-primary">{{ $group->lessonstarttime }}</span>
+                        <span class="badge bg-primary">{{ $group->lessonendtime }}</span>
                     </td>
                     <td class="nk-tb-col">
                         <span>{{ date_format($group->created_at, 'd-m-Y') }}</span>
