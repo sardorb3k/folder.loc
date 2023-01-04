@@ -11,7 +11,7 @@
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
-    
+
     <div class="nk-block">
         <div class="row g-gs">
             <div class="col-lg-6 col-xxl-6">
@@ -57,6 +57,9 @@
                                 <canvas class="analytics-line-large" id="analyticOvData"></canvas>
                             </div>
                             <div class="chart-label-group ms-5">
+                                <div class="chart-label">01 Jan, 2020</div>
+                                <div class="chart-label">01 Jan, 2020</div>
+                                <div class="chart-label">01 Jan, 2020</div>
                                 <div class="chart-label">01 Jan, 2020</div>
                                 <div class="chart-label d-none d-sm-block">15 Jan, 2020</div>
                                 <div class="chart-label">30 Jan, 2020</div>
@@ -105,7 +108,8 @@
                                 @foreach ($student_hear as $item)
                                     <div class="traffic-channel-data">
                                         <div class="title"><span class="dot dot-lg sq" data-bg="#9cabff"
-                                                style="background: rgb(156, 171, 255);"></span><span style="text-transform:capitalize;">{{ $item->title }}</span>
+                                                style="background: rgb(156, 171, 255);"></span><span
+                                                style="text-transform:capitalize;">{{ $item->title }}</span>
                                         </div>
                                         <div class="amount">{{ $item->result }}</div>
                                     </div>
@@ -125,16 +129,20 @@
                         </div>
                     </div>
                     <div class="card-inner">
-                        <table class="datatable-init nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                        <table class="datatable-init nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false"
+                            id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                             <thead>
                                 <tr class="nk-tb-item nk-tb-head">
-                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                        rowspan="1" colspan="1">
                                         <span class="sub-text">#</span>
                                     </th>
-                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                        rowspan="1" colspan="1">
                                         <span class="sub-text">Student</span>
                                     </th>
-                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0"
+                                        aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                         <span class="sub-text">Missed days</span>
                                     </th>
                                 </tr>
@@ -168,16 +176,20 @@
                         </div>
                     </div>
                     <div class="card-inner">
-                        <table class="datatable-init nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                        <table class="datatable-init nk-tb-list nk-tb-ulist no-footer" data-auto-responsive="false"
+                            id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                             <thead>
                                 <tr class="nk-tb-item nk-tb-head">
-                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                        rowspan="1" colspan="1">
                                         <span class="sub-text">#</span>
                                     </th>
-                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                        rowspan="1" colspan="1">
                                         <span class="sub-text">Student</span>
                                     </th>
-                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                    <th class="nk-tb-col tb-col-mb sorting" tabindex="0"
+                                        aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                         <span class="sub-text">Payment Due</span>
                                     </th>
                                 </tr>
@@ -225,6 +237,25 @@
                         {{ $item_student->result }},
                     @endforeach
                 ]
+            }]
+        };
+
+        var analyticOvData = {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            dataUnit: 'People',
+            lineTension: .1,
+            datasets: [{
+                label: "Current Month",
+                color: "#c4cefe",
+                dash: [5],
+                background: "transparent",
+                data: [3910, 4420, 4110, 5180, 4400, 5170, 6460, 8830, 5290, 5430, 4690, 4350]
+            }, {
+                label: "Current Month",
+                color: "#798bff",
+                dash: 0,
+                background: NioApp.hexRGB('#798bff', .15),
+                data: [4110, 4220, 4810, 5480, 4600, 5670, 6660, 4830, 5590, 5730, 4790, 4950]
             }]
         };
     </script>

@@ -102,8 +102,28 @@ class DashboardRepository implements DashboardRepositoryInterface
                 'user_id' => $user_id
             ]
         );
-        // dd($audience_student_count);
-        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count', 'payments'));
+        $groups = DB::select("SELECT
+                    DISTINCT users.id as userId,
+                    CONCAT(
+                        users.firstname,
+                        ' ',
+                        users.lastname
+                    ) AS fullname,
+                    pp.payment_end
+                FROM
+                    `payments` as pp
+                LEFT JOIN users ON users.id = pp.student_id
+                WHERE
+                    #pp.payment_end >= $date_all and
+                    users.status = 'active' and
+                    pp.payment_end = (select max(p.payment_end) from payments as p where users.id = p.student_id)
+                ORDER BY
+                    pp.payment_end ASC
+                LIMIT 30;");
+
+        $audience = DB::select("SELECT CAST( MONTHNAME(created_at) AS CHAR(3) ) AS 'month', COUNT(*) FROM users WHERE created_at BETWEEN '2022/01/01' AND '2023/12/31' GROUP BY MONTH(created_at)");
+        dd($audience);
+        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count', 'payments','audience'));
     }
 
     // studentDashboard
@@ -191,8 +211,8 @@ class DashboardRepository implements DashboardRepositoryInterface
         payments.payment_date,
         groups.name,
         (
-            SELECT group_level.name 
-            FROM group_level 
+            SELECT group_level.name
+            FROM group_level
             WHERE group_level.id = groups.level
         ) as group_level
         FROM

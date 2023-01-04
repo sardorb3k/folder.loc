@@ -70,7 +70,7 @@
                     <td class="nk-tb-col nk-tb-col-check sorting_1">
                         <span>{{ $loop->iteration }}</span>
                     </td>
-                    <td class="nk-tb-col tb-col-mb">
+                    <td class="nk-tb-col">
                         <div class="user-card">
                             <a href="{{ route('students.show', $student->id) }}">
                                 <div class="user-card">
@@ -87,10 +87,10 @@
                             </a>
                         </div>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <span>{{ $student->birthday }}</span>
                     </td>
-                    <td class="nk-tb-col tb-col-lg">
+                    <td class="nk-tb-col">
                         <span class="tb-status text-{{ $student->status == 'active' ? 'success' : 'info' }}">
                             @if ($student->status == 'active')
                                 Active
@@ -100,7 +100,7 @@
                         </span>
                     </td>
                     @if (Auth::user()->role != 'teacher' && Auth::user()->role != 'assistant')
-                        <td class="nk-tb-col tb-col-lg">
+                        <td class="nk-tb-col">
                             <ul class="nk-tb-actions gx-1">
                                 <li>
                                     <div class="drodown">

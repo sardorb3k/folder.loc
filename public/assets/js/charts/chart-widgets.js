@@ -132,24 +132,25 @@
   NioApp.coms.docReady.push(function () {
     lineSalesOverview();
   });
+
   var analyticOvData = {
-    labels: ["01 Jan", "02 Jan", "03 Jan", "04 Jan", "05 Jan", "06 Jan", "07 Jan", "08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan", "13 Jan", "14 Jan", "15 Jan", "16 Jan", "17 Jan", "18 Jan", "19 Jan", "20 Jan", "21 Jan", "22 Jan", "23 Jan", "24 Jan", "25 Jan", "26 Jan", "27 Jan", "28 Jan", "29 Jan", "30 Jan"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     dataUnit: 'People',
     lineTension: .1,
     datasets: [{
-      label: "Current Month",
-      color: "#c4cefe",
-      dash: [5],
-      background: "transparent",
-      data: [3910, 4420, 4110, 5180, 4400, 5170, 6460, 8830, 5290, 5430, 4690, 4350, 4600, 5200, 5650, 6850, 6950, 4150, 4300, 6000, 6800, 2250, 6900, 7950, 6900, 4200, 6250, 7650, 8950, 9750]
+        label: "Current Month",
+        color: "#c4cefe",
+        dash: [5],
+        background: "transparent",
+        data: [3910, 4420, 4110, 5180, 4400, 5170, 6460, 8830, 5290, 5430, 4690, 4350]
     }, {
-      label: "Current Month",
-      color: "#798bff",
-      dash: 0,
-      background: NioApp.hexRGB('#798bff', .15),
-      data: [4110, 4220, 4810, 5480, 4600, 5670, 6660, 4830, 5590, 5730, 4790, 4950, 5100, 5800, 5950, 5850, 5950, 4450, 4900, 8000, 7200, 7250, 7900, 8950, 6300, 7200, 7250, 7650, 6950, 4750]
+        label: "Current Month",
+        color: "#798bff",
+        dash: 0,
+        background: NioApp.hexRGB('#798bff', .15),
+        data: [4110, 4220, 4810, 5480, 4600, 5670, 6660, 4830, 5590, 5730, 4790, 4950]
     }]
-  };
+};
 
   function analyticsLineLarge(selector, set_data) {
     var $selector = selector ? $(selector) : $('.analytics-line-large');
