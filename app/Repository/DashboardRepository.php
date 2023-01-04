@@ -121,9 +121,9 @@ class DashboardRepository implements DashboardRepositoryInterface
                     pp.payment_end ASC
                 LIMIT 30;");
 
-        $audience = DB::select("SELECT CAST( MONTHNAME(created_at) AS CHAR(3) ) AS 'month', COUNT(*) FROM users WHERE created_at BETWEEN '2022/01/01' AND '2023/12/31' GROUP BY MONTH(created_at)");
-        dd($audience);
-        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count', 'payments','audience'));
+        // $audience = DB::select("SELECT CAST( MONTHNAME(created_at) AS CHAR(3) ) AS 'month', COUNT(*) FROM users WHERE created_at BETWEEN '2022/01/01' AND '2023/12/31' GROUP BY MONTH(created_at)");
+        // dd($audience);
+        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count', 'payments'));
     }
 
     // studentDashboard
