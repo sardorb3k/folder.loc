@@ -132,6 +132,7 @@
         }
     </style>
     <script>
+
         const labelSelect = $("#labels").selectize({
             delimiter: ",",
             persist: true,
