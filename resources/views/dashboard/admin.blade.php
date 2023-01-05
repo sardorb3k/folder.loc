@@ -47,46 +47,48 @@
     </div><!-- .nk-block-head -->
     <div class="nk-block">
         <div class="row g-gs">
-            <div class="col-xxl-6">
-                <div class="row g-gs">
-                    <div class="col-lg-6 col-xxl-12">
-                        <div class="card card-bordered">
-                            <div class="card-inner">
-                                <div class="card-title-group align-start mb-2">
-                                    <div class="card-title">
-                                        <h6 class="title">Sales Revenue</h6>
-                                        <p>amount of the current and next month.</p>
+            @if (in_array(Auth::user()->id, [1, 2, 93]))
+                <div class="col-xxl-6">
+                    <div class="row g-gs">
+                        <div class="col-lg-6 col-xxl-12">
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="card-title-group align-start mb-2">
+                                        <div class="card-title">
+                                            <h6 class="title">Sales Revenue</h6>
+                                            <p>amount of the current and next month.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="align-end gy-3 gx-5 flex-wrap flex-md-nowrap flex-lg-wrap flex-xxl-nowrap">
-                                    <div class="nk-sale-data-group flex-md-nowrap g-4">
-                                        <div class="nk-sale-data">
-                                            <span class="amount">{{ number_format($amount->amount) }} <span
-                                                    class="change down @if ($amount->pres < 0) text-danger
+                                    <div class="align-end gy-3 gx-5 flex-wrap flex-md-nowrap flex-lg-wrap flex-xxl-nowrap">
+                                        <div class="nk-sale-data-group flex-md-nowrap g-4">
+                                            <div class="nk-sale-data">
+                                                <span class="amount">{{ number_format($amount->amount) }} <span
+                                                        class="change down @if ($amount->pres < 0) text-danger
                                             @else
                                             text-success @endif"><em
-                                                        class="icon ni @if ($amount->pres < 0) ni-arrow-long-down
+                                                            class="icon ni @if ($amount->pres < 0) ni-arrow-long-down
                                                     @else
                                                     ni-arrow-long-up @endif"></em>{{ $amount->pres }}%</span></span>
-                                            <span class="sub-title">Amount</span>
-                                        </div>
-                                        <div class="nk-sale-data">
-                                            <span class="amount">{{ number_format($user->count) }}<span
-                                                    class="change up @if ($user->pres < 0) text-danger
+                                                <span class="sub-title">Amount</span>
+                                            </div>
+                                            <div class="nk-sale-data">
+                                                <span class="amount">{{ number_format($user->count) }}<span
+                                                        class="change up @if ($user->pres < 0) text-danger
                                             @else
                                             text-success @endif"><em
-                                                        class="icon ni @if ($user->pres < 0) ni-arrow-long-down
+                                                            class="icon ni @if ($user->pres < 0) ni-arrow-long-down
                                                     @else
                                                     ni-arrow-long-up @endif"></em>{{ $user->pres }}%</span></span>
-                                            <span class="sub-title">Users</span>
+                                                <span class="sub-title">Users</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- .col -->
-                </div><!-- .row -->
-            </div><!-- .col -->
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+                </div><!-- .col -->
+            @endif
             <div class="col-md-6 col-xxl-4">
                 <div class="card card-bordered card-full">
                     <div class="card-inner-group">
