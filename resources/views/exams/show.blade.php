@@ -62,15 +62,15 @@
                                     rowspan="1" colspan="1">
                                     <span class="sub-text">#</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1"
                                     rowspan="1" colspan="1">
                                     <span class="sub-text">Student</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1"
                                     rowspan="1" colspan="1">
                                     <span class="sub-text">Birthday</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1"
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1"
                                     rowspan="1" colspan="1">
                                     <span class="sub-text">Result</span>
                                 </th>
@@ -82,7 +82,7 @@
                                     <td class="nk-tb-col nk-tb-col-check sorting_1">
                                         <span>{{ $loop->iteration }}</span>
                                     </td>
-                                    <td class="nk-tb-col tb-col-mb">
+                                    <td class="nk-tb-col">
                                         <div class="user-card">
                                             <a href="{{ route('students.show', $student->id) }}">
                                                 <div class="user-card">

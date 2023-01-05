@@ -39,7 +39,7 @@
     </div><!-- .nk-block-head -->
     <div class="card card-preview">
         <div class="card-inner">
-            <div class="row gy-4">
+            <div class="gy-4">
                 <form action="{{ route('payments.show_red', $studentId) }}" method="get" style="display: contents;">
                     @csrf
                     <div class="col-sm-6">
@@ -52,7 +52,6 @@
                                 <input type="text" id="mesVigencia" class="form-control" name="datetime" onkeydown="return false"
                                     value="{{ $date }}" data-date-format="yyyy-mm" autocomplete="off" required>
                             </div>
-                            <div class="form-note">Date format <code>mm/yyyy</code></div>
                         </div>
                     </div>
 

@@ -42,13 +42,13 @@
                                 <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">#</span>
                                 </th>
-                                <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Group</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Days</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Time</span>
                                 </th>
                             </tr>
@@ -59,15 +59,15 @@
                                     <td class="nk-tb-col nk-tb-col-check sorting_1">
                                         <span>{{ $loop->iteration }}</span>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <a href="{{ route('salary.show_student', ['date'=> $date, 'id'=>$id, 'group_id'=> $group->id]) }}">
                                             <span class="text-capitalize">{{ $group->level }} {{ $group->name }}</span>
                                         </a>
                                     </td>
-                                    <td class="nk-tb-col tb-col-mb">
+                                    <td class="nk-tb-col">
                                         <span class="badge">{{ $group->lessonstarttime }}</span>
                                     </td>
-                                    <td class="nk-tb-col tb-col-mb">
+                                    <td class="nk-tb-col">
                                         <span class="badge text-capitalize">{{ $group->days }}</span>
                                     </td>
                                 </tr>

@@ -37,16 +37,16 @@
                                 <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">#</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Student</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Attendance</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Payment</span>
                                 </th>
-                                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                                     <span class="sub-text">Amount</span>
                                 </th>
                             </tr>
@@ -57,7 +57,7 @@
                                     <td class="nk-tb-col nk-tb-col-check sorting_1">
                                         <span>{{ $loop->iteration }}</span>
                                     </td>
-                                    <td class="nk-tb-col tb-col-mb">
+                                    <td class="nk-tb-col">
                                         <div class="user-card">
                                             <a href="{{ route('students.show', $student->id) }}">
                                                 <div class="user-card">
@@ -74,17 +74,17 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <span class="badge badge-outline-secondary">{{ $student->att_ap }}</span> /
                                         <span class="badge badge-outline-secondary">{{ $crm_attendance_day }}</span>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="payment"
                                                 value="{{ number_format($student->payment) }}" disabled>
                                         </div>
                                     </td>
-                                    <td class="nk-tb-col tb-col-lg">
+                                    <td class="nk-tb-col">
                                         <div class="form-control-wrap">
                                             <input type="text" name="amount[{{ $student->id }}]" id="amount"
                                                 value="{{ $student->amount }}" class="form-control payment-amount" autocomplete="off">
