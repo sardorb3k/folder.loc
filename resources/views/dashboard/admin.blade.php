@@ -18,9 +18,9 @@
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
                             <li>
-                                <div class="dropdown" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="come soon">
-                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"
+                                <div class="dropdown" data-bs-toggle="tooltip" data-bs-placement="left" title="come soon">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Tooltip on top"
                                         class="dropdown-toggle btn btn-white btn-dim btn-outline-light disabled"
                                         data-bs-toggle="dropdown" disabled><em
                                             class="d-none d-sm-inline icon ni ni-calender-date"></em><span><span
@@ -35,8 +35,9 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="nk-block-tools-opt "  data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="come soon"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top" class="btn btn-primary disabled" disabled><em
+                            <li class="nk-block-tools-opt " data-bs-toggle="tooltip" data-bs-placement="left"
+                                title="come soon"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Tooltip on top" class="btn btn-primary disabled" disabled><em
                                         class="icon ni ni-reports"></em><span>Reports</span></a></li>
                         </ul>
                     </div>
@@ -151,12 +152,13 @@
                                             @if ($task->board_id == 6)
                                                 <em class="icon ni ni-check-circle"></em>
                                             @endif
-                                            <div class="timeline-data">
-                                                <h6 class="timeline-title">{{ $task->name }}</h6>
-                                                <div class="timeline-des">
-                                                    <span class="time">{{ $task->deadline_time }}</span>
-                                                </div>
+                                        </div>
+                                        <div class="timeline-data">
+                                            <h6 class="timeline-title">{{ $task->name }}</h6>
+                                            <div class="timeline-des">
+                                                <span class="time">{{ $task->deadline_time }}</span>
                                             </div>
+                                        </div>
                                     </li>
 
                                 @empty
