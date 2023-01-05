@@ -1,6 +1,7 @@
 @section('title', 'Dashboard')
 @extends('layouts.app')
 @section('content')
+
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
@@ -9,8 +10,167 @@
                     <p>{{ __('dashboard.welcome') }}, {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</p>
                 </div>
             </div><!-- .nk-block-head-content -->
+            <div class="nk-block-head-content">
+
+                <div class="toggle-wrap nk-block-tools-toggle">
+                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
+                            class="icon ni ni-more-v"></em></a>
+                    <div class="toggle-expand-content" data-content="pageMenu">
+                        <ul class="nk-block-tools g-3">
+                            <li>
+                                <div class="dropdown" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="come soon">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"
+                                        class="dropdown-toggle btn btn-white btn-dim btn-outline-light disabled"
+                                        data-bs-toggle="dropdown" disabled><em
+                                            class="d-none d-sm-inline icon ni ni-calender-date"></em><span><span
+                                                class="d-none d-md-inline">Last</span> 30 Days</span><em
+                                            class="dd-indc icon ni ni-chevron-right"></em></a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <ul class="link-list-opt no-bdr">
+                                            <li><a href="#"><span>Last 30 Days</span></a></li>
+                                            <li><a href="#"><span>Last 6 Months</span></a></li>
+                                            <li><a href="#"><span>Last 1 Years</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nk-block-tools-opt "  data-bs-toggle="tooltip"
+                            data-bs-placement="left" title="come soon"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top" class="btn btn-primary disabled" disabled><em
+                                        class="icon ni ni-reports"></em><span>Reports</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
+    <div class="nk-block">
+        <div class="row g-gs">
+            <div class="col-xxl-6">
+                <div class="row g-gs">
+                    <div class="col-lg-6 col-xxl-12">
+                        <div class="card card-bordered">
+                            <div class="card-inner">
+                                <div class="card-title-group align-start mb-2">
+                                    <div class="card-title">
+                                        <h6 class="title">Sales Revenue</h6>
+                                        <p>amount of the current and next month.</p>
+                                    </div>
+                                </div>
+                                <div class="align-end gy-3 gx-5 flex-wrap flex-md-nowrap flex-lg-wrap flex-xxl-nowrap">
+                                    <div class="nk-sale-data-group flex-md-nowrap g-4">
+                                        <div class="nk-sale-data">
+                                            <span class="amount">{{ number_format($amount->amount) }} <span
+                                                    class="change down @if ($amount->pres < 0) text-danger
+                                            @else
+                                            text-success @endif"><em
+                                                        class="icon ni @if ($amount->pres < 0) ni-arrow-long-down
+                                                    @else
+                                                    ni-arrow-long-up @endif"></em>{{ $amount->pres }}%</span></span>
+                                            <span class="sub-title">Amount</span>
+                                        </div>
+                                        <div class="nk-sale-data">
+                                            <span class="amount">{{ number_format($user->count) }}<span
+                                                    class="change up @if ($user->pres < 0) text-danger
+                                            @else
+                                            text-success @endif"><em
+                                                        class="icon ni @if ($user->pres < 0) ni-arrow-long-down
+                                                    @else
+                                                    ni-arrow-long-up @endif"></em>{{ $user->pres }}%</span></span>
+                                            <span class="sub-title">Users</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .col -->
+            <div class="col-md-6 col-xxl-4">
+                <div class="card card-bordered card-full">
+                    <div class="card-inner-group">
+                        <div class="card-inner">
+                            <div class="card-title-group">
+                                <div class="card-title">
+                                    <h6 class="title">Student birthdate</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        @forelse ($birthdays as $birthday)
+                            <div class="card-inner card-inner-md">
+                                <div class="user-card">
+                                    <div class="user-avatar bg-primary-dim">
+                                        <span>AB</span>
+                                    </div>
+                                    <div class="user-info">
+                                        <span
+                                            class="lead-text">{{ $birthday->lastname . ' ' . $birthday->firstname }}</span>
+                                        <span class="sub-text">{{ $birthday->phone }}</span>
+                                    </div>
+                                    <div class="user-action">
+                                        <span class="lead-text">{{ $birthday->birthday }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        @empty
+                            <div class="card-inner card-inner-md">
+                                ...
+                            </div>
+                        @endforelse
+                    </div>
+                </div><!-- .card -->
+            </div><!-- .col -->
+            <div class="col-lg-6 col-xxl-4">
+                <div class="card card-bordered h-100">
+                    <div class="card-inner border-bottom">
+                        <div class="card-title-group">
+                            <div class="card-title">
+                                <h6 class="title">Tasks</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-inner">
+                        <div class="timeline">
+                            <ul class="timeline-list">
+
+                                @forelse ($tasks as $task)
+                                    <li class="timeline-item">
+                                        <div class="timeline-status bg-primary is-outline"></div>
+                                        <div class="timeline-date">{{ $task->deadline_name }}
+                                            @if ($task->board_id == 1)
+                                                <em class="icon ni ni-blank-alt"></em>
+                                            @endif
+                                            @if ($task->board_id == 2)
+                                                <em class="icon ni ni-loader"></em>
+                                            @endif
+                                            @if ($task->board_id == 3)
+                                                <em class="icon ni ni-circle"></em>
+                                            @endif
+                                            @if ($task->board_id == 6)
+                                                <em class="icon ni ni-check-circle"></em>
+                                            @endif
+                                            <div class="timeline-data">
+                                                <h6 class="timeline-title">{{ $task->name }}</h6>
+                                                <div class="timeline-des">
+                                                    <span class="time">{{ $task->deadline_time }}</span>
+                                                </div>
+                                            </div>
+                                    </li>
+
+                                @empty
+                                    <li class="timeline-item">
+                                        <p>No....</p>
+                                    </li>
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- .card -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .nk-block -->
 
     <div class="nk-block">
         <div class="row g-gs">

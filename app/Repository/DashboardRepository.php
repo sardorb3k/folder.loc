@@ -120,10 +120,14 @@ class DashboardRepository implements DashboardRepositoryInterface
                 ORDER BY
                     pp.payment_end ASC
                 LIMIT 30;");
+        $birthdays = DB::select("SELECT * FROM `users` WHERE MONTH(birthday) = Month(now()) and DAY(birthday) >= DAY(now()) ORDER BY DAY(`users`.`birthday`) ASC LIMIT 5");
+        $tasks = DB::select("SELECT *, CONCAT( DAY(deadline), ' ', CAST( MONTHNAME(deadline) AS CHAR(3) ) ) AS 'deadline_name', time(deadline) as deadline_time FROM `task` WHERE MONTH(`deadline`) = MONTH(NOW()) AND DAY(`deadline`) >= DAY(NOW()) AND users REGEXP 2 ORDER BY DAY(`deadline`) ASC");
+        $amount = collect(\DB::select("SELECT SUM(amount) as amount, ( ROUND( ( SUM(amount) -( SELECT SUM(amount) FROM `payments` WHERE YEAR(`payment_date`) = 2022 AND MONTH(`payment_date`) = 10 ) ) /( SELECT SUM(amount) FROM `payments` WHERE YEAR(`payment_date`) = 2022 AND MONTH(`payment_date`) = 10 ) * 100 ) ) AS pres FROM `payments` WHERE YEAR(`payment_date`) = 2022 AND MONTH(`payment_date`) = 11"))->first();
+        $user = collect(\DB::select("SELECT count(id) as count, ( ROUND( ( count(id) -( SELECT count(id) FROM `users` WHERE YEAR(`created_at`) = 2022 AND MONTH(`created_at`) = 10 ) ) /( SELECT count(id) FROM `users` WHERE YEAR(`created_at`) = 2022 AND MONTH(`created_at`) = 10 ) * 100 ) ) AS pres FROM `users` WHERE YEAR(`created_at`) = 2022 AND MONTH(`created_at`) = 11 and `status` = 'active'"))->first();
 
         // $audience = DB::select("SELECT CAST( MONTHNAME(created_at) AS CHAR(3) ) AS 'month', COUNT(*) FROM users WHERE created_at BETWEEN '2022/01/01' AND '2023/12/31' GROUP BY MONTH(created_at)");
-        // dd($audience);
-        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count', 'payments'));
+        // dd($amount->amount);
+        return view('dashboard.admin', compact('attendance_n', 'groups', 'student_hear', 'audience_student_count', 'audience_teacher_count', 'audience_group_count', 'payments', 'birthdays', 'tasks', 'amount', 'user'));
     }
 
     // studentDashboard
