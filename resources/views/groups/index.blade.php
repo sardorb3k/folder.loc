@@ -47,9 +47,9 @@
                 <th class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Students #</span>
                 </th>
-                <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
+                {{-- <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Days</span>
-                </th>
+                </th> --}}
                 <th class="nk-tb-col tb-col-mb sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1">
                     <span class="sub-text">Time</span>
                 </th>
@@ -98,11 +98,11 @@
                     <td class="nk-tb-col">
                         <span> {{$group->students_count}} </span>
                     </td>
-                    <td class="nk-tb-col">
+                    {{-- <td class="nk-tb-col">
                         <span class="badge bg-primary">
                             {{ $group->days }}
                         </span>
-                    </td>
+                    </td> --}}
                     <td class="nk-tb-col">
                         <span class="badge bg-primary">{{ $group->lessonstarttime }}</span>
                         <span class="badge bg-primary">{{ $group->lessonendtime }}</span>
