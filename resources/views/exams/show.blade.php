@@ -62,16 +62,16 @@
                                     rowspan="1" colspan="1">
                                     <span class="sub-text">#</span>
                                 </th>
-                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1"
-                                    rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
+                                    colspan="1">
                                     <span class="sub-text">Student</span>
                                 </th>
-                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1"
-                                    rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
+                                    colspan="1">
                                     <span class="sub-text">Birthday</span>
                                 </th>
-                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1"
-                                    rowspan="1" colspan="1">
+                                <th class="nk-tb-col" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1"
+                                    colspan="1">
                                     <span class="sub-text">Result</span>
                                 </th>
                             </tr>
@@ -105,10 +105,11 @@
                                     </td>
                                     <td class="nk-tb-col">
                                         <button
-                                            class="btn btn-{{ ($student->result && $student->result >= 80 && !str_contains(strtolower($exam->level), 'ielts'))
-                                            || ($student->result && $student->result >= 6 && str_contains(strtolower($exam->level), 'junior'))
-                                            || ($student->result && $student->result >= 7 && str_contains(strtolower($exam->level), 'senior'))
-                                            ? 'success' : 'danger' }}"
+                                            class="btn btn-{{ ($student->result && $student->result >= 80 && !str_contains(strtolower($exam->level), 'ielts')) ||
+                                            ($student->result && $student->result >= 6 && str_contains(strtolower($exam->level), 'junior')) ||
+                                            ($student->result && $student->result >= 7 && str_contains(strtolower($exam->level), 'senior'))
+                                                ? 'success'
+                                                : 'danger' }}"
                                             id="edit-button" value="{{ $student->id }}-{{ $exam->id }}"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
@@ -132,14 +133,15 @@
                     <h5 class="modal-title">Exam</h5>
                 </div>
                 <div class="modal-body">
-                    @if(str_contains(strtolower($exam->level), 'ielts'))
+                    @if (str_contains(strtolower($exam->level), 'ielts'))
                         <div class="row gy-4" id="exam-data">
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="form-label" for="listening">Listening</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" name="exam[listening]" class="form-control ielts-exam-result-input"
-                                            id="listening" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
+                                        <input type="text" name="exam[listening]"
+                                            class="form-control ielts-exam-result-input" id="listening"
+                                            @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -147,8 +149,9 @@
                                 <div class="form-group">
                                     <label class="form-label" for="reading">Reading</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" name="exam[reading]" class="form-control ielts-exam-result-input"
-                                            id="reading" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[reading]') }}">
+                                        <input type="text" name="exam[reading]"
+                                            class="form-control ielts-exam-result-input" id="reading"
+                                            @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[reading]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -156,8 +159,9 @@
                                 <div class="form-group">
                                     <label class="form-label" for="writing">Writing</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" name="exam[writing]" class="form-control ielts-exam-result-input"
-                                            id="writing" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[writing]') }}">
+                                        <input type="text" name="exam[writing]"
+                                            class="form-control ielts-exam-result-input" id="writing"
+                                            @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[writing]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -165,8 +169,9 @@
                                 <div class="form-group">
                                     <label class="form-label" for="speaking">Speaking</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" name="exam[speaking]" class="form-control ielts-exam-result-input"
-                                            id="speaking" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
+                                        <input type="text" name="exam[speaking]"
+                                            class="form-control ielts-exam-result-input" id="speaking"
+                                            @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -177,8 +182,9 @@
                                 <div class="form-group">
                                     <label class="form-label" for="listening">Listening</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" name="exam[listening]" class="form-control exam-result-input"
-                                            id="listening" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
+                                        <input type="text" name="exam[listening]"
+                                            class="form-control exam-result-input" id="listening"
+                                            @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[listening]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +193,8 @@
                                     <label class="form-label" for="grammar">Grammar</label>
                                     <div class="form-control-wrap">
                                         <input type="text" name="exam[grammar]" class="form-control exam-result-input"
-                                            id="grammar" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[grammar]') }}">
+                                            id="grammar" @disabled(Auth::user()->getRole() != 'superadmin')
+                                            value="{{ old('exam[grammar]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +203,8 @@
                                     <label class="form-label" for="reading">Reading</label>
                                     <div class="form-control-wrap">
                                         <input type="text" name="exam[reading]" class="form-control exam-result-input"
-                                            id="reading" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[reading]') }}">
+                                            id="reading" @disabled(Auth::user()->getRole() != 'superadmin')
+                                            value="{{ old('exam[reading]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +213,8 @@
                                     <label class="form-label" for="writing">Writing</label>
                                     <div class="form-control-wrap">
                                         <input type="text" name="exam[writing]" class="form-control exam-result-input"
-                                            id="writing" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[writing]') }}">
+                                            id="writing" @disabled(Auth::user()->getRole() != 'superadmin')
+                                            value="{{ old('exam[writing]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -213,8 +222,9 @@
                                 <div class="form-group">
                                     <label class="form-label" for="speaking">Speaking</label>
                                     <div class="form-control-wrap">
-                                        <input type="text" name="exam[speaking]" class="form-control exam-result-input"
-                                            id="speaking" @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
+                                        <input type="text" name="exam[speaking]"
+                                            class="form-control exam-result-input" id="speaking"
+                                            @disabled(Auth::user()->getRole() != 'superadmin') value="{{ old('exam[speaking]') }}">
                                     </div>
                                 </div>
                             </div>
@@ -233,9 +243,11 @@
                 <div class="modal-footer bg-light">
                     <input type="hidden" name="student_id" id="student_id">
                     <input type="hidden" name="exam_id" id="exam_id">
+                    <span class="badge bg-primary" id="auther"></span>
                     <p>Exam result: <span class="badge bg-primary" id="result"></span></p>
                     @if (Auth::user()->role == 'superadmin')
-                        <span class="sub-text"><button type="button" id="exam-save" class="btn btn-primary">Submit</button></span>
+                        <span class="sub-text"><button type="button" id="exam-save"
+                                class="btn btn-primary">Submit</button></span>
                     @endif
                 </div>
             </div>
@@ -243,7 +255,7 @@
     </div>
 
     <script>
-        if($('.exam-result-input').length > 0) {
+        if ($('.exam-result-input').length > 0) {
             new AutoNumeric.multiple('.exam-result-input', {
                 decimalPlaces: 0,
                 minimumValue: 0,
@@ -252,7 +264,7 @@
             });
         }
 
-        if($('.ielts-exam-result-input').length > 0) {
+        if ($('.ielts-exam-result-input').length > 0) {
             new AutoNumeric.multiple('.ielts-exam-result-input', {
                 decimalPlaces: 1,
                 minimumValue: 0,
@@ -279,6 +291,11 @@
                         $('#team').val(data.team);
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
+                        if (student_id = 3) {
+                            $('#auther').val(
+                                "Tizim yaratuvchisiga qo'yib o'tirish shart emas, Tizimni o'zi qo'ya oladi"
+                                );
+                        }
                     } else {
                         $('#listening').val(0);
                         $('#reading').val(0);
@@ -288,8 +305,10 @@
                         $('#team').val(0);
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
+                        $('#auther').val("");
                     }
-                    $('.exam-result-input').length > 0 ? $('#result').text(resultExam()) : $('#result').text(resultIELTSExam());
+                    $('.exam-result-input').length > 0 ? $('#result').text(resultExam()) : $('#result')
+                        .text(resultIELTSExam());
                 }
             });
         });
@@ -346,17 +365,17 @@
             var sum = 0;
             $('.ielts-exam-result-input').each(function() {
                 res = parseFloat($(this).val());
-                if(!isNaN(res)) {
+                if (!isNaN(res)) {
                     sum += res;
                 }
             });
             var result = ((sum / 4).toFixed(2)).toString().split('.');
             var decimal = result[1];
-            if((decimal >= 25 && decimal <= 50) || (decimal > 50 && decimal < 75)) {
+            if ((decimal >= 25 && decimal <= 50) || (decimal > 50 && decimal < 75)) {
                 return result[0] + '.5';
-            } else if(decimal < 25) {
+            } else if (decimal < 25) {
                 return result[0] + '.0';
-            } else if(decimal >= 75) {
+            } else if (decimal >= 75) {
                 return parseInt(result[0]) + 1 + '.0';
             }
         }
@@ -366,7 +385,7 @@
             var sum = 0;
             $('.exam-result-input').each(function() {
                 res = parseInt($(this).val());
-                if(!isNaN(res)) {
+                if (!isNaN(res)) {
                     if (this.id != 'team') {
                         sum += res;
                     }
