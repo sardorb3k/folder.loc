@@ -111,7 +111,7 @@
                                             ? 'success' : 'danger' }}"
                                             id="edit-button" value="{{ $student->id }}-{{ $exam->id }}"
                                             data-bs-toggle="modal"
-                                            data-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
+                                            data-bs-target="#exam-anw">{{ $student->result ? $student->result : '0' }}</button>
                                     </td>
                                 </tr>
                             @endforeach

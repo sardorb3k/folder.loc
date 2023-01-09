@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mobile\AuthController;
+use Telegram\Bot\Laravel\Facades\Telegram;
+// use Telegram\Bot\Keyboard\Keyboard;
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +34,7 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
+// Route::get('/bot/getupdates', function () {
+//     $updates = Telegram::getUpdates();
+//     return (json_encode($updates));
+// });
