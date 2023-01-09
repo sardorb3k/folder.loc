@@ -125,7 +125,7 @@
     <div class="modal fade" tabindex="-1" id="exam-anw">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <em class="icon ni ni-cross"></em>
                 </a>
                 <div class="modal-header">
