@@ -291,7 +291,7 @@
                         $('#team').val(data.team);
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
-                        if (student_id = 3) {
+                        if (student_id == 3) {
                             $('#auther').val(
                                 "Tizim yaratuvchisiga qo'yib o'tirish shart emas, Tizimni o'zi qo'ya oladi"
                                 );
