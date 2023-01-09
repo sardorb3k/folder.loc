@@ -291,11 +291,6 @@
                         $('#team').val(data.team);
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
-                        if (student_id == 3) {
-                            $('#auther').val(
-                                "Tizim yaratuvchisiga qo'yib o'tirish shart emas, Tizimni o'zi qo'ya oladi"
-                                );
-                        }
                     } else {
                         $('#listening').val(0);
                         $('#reading').val(0);
@@ -305,11 +300,6 @@
                         $('#team').val(0);
                         $('#student_id').val(student_id);
                         $('#exam_id').val(exam_id);
-                        if (student_id == 3) {
-                            $('#auther').val(
-                                "Tizim yaratuvchisiga qo'yib o'tirish shart emas, Tizimni o'zi qo'ya oladi"
-                                );
-                        }
                     }
                     $('.exam-result-input').length > 0 ? $('#result').text(resultExam()) : $('#result')
                         .text(resultIELTSExam());
